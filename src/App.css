@@ -11,12 +11,18 @@ html, body {
 }
 
 .title {
+  display: flex;
+  align-items: center;
+}
+
+.main-heading {
   background-color: #24335A;
   height: 5rem;
   font-size: 1.5rem;
   color: #ecf0f1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 1em;
 }
 
@@ -26,31 +32,81 @@ html, body {
   margin-right: 1rem;
 }
 
+.lamp {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  margin-right: 4em;
+}
+
+.bulb {
+  height: 3rem;
+  width: 3rem;
+}
+
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .panel-row {
-  margin: 5rem auto;
+  margin: 1rem auto 0 auto;
   display: flex;
   align-content: space-between;
 }
 
 .panel-title {
+  display: flex;
+  justify-content: space-between;
   color: #ecf0f1;
-  padding: 2rem;
-  font-size: 2rem;
+  font-size: 1.6rem;
   background-color: rgb(30, 40, 51);
   border-bottom: .1rem solid rgb(71, 86, 102);
 }
 
+.panel-title h3 {
+  padding: 2rem;
+}
+
 .panel-body {
   background-color: rgb(30, 40, 51);
-  width: 55rem;
-  height: 55rem;
+  width: 58rem;
+  height: 40rem;
+  margin: 2rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 6px -6px  rgb(15, 20, 26);
+}
+
+.panel-content {
+  padding: 2em;
+  height: 30rem;
+  font-size: 1.5em;
+  color: #ecf0f1;
+  overflow: auto;
+}
+
+.long-panel {
+  background-color: rgb(30, 40, 51);
+  width: 155rem;
+  height: 45rem;
   margin: 2rem;
   border-radius: 1rem;
+  box-shadow: 0 10px 6px -6px  rgb(15, 20, 26);
+}
+
+.refresh-container {
+  background-color: #168EFE;
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.refresh {
+
+  font-size: 2rem;
 }
 
 /* .App {
