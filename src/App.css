@@ -1,3 +1,28 @@
+/* 
+====================================
+SCROLLBARS
+==================================== 
+*/
+
+div::-webkit-scrollbar {
+  width: 1em;
+}
+
+div::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+div::-webkit-scrollbar-thumb {
+background-color: #34495e;
+outline: 1px solid slategrey;
+}
+
+/* 
+====================================
+MAIN
+==================================== 
+*/
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +32,17 @@
 html, body {
   height: 100%;
   font-size: 10px;
+  line-height: 230%;
   background-color: #365777;
+  font-family: 'Roboto', sans-serif;
+  text-rendering: optimizeLegibility;
 }
+
+/* 
+====================================
+HEADER
+==================================== 
+*/
 
 .title {
   display: flex;
@@ -44,16 +78,22 @@ html, body {
   width: 3rem;
 }
 
+/* 
+====================================
+BODY
+==================================== 
+*/
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
 .panel-row {
   margin: 1rem auto 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-content: space-between;
 }
 
@@ -105,35 +145,5 @@ html, body {
 }
 
 .refresh {
-
-  font-size: 2rem;
+  width: 2.5rem;
 }
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */

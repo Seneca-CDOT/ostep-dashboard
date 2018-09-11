@@ -21,8 +21,7 @@ class App extends Component {
                 title={panel}
               />
             ))}
-          </div>
-          <div className="panel-row">
+
             {bottomPanels.map((panel, i) => (
               <Panel
                 key={i}
