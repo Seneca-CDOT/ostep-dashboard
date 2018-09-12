@@ -3,13 +3,41 @@ import refresh from './assets/refresh.svg';
 import bulbOn from './assets/bulb-on.svg';
 import bulbOff from './assets/bulb-off.svg';
 import github from './assets/github.svg';
+import slack from './assets/Slack_Mark.svg';
 import outlet from './assets/outlet.svg';
+import Service from '../Service.js';
+
 
 class Panel extends React.Component {
   constructor(props) {
     super(props);
     this.formatGithub = this.formatGithub.bind(this);
     this.formatOutput = this.formatOutput.bind(this);
+    this.refreshData = this.refreshData.bind(this);
+
+    const service = new Service();
+
+    this.state = {
+      eods: {}
+    }
+
+    // Fetch eod list
+    if (this.props.title === "eods") {
+      const eods = service.getEods((eods) => {
+        this.setState({ eods });
+      });
+    }
+
+  }
+
+  refreshData() {
+    const service = new Service();
+    
+    if (this.props.title === "eods") {
+      const eods = service.getEods((eods) => {
+        this.setState({ eods });
+      });
+    }
   }
 
   formatOutput(panelType) {
@@ -67,7 +95,44 @@ class Panel extends React.Component {
   }
 
   formatEOD() {
+    
+    const {eods} = this.state;
+    let currentEods = {}
+    let oldEods = {}
 
+    
+    Object.keys(eods).forEach((username) => {
+      if (new Date(eods[username].time).toDateString() == new Date().toDateString()) {
+        currentEods[username] = eods[username]
+      } else {
+        oldEods[username] = eods[username]
+      }
+    });
+
+    return (
+      <div>
+        <h3>Today's EODs</h3>
+        {Object.keys(currentEods).map((username) => (
+          <div className="github-entry">
+            <span></span>
+            <img className="slack-icon" src={slack}></img>
+            <span className="github-name">{username}</span> posted EOD in channel
+            <span className="github-repo"> {currentEods[username].channel}</span>:
+            <p>{currentEods[username].text}</p>
+          </div>
+        ))}
+          <h3>Past EODs</h3>
+          {Object.keys(oldEods).map((username) => (
+            <div className="github-entry">
+              <span></span>
+              <img className="slack-icon" src={slack}></img>
+              <span className="github-name">{username}</span> posted EOD in channel
+              <span className="github-repo"> {oldEods[username].channel}</span>:
+              <p>{oldEods[username].text}</p>
+            </div>
+          ))}
+      </div>
+    );
   }
 
   formatLamp() {
@@ -109,7 +174,7 @@ class Panel extends React.Component {
           <h3>
             {this.props.title.toUpperCase()}
           </h3>
-          <div className="refresh-container">
+          <div className="refresh-container" onClick={this.refreshData}>
             <img className="refresh" src={refresh}></img>
           </div>
         </div>

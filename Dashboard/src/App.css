@@ -184,6 +184,19 @@ GITHUB CONTENT
 
 /* 
 ====================================
+EOD CONTENT
+==================================== 
+*/
+
+.slack-icon {
+  height: 2em;
+  width: 2em;
+  margin-bottom: -0.5em;
+  margin-right: 1em;
+}
+
+/* 
+====================================
 INFRASTRUCTURE CONTENT
 ==================================== 
 */
