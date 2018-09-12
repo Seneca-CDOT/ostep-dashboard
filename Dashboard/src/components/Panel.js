@@ -5,6 +5,11 @@ import bulbOff from './assets/bulb-off.svg';
 import github from './assets/github.svg';
 import slack from './assets/Slack_Mark.svg';
 import outlet from './assets/outlet.svg';
+import clock from './assets/clock.svg';
+import user from './assets/user.svg';
+import calendar from './assets/calendar.svg';
+import clipboard from './assets/clipboard.svg';
+
 import Service from '../Service.js';
 const service = new Service();
 
@@ -151,11 +156,14 @@ class Panel extends React.Component {
     const { db1042 } = this.state;
 
     return (
-      this.props.data.map((row, i) => (
+      this.props.data.row.map((row, i) => (
         <div key={row + i} className="github-entry">
-          <img className="github-icon" src={github}></img>
-          <span className="github-name">John Kimble</span> committed to
-          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+          <img className="github-icon" src={clock}></img>
+          <span className="github-name">{row["Date and time"]}</span>
+          <img className="github-icon" src={clipboard}></img>
+          <span className="github-repo">{row["Purpose"]}</span>
+          <img className="github-icon" src={user}></img>
+          <span className="github-repo">{row["Contact person"]}</span>
         </div>
       ))
     );
