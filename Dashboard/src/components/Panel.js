@@ -22,13 +22,15 @@ class Panel extends React.Component {
     this.refreshData = this.refreshData.bind(this);
 
     this.state = {
-      data: {},
+      data: null,
     }
   }
 
   componentWillMount() {
-    if (endpoints[this.props.title])
+    if (endpoints[this.props.title]){
       this.fetchData();
+
+    }
   }
 
 
@@ -44,6 +46,7 @@ class Panel extends React.Component {
   }
 
   formatOutput(panelType) {
+    console.log("data is: ", this.props.title, this.state.data);
     switch (panelType) {
       case "github":
         return this.formatGithub();
@@ -137,9 +140,10 @@ class Panel extends React.Component {
   }
 
   formatLamp() {
-    const status = this.props.data ? "on" : "off";
+    
+    const status = this.state.data.onCampus ? "on" : "off";
     const message = status === "on" ?
-      "Chris Tyler is on campus!" : "DB 1036 is dark.";
+      "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
     return (
       <div className="lamp-container">
         <img
