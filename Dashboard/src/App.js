@@ -9,7 +9,7 @@ class App extends Component {
   }
 
   render() {
-    const panelNames = ['github', 'infrastructure', 'ra presentations', 'eods', 'the lamp', 'room 1042'];
+    const panelNames = ['github', 'infrastructure', 'presentations', 'eods', 'lamp', 'db1042'];
     return (
       <div>
         <Header

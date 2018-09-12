@@ -18,7 +18,7 @@ class Panel extends React.Component {
 
 
     this.state = {
-      eods: {}
+      data: {},
     }
   }
 
@@ -29,8 +29,8 @@ class Panel extends React.Component {
 
 
   fetchData() {
-    service.getData(this.props.title, (eods) => {
-      this.setState({ eods });
+    service.getData(this.props.title, (data) => {
+      this.setState({ data });
     });
   }
 
@@ -46,17 +46,17 @@ class Panel extends React.Component {
       case "infrastructure":
         return this.formatInfrastructure();
         break;
-      case "ra presentations":
-        return this.formatRAPresentations();
+      case "presentations":
+        return this.formatPresentations();
         break;
       case "eods":
         return this.formatEOD();
         break;
-      case "the lamp":
+      case "lamp":
         return this.formatLamp();
         break;
-      case "room 1042":
-        return this.formatRoom1042();
+      case "db1042":
+        return this.formatDB1042();
         break;
       default:
         throw new Error(`${panelType} is not a valid panel type!`);
@@ -93,17 +93,15 @@ class Panel extends React.Component {
   }
 
   formatEOD() {
-
-    const { eods } = this.state;
+    const { data } = this.state;
     let currentEods = {}
     let oldEods = {}
 
-
-    Object.keys(eods).forEach((username) => {
-      if (new Date(eods[username].time).toDateString() == new Date().toDateString()) {
-        currentEods[username] = eods[username]
+    Object.keys(data).forEach((username) => {
+      if (new Date(data[username].time).toDateString() == new Date().toDateString()) {
+        currentEods[username] = data[username]
       } else {
-        oldEods[username] = eods[username]
+        oldEods[username] = data[username]
       }
     });
 
@@ -149,11 +147,21 @@ class Panel extends React.Component {
     );
   }
 
-  formatRoom1042() {
+  formatDB1042() {
+    const { db1042 } = this.state;
 
+    return (
+      this.props.data.map((row, i) => (
+        <div key={row + i} className="github-entry">
+          <img className="github-icon" src={github}></img>
+          <span className="github-name">John Kimble</span> committed to
+          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+        </div>
+      ))
+    );
   }
 
-  formatRAPresentations() {
+  formatPresentations() {
 
   }
 
