@@ -25,4 +25,9 @@ app.use((req, res) => {
   res.status(404).send("<h1>Page Not Found</h1>");
 });
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  next();
+ });
+
 app.listen(HTTP_PORT, listen);
