@@ -17,13 +17,16 @@ class Panel extends React.Component {
     this.refreshData = this.refreshData.bind(this);
 
     this.state = {
-      data: {},
+      data: null,
     }
   }
 
   componentWillMount() {
-    if (endpoints[this.props.title])
+    console.log("endpoints", endpoints);
+    if (endpoints[this.props.title]){
       this.fetchData();
+      console.log("data is: ", this.props.title, this.state.data);
+    }
   }
 
 
