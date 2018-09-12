@@ -1,0 +1,15 @@
+{
+  "name": "ramodule",
+  "version": "1.0.0",
+  "description": "Accesses presenter table from RA website and returns an array of rows",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fahad Chughtai",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "table-scraper": "^0.1.0"
+  }
+}
