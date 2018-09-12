@@ -135,9 +135,10 @@ class Panel extends React.Component {
   }
 
   formatLamp() {
-    const status = this.props.data ? "on" : "off";
+    
+    const status = this.state.data.onCampus ? "on" : "off";
     const message = status === "on" ?
-      "Chris Tyler is on campus!" : "DB 1036 is dark.";
+      "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
     return (
       <div className="lamp-container">
         <img
