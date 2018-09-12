@@ -11,23 +11,26 @@ class App extends Component {
     super(props);
     const service = new Service();
     console.log(service.getData('https://jsonplaceholder.typicode.com/todos/1'));
-    
+
   }
   render() {
-    const panelNames = ['github', 'infrastructure', 'ra presentations', 'slack', 'eods', 'room 1042'];
+    const panelNames = ['github', 'infrastructure', 'ra presentations', 'eods', 'the lamp', 'room 1042'];
     return (
       <div>
         <Header
           name={'ostep dashboard'}
         />
-        <div className="container">
-          <div className="panel-row">
-            {panelNames.map((name, i) => (
-              <Panel
-                key={i}
-                title={name}
-              />
-            ))}
+        <div className="main-content">
+          <div className="container">
+            <div className="panel-row">
+              {panelNames.map((name, i) => (
+                <Panel
+                  key={i}
+                  title={name}
+                  data={[1, 2, 3, 1, 2, 3, 1, 2, 3]}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
