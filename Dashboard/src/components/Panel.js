@@ -39,8 +39,8 @@ class Panel extends React.Component {
 
   formatGithub() {
     return (
-      this.props.data.map((commit) => (
-        <div className="github-entry">
+      this.props.data.map((commit, i) => (
+        <div key={commit + i} className="github-entry">
           <img className="github-icon" src={github}></img>
           <span className="github-name">John Kimble</span> committed to
           <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
@@ -52,7 +52,7 @@ class Panel extends React.Component {
   formatInfrastructure() {
     return (
       <div>
-        {this.props.data.map((ip) => (
+        {this.props.data.map((ip, i) => (
           <div 
             key={ip}
             className="ip-entry"
