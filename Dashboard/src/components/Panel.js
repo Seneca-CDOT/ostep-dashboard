@@ -139,7 +139,6 @@ class Panel extends React.Component {
   }
 
   formatLamp() {
-    
     const status = this.state.data.onCampus ? "on" : "off";
     const message = status === "on" ?
       "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
@@ -152,27 +151,23 @@ class Panel extends React.Component {
   }
 
   formatDB1042() {
-    return (
-      this.props.data.row.map((row, i) => (
-        <div key={row + i} className="github-entry">
-          <img className="github-icon" src={clock} alt={""}/>
-          <span className="github-name">{row["Date and time"]}</span>
-          <img className="github-icon" src={clipboard} alt={""}></img>
-          <span className="github-repo">{row["Purpose"]}</span>
-          <img className="github-icon" src={user} alt={""}></img>
-          <span className="github-repo">{row["Contact person"]}</span>
-        </div>
-      ))
-    );
+
   }
 
   formatPresentations() {
     return (
-      this.props.data.row.map((row, i) => (
+      this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
-          <img className="github-icon" src={github}></img>
-          <span className="github-name">John Kimble</span> committed to
-          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+          {Date(row.Date) < Date.now() && 
+          <div>
+            <img className="github-icon" src={user} />
+            <span className="github-name">{row.Presenter}</span> presents topic 
+            <span className="github-repo"> {row.Topic}</span> on 
+            <span className="github-repo"> {row.Date}</span> from 
+            <span className="github-repo"> {row.Time}</span> in 
+            <span className="github-repo"> {row.Room}</span>
+          </div>
+          }
         </div>
       ))
     );
