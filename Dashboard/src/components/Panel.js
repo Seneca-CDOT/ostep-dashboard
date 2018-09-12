@@ -22,10 +22,9 @@ class Panel extends React.Component {
   }
 
   componentWillMount() {
-    console.log("endpoints", endpoints);
     if (endpoints[this.props.title]){
       this.fetchData();
-      console.log("data is: ", this.props.title, this.state.data);
+
     }
   }
 
@@ -42,6 +41,7 @@ class Panel extends React.Component {
   }
 
   formatOutput(panelType) {
+    console.log("data is: ", this.props.title, this.state.data);
     switch (panelType) {
       case "github":
         return this.formatGithub();
