@@ -9,6 +9,7 @@ import clock from './assets/clock.svg';
 import user from './assets/user.svg';
 import calendar from './assets/calendar.svg';
 import clipboard from './assets/clipboard.svg';
+import home from './assets/home.svg';
 import Service from '../Service.js';
 import endpoints from '../config.js';
 const service = new Service();
@@ -19,20 +20,31 @@ class Panel extends React.Component {
     this.formatGithub = this.formatGithub.bind(this);
     this.formatOutput = this.formatOutput.bind(this);
     this.refreshData = this.refreshData.bind(this);
-
+    this.tempData;
     this.state = {
       data: null,
     }
   }
 
   componentWillMount() {
-    if (endpoints[this.props.title]){
+    if (endpoints[this.props.title]) {
       this.fetchData();
     }
 
-    setInterval(() => {this.fetchData();}, 30 * 1000);
+    setInterval(() => { this.fetchData(); }, 30 * 1000);
   }
 
+  sortDates() {
+    let tempData = this.state.data;
+
+    tempData.rows.sort(function (a, b) {
+      a = new Date(a["Date and time"]);
+      b = new Date(b["Date and time"]);
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+
+    return tempData;
+  }
 
   fetchData() {
     service.getData(this.props.title, (data) => {
@@ -46,6 +58,7 @@ class Panel extends React.Component {
   }
 
   formatOutput(panelType) {
+
     console.log("data is: ", this.props.title, this.state.data);
     switch (panelType) {
       case "github":
@@ -64,7 +77,8 @@ class Panel extends React.Component {
         return this.formatLamp();
         break;
       case "db1042":
-        return this.formatDB1042();
+        const sortedData = this.sortDates();
+        return this.formatDB1042(sortedData);
         break;
       default:
         throw new Error(`${panelType} is not a valid panel type!`);
@@ -75,7 +89,7 @@ class Panel extends React.Component {
     return (
       this.state.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
-          <img className="github-icon" src={github} alt="Github icon"/>
+          <img className="github-icon" src={github} alt="Github icon" />
           <span className="github-name">John Kimble</span> committed to
           <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
         </div>
@@ -91,7 +105,7 @@ class Panel extends React.Component {
             key={ip}
             className="ip-entry"
           >
-            <img className="ip-icon" src={outlet} alt={"IP icon"}/>
+            <img className="ip-icon" src={outlet} alt={"IP icon"} />
             <span className="ip-name">Workstation1006</span> located at
             192.168.122.112 is <span className="ip-up">UP!</span>
           </div>
@@ -119,7 +133,7 @@ class Panel extends React.Component {
         {Object.keys(currentEods).map((username) => (
           <div className="github-entry" key={username}>
             <span></span>
-            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
+            <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
             <span className="github-repo"> {currentEods[username].channel}</span>:
             <p>{currentEods[username].text}</p>
@@ -129,7 +143,7 @@ class Panel extends React.Component {
         {Object.keys(oldEods).map((username) => (
           <div className="github-entry">
             <span></span>
-            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
+            <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
               <p>{oldEods[username].text}</p>
@@ -145,21 +159,23 @@ class Panel extends React.Component {
       "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
     return (
       <div className="lamp-container">
-        <img className="bulb-off" src={status === "on" ? bulbOn : bulbOff} alt={"bulb icon"}/>
+        <img className="bulb-off" src={status === "on" ? bulbOn : bulbOff} alt={"bulb icon"} />
         <div className="lamp-message">{message}</div>
       </div>
     );
   }
 
-  formatDB1042() {
+  formatDB1042(sortedData) {
+
+
     return (
-      this.state.data.rows.map((row, i) => (
+      sortedData.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
-          <img className="meeting-icons" src={clock} alt={"clock icon"}/>
-          <span className="github-name">{row["Date and time"]}</span>
-          <img className="meeting-icons" src={clipboard} alt={"clipboard icon"}/>
+          <img className="meeting-icons" src={clock} alt={"clock icon"} />
+          <span className="github-name">{row["Date and time"].split(' ')[1]}</span>
+          <img className="meeting-icons" src={clipboard} alt={"clipboard icon"} />
           <span className="github-repo">{row["Purpose"]}</span>
-          <img className="meeting-icons" src={user} alt={"organizer icon"}/>
+          <img className="meeting-icons" src={user} alt={"organizer icon"} />
           <span className="github-repo">{row["Contact person"]}</span>
         </div>
       ))
@@ -170,14 +186,14 @@ class Panel extends React.Component {
     return (
       this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
-          {new Date(row.Date) > Date.now() && 
-          <div>
-            <img className="github-icon" src={user} /> <span className="github-name">{row.Presenter}</span> presents 
-            <span className="github-repo"> {row.Topic}</span> on 
-            <span className="github-repo"> {row.Date}</span> from 
-            <span className="github-repo"> {row.Time}</span> in 
-            <span className="github-repo"> {row.Room}</span>
-          </div>
+          {new Date(row.Date) > Date.now() &&
+            <div>
+              <img className="meeting-icons" src={user} /> <span className="github-name">{row.Presenter}</span>
+              <img className="meeting-icons" src={clipboard} /> <span className="github-repo"> {row.Topic}</span>
+              <img className="meeting-icons" src={calendar} /> <span className="github-repo"> {row.Date}</span>
+              <img className="meeting-icons" src={clock} /> <span className="github-repo"> {row.Time}</span>
+              <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span>
+            </div>
           }
         </div>
       ))
@@ -200,7 +216,7 @@ class Panel extends React.Component {
             {this.props.title.toUpperCase()}
           </h3>
           <div className="refresh-container" onClick={this.refreshData}>
-            <img className="refresh" src={refresh} alt={""}/>
+            <img className="refresh" src={refresh} alt={""} />
           </div>
         </div>
         <div className="panel-content">

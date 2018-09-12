@@ -118,9 +118,9 @@ BODY
 
 .panel-body {
   background-color: rgb(30, 40, 51);
-  width: 58rem;
+  width: 60rem;
   height: 40rem;
-  margin: 2rem 2rem 1rem 2rem;
+  margin: 2rem 1rem 2rem 2rem;
   border-radius: 1rem;
   box-shadow: 0 10px 6px -6px  rgb(15, 20, 26);
 }
@@ -256,8 +256,7 @@ DB1042 CONTENT
 ==================================== 
 */
 .meeting-icons {
-  padding-right: 1em;
-  padding-left: 1em;
+  padding: 0 .6em 0 .4em;
 }
 
 /* 
