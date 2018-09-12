@@ -6,6 +6,7 @@ import github from './assets/github.svg';
 import slack from './assets/Slack_Mark.svg';
 import outlet from './assets/outlet.svg';
 import Service from '../Service.js';
+const service = new Service();
 
 
 class Panel extends React.Component {
@@ -15,29 +16,26 @@ class Panel extends React.Component {
     this.formatOutput = this.formatOutput.bind(this);
     this.refreshData = this.refreshData.bind(this);
 
-    const service = new Service();
 
     this.state = {
       eods: {}
     }
+  }
 
-    // Fetch eod list
-    if (this.props.title === "eods") {
-      const eods = service.getEods((eods) => {
-        this.setState({ eods });
-      });
-    }
+  componentWillMount() {
+    if (this.props.title === "eods")
+      this.fetchData();
+  }
 
+
+  fetchData() {
+    service.getData(this.props.title, (eods) => {
+      this.setState({ eods });
+    });
   }
 
   refreshData() {
-    const service = new Service();
-    
-    if (this.props.title === "eods") {
-      const eods = service.getEods((eods) => {
-        this.setState({ eods });
-      });
-    }
+    this.fetchData();
   }
 
   formatOutput(panelType) {
@@ -81,7 +79,7 @@ class Panel extends React.Component {
     return (
       <div>
         {this.props.data.map((ip, i) => (
-          <div 
+          <div
             key={ip}
             className="ip-entry"
           >
@@ -95,12 +93,12 @@ class Panel extends React.Component {
   }
 
   formatEOD() {
-    
-    const {eods} = this.state;
+
+    const { eods } = this.state;
     let currentEods = {}
     let oldEods = {}
 
-    
+
     Object.keys(eods).forEach((username) => {
       if (new Date(eods[username].time).toDateString() == new Date().toDateString()) {
         currentEods[username] = eods[username]
@@ -121,16 +119,16 @@ class Panel extends React.Component {
             <p>{currentEods[username].text}</p>
           </div>
         ))}
-          <h3>Past EODs</h3>
-          {Object.keys(oldEods).map((username) => (
-            <div className="github-entry">
-              <span></span>
-              <img className="slack-icon" src={slack}></img>
-              <span className="github-name">{username}</span> posted EOD in channel
+        <h3>Past EODs</h3>
+        {Object.keys(oldEods).map((username) => (
+          <div className="github-entry">
+            <span></span>
+            <img className="slack-icon" src={slack}></img>
+            <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
               <p>{oldEods[username].text}</p>
-            </div>
-          ))}
+          </div>
+        ))}
       </div>
     );
   }

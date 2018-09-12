@@ -1,3 +1,4 @@
 export default {
-  osteppyUrl: "http://narnia.cdot.systems:8080/eod",
+  eods: "http://narnia.cdot.systems:8080/eod",
+  'room 1042': "http://romania.cdot.systems:8080/",
 };
