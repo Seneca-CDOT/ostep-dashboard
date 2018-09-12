@@ -11,6 +11,11 @@ const listen = function() {
     console.log("Now listening on port: " + HTTP_PORT);
 }
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  next();
+});
+
 //APPLICATION
 
 app.get('/', (req, res) => {

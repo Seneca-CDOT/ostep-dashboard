@@ -12,9 +12,15 @@ class Service {
         body += data;
       });
       res.on("end", () => {
-        body = JSON.parse(body);
-        console.log(body);
-        cb(body);
+        try {
+          body = JSON.parse(body);
+          console.log(body);
+          cb(body);
+        } catch(e) {
+          console.log("INVALID JSON");
+          console.log(e);
+        }
+
       });
     });
   }
