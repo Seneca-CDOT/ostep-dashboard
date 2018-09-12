@@ -5,6 +5,11 @@ const tabletojson = require("tabletojson");
 const PORT = 8080;
 let bookings;
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  next();
+});
+
 tabletojson.convertUrl(
   'https://wiki.cdot.senecacollege.ca/wiki/Meeting_Room_T1042',
   function(tableAsJson) {

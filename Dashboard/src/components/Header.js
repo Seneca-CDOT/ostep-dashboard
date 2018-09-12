@@ -7,7 +7,7 @@ class Header extends React.Component {
     return (
       <div className="main-heading">
         <div className="title">
-          <img className="logo" src={logo}></img>
+          <img className="logo" src={logo} alt={"CDOT logo"}/>
           <h1>{this.props.name.toUpperCase()} </h1>
         </div>
       <LampStatus />

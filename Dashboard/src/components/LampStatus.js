@@ -8,7 +8,7 @@ class LampStatus extends React.Component {
         return (
             <div className="lamp">
                 <h2>DB 1036 LAMP IS {status}</h2>
-                <img className="bulb" src={bulbOff}></img>
+                <img className="bulb" src={bulbOff} alt={""}/>
             </div>
         );
 
