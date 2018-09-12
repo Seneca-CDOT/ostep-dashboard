@@ -163,7 +163,7 @@ class Panel extends React.Component {
   }
 
   formatPresentations() {
-
+    
   }
 
   loadSpinner() {
