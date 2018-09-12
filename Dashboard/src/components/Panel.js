@@ -2,6 +2,8 @@ import React from 'react';
 import refresh from './assets/refresh.svg';
 import bulbOn from './assets/bulb-on.svg';
 import bulbOff from './assets/bulb-off.svg';
+import github from './assets/github.svg';
+import outlet from './assets/outlet.svg';
 
 class Panel extends React.Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class Panel extends React.Component {
     this.formatGithub = this.formatGithub.bind(this);
     this.formatOutput = this.formatOutput.bind(this);
   }
+
   formatOutput(panelType) {
     switch (panelType) {
       case "github":
@@ -35,14 +38,32 @@ class Panel extends React.Component {
   }
 
   formatGithub() {
-    return this.props.data.map((commit) => (
-      <li className="github-entry"><span className="github-name">John Kimble</span> committed to  
-         <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."</li>
-    ));
+    return (
+      this.props.data.map((commit) => (
+        <div className="github-entry">
+          <img className="github-icon" src={github}></img>
+          <span className="github-name">John Kimble</span> committed to
+          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+        </div>
+      ))
+    );
   }
 
   formatInfrastructure() {
-
+    return (
+      <div>
+        {this.props.data.map((ip) => (
+          <div 
+            key={ip}
+            className="ip-entry"
+          >
+            <img className="ip-icon" src={outlet}></img>
+            <span className="ip-name">Workstation1006</span> located at
+            192.168.122.112 is <span className="ip-up">UP!</span>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   formatEOD() {
@@ -51,17 +72,16 @@ class Panel extends React.Component {
 
   formatLamp() {
     const status = this.props.data ? "on" : "off";
-    const message = status === "on" ? 
-      "Chris Tyler is on campus." : "DB 1036 is dark.";
- 
-    return(
+    const message = status === "on" ?
+      "Chris Tyler is on campus!" : "DB 1036 is dark.";
+    return (
       <div className="lamp-container">
-      <img 
-        className="bulb-off" 
-        src={status === "on" ? bulbOn : bulbOff}
-      >
-      </img>
-      <div className="lamp-message">DB 1036 is dark.</div>
+        <img
+          className="bulb-off"
+          src={status === "on" ? bulbOn : bulbOff}
+        >
+        </img>
+        <div className="lamp-message">{message}</div>
       </div>
     );
   }
@@ -77,7 +97,7 @@ class Panel extends React.Component {
   loadSpinner() {
     return (
       <div className="spinner-container">
-      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       </div>
     );
   }

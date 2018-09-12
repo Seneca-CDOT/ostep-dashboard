@@ -33,7 +33,7 @@ html, body {
   height: 100%;
   font-size: 10px;
   line-height: 230%;
-  background-color: #487eb0;
+  background-color: #3498db;
   font-family: 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
 }
@@ -126,7 +126,7 @@ BODY
 }
 
 .panel-content {
-  padding: 1em;
+  padding: 1.1em;
   height: 30rem;
   font-size: 1.5em;
   color: #ecf0f1;
@@ -156,22 +156,61 @@ BODY
 
 /* 
 ====================================
-PANEL CONTENT
+GITHUB CONTENT
 ==================================== 
 */
 
 .github-entry{
-  padding-bottom: 0.4em;
+  padding-bottom: 0.6em;
 }
 
 .github-name {
   margin-left: -0.4em;
-  color: #e74c3c;
+  color: #e84118;
   font-weight: 700;
 }
 
 .github-repo {
-  color: #3498db;
+  color: #00a8ff;
+  font-weight: 700;
+}
+
+.github-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+  margin-bottom: -0.2em;
+}
+
+/* 
+====================================
+INFRASTRUCTURE CONTENT
+==================================== 
+*/
+
+.ip-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+  margin-bottom: -0.2em;
+}
+
+.ip-name {
+  color: #00a8ff;
+  font-weight: 700;
+}
+
+.ip-entry {
+  padding-bottom: 0.2em;
+}
+
+.ip-up {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.ip-down {
+  color: #c23616;
   font-weight: 700;
 }
 
