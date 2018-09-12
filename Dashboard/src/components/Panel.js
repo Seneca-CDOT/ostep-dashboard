@@ -28,8 +28,9 @@ class Panel extends React.Component {
   componentWillMount() {
     if (endpoints[this.props.title]){
       this.fetchData();
-
     }
+
+    setInterval(() => {this.fetchData();}, 30 * 1000);
   }
 
 
