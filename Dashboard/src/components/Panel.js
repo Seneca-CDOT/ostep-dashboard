@@ -9,7 +9,6 @@ import clock from './assets/clock.svg';
 import user from './assets/user.svg';
 import calendar from './assets/calendar.svg';
 import clipboard from './assets/clipboard.svg';
-
 import Service from '../Service.js';
 import endpoints from '../config.js';
 const service = new Service();
@@ -74,7 +73,7 @@ class Panel extends React.Component {
     return (
       this.props.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
-          <img className="github-icon" src={github} alt="Github icon"></img>
+          <img className="github-icon" src={github} alt="Github icon"/>
           <span className="github-name">John Kimble</span> committed to
           <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
         </div>
@@ -90,7 +89,7 @@ class Panel extends React.Component {
             key={ip}
             className="ip-entry"
           >
-            <img className="ip-icon" src={outlet} alt={"IP icon"}></img>
+            <img className="ip-icon" src={outlet} alt={"IP icon"}/>
             <span className="ip-name">Workstation1006</span> located at
             192.168.122.112 is <span className="ip-up">UP!</span>
           </div>
@@ -118,7 +117,7 @@ class Panel extends React.Component {
         {Object.keys(currentEods).map((username) => (
           <div className="github-entry" key={username}>
             <span></span>
-            <img className="slack-icon" src={slack} alt={"Slack icon"}></img>
+            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
             <span className="github-name">{username}</span> posted EOD in channel
             <span className="github-repo"> {currentEods[username].channel}</span>:
             <p>{currentEods[username].text}</p>
@@ -128,7 +127,7 @@ class Panel extends React.Component {
         {Object.keys(oldEods).map((username) => (
           <div className="github-entry">
             <span></span>
-            <img className="slack-icon" src={slack} alt={"Slack icon"}></img>
+            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
             <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
               <p>{oldEods[username].text}</p>
@@ -144,7 +143,7 @@ class Panel extends React.Component {
       "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
     return (
       <div className="lamp-container">
-        <img className="bulb-off" src={status === "on" ? bulbOn : bulbOff} alt={"bulb icon"}></img>
+        <img className="bulb-off" src={status === "on" ? bulbOn : bulbOff} alt={"bulb icon"}/>
         <div className="lamp-message">{message}</div>
       </div>
     );
@@ -189,7 +188,7 @@ class Panel extends React.Component {
             {this.props.title.toUpperCase()}
           </h3>
           <div className="refresh-container" onClick={this.refreshData}>
-            <img className="refresh" src={refresh} alt={""}></img>
+            <img className="refresh" src={refresh} alt={""}/>
           </div>
         </div>
         <div className="panel-content">
