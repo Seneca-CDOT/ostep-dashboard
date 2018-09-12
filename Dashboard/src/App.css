@@ -229,9 +229,10 @@ INFRASTRUCTURE CONTENT
 
 /* 
 ====================================
-LAMP COMPONENTS
+LAMP CONTENT
 ==================================== 
 */
+
 .lamp-container {
   display: flex;
   flex-direction: column;
@@ -248,6 +249,13 @@ LAMP COMPONENTS
   padding-top: 4rem;
   font-size: 2rem;
 }
+
+/* 
+====================================
+LAMP CONTENT
+==================================== 
+*/
+
 
 /* 
 ====================================

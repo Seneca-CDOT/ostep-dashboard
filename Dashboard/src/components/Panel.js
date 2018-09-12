@@ -28,7 +28,6 @@ class Panel extends React.Component {
     }
   }
 
-
   fetchData() {
     service.getData(this.props.title, (data) => {
       this.setState({ data });
@@ -166,7 +165,15 @@ class Panel extends React.Component {
   }
 
   formatPresentations() {
-
+    return (
+      this.props.data.row.map((row, i) => (
+        <div key={row + i} className="github-entry">
+          <img className="github-icon" src={github}></img>
+          <span className="github-name">John Kimble</span> committed to
+          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+        </div>
+      ))
+    );
   }
 
   loadSpinner() {
