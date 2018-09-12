@@ -6,8 +6,8 @@ import github from './assets/github.svg';
 import slack from './assets/Slack_Mark.svg';
 import outlet from './assets/outlet.svg';
 import Service from '../Service.js';
+import endpoints from '../config.js';
 const service = new Service();
-
 
 class Panel extends React.Component {
   constructor(props) {
@@ -16,14 +16,13 @@ class Panel extends React.Component {
     this.formatOutput = this.formatOutput.bind(this);
     this.refreshData = this.refreshData.bind(this);
 
-
     this.state = {
       data: {},
     }
   }
 
   componentWillMount() {
-    if (this.props.title === "eods")
+    if (endpoints[this.props.title])
       this.fetchData();
   }
 
@@ -163,7 +162,7 @@ class Panel extends React.Component {
   }
 
   formatPresentations() {
-    
+
   }
 
   loadSpinner() {
