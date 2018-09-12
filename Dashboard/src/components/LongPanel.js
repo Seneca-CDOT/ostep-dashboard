@@ -10,7 +10,7 @@ class LongPanel extends React.Component {
             {this.props.title.toUpperCase()}
           </h3>
           <div className="refresh-container">
-           <img className="refresh" src={refresh}></img>
+           <img className="refresh" src={refresh} alt={"refresh animation"}/>
           </div>
         </div>
       </div>

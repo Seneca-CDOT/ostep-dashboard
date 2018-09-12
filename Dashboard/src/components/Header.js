@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './assets/logo.png';
-import LampStatus from './LampStatus';
 
 class Header extends React.Component {
   render() {
@@ -10,7 +9,6 @@ class Header extends React.Component {
           <img className="logo" src={logo} alt={"CDOT logo"}/>
           <h1>{this.props.name.toUpperCase()} </h1>
         </div>
-      <LampStatus />
       </div>
     );
   }
