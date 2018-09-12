@@ -166,7 +166,21 @@ class Panel extends React.Component {
   }
 
   formatPresentations() {
-
+    return (
+      this.state.data.rows.map((row, i) => (
+        <div key={row + i} className="github-entry">
+          {new Date(row.Date) > Date.now() && 
+          <div>
+            <img className="github-icon" src={user} /> <span className="github-name">{row.Presenter}</span> presents 
+            <span className="github-repo"> {row.Topic}</span> on 
+            <span className="github-repo"> {row.Date}</span> from 
+            <span className="github-repo"> {row.Time}</span> in 
+            <span className="github-repo"> {row.Room}</span>
+          </div>
+          }
+        </div>
+      ))
+    );
   }
 
   loadSpinner() {
