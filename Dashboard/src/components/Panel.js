@@ -114,7 +114,7 @@ class Panel extends React.Component {
 
     return (
       <div>
-        <h3>Today's EODs</h3>
+        {Object.keys(currentEods).length !== 0 && <h3>Today's EODs</h3>}
         {Object.keys(currentEods).map((username) => (
           <div className="github-entry" key={username}>
             <span></span>
@@ -124,7 +124,7 @@ class Panel extends React.Component {
             <p>{currentEods[username].text}</p>
           </div>
         ))}
-        <h3>Past EODs</h3>
+        {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
         {Object.keys(oldEods).map((username) => (
           <div className="github-entry">
             <span></span>
