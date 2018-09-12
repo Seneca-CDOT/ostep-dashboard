@@ -2,6 +2,11 @@ var express = require('express');
 var app = express();
 var scraper = require('table-scraper');
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    next();
+  });
+
 //creates object for sending the rows
 
 

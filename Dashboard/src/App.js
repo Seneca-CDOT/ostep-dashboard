@@ -22,7 +22,6 @@ class App extends Component {
                 <Panel
                   key={i}
                   title={name}
-                  data={[1, 2, 3, 1, 2, 3, 1, 2, 3]}
                 />
               ))}
             </div>

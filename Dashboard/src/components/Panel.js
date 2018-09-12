@@ -5,6 +5,10 @@ import bulbOff from './assets/bulb-off.svg';
 import github from './assets/github.svg';
 import slack from './assets/Slack_Mark.svg';
 import outlet from './assets/outlet.svg';
+import clock from './assets/clock.svg';
+import user from './assets/user.svg';
+import calendar from './assets/calendar.svg';
+import clipboard from './assets/clipboard.svg';
 import Service from '../Service.js';
 import endpoints from '../config.js';
 const service = new Service();
@@ -17,15 +21,16 @@ class Panel extends React.Component {
     this.refreshData = this.refreshData.bind(this);
 
     this.state = {
-      data: {},
+      data: null,
     }
   }
 
   componentWillMount() {
-    if (endpoints[this.props.title])
+    if (endpoints[this.props.title]){
       this.fetchData();
-  }
 
+    }
+  }
 
   fetchData() {
     service.getData(this.props.title, (data) => {
@@ -39,6 +44,7 @@ class Panel extends React.Component {
   }
 
   formatOutput(panelType) {
+    console.log("data is: ", this.props.title, this.state.data);
     switch (panelType) {
       case "github":
         return this.formatGithub();
@@ -67,7 +73,7 @@ class Panel extends React.Component {
     return (
       this.props.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
-          <img className="github-icon" src={github}></img>
+          <img className="github-icon" src={github} alt="Github icon"/>
           <span className="github-name">John Kimble</span> committed to
           <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
         </div>
@@ -83,7 +89,7 @@ class Panel extends React.Component {
             key={ip}
             className="ip-entry"
           >
-            <img className="ip-icon" src={outlet}></img>
+            <img className="ip-icon" src={outlet} alt={"IP icon"}/>
             <span className="ip-name">Workstation1006</span> located at
             192.168.122.112 is <span className="ip-up">UP!</span>
           </div>
@@ -98,7 +104,7 @@ class Panel extends React.Component {
     let oldEods = {}
 
     Object.keys(data).forEach((username) => {
-      if (new Date(data[username].time).toDateString() == new Date().toDateString()) {
+      if (new Date(data[username].time).toDateString() === new Date().toDateString()) {
         currentEods[username] = data[username]
       } else {
         oldEods[username] = data[username]
@@ -109,9 +115,9 @@ class Panel extends React.Component {
       <div>
         {Object.keys(currentEods).length !==0 && <h3>Today's EODs</h3> }
         {Object.keys(currentEods).map((username) => (
-          <div className="github-entry">
+          <div className="github-entry" key={username}>
             <span></span>
-            <img className="slack-icon" src={slack}></img>
+            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
             <span className="github-name">{username}</span> posted EOD in channel
             <span className="github-repo"> {currentEods[username].channel}</span>:
             <p>{currentEods[username].text}</p>
@@ -121,7 +127,7 @@ class Panel extends React.Component {
         {Object.keys(oldEods).map((username) => (
           <div className="github-entry">
             <span></span>
-            <img className="slack-icon" src={slack}></img>
+            <img className="slack-icon" src={slack} alt={"Slack icon"}/>
             <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
               <p>{oldEods[username].text}</p>
@@ -132,38 +138,38 @@ class Panel extends React.Component {
   }
 
   formatLamp() {
-    
     const status = this.state.data.onCampus ? "on" : "off";
     const message = status === "on" ?
       "Chris Tyler is on campus!" : "DB 1036 is dark and full of terrors";
     return (
       <div className="lamp-container">
-        <img
-          className="bulb-off"
-          src={status === "on" ? bulbOn : bulbOff}
-        >
-        </img>
+        <img className="bulb-off" src={status === "on" ? bulbOn : bulbOff} alt={"bulb icon"}/>
         <div className="lamp-message">{message}</div>
       </div>
     );
   }
 
   formatDB1042() {
-    const { db1042 } = this.state;
 
-    return (
-      this.props.data.map((row, i) => (
-        <div key={row + i} className="github-entry">
-          <img className="github-icon" src={github}></img>
-          <span className="github-name">John Kimble</span> committed to
-          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
-        </div>
-      ))
-    );
   }
 
   formatPresentations() {
-
+    return (
+      this.state.data.rows.map((row, i) => (
+        <div key={row + i} className="github-entry">
+          {Date(row.Date) < Date.now() && 
+          <div>
+            <img className="github-icon" src={user} />
+            <span className="github-name">{row.Presenter}</span> presents topic 
+            <span className="github-repo"> {row.Topic}</span> on 
+            <span className="github-repo"> {row.Date}</span> from 
+            <span className="github-repo"> {row.Time}</span> in 
+            <span className="github-repo"> {row.Room}</span>
+          </div>
+          }
+        </div>
+      ))
+    );
   }
 
   loadSpinner() {
@@ -182,11 +188,11 @@ class Panel extends React.Component {
             {this.props.title.toUpperCase()}
           </h3>
           <div className="refresh-container" onClick={this.refreshData}>
-            <img className="refresh" src={refresh}></img>
+            <img className="refresh" src={refresh} alt={""}/>
           </div>
         </div>
         <div className="panel-content">
-          {this.state.data && this.formatOutput(this.props.title) || this.loadSpinner()}
+          {(this.state.data && this.formatOutput(this.props.title)) || this.loadSpinner()}
         </div>
       </div>
     );
