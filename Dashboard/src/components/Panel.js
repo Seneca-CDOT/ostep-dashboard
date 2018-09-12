@@ -72,7 +72,7 @@ class Panel extends React.Component {
 
   formatGithub() {
     return (
-      this.props.data.map((commit, i) => (
+      this.state.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
           <img className="github-icon" src={github} alt="Github icon"/>
           <span className="github-name">John Kimble</span> committed to
@@ -85,7 +85,7 @@ class Panel extends React.Component {
   formatInfrastructure() {
     return (
       <div>
-        {this.props.data.map((ip, i) => (
+        {this.state.data.map((ip, i) => (
           <div
             key={ip}
             className="ip-entry"
@@ -152,7 +152,7 @@ class Panel extends React.Component {
 
   formatDB1042() {
     return (
-      this.props.data.row.map((row, i) => (
+      this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
           <img className="github-icon" src={clock} alt={""}/>
           <span className="github-name">{row["Date and time"]}</span>
