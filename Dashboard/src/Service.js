@@ -8,6 +8,9 @@ class Service {
     http.get(url, res => {
       res.setEncoding("utf8");
       let body = "";
+      res.on("error", function(e) {
+        console.error(e.message);
+      }),
       res.on("data", data => {
         body += data;
       });

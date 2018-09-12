@@ -32,6 +32,7 @@ class Panel extends React.Component {
     }
   }
 
+
   fetchData() {
     service.getData(this.props.title, (data) => {
       this.setState({ data });
@@ -71,7 +72,7 @@ class Panel extends React.Component {
 
   formatGithub() {
     return (
-      this.props.data.map((commit, i) => (
+      this.state.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
           <img className="github-icon" src={github} alt="Github icon"/>
           <span className="github-name">John Kimble</span> committed to
@@ -84,7 +85,7 @@ class Panel extends React.Component {
   formatInfrastructure() {
     return (
       <div>
-        {this.props.data.map((ip, i) => (
+        {this.state.data.map((ip, i) => (
           <div
             key={ip}
             className="ip-entry"
@@ -113,7 +114,7 @@ class Panel extends React.Component {
 
     return (
       <div>
-        <h3>Today's EODs</h3>
+        {Object.keys(currentEods).length !== 0 && <h3>Today's EODs</h3>}
         {Object.keys(currentEods).map((username) => (
           <div className="github-entry" key={username}>
             <span></span>
@@ -123,7 +124,7 @@ class Panel extends React.Component {
             <p>{currentEods[username].text}</p>
           </div>
         ))}
-        <h3>Past EODs</h3>
+        {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
         {Object.keys(oldEods).map((username) => (
           <div className="github-entry">
             <span></span>
@@ -150,25 +151,22 @@ class Panel extends React.Component {
   }
 
   formatDB1042() {
-
-  }
-
-  formatPresentations() {
     return (
       this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
-          {new Date(row.Date) > Date.now() && 
-          <div>
-            <img className="github-icon" src={user} /> <span className="github-name">{row.Presenter}</span> presents 
-            <span className="github-repo"> {row.Topic}</span> on 
-            <span className="github-repo"> {row.Date}</span> from 
-            <span className="github-repo"> {row.Time}</span> in 
-            <span className="github-repo"> {row.Room}</span>
-          </div>
-          }
+          <img className="meeting-icons" src={clock} alt={"clock icon"}/>
+          <span className="github-name">{row["Date and time"]}</span>
+          <img className="meeting-icons" src={clipboard} alt={"clipboard icon"}/>
+          <span className="github-repo">{row["Purpose"]}</span>
+          <img className="meeting-icons" src={user} alt={"organizer icon"}/>
+          <span className="github-repo">{row["Contact person"]}</span>
         </div>
       ))
     );
+  }
+
+  formatPresentations() {
+
   }
 
   loadSpinner() {
