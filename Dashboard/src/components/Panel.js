@@ -154,11 +154,11 @@ class Panel extends React.Component {
     return (
       this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
-          <img className="github-icon" src={clock} alt={""}/>
+          <img className="meeting-icons" src={clock} alt={"clock icon"}/>
           <span className="github-name">{row["Date and time"]}</span>
-          <img className="github-icon" src={clipboard} alt={""}/>
+          <img className="meeting-icons" src={clipboard} alt={"clipboard icon"}/>
           <span className="github-repo">{row["Purpose"]}</span>
-          <img className="github-icon" src={user} alt={""}/>
+          <img className="meeting-icons" src={user} alt={"organizer icon"}/>
           <span className="github-repo">{row["Contact person"]}</span>
         </div>
       ))
