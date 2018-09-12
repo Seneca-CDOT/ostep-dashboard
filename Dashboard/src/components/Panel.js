@@ -35,6 +35,7 @@ class Panel extends React.Component {
   }
 
   refreshData() {
+    this.setState({ data: null });
     this.fetchData();
   }
 
@@ -185,7 +186,7 @@ class Panel extends React.Component {
           </div>
         </div>
         <div className="panel-content">
-          {this.props.data && this.formatOutput(this.props.title) || this.loadSpinner()}
+          {this.state.data && this.formatOutput(this.props.title) || this.loadSpinner()}
         </div>
       </div>
     );
