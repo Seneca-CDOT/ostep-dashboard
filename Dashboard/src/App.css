@@ -259,6 +259,24 @@ DB1042 CONTENT
   padding: 0 .6em 0 .4em;
 }
 
+
+/*
+======================================
+RESPONSIVE DESIGN
+======================================
+*/
+
+@media only screen and (max-width: 450px) {
+  html {
+    font-size: 6px;
+  }
+
+  .panel-content {
+    font-size: 1.75rem;
+  }
+}
+
+
 /* 
 ====================================
 LOADING SPINNER
