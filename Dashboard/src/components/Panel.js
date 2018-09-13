@@ -187,12 +187,12 @@ class Panel extends React.Component {
       this.state.data.rows.map((row, i) => (
         <div key={row + i} className="github-entry">
           {new Date(row.Date) > Date.now() &&
-            <div>
-              <img className="meeting-icons" src={user} /> <span className="github-name">{row.Presenter}</span>
-              <img className="meeting-icons" src={clipboard} /> <span className="github-repo"> {row.Topic}</span>
-              <img className="meeting-icons" src={calendar} /> <span className="github-repo"> {row.Date}</span>
-              <img className="meeting-icons" src={clock} /> <span className="github-repo"> {row.Time}</span>
-              <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span>
+            <div className="presenter-row">
+            <span className="github-name presenter-section"><img className="meeting-icons" src={user} /> {row.Presenter}</span>
+            <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} />  {row.Topic}</span>
+            <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} />  {row.Date}</span>
+            <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} />  {row.Time}</span>
+           {/* <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span> */}
             </div>
           }
         </div>

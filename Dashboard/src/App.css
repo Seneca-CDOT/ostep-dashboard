@@ -252,6 +252,23 @@ LAMP CONTENT
 
 /* 
 ====================================
+PRESENTATIONS CONTENT
+==================================== 
+*/
+
+.presenter-section {
+  width: 22em;
+  font-size: .9em;
+}
+
+.presenter-row {
+  display: flex;
+  justify-content: space-between; 
+}
+
+
+/* 
+====================================
 DB1042 CONTENT
 ==================================== 
 */
@@ -273,6 +290,11 @@ RESPONSIVE DESIGN
 
   .panel-content {
     font-size: 1.75rem;
+  }
+
+  .presenter-section {
+    width: 5em;
+    font-size: 1em;
   }
 }
 
