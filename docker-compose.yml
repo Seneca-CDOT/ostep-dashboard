@@ -7,6 +7,7 @@ services:
      - "lamp"
      - "rapresenter"
      - "db1042"
+     - "infrastructure"
     ports:
      - "8080:3000"
   osteppy:
@@ -25,3 +26,7 @@ services:
     build: ./DB1042
     ports:
       - "8084:8084"
+  infrastructure:
+    build: ./Infrastructure
+    ports:
+      - "8085:3200"

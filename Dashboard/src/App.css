@@ -223,7 +223,7 @@ INFRASTRUCTURE CONTENT
 }
 
 .ip-down {
-  color: #c23616;
+  color: red;
   font-weight: 700;
 }
 
@@ -257,12 +257,8 @@ PRESENTATIONS CONTENT
 */
 
 .presenter-section {
-  width: 17em;
+  width: 22em;
   font-size: .9em;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  vertical-align: bottom;
-  overflow: hidden;
 }
 
 .presenter-row {
@@ -328,10 +324,7 @@ RESPONSIVE DESIGN
 
   .presenter-section {
     width: 5em;
-    text-overflow: initial;
-    overflow: visible;
     font-size: 1em;
-    white-space: normal;
   }
 
   .meeting-time {

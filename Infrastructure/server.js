@@ -29,20 +29,12 @@ var ping = require('ping');
 // ssh into servers using cmdline
 var cmd=require('node-cmd');
 var dig=require('node-dig-dns');
-let numPassed = 0;
-
-
-
-
-// Checks DNS
-
-
-
-
-
 var http = require('http');
+
+
 http.createServer(function(req,res) {
-     res.writeHead(200, {'Content-Type':'application/json'});
+     
+    let numPassed = 0;
      object.forEach(async (item) => {
         // console.log(item.IPAddress)
        
@@ -61,7 +53,7 @@ http.createServer(function(req,res) {
                 console.log("Done fetching the data!");
                 // console.log(object)
     
-                let numPassed = 0;
+                numPassed = 0;
                 
                 dig(['cdot.systems', 'ns'])
                 .then((result) => {
@@ -69,12 +61,20 @@ http.createServer(function(req,res) {
                     // for (let i in result.answer) {
                     //     console.log(result.answer[i].value)
                     // }
+                    console.log(result.answer)
+
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader('Access-Control-Request-Method', '*');
+                    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+                    res.setHeader('Access-Control-Allow-Headers', '*');
+                    
+                    res.writeHead(200, {'Content-Type':'application/json'});
                     res.end(JSON.stringify({Workstations:object , Servers:result.answer}));
 
-                    console.log(result.answer)
+                    numPassed = 0;
                 })
                 .catch((err) => {
-                console.log('Error:', err);
+                    console.log('Error:', err);
                 });
     
                 // servers.forEach( async (item) => {
@@ -100,7 +100,7 @@ http.createServer(function(req,res) {
        
     });
      
- }).listen(3000);
+ }).listen(3200);
 
 
 
