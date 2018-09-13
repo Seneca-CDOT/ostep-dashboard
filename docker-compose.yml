@@ -1,0 +1,27 @@
+version: '2'
+services:
+  dashboard:
+    build: ./Dashboard
+    depends_on:
+     - "osteppy"
+     - "lamp"
+     - "rapresenter"
+     - "db1042"
+    ports:
+     - "8080:3000"
+  osteppy:
+    build: ./Osteppy
+    ports:
+      - "8081:8080"
+  lamp:
+    build: ./LAMP
+    ports:
+      - "8082:3000"
+  rapresenter:
+    build: ./RAPresenter
+    ports:
+      - "8083:8083"
+  db1042:
+    build: ./DB1042
+    ports:
+      - "8084:3000"
