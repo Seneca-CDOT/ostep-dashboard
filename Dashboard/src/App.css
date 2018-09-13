@@ -276,10 +276,40 @@ PRESENTATIONS CONTENT
 DB1042 CONTENT
 ==================================== 
 */
-.meeting-icons {
-  padding: 0 .6em 0 .4em;
+
+.meeting {
+  display: flex;
 }
 
+.meeting-time {
+  justify-content: flex-start;
+  width: 16rem;
+  font-weight: bold;
+  color: palegreen;
+}
+
+.meeting-topic {
+  width: 35rem;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: palegoldenrod;
+}
+
+.meeting-organizer {
+  width: 20rem;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e84118;
+}
+
+.meeting-icons {
+  padding: 0 .6em 0 .4em;
+  vertical-align: middle;
+}
 
 /*
 ======================================
@@ -302,6 +332,10 @@ RESPONSIVE DESIGN
     overflow: visible;
     font-size: 1em;
     white-space: normal;
+  }
+
+  .meeting-time {
+    min-width: 16rem;
   }
 }
 
