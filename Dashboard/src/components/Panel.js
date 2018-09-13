@@ -97,33 +97,32 @@ class Panel extends React.Component {
     return (
       <div>
         <h3>Workstations</h3>
-         <div>
-        {workstations.map((server, i) => (
-          <div
-            key={i}
-            className="ip-entry"
-          >
-            <img className="ip-icon" src={outlet} alt={"IP icon"} />
-            <span className="ip-name"> {server.IPAddress} </span> 
-             is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
-          </div>
-        ))}
+        <div>
+          {workstations.map((server, i) => (
+            <div
+              key={i}
+              className="ip-entry"
+            >
+              <img className="ip-icon" src={outlet} alt={"IP icon"} />
+              <span className="ip-name"> {server.IPAddress} </span>
+              is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
+            </div>
+          ))}
+        </div>
+        <h3>Servers</h3>
+        <div>
+          {servers.map((server, i) => (
+            <div
+              key={i}
+              className="ip-entry"
+            >
+              <img className="ip-icon" src={outlet} alt={"IP icon"} />
+              <span className="ip-name"> {server.domain} </span>
+              value is <span className="ip-up">{server.value}</span>
+            </div>
+          ))}
+        </div>
       </div>
-      <h3>Servers</h3>
-      <div>
-        {servers.map((server, i) => (
-          <div
-            key={i}
-            className="ip-entry"
-          >
-            <img className="ip-icon" src={outlet} alt={"IP icon"} />
-            <span className="ip-name"> {server.domain} </span> 
-             value is <span className="ip-up">{server.value}</span>
-          </div>
-        ))}
-      </div>
-      </div>
-     
     );
   }
 
@@ -202,11 +201,11 @@ class Panel extends React.Component {
         <div key={row + i} className="github-entry">
           {new Date(row.Date) > Date.now() &&
             <div className="presenter-row">
-            <span className="github-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"}/> {row.Presenter}</span>
-            <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"}/>  {row.Topic}</span>
-            <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"}/>  {row.Date}</span>
-            <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"}/>  {row.Time}</span>
-           {/* <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span> */}
+              <span className="github-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"} /> {row.Presenter}</span>
+              <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"} />  {row.Topic}</span>
+              <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />  {row.Date}</span>
+              <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />  {row.Time}</span>
+              {/* <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span> */}
             </div>
           }
         </div>
