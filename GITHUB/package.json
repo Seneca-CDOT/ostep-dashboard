@@ -1,13 +1,19 @@
 {
-    "name": "docker_web_app",
-    "version": "1.0.0",
-    "description": "Node.js on Docker",
-    "author": "First Last <first.last@example.com>",
-    "main": "server.js",
-    "scripts": {
-      "start": "node server.js"
-    },
-    "dependencies": {
-      "express": "^4.16.1"
-    }
-  }
+  "name": "github_service_app",
+  "version": "1.0.0",
+  "description": "GITHUB for Dashboard",
+  "author": "Lewis Kim",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "eslint": "^5.5.0",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "path": "^0.12.7",
+    "request": "^2.88.0"
+  },
+  "license": "ISC"
+}
