@@ -4,10 +4,6 @@ import Panel from './components/Panel';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const panelNames = ['github', 'infrastructure', 'presentations', 'eods', 'lamp', 'db1042'];
     return (

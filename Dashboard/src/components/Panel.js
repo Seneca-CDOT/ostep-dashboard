@@ -20,7 +20,6 @@ class Panel extends React.Component {
     this.formatGithub = this.formatGithub.bind(this);
     this.formatOutput = this.formatOutput.bind(this);
     this.refreshData = this.refreshData.bind(this);
-    this.tempData;
     this.state = {
       data: null,
     }
@@ -63,23 +62,17 @@ class Panel extends React.Component {
     switch (panelType) {
       case "github":
         return this.formatGithub();
-        break;
       case "infrastructure":
         return this.formatInfrastructure();
-        break;
       case "presentations":
         return this.formatPresentations();
-        break;
       case "eods":
         return this.formatEOD();
-        break;
       case "lamp":
         return this.formatLamp();
-        break;
       case "db1042":
         const sortedData = this.sortDates();
         return this.formatDB1042(sortedData);
-        break;
       default:
         throw new Error(`${panelType} is not a valid panel type!`);
     }
@@ -103,6 +96,7 @@ class Panel extends React.Component {
 
     return (
       <div>
+        <h3>Workstations</h3>
          <div>
         {workstations.map((server, i) => (
           <div
@@ -111,12 +105,12 @@ class Panel extends React.Component {
           >
             <img className="ip-icon" src={outlet} alt={"IP icon"} />
             <span className="ip-name"> {server.IPAddress} </span> 
-             is <span className="ip-up">{server.Status}</span>
+             is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
           </div>
         ))}
       </div>
+      <h3>Servers</h3>
       <div>
-
         {servers.map((server, i) => (
           <div
             key={i}
@@ -189,10 +183,10 @@ class Panel extends React.Component {
       sortedData.rows.map((row, i) => (
         <div key={row + i} className="github-entry meeting">
           <span className="meeting-time">
-            <img className="meeting-icons" src={clock} alt={"clock icon"} />{row["Date and time"].split(' ')[1]}
+            <img className="meeting-icons" src={clock} alt={"meeting time icon"} />{row["Date and time"].split(' ')[1]}
           </span>
           <span className="meeting-topic">
-            <img className="meeting-icons" src={clipboard} alt={"clipboard icon"} />{row["Purpose"]}
+            <img className="meeting-icons" src={clipboard} alt={"meeting topic icon"} />{row["Purpose"]}
           </span>
           <span className="meeting-organizer">
             <img className="meeting-icons" src={user} alt={"organizer icon"} />{row["Contact person"]}
@@ -208,10 +202,10 @@ class Panel extends React.Component {
         <div key={row + i} className="github-entry">
           {new Date(row.Date) > Date.now() &&
             <div className="presenter-row">
-            <span className="github-name presenter-section"><img className="meeting-icons" src={user} /> {row.Presenter}</span>
-            <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} />  {row.Topic}</span>
-            <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} />  {row.Date}</span>
-            <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} />  {row.Time}</span>
+            <span className="github-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"}/> {row.Presenter}</span>
+            <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"}/>  {row.Topic}</span>
+            <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"}/>  {row.Date}</span>
+            <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"}/>  {row.Time}</span>
            {/* <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span> */}
             </div>
           }
@@ -236,7 +230,7 @@ class Panel extends React.Component {
             {this.props.title.toUpperCase()}
           </h3>
           <div className="refresh-container" onClick={this.refreshData}>
-            <img className="refresh" src={refresh} alt={""} />
+            <img className="refresh" src={refresh} alt={"refresh icon"} />
           </div>
         </div>
         <div className="panel-content">
