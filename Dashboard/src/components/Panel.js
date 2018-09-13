@@ -98,19 +98,38 @@ class Panel extends React.Component {
   }
 
   formatInfrastructure() {
+    const servers = this.state.data.Servers;
+    const workstations = this.state.data.Workstations
+
     return (
       <div>
-        {this.state.data.map((ip, i) => (
+         <div>
+        {workstations.map((server, i) => (
           <div
-            key={ip}
+            key={i}
             className="ip-entry"
           >
             <img className="ip-icon" src={outlet} alt={"IP icon"} />
-            <span className="ip-name">Workstation1006</span> located at
-            192.168.122.112 is <span className="ip-up">UP!</span>
+            <span className="ip-name"> {server.IPAddress} </span> 
+             is <span className="ip-up">{server.Status}</span>
           </div>
         ))}
       </div>
+      <div>
+
+        {servers.map((server, i) => (
+          <div
+            key={i}
+            className="ip-entry"
+          >
+            <img className="ip-icon" src={outlet} alt={"IP icon"} />
+            <span className="ip-name"> {server.domain} </span> 
+             value is <span className="ip-up">{server.value}</span>
+          </div>
+        ))}
+      </div>
+      </div>
+     
     );
   }
 
