@@ -3,4 +3,5 @@ export default {
   db1042: "http://localhost:8084/",
   presentations: "http://vega.cdot.systems:8083",
   lamp: "http://vega.cdot.systems:8080",
+  infrastructure: "http://localhost:3200"
 };
