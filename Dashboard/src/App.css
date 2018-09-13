@@ -259,6 +259,10 @@ PRESENTATIONS CONTENT
 .presenter-section {
   width: 22em;
   font-size: .9em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  overflow: hidden;
 }
 
 .presenter-row {
