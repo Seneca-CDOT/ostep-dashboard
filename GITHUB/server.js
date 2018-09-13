@@ -19,15 +19,16 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    //data.getBranches().then(function() {
+    data.initialize().then(function() {
+      data.delay(1000).then(function() {
     data.getRepos().then(function() {
-      data.delay(2000).then(function() {
+      data.delay(1000).then(function() {
         data.getAllBranchUrls().then(function() {
-          data.delay(2000).then(function() {
+          data.delay(1000).then(function() {
             data.getAllCommits().then(() => {
-              data.delay(2000).then(function() {
+              data.delay(1000).then(function() {
                 data.getCommits().then(() => {
-                  data.delay(2000).then(function() {
+                  data.delay(1000).then(function() {
                     data.getRecentCommits().then((data) =>{
                       res.json(data);
                     });
@@ -38,6 +39,8 @@ app.get('/', (req, res) => {
           }); 
         });
       });
+    });
+    });
     }).catch((err) => {
       console.log(err);
     });

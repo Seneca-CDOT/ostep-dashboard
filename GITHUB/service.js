@@ -1,27 +1,22 @@
 var branches = [];
 var commits = [];
 var recentCommits = [];
-var commitCompare = [];
+var todayCommits = [];
 var request = require("request");
 var fs = require('fs');
-var branchJSON = fs.readFileSync('branches.json', 'utf8');
 //var token = process.env.GIT_TOKEN; 
 //var token = "a3450eee9c0b49dc2fb5c62bb81a8ee2ae267e00";
 //var branchUrl = 'https://api.github.com/repos/Seneca-CDOT/ostep-dashboard/branches?access_token=' + token; 
 //var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100?access_token=' + token;
-var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=a3450eee9c0b49dc2fb5c62bb81a8ee2ae267e00';
+var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=1b5ca8f01a319a19134284b7f76af1d33e29902a';
 //https://api.github.com/repos/Seneca-CDOT/ostep-dashboard/branches?access_token=a3450eee9c0b49dc2fb5c62bb81a8ee2ae267e00
 var repoUrls = [];
-var repos = [];
-var filteredCommits = [];
+
 
 
 var today = new Date();
 const oneDay = 24 * 60 * 60 * 1000;
 const recency = oneDay;
-const recentDate = new Date(today - recency);
-const oldDate = new Date(recentDate - oneDay);
-const testDate = new Date(today - 2 * 60 * 60 * 1000)
 
 function isJSON (data) {
     var ret = true;
@@ -32,6 +27,18 @@ function isJSON (data) {
     }
     return ret;
  }
+
+module.exports.initialize = function() {
+    return new Promise((resolve, reject) => {
+        today = new Date();
+        branches = [];
+        commits = [];
+        recentCommits = [];
+        todayCommits = [];
+        repoUrls = [];
+        resolve();
+    });
+}
 
 module.exports.getRepos = function() {
     return new Promise ((resolve, reject) => {
@@ -50,7 +57,7 @@ module.exports.getRepos = function() {
                     if ((today - new Date(reposX[i].pushed_at)) < recency) {
                         repoUrls.push({
                             'name': reposX[i].name,
-                            'url': reposX[i].url + "/branches?access_token=53f81e297545fe3803b07413bbdf4a744cc419ef" 
+                            'url': reposX[i].url + "/branches?access_token=1b5ca8f01a319a19134284b7f76af1d33e29902a" 
                         });
                         console.log("DEBUG reposX[i].url" + reposX[i].url);
                     } else {
@@ -83,7 +90,7 @@ var getBranches = function(branchUrlX, repoName) {
 
                 for (var i in branches){
                     request.get({
-                        url: branches[i].commit.url + "?access_token=53f81e297545fe3803b07413bbdf4a744cc419ef",
+                        url: branches[i].commit.url + "?access_token=1b5ca8f01a319a19134284b7f76af1d33e29902a",
                         headers: {'User-Agent': 'request'},
                     }, (err, res, data) => {
                         if (err) {
@@ -91,12 +98,10 @@ var getBranches = function(branchUrlX, repoName) {
                             reject("Unable to access repo url.");
                           } else {
                             var subbranch = JSON.parse(data);
+                            console.log(branches[i].commit.url);
                             subbranch.commit.branchName = branches[i].name;
                             subbranch.commit.repoName = repoName;
-                            //Checks if the commit is today.
-                            //if (new Date(subbranch.commit.author.date).setHours(0,0,0,0) == today.setHours(0,0,0,0)) {
                                 commits.push(subbranch.commit);
-                            //}
                           }
                     });
                 }
@@ -136,7 +141,7 @@ module.exports.getCommits = function() {
     return new Promise((resolve, reject) => {
         //console.log(commits);
         for (let i in commits) {
-            var tempUrl = commits[i].url + '&access_token=a3450eee9c0b49dc2fb5c62bb81a8ee2ae267e00';// + token;
+            var tempUrl = commits[i].url + '&access_token=1b5ca8f01a319a19134284b7f76af1d33e29902a';// + token;
             var repoName = commits[i].repoName;
             var branchName = commits[i].branchName;
             //console.log("DEBUG getCommits. tempurl1: " + tempUrl);
@@ -175,7 +180,19 @@ module.exports.getCommits = function() {
 
 module.exports.getRecentCommits = function() {
     return new Promise((resolve,reject) => {
-        resolve(recentCommits);
+        //sort by date
+        recentCommits.sort((a) => {
+            var currentDate = new Date();
+            if (new Date(a.author.date) >= new Date(currentDate.setDate(currentDate.getDate() - 1))) {
+                todayCommits.push(a);
+            }
+        });
+        todayCommits.sort((a,b) => {
+            var c = new Date(a.author.date);
+            var d = new Date(b.author.date);
+            return d - c;
+        });
+        resolve(todayCommits);
     });
 }
 
@@ -195,10 +212,6 @@ module.exports.getAllCommits = function() {
     return new Promise((resolve, reject) => {
         var checkedRepo = "";
         //Ian this does not work. Apparently this is most efficient way to compare each element with each other. 
-        for (var i = 0; i < commits.length; i++) {
-            for (var j = i + 1; j < commits.length; j++) {
-            }
-        }
         //console.log("Debug getAllCommits. commits: " + commits);
         resolve();
     });
