@@ -257,7 +257,7 @@ PRESENTATIONS CONTENT
 */
 
 .presenter-section {
-  width: 22em;
+  width: 17em;
   font-size: .9em;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -298,7 +298,10 @@ RESPONSIVE DESIGN
 
   .presenter-section {
     width: 5em;
+    text-overflow: initial;
+    overflow: visible;
     font-size: 1em;
+    white-space: normal;
   }
 }
 
