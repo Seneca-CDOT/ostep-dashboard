@@ -7,3 +7,23 @@
 `docker build -t github-api .`
 
 `docker run -p 3000:3000 -d github-api`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Seneca-CDOT/ostep-dashboard/blob/dashboard/GITHUB_API/LICENSE) file for details.
+
+## Open Source Software Used
+
+Node.JS + npm packages
+
+## Instructions
+
+### Create a Config.js file local to Service.js
+
+Add this code: 
+
+module.exports.configKey = {
+    SECRET_KEY: '(ENTER TOKEN HERE)'
+}
+
+Note: This key is called from the backend, so it should not be available to the public.
