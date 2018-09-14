@@ -79,12 +79,16 @@ class Panel extends React.Component {
   }
 
   formatGithub() {
+
+    const parseDate = (date) => `${new Date(date).getHours()}:${new Date(date).getMinutes()}`;
+
     return (
       this.state.data.map((commit, i) => (
         <div key={commit + i} className="github-entry">
           <img className="github-icon" src={github} alt="Github icon" />
-          <span className="github-name">John Kimble</span> committed to
-          <span className="github-repo"> TSCompare</span>: "Add flexbox to some long repo message that is really way too long to fit."
+          <span className="github-name">{commit.author.name}</span> committed to
+          <span className="github-repo"> {commit.repoName}</span> at {parseDate(commit.author.date)}
+          <p className="github-message">{commit.message}</p>
         </div>
       ))
     );
