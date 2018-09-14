@@ -7,22 +7,19 @@ class App extends Component {
   render() {
     const panelNames = ['github', 'infrastructure', 'presentations', 'eods', 'lamp', 'db1042'];
     return (
-      <div>
+      <div className="app-content">
         <Header
           name={'ostep dashboard'}
         />
-        <div className="main-content">
-          <div className="container">
-            <div className="panel-row">
-              {panelNames.map((name, i) => (
-                <Panel
-                  key={i}
-                  title={name}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="panel-row">
+          {panelNames.map((name, i) => (
+            <Panel
+              key={i}
+              title={name}
+            />
+          ))}
         </div>
+        <div className="blank"></div>
       </div>
     );
   }

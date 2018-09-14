@@ -184,7 +184,7 @@ class Panel extends React.Component {
   formatDB1042(sortedData) {
     return (
       <div>
-        {!!sortedData && <div>No Meetings Found for Today.</div>}
+        {!!sortedData && <div>No meetings found for today.</div>}
 
         {
           !!sortedData.rows.length && sortedData.rows.map((row, i) => (
