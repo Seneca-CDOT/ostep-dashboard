@@ -1,6 +1,6 @@
 # Welcome to Ostep Dashboard!
 
-Ostep dashboard displays 
+Ostep dashboard 
 
 
 ## Docker
