@@ -36,7 +36,7 @@ services:
     container_name: infrastructure
     build: ./Infrastructure
     ports:
-      - "8085:3000"
+      - "8085:3200"
   github:
     container_name: github
     build: ./Github
