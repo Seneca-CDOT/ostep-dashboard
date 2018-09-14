@@ -8,7 +8,7 @@ This project was created as a micro-service for the OSTEP-Dashboard. It allows o
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Seneca-CDOT/ostep-dashboard/blob/master/LAMP/LICENSE.MD) file for details.
 
 ## Open Source Software Used
 
