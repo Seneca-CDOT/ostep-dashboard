@@ -8,13 +8,15 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
+RUN npm install ping node-cmd node-dig-dns http express
+RUN apt-get update && apt-get install -y dnsutils
 # If you are building your code for production
 # RUN npm install --only=production
 
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3200
 CMD [ "npm", "start" ]
+
 
