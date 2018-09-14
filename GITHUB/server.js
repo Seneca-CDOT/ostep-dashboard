@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 var data = require("./service.js");
-const HTTP_PORT = process.env.PORT || 8080;
+const HTTP_PORT = process.env.PORT || 4141;
 
 app.use(bodyParser.json());
 
@@ -25,8 +25,6 @@ app.get('/', (req, res) => {
       data.delay(1000).then(function() {
         data.getAllBranchUrls().then(function() {
           data.delay(1000).then(function() {
-            data.getAllCommits().then(() => {
-              data.delay(1000).then(function() {
                 data.getCommits().then(() => {
                   data.delay(1000).then(function() {
                     data.getRecentCommits().then((data) =>{
@@ -34,8 +32,7 @@ app.get('/', (req, res) => {
                     });
                   });
                 });
-              });
-            });
+ 
           }); 
         });
       });
