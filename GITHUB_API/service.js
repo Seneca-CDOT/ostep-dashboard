@@ -5,7 +5,7 @@ var commits = [];
 var recentCommits = [];
 var todayCommits = [];
 var request = require("request");
-var key = config.configKey.SECRET_KEY;
+var key = process.env.GITHUB_TOKEN; //var key = config.configKey.SECRET_KEY;
 var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=' + key;
 console.log(key);
 var repoUrls = [];
