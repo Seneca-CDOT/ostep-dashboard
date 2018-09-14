@@ -9,7 +9,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN apt-get update && apt-get install -y dnsutils
-RUN npm install ping node-cmd node-dig-dns http express
 # If you are building your code for production
 # RUN npm install --only=production
 
