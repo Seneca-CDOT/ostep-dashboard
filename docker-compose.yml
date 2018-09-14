@@ -8,7 +8,8 @@ services:
      - "lamp"
      - "rapresenter"
      - "db1042"
-    #  - "infrastructure"
+     - "github"
+     - "infrastructure"
     ports:
      - "8080:3000"
   osteppy:
@@ -31,13 +32,11 @@ services:
     build: ./DB1042
     ports:
       - "8084:8084"
-  # infrastructure:
-  #   container_name: infrastructure
-  #   build: ./Infrastructure
-  #   env_file:
-  #     - infrastructure.env
-  #   ports:
-  #     - "8085:3000"
+  infrastructure:
+    container_name: infrastructure
+    build: ./Infrastructure
+    ports:
+      - "8085:3000"
   github:
     container_name: github
     build: ./Github
