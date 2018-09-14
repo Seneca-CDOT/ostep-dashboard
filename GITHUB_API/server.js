@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 var data = require("./service.js");
 const HTTP_PORT = process.env.PORT || 4141;
+var delayTime = 1000;
 
 app.use(bodyParser.json());
 
@@ -19,28 +20,27 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    data.initialize().then(function() {
-      data.delay(1000).then(function() {
-    data.getRepos().then(function() {
-      data.delay(1000).then(function() {
-        data.getAllBranchUrls().then(function() {
-          data.delay(1000).then(function() {
-                data.getCommits().then(() => {
-                  data.delay(1000).then(function() {
-                    data.getRecentCommits().then((data) =>{
-                      res.json(data);
-                    });
+  data.initialize().then(function() {
+    data.delay(delayTime).then(function() {
+      data.getRepos().then(function() {
+        data.delay(delayTime).then(function() {
+          data.getAllBranchUrls().then(function() {
+            data.delay(delayTime).then(function() {
+              data.getCommits().then(() => {
+                data.delay(delayTime).then(function() {
+                  data.getRecentCommits().then((data) =>{
+                    res.json(data);
                   });
                 });
- 
-          }); 
+              });
+            }); 
+          });
         });
       });
     });
-    });
-    }).catch((err) => {
+  }).catch((err) => {
       console.log(err);
-    });
+  });
 });
 
 app.use((req, res) => {
