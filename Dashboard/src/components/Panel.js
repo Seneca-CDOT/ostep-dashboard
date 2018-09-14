@@ -184,10 +184,10 @@ class Panel extends React.Component {
   formatDB1042(sortedData) {
     return (
       <div>
-        {!sortedData.row.length && <div>No Meetings Found for Today.</div>}
+        {!!sortedData && <div>No Meetings Found for Today.</div>}
 
         {
-          sortedData.rows.length && sortedData.rows.map((row, i) => (
+          !!sortedData.rows.length && sortedData.rows.map((row, i) => (
             <div key={row + i} className="github-entry meeting">
               <span className="meeting-time">
                 <img className="meeting-icons" src={clock} alt={"meeting time icon"} />{row["Date and time"].split(' ')[1]}
