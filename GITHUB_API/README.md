@@ -6,7 +6,7 @@
 
 `docker build -t github-api .`
 
-`docker run -p 3000:3000 -d github-api`
+`docker run --env-file=token.env -i -t -p 4141:4141 -d github-api`
 
 ## License
 
