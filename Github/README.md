@@ -6,7 +6,7 @@
 
 `docker build -t github-api .`
 
-`docker run -p 3000:3000 -d github-api`
+`docker run --env-file=token.env -i -t -p 4141:4141 -d github-api`
 
 ## License
 
@@ -18,12 +18,10 @@ Node.JS + npm packages
 
 ## Instructions
 
-### Create a config.js file local to service.js
+### Create a token.env file local to service.js
 
 Add this code: 
 
-module.exports.configKey = {
-    SECRET_KEY: '(ENTER TOKEN HERE)'
-}
+GITHUB_TOKEN="PLACEHOLDER"
 
 Note: This key is called from the backend, so it should not be available to the public.
