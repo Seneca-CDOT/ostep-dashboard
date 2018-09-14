@@ -18,7 +18,7 @@ Node.JS + npm packages
 
 ## Instructions
 
-### Create a Config.js file local to Service.js
+### Create a config.js file local to service.js
 
 Add this code: 
 
