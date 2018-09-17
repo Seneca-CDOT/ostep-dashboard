@@ -1,8 +1,11 @@
+
+const dash_host = process.env.REACT_APP_OSTEP_DASH_HOST;
+
 export default {
-  eods: "http://vega.cdot.systems:8081/eod",
-  db1042: "http://vega.cdot.systems:8084",
-  presentations: "http://vega.cdot.systems:8083",
-  lamp: "http://vega.cdot.systems:8082",
-  infrastructure: "http://vega.cdot.systems:8085",
-  github: "http://vega.cdot.systems:8086"
+  eods: `http://${dash_host}:8081/eod`,
+  db1042: `http://${dash_host}:8084`,
+  presentations: `http://${dash_host}:8083`,
+  lamp: `http://${dash_host}:8082`,
+  infrastructure: `http://${dash_host}:8085`,
+  github: `http://${dash_host}:8086`
 }
