@@ -1,0 +1,1 @@
+module.exports.configKey = { SECRET_KEY: '9c4697df4f84b9873fc58ce4b46d53e2a2b7bdf2' }

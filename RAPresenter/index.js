@@ -2,11 +2,17 @@ var express = require('express');
 var app = express();
 var scraper = require('table-scraper');
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    next();
+  });
+
 //creates object for sending the rows
-var newObj = {"rows":[]};
+
 
 app.get('/', (req, res)=>{
     //scrapes table data from wiki.cdot website
+    var newObj = {"rows":[]};
     scraper
     .get('https://wiki.cdot.senecacollege.ca/wiki/CDOT_Fall_2018_Weekly_Presentation_Schedule#Presentation_Dates')
     .then(function(tableData){
@@ -19,7 +25,7 @@ app.get('/', (req, res)=>{
     })
 });
 
-app.listen(8080, ()=>{
+app.listen(8083, ()=>{
     console.log("app listening on port 8080")
 })
 

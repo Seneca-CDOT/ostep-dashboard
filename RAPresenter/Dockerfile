@@ -6,6 +6,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 # copy dependancies into working directory, run npm, and install dependencies 
-EXPOSE 8080
-CMD [ "npm", "start"]
-#on port 8080
+EXPOSE 8083
+CMD [ "node", "index.js"]
+#on port 8083
