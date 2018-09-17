@@ -1,8 +1,8 @@
 export default {
-  eods: "http://localhost:8081/eod",
-  db1042: "http://localhost:8084",
-  presentations: "http://localhost:8083",
-  lamp: "http://localhost:8082",
-  infrastructure: "http://localhost:8085",
-  github: "http://localhost:8086"
+  eods: "http://vega.cdot.systems:8081/eod",
+  db1042: "http://vega.cdot.systems:8084",
+  presentations: "http://vega.cdot.systems:8083",
+  lamp: "http://vega.cdot.systems:8082",
+  infrastructure: "http://vega.cdot.systems:8085",
+  github: "http://vega.cdot.systems:8086"
 }

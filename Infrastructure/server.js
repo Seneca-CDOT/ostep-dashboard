@@ -44,7 +44,7 @@ app.get('/', (req, res)=> {
                     // if (item.Description = '')
                     console.log("server ssh fetching")
                     new Promise(resolve =>  { cmd.get(
-                        'ssh -p '+ item.Port+ ' arif@'+item.Domain + ' hostname',
+                        'ssh -o "StrictHostKeyChecking no" -i id_rsa -p '+ item.Port+ ' arif@'+item.Domain + ' hostname',
                         function(err, data, stderr) {
                             if (data='bbetty'||'ccharlie'||'aarchie.cdot.systems'||'xerxes.cdot.systems'){
                                 item.Status = 'alive'
@@ -64,18 +64,8 @@ app.get('/', (req, res)=> {
                         }
                         dig(['cdot.systems', 'ns'])
                         .then((result) => {
-              
-                            // for (let i in result.answer) {
-                            //     console.log(result.answer[i].value)
-                            // }
+ 
                             console.log(result.answer)
-        
-                            // res.setHeader('Access-Control-Allow-Origin', '*');
-                            // res.setHeader('Access-Control-Request-Method', '*');
-                            // res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-                            // res.setHeader('Access-Control-Allow-Headers', '*');
-                            
-                            // res.writeHead(200, {'Content-Type':'application/json'});
                             res.end(JSON.stringify({Workstations:object , DNS:result.answer, Servers:servers}));
         
                             numPassed = 0;
@@ -96,4 +86,4 @@ app.get('/', (req, res)=> {
        
     });
      
-}).listen(3000);
+}).listen(3200);

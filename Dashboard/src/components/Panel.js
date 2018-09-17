@@ -97,32 +97,47 @@ class Panel extends React.Component {
   formatInfrastructure() {
     const servers = this.state.data.Servers;
     const workstations = this.state.data.Workstations
+    const dns = this.state.data.DNS
+    console.log(dns);
 
     return (
       <div>
-        <h3>Workstations</h3>
-        <div>
-          {workstations.map((server, i) => (
-            <div
-              key={i}
-              className="ip-entry"
-            >
-              <img className="ip-icon" src={outlet} alt={"IP icon"} />
-              <span className="ip-name"> {server.IPAddress} </span>
-              is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
-            </div>
-          ))}
-        </div>
         <h3>Servers</h3>
         <div>
           {servers.map((server, i) => (
             <div
-              key={i}
+              key={"servers-"+i}
+              className="ip-entry"
+            >
+              <img className="ip-icon" src={outlet} alt={"IP icon"} />
+              <span className="ip-name"> {server.Name} </span>
+              status is <span className="ip-up">{server.Status}</span>
+            </div>
+          ))}
+        </div>
+        <h3>DNS</h3>
+        <div>
+          {dns.map((server, i) => (
+            <div
+              key={"dns"+i}
               className="ip-entry"
             >
               <img className="ip-icon" src={outlet} alt={"IP icon"} />
               <span className="ip-name"> {server.domain} </span>
               value is <span className="ip-up">{server.value}</span>
+            </div>
+          ))}
+        </div>
+        <h3>Workstations</h3>
+        <div>
+          {workstations.map((server, i) => (
+            <div
+              key={"workstation-"+i}
+              className="ip-entry"
+            >
+              <img className="ip-icon" src={outlet} alt={"IP icon"} />
+              <span className="ip-name"> {server.IPAddress} </span>
+              is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
             </div>
           ))}
         </div>
@@ -146,8 +161,8 @@ class Panel extends React.Component {
     return (
       <div>
         {Object.keys(currentEods).length !== 0 && <h3>Today's EODs</h3>}
-        {Object.keys(currentEods).map((username) => (
-          <div className="github-entry" key={username}>
+        {Object.keys(currentEods).map((username, i) => (
+          <div className="github-entry" key={username+i}>
             <span></span>
             <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
@@ -183,19 +198,26 @@ class Panel extends React.Component {
 
   formatDB1042(sortedData) {
     return (
-      sortedData.rows.map((row, i) => (
-        <div key={row + i} className="github-entry meeting">
-          <span className="meeting-time">
-            <img className="meeting-icons" src={clock} alt={"meeting time icon"} />{row["Date and time"].split(' ')[1]}
-          </span>
-          <span className="meeting-topic">
-            <img className="meeting-icons" src={clipboard} alt={"meeting topic icon"} />{row["Purpose"]}
-          </span>
-          <span className="meeting-organizer">
-            <img className="meeting-icons" src={user} alt={"organizer icon"} />{row["Contact person"]}
-          </span>
-        </div>
-      ))
+      <div>
+        {!sortedData && <div>No meetings found for today.</div>}
+
+        {
+          !!sortedData.rows.length && sortedData.rows.map((row, i) => (
+            <div key={row + i} className="github-entry meeting">
+              <span className="meeting-time">
+                <img className="meeting-icons" src={clock} alt={"meeting time icon"} />{row["Date and time"].split(' ')[1]}
+              </span>
+              <span className="meeting-topic">
+                <img className="meeting-icons" src={clipboard} alt={"meeting topic icon"} />{row["Purpose"]}
+              </span>
+              <span className="meeting-organizer">
+                <img className="meeting-icons" src={user} alt={"organizer icon"} />{row["Contact person"]}
+              </span>
+            </div>
+          ))
+        }
+
+      </div>
     );
   }
 

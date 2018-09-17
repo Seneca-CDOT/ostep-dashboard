@@ -39,6 +39,17 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
+.app-content {
+  display:flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.blank {
+  height: 6em;
+}
+
 /* 
 ====================================
 HEADER
@@ -122,6 +133,7 @@ BODY
   width: 60rem;
   height: 40rem;
   margin: 2rem 1rem 2rem 2rem;
+  align-self: center;
 
 }
 
@@ -336,6 +348,15 @@ RESPONSIVE DESIGN
   .meeting-time {
     min-width: 16rem;
   }
+
+  .blank {
+    height: 0em;
+  }
+
+  .main-title {
+    padding: 2em;
+  }
+
 }
 
 
