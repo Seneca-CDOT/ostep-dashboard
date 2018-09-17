@@ -12,6 +12,8 @@ import clipboard from './assets/clipboard.svg';
 import home from './assets/home.svg';
 import Service from '../Service.js';
 import endpoints from '../config.js';
+import ReactMarkdown from 'react-markdown';
+
 const service = new Service();
 
 class Panel extends React.Component {
@@ -167,7 +169,7 @@ class Panel extends React.Component {
             <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
             <span className="github-repo"> {currentEods[username].channel}</span>:
-            <p>{currentEods[username].text}</p>
+            <ReactMarkdown source={currentEods[username].text} />
           </div>
         ))}
         {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
@@ -177,7 +179,7 @@ class Panel extends React.Component {
             <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
-              <p>{oldEods[username].text}</p>
+              <ReactMarkdown source={currentEods[username].text} />
           </div>
         ))}
       </div>
