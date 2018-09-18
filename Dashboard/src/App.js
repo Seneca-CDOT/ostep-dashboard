@@ -6,11 +6,6 @@ import Service from './Service.js';
 const service = new Service();
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   fetchData(componentName, cb) {
     service.getData(componentName, cb);
   }
@@ -27,7 +22,6 @@ class App extends Component {
       panels = panelQuery.split(",").filter((panel) => defaultPanels.includes(panel));
     }
 
-    // const panelNames = ['github', 'infrastructure', 'presentations', 'eods', 'lamp', 'db1042'];
     return (
       <div className="app-content">
         <Header
