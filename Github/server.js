@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
-var data = require("./service.js");
+var data = require("./serviceNew.js");
 const HTTP_PORT = process.env.PORT || 4141;
 var delayTime = 1000;
 
@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
   data.initialize().then(function() {
     data.delay(delayTime).then(function() {
       data.getRepos().then(function() {
@@ -38,6 +38,14 @@ app.get('/', (req, res) => {
         });
       });
     });
+  }).catch((err) => {
+      console.log(err);
+  });
+});*/
+
+app.get('/', (req, res) => {
+  data.initialize().then((data) =>{
+    res.json(data);
   }).catch((err) => {
       console.log(err);
   });
