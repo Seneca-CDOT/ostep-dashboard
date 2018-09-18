@@ -1,9 +1,10 @@
 {
-  "name": "t1042",
+  "name": "db1042-server",
   "version": "1.0.0",
-  "description": "Parses T1042 Meeting Room Schedule",
-  "main": "index.js",
+  "description": "Parses DB1042 Meeting Room Schedule",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

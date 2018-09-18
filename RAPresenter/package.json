@@ -1,9 +1,10 @@
 {
-  "name": "ramodule",
+  "name": "rapresenter-server",
   "version": "1.0.0",
   "description": "Accesses presenter table from RA website and returns an array of rows",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fahad Chughtai",

@@ -9,8 +9,9 @@ var cmd=require('node-cmd');
 var dig=require('node-dig-dns');
 var http = require('http');
 const express = require('express')
-
 const app = express();
+
+const PORT = 2005;
 
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin', "*");
@@ -86,4 +87,5 @@ app.get('/', (req, res)=> {
        
     });
      
-}).listen(3200);
+}).listen(PORT);
+console.log(`Running on localhost:${PORT}`);

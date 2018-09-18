@@ -13,37 +13,37 @@ services:
      - "github"
      - "infrastructure"
     ports:
-     - "8080:3000"
+     - "8080:2000"
   osteppy:
     container_name: osteppy
     build: ./Osteppy
     ports:
-      - "8081:8080"
+      - "8081:2001"
   lamp:
     container_name: lamp
-    build: ./LAMP
+    build: ./Lamp
     ports:
-      - "8082:8080"
+      - "8082:2002"
   rapresenter:
     container_name: rapresenter
     build: ./RAPresenter
     ports:
-      - "8083:8083"
+      - "8083:2003"
   db1042:
     container_name: db1042
     build: ./DB1042
     ports:
-      - "8084:8084"
+      - "8084:2004"
   infrastructure:
     container_name: infrastructure
     build: ./Infrastructure
     ports:
-      - "8085:3200"
+      - "8085:2005"
   github:
     container_name: github
     build: ./Github
     env_file:
       - github.env
     ports:
-      - "8086:4141"
+      - "8086:2006"
 
