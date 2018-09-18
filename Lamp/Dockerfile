@@ -1,4 +1,4 @@
-FROM node:8
+FROM node
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 2003
 
 CMD [ "npm", "start" ]
