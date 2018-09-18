@@ -9,12 +9,9 @@ import clock from './assets/clock.svg';
 import user from './assets/user.svg';
 import calendar from './assets/calendar.svg';
 import clipboard from './assets/clipboard.svg';
-import home from './assets/home.svg';
-import Service from '../Service.js';
 import endpoints from '../config.js';
 import ReactMarkdown from 'react-markdown';
 
-const service = new Service();
 
 class Panel extends React.Component {
   constructor(props) {
@@ -48,7 +45,7 @@ class Panel extends React.Component {
   }
 
   fetchData() {
-    service.getData(this.props.title, (data) => {
+    this.props.fetchData(this.props.title, (data) => {
       this.setState({ data });
     });
   }
