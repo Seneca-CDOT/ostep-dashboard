@@ -207,10 +207,19 @@ EOD CONTENT
 */
 
 .slack-icon {
-  height: 2em;
-  width: 2em;
-  margin-bottom: -0.5em;
+  height: 1.5em;
+  width: 1.5em;
   margin-right: 1em;
+}
+
+.slack-title {
+  display: flex;
+  align-items: center;
+  margin: 0.4em 0;
+}
+
+.slack-post {
+  padding: 0 .3em;
 }
 
 /* 
