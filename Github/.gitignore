@@ -4,5 +4,8 @@
 *node_modules/
 npm-debug.log
 
-./config.js
-token.env
+./*config*
+./*.env
+./*New*
+./*Old*
+./*key*

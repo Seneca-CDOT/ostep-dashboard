@@ -51,8 +51,6 @@ module.exports.getRepos = function() {
                     //} else {
                      //   i = 0;
                     }
-                    
-
                 }
                 //console.log("DEBUG getRepos");
                 resolve();

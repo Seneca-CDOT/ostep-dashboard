@@ -5,30 +5,53 @@ var commits = [];
 var recentCommits = [];
 var todayCommits = [];
 var request = require("request");
-var requestXML = new XMLHttpRequest();
-var key = '9c4697df4f84b9873fc58ce4b46d53e2a2b7bdf2'; //process.env.GITHUB_TOKEN; //var key = config.configKey.SECRET_KEY;
+var key = process.env.GITHUB_TOKEN; //
 var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=' + key;
+var tempUrl = "https://api.github.com/orgs/Seneca-CDOT/repos"
 console.log(key);
 var repoUrls = [];
-
-
-
 var today = new Date();
 const oneDay = 24 * 60 * 60 * 1000;
 const recency = oneDay;
 
+async function list() {
+    //const userGet = `https://api.github.com/search/users?page=1&q=daspinola&type=Users`
+    
+    const repoList = await request(tempUrl); //
+    console.log("DEBUG list: repoList" + repoList);
+    repoList.forEach(async function (repo){
+        console.log("DEBUG list: forEach" + repo.);
+    });
+    
+    return repos;
+    /*
+    usersList.forEach(async function (user) {
+      const repos = await request(user.repos_url)
+      
+      handleRepoList(user, repos)
+    })*/
+}
+  
+ function handleRepoList(user, repos) {
+    const userRepos = JSON.parse(repos)
+    
+    // Handle each individual user repo here
+  
+    console.log(user, userRepos)
+ }
+
 module.exports.initialize = function() {
     return new Promise((resolve, reject) => {
         today = new Date();
-        //branches = [];
-        //commits = [];
-        //recentCommits = [];
-        //todayCommits = [];
-        //repoUrls = [];
+        branches = [];
+        commits = [];
+        recentCommits = [];
+        todayCommits = [];
+        repoUrls = [];
         //var data;
         
         //1. getRepos
-        retrieveRepos();
+        //retrieveRepos();
         //2. getAllBranchUrls
         //getAllBranchUrls();
         //3. getCommits
@@ -36,18 +59,18 @@ module.exports.initialize = function() {
         //4. getRecentCommits
         //getRecentCommits();
         
-        resolve(requestXml.responseText);
-        //resolve(todayCommits);
+        //resolve(requestXml.responseText);
+        resolve(list());
     });
 }
 
-var retrieveRepos = () => {
+/*var retrieveRepos = () => {
     requestXML.open('GET', repoUrl, false);
     requestXML.send(null);
-}
+}*/
 
 var getRepos = function() {
-    //return new Promise ((resolve, reject) => {
+    return new Promise ((resolve, reject) => {
         request.get({
             url: repoUrl,
             headers: {'User-Agent': 'request'},
@@ -57,11 +80,12 @@ var getRepos = function() {
                 reject("Unable to get repos.");
               } else {
                 var reposX = JSON.parse(data);
+                var repositoryURLs = [];
                 //console.log("DEBUG getRepos. reposX.length: " + reposX.length);
                 for (var i = reposX.length-1; i > 1; i--){
 
                     if ((today - new Date(reposX[i].pushed_at)) < recency) {
-                        repoUrls.push({
+                        repoUrls.push({ // repositoryURLs
                             'name': reposX[i].name,
                             'url': reposX[i].url + "/branches?access_token=" + key
                         });
@@ -73,11 +97,11 @@ var getRepos = function() {
 
                 }
                 //console.log("DEBUG getRepos");
-                //resolve();
-                return;
+                resolve(repoUrls);
+                //return repositoryURLs;
               }
         });
-    //});
+    });
 }
 
 //-------------------------------------------------------------------------------------------
