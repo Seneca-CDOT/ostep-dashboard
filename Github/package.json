@@ -1,7 +1,7 @@
 {
-  "name": "github_service_app",
+  "name": "github-server",
   "version": "1.0.0",
-  "description": "GITHUB for Dashboard",
+  "description": "Grabs Github activity for the OSTEP team",
   "author": "Lewis Kim & Ian Zhu",
   "main": "server.js",
   "scripts": {

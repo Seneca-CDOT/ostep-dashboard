@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var scraper = require('table-scraper');
 
+const PORT = 2003;
+
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     next();
@@ -25,8 +27,5 @@ app.get('/', (req, res)=>{
     })
 });
 
-app.listen(8083, ()=>{
-    console.log("app listening on port 8080")
-})
-
-
+app.listen(PORT);
+console.log(`Running on localhost:${PORT}`);
