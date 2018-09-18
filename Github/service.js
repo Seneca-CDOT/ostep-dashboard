@@ -11,7 +11,6 @@ console.log(key);
 var repoUrls = [];
 
 
-
 var today = new Date();
 const oneDay = 24 * 60 * 60 * 1000;
 const recency = oneDay;
@@ -28,6 +27,7 @@ module.exports.initialize = function() {
     });
 }
 
+//1. getRepos
 module.exports.getRepos = function() {
     return new Promise ((resolve, reject) => {
         request.get({
@@ -48,8 +48,8 @@ module.exports.getRepos = function() {
                             'url': reposX[i].url + "/branches?access_token=" + key
                         });
                         //console.log("DEBUG reposX[i].url" + reposX[i].url);
-                    } else {
-                        i = 0;
+                    //} else {
+                     //   i = 0;
                     }
                     
 
@@ -61,7 +61,18 @@ module.exports.getRepos = function() {
     });
 }
 
-//-------------------------------------------------------------------------------------------
+//2. getAllBranchUrls
+module.exports.getAllBranchUrls = function() {
+    return new Promise((resolve,reject) => {
+        //console.log("DEBUG getAllBranchUrls. repoUrls.length: " + repoUrls.length);
+        for (var i = 0; i < repoUrls.length; i++) {
+            //console.log("DEBUG getAllBranchUrls. repoUrls[i].url: " + repoUrls[i].url);
+            getBranches(repoUrls[i].url, repoUrls[i].name);
+
+        }
+        resolve();
+    });
+}
 
 var getBranches = function(branchUrlX, repoName) {
     return new Promise ((resolve, reject) => {
@@ -121,6 +132,7 @@ module.exports.debugBranch = function() {
     });
 }
 
+//3. getCommits
 module.exports.getCommits = function() {
     return new Promise((resolve, reject) => {
         //console.log(commits);
@@ -158,6 +170,7 @@ module.exports.getCommits = function() {
     
 }
 
+//4. getRecentCommits
 module.exports.getRecentCommits = function() {
     return new Promise((resolve,reject) => {
         //sort by date
@@ -173,18 +186,6 @@ module.exports.getRecentCommits = function() {
             return d - c;
         });
         resolve(todayCommits);
-    });
-}
-
-module.exports.getAllBranchUrls = function() {
-    return new Promise((resolve,reject) => {
-        //console.log("DEBUG getAllBranchUrls. repoUrls.length: " + repoUrls.length);
-        for (var i = 0; i < repoUrls.length; i++) {
-            //console.log("DEBUG getAllBranchUrls. repoUrls[i].url: " + repoUrls[i].url);
-            getBranches(repoUrls[i].url, repoUrls[i].name);
-
-        }
-        resolve();
     });
 }
 
