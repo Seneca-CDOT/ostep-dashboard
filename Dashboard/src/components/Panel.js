@@ -179,7 +179,7 @@ class Panel extends React.Component {
             <img className="slack-icon" src={slack} alt={"Slack icon"} />
             <span className="github-name">{username}</span> posted EOD in channel
               <span className="github-repo"> {oldEods[username].channel}</span>:
-              <ReactMarkdown source={currentEods[username].text} />
+              <ReactMarkdown source={oldEods[username].text} />
           </div>
         ))}
       </div>
