@@ -6,6 +6,6 @@ npm-debug.log
 
 ./*config*
 ./*.env
-./*New*
-./*Old*
-./*key*
+./*New*.js
+./*Old*.js
+./*key*.js
