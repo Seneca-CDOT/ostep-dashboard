@@ -9,7 +9,9 @@ import clock from './assets/clock.svg';
 import user from './assets/user.svg';
 import calendar from './assets/calendar.svg';
 import clipboard from './assets/clipboard.svg';
-import home from './assets/home.svg';
+import zap from './assets/zap.svg';
+import zapOff from './assets/zap-off.svg';
+
 import Service from '../Service.js';
 import endpoints from '../config.js';
 import ReactMarkdown from 'react-markdown';
@@ -97,51 +99,52 @@ class Panel extends React.Component {
   }
 
   formatInfrastructure() {
-    const servers = this.state.data.Servers;
-    const workstations = this.state.data.Workstations
-    const dns = this.state.data.DNS
-    console.log(dns);
+
+    const upSort = (a, b) => a.Status === 'up';
+    
+    const servers = this.state.data.Servers.sort(upSort);
+    const workstations = this.state.data.Workstations.sort(upSort);
+    const dns = this.state.data.DNS;
 
     return (
       <div>
-        <h3>Servers</h3>
-        <div>
-          {servers.map((server, i) => (
-            <div
-              key={"servers-"+i}
-              className="ip-entry"
-            >
-              <img className="ip-icon" src={outlet} alt={"IP icon"} />
-              <span className="ip-name"> {server.Name} </span>
-              status is <span className="ip-up">{server.Status}</span>
-            </div>
-          ))}
-        </div>
-        <h3>DNS</h3>
-        <div>
-          {dns.map((server, i) => (
-            <div
-              key={"dns"+i}
-              className="ip-entry"
-            >
-              <img className="ip-icon" src={outlet} alt={"IP icon"} />
-              <span className="ip-name"> {server.domain} </span>
-              value is <span className="ip-up">{server.value}</span>
-            </div>
-          ))}
-        </div>
-        <h3>Workstations</h3>
-        <div>
-          {workstations.map((server, i) => (
-            <div
-              key={"workstation-"+i}
-              className="ip-entry"
-            >
-              <img className="ip-icon" src={outlet} alt={"IP icon"} />
-              <span className="ip-name"> {server.IPAddress} </span>
-              is <span className={server.Status === "alive" ? "ip-up" : "ip-down"}>{server.Status}</span>
-            </div>
-          ))}
+        <div className="infra-wrapper">
+          <div className="infra-column">
+            <div className="infra-box"><h3>Servers</h3></div>
+            {servers.map((server, i) => (
+              <div
+                key={"servers-"+i}
+                className="infra-box"
+              >
+                <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
+                <span> {server.Name} </span>
+              </div>
+            ))}
+          </div>
+          <div className="infra-column">
+            <div className="infra-box"><h3>Workstations</h3> </div>
+            {workstations.map((server, i) => (
+              <div
+                key={"workstation-"+i}
+                className="infra-box"
+              >
+                <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
+                <span> {server.Host} </span>
+              </div>
+            ))}
+          </div>
+          <div className="infra-column">
+          <div className="infra-box"><h3>DNS</h3></div>
+            {dns.map((server, i) => (
+              <div
+                key={"dns"+i}
+                className="infra-box"
+              >
+                <img className="ip-icon" src={zap} alt={"IP icon"} />
+                <span >{server.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
