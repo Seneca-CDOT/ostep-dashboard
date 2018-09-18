@@ -353,6 +353,10 @@ RESPONSIVE DESIGN
     width: 55rem;
   }
 
+  .panel-row {
+    justify-content: center;
+  }
+
   .panel-content {
     font-size: 1.75rem;
   }
