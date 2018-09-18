@@ -1,1 +1,0 @@
-module.exports.configKey = { SECRET_KEY: '' }
