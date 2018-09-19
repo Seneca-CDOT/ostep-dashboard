@@ -4,15 +4,12 @@ import bulbOn from './assets/bulb-on.svg';
 import bulbOff from './assets/bulb-off.svg';
 import github from './assets/github.svg';
 import slack from './assets/slack.svg';
-import outlet from './assets/outlet.svg';
 import clock from './assets/clock.svg';
 import user from './assets/user.svg';
 import calendar from './assets/calendar.svg';
 import clipboard from './assets/clipboard.svg';
 import zap from './assets/zap.svg';
 import zapOff from './assets/zap-off.svg';
-
-import Service from '../Service.js';
 import endpoints from '../config.js';
 import ReactMarkdown from 'react-markdown';
 
@@ -100,7 +97,7 @@ class Panel extends React.Component {
   formatInfrastructure() {
 
     const upSort = (a, b) => a.Status === 'up';
-    
+
     const servers = this.state.data.Servers.sort(upSort);
     const workstations = this.state.data.Workstations.sort(upSort);
     const dns = this.state.data.DNS;
@@ -112,7 +109,7 @@ class Panel extends React.Component {
             <div className="infra-box"><h3>Servers</h3></div>
             {servers.map((server, i) => (
               <div
-                key={"servers-"+i}
+                key={"servers-" + i}
                 className="infra-box"
               >
                 <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
@@ -124,7 +121,7 @@ class Panel extends React.Component {
             <div className="infra-box"><h3>Workstations</h3> </div>
             {workstations.map((server, i) => (
               <div
-                key={"workstation-"+i}
+                key={"workstation-" + i}
                 className="infra-box"
               >
                 <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
@@ -133,10 +130,10 @@ class Panel extends React.Component {
             ))}
           </div>
           <div className="infra-column">
-          <div className="infra-box"><h3>DNS</h3></div>
+            <div className="infra-box"><h3>DNS</h3></div>
             {dns.map((server, i) => (
               <div
-                key={"dns"+i}
+                key={"dns" + i}
                 className="infra-box"
               >
                 <img className="ip-icon" src={zap} alt={"IP icon"} />
@@ -169,9 +166,9 @@ class Panel extends React.Component {
           <div className="github-entry" key={username + i}>
             <div className="slack-title">
               <img className="slack-icon" src={slack} alt={"Slack icon"} />
-              <span className="github-name">{username}</span> 
-              <p className="slack-post"> posted EOD in channel </p> 
-             <div className="github-repo">{`#${currentEods[username].channel}`}</div>:
+              <span className="github-name">{username}</span>
+              <p className="slack-post"> posted EOD in channel </p>
+              <div className="github-repo">{`#${currentEods[username].channel}`}</div>:
             </div>
             <ReactMarkdown source={currentEods[username].text} />
           </div>
@@ -182,7 +179,7 @@ class Panel extends React.Component {
             <div className="slack-title">
               <img className="slack-icon" src={slack} alt={"Slack icon"} />
               <span className="github-name">{username}</span>
-              <p className="slack-post"> posted EOD in channel </p> 
+              <p className="slack-post"> posted EOD in channel </p>
               <span className="github-repo"> {oldEods[username].channel}</span>:
             </div>
             <ReactMarkdown source={oldEods[username].text} />
