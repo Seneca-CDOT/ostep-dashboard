@@ -10,14 +10,16 @@ app.use(function(req, res, next) {
   next();
 });
 
-tabletojson.convertUrl(
-  'https://wiki.cdot.senecacollege.ca/wiki/Meeting_Room_T1042',
-  function(tableAsJson) {
-    bookings = tableAsJson[0];
-  }
-);
+const getTable = () => {
+  tabletojson.convertUrl(
+    'https://wiki.cdot.senecacollege.ca/wiki/Meeting_Room_T1042',
+    function (tableAsJson) {
+      bookings = tableAsJson[0];
+    })
+};
 
 app.get("/", (req, res) => {
+  getTable();
   let today = new Date();
   bookings = bookings.filter(row => {
     let splitDateTime = row["Date and time"].split(' ');
