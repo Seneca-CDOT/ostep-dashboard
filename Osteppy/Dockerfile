@@ -10,6 +10,9 @@ RUN cd /www; npm install
 # Copy app source
 COPY . /www
 
+# Build the prod version
+RUN  cd /www; npm run build
+
 # Set work directory to /www
 WORKDIR /www
 
@@ -20,5 +23,4 @@ ENV PORT 2001
 EXPOSE 2001
 
 # start command as per package.json
-CMD ["npm", "run", "build"]
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]
