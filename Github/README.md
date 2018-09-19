@@ -18,6 +18,8 @@ Node.JS + npm packages
 
 ## Instructions
 
+npm install
+
 ### Create a token.env file local to service.js
 
 Add this code: 
