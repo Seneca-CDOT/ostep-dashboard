@@ -147,6 +147,7 @@ BODY
   font-size: 1.5em;
   color: #ecf0f1;
   overflow: auto;
+  word-break: break-all;
 }
 
 .long-panel {
