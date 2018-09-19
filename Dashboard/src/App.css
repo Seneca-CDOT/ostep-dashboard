@@ -307,6 +307,7 @@ PRESENTATIONS CONTENT
 .presenter-section {
   width: 22em;
   font-size: .9em;
+  display: flex;
 }
 
 .presenter-row {
@@ -314,6 +315,29 @@ PRESENTATIONS CONTENT
   justify-content: space-between; 
 }
 
+.presenter-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  width: 7em;
+}
+
+.presenter-name {
+  margin-left: -0.4em;
+  color: #e74c3c;
+  font-weight: 700;
+  
+}
+
+.presenter-info {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.presenter-entry{
+  padding-bottom: 0.6em;
+}
 
 /* 
 ====================================
@@ -382,9 +406,17 @@ RESPONSIVE DESIGN
     font-size: 1.75rem;
   }
 
+  .presenter-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .presenter-section {
-    width: 5em;
+    width: 8em;
     font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
   }
 
   .meeting-time {

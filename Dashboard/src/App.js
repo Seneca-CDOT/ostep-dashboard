@@ -4,6 +4,7 @@ import Panel from './components/Panel';
 import './App.css';
 import Service from './Service.js';
 const service = new Service();
+const DEFAULT_PANELS = ['github', 'infrastructure', 'presentations', 'eods', 'db1042'];
 
 class App extends Component {
   fetchData(componentName, cb) {
@@ -11,15 +12,12 @@ class App extends Component {
   }
 
   render() {
-
-    let defaultPanels = ['github', 'infrastructure', 'presentations', 'eods', 'db1042'];
-    let panels = defaultPanels;
-
+    let panels = DEFAULT_PANELS;
     const urlParams = new URLSearchParams(window.location.search);
     const panelQuery = urlParams.get('panels');
 
     if (panelQuery) {
-      panels = panelQuery.split(",").filter((panel) => defaultPanels.includes(panel));
+      panels = panelQuery.split(",").filter((panel) => DEFAULT_PANELS.includes(panel));
     }
 
     return (

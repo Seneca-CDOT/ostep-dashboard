@@ -79,7 +79,6 @@ class Panel extends React.Component {
   }
 
   formatGithub() {
-
     const parseDate = (date) => `${new Date(date).getHours()}:${new Date(date).getMinutes()}`;
 
     return (
@@ -95,9 +94,7 @@ class Panel extends React.Component {
   }
 
   formatInfrastructure() {
-
     const upSort = (a, b) => a.Status === 'up';
-
     const servers = this.state.data.Servers.sort(upSort);
     const workstations = this.state.data.Workstations.sort(upSort);
     const dns = this.state.data.DNS;
@@ -204,7 +201,7 @@ class Panel extends React.Component {
   formatDB1042(sortedData) {
     return (
       <div>
-        {!sortedData && <div>No meetings found for today.</div>}
+        {!sortedData && <div>No upcoming meetings found for today.</div>}
 
         {
           !!sortedData.rows.length && sortedData.rows.map((row, i) => (
@@ -227,16 +224,30 @@ class Panel extends React.Component {
   }
 
   formatPresentations() {
+    const formatDate = (presenterDate) => {
+      const date = new Date(presenterDate);
+      const month = date.toDateString().split(' ')[1];
+      const day = date.toDateString().split(' ')[2];
+      return `${month} ${day}`;
+    };
+    
     return (
       this.state.data.rows.map((row, i) => (
-        <div key={row + i} className="github-entry">
+        <div key={row + i} className="presenter-entry">
           {new Date(row.Date) > Date.now() &&
             <div className="presenter-row">
-              <span className="github-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"} /> {row.Presenter}</span>
-              <span className="github-repo presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"} />  {row.Topic}</span>
-              <span className="github-repo presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />  {row.Date}</span>
-              <span className="github-repo presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />  {row.Time}</span>
-              {/* <img className="meeting-icons" src={home} /> <span className="github-repo"> {row.Room}</span> */}
+              <div className="presenter-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"} />
+                <span className="presenter-text">{row.Presenter}</span>
+              </div>
+              <div className="presenter-info presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"} />
+                <span className="presenter-text">{row.Topic}</span>
+              </div>
+              <div className="presenter-info presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />
+                <span className="presenter-text">{formatDate(row.Date)}</span>
+              </div>
+              <div className="presenter-info presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />
+                <span className="presenter-text">{row.Time.split("-")[0]}</span>
+              </div>
             </div>
           }
         </div>
