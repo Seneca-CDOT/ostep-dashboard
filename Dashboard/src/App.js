@@ -7,6 +7,7 @@ import Service from './Service.js';
 import Infrastructure from './components/Infrastructure'
 import Github from './components/Github'
 import Osteppy from './components/Osteppy';
+import Meetings from './components/Meetings';
 const service = new Service();
 const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 const MERGED_PANELS = ['presentations', 'db1042']
@@ -41,7 +42,9 @@ class App extends Component {
         <Osteppy
           fetchData={this.fetchData}
         />
-
+        <Meetings
+          fetchData={this.fetchData}
+        />
         <div className="blank"></div>
       </div>
 

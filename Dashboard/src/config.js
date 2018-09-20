@@ -5,7 +5,7 @@ export default {
   osteppy: `http://narnia.cdot.systems:8081/eod`,
   lamp: `http://${dash_host}:8082`,
   presentations: `http://${dash_host}:8083`,
-  db1042: `http://${dash_host}:8084`,
+  meetings: `http://${dash_host}:8084`,
   infrastructure: `http://${dash_host}:8085`,
   github: `http://${dash_host}:8086`
 }
