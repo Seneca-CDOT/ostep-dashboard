@@ -194,7 +194,6 @@ module.exports.getCommits = function() {
                     var temp = [];
                     temp = JSON.parse(data);
                         for (let x in temp) {
-
                             temp[x].commit.branchName = commits[i].branchName;;
                             temp[x].commit.repoName = commits[i].repoName;
                             recentCommits.push(temp[x].commit);
