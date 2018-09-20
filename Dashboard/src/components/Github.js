@@ -26,9 +26,12 @@ class Github extends Container {
             this.state.data.map((commit, i) => (
               <div key={commit + i} className="github-entry">
                 <img className="github-icon" src={github} alt="Github icon" />
-                <span className="github-name">{commit.author.name}</span> committed to
-              <span className="github-repo"> {commit.repoName}</span> at {parseDate(commit.author.date)}
-                <p className="github-message">{commit.message}</p>
+                <span className="github-name">{commit.author.name}</span>
+                <span> committed to </span>
+                <span className="github-repo"> {` ${commit.repoName}`}</span>
+                at
+                <span className="github-time">{` ${parseDate(commit.author.date)}`}</span>
+                <p className="github-message">{`"${commit.message}"`}</p>
               </div>
             ))
           }

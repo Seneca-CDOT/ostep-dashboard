@@ -9,7 +9,7 @@ const Panel = (props) => {
         <h3>
           {props.title.toUpperCase()}
         </h3>
-        <div className="refresh-container" onClick={this.refreshData}>
+        <div className="refresh-container" onClick={props.refreshData}>
           <img className="refresh" src={refresh} alt={"refresh icon"} />
         </div>
       </div>

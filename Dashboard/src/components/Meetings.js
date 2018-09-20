@@ -27,7 +27,10 @@ class Meetings extends Container {
 
     return (
       <div>
-        <Panel title={COMPONENT_NAME}>
+        <Panel
+          title={COMPONENT_NAME}
+          refreshData={this.refreshData}
+        >
           {!this.sortedData && <div>No upcoming meetings found for today.</div>}
 
           {

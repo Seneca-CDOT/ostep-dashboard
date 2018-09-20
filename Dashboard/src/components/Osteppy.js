@@ -14,7 +14,7 @@ class Osteppy extends Container {
     const { data } = this.state;
     let currentEods = {}
     let oldEods = {}
-    
+
     if (this.state.data) {
       Object.keys(data).forEach((username) => {
         if (new Date(data[username].time).toDateString() === new Date().toDateString()) {
@@ -26,7 +26,10 @@ class Osteppy extends Container {
     }
 
     return (
-      <Panel title={COMPONENT_NAME}>
+      <Panel
+        title={COMPONENT_NAME}
+        refreshData={this.refreshData}
+      >
         {this.state.data &&
           <div>
             {Object.keys(currentEods).length !== 0 && <h3>Today's EODs</h3>}
@@ -60,4 +63,4 @@ class Osteppy extends Container {
   }
 }
 
-  export default Osteppy;
+export default Osteppy;

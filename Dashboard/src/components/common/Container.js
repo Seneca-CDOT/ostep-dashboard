@@ -4,6 +4,7 @@ class Container extends React.Component {
   constructor(props, componentName) {
     super(props);
     this.componentName = componentName;
+    this.refreshData = this.refreshData.bind(this);
     console.log("IN CONTAINER CONSTRUCTOR==")
     this.state = {
       data: null,

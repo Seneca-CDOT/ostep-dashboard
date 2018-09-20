@@ -23,7 +23,10 @@ class Infrastructure extends Container {
 
     return (
       <div>
-        <Panel title={COMPONENT_NAME}>
+        <Panel
+          title={COMPONENT_NAME}
+          refreshData={this.refreshData}
+        >
           {this.state.data &&
             <div>
               <div className="infra-wrapper">

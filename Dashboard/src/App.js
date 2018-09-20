@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Panel from './components/common/Panel';
-import MergedPanel from './components/MergedPanel';
 import './App.css';
 import Service from './Service.js';
 import Infrastructure from './components/Infrastructure'
 import Github from './components/Github'
 import Osteppy from './components/Osteppy';
 import Meetings from './components/Meetings';
+import Presentations from './components/Presentations';
 const service = new Service();
 const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
-const MERGED_PANELS = ['presentations', 'db1042']
 
 class App extends Component {
   fetchData(componentName, cb) {
@@ -43,6 +41,9 @@ class App extends Component {
           fetchData={this.fetchData}
         />
         <Meetings
+          fetchData={this.fetchData}
+        />
+        <Presentations
           fetchData={this.fetchData}
         />
         <div className="blank"></div>
