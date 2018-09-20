@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Panel from './components/Panel';
+import MergedPanel from './components/MergedPanel';
 import './App.css';
 import Service from './Service.js';
+import Infrastructure from './components/Infrastructure'
 const service = new Service();
-const DEFAULT_PANELS = ['github', 'infrastructure', 'presentations', 'eods', 'db1042'];
+const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
+const MERGED_PANELS = ['presentations', 'db1042']
 
 class App extends Component {
   fetchData(componentName, cb) {
@@ -34,6 +37,12 @@ class App extends Component {
               fetchData={this.fetchData}
             />
           ))}
+          <MergedPanel 
+            fetchData={this.fetchData}
+          />
+          <Infrastructure 
+            fetchData={this.fetchData}
+          />
         </div>
         <div className="blank"></div>
       </div>

@@ -13,7 +13,6 @@ class Header extends React.Component {
 
   componentWillMount() {
     this.fetchData();
-    console.log("IN LAMP", this.state)
   }
 
   fetchData() {
@@ -29,7 +28,6 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log("STATE", this.state.data)
     return (
       <header>
         <div className="title">

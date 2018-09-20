@@ -79,7 +79,14 @@ class Panel extends React.Component {
   }
 
   formatGithub() {
-    const parseDate = (date) => `${new Date(date).getHours()}:${new Date(date).getMinutes()}`;
+    const parseDate = (date) => {
+      const newDate = new Date(date);
+      let minutes = String(newDate.getMinutes());
+      if (minutes.length === 1) minutes = '0' + minutes;
+      let hours = newDate.getHours();
+
+      return `${hours}:${minutes}`;
+    };
 
     return (
       this.state.data.map((commit, i) => (
