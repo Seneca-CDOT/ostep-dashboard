@@ -27,6 +27,10 @@ class Panel extends React.Component {
     this.setState({ data: null });
     this.fetchData();
   }
+
+  render() {
+    
+  }
 }
 
 export default Panel;

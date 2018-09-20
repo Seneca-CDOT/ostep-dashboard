@@ -1,30 +1,17 @@
 import React from 'react';
-import Panel from './common/Panel'
 import zap from './assets/zap.svg';
 import zapOff from './assets/zap-off.svg';
+import Panel from './Panel';
 
-class Infrastructure extends Panel {
-  constructor(props) {
-    console.log("INFRA==")
-    super(props);
-    this.title = "infrastructure";
-  }
+const Infrastructure = (props) => {
+  const endpoint = "infrastructure";
+  const upSort = (a, b) => a.Status === 'up';
+  const servers = this.state.data.Servers.sort(upSort);
+  const workstations = this.state.data.Workstations.sort(upSort);
+  const dns = this.state.data.DNS;
 
-
-  render() {
-    console.log("STATE IS", this.state)
-    let servers, workstations, dns;
-
-    if (this.state.data) {
-      const upSort = (a, b) => a.Status === 'up';
-      servers = this.state.data.Servers.sort(upSort);
-      workstations = this.state.data.Workstations.sort(upSort);
-      dns = this.state.data.DNS;
-    }
-
-    return (
+  const format = () => (
       <div>
-        {this.state.data &&
         <div className="infra-wrapper">
           <div className="infra-column">
             <div className="infra-box"><h3>Servers</h3></div>
@@ -63,10 +50,16 @@ class Infrastructure extends Panel {
             ))}
           </div>
         </div>
-        }
       </div>
     );
-  }
+  
+    return (
+      <Panel 
+        endpoint={endpoint}
+        fetchData={props.fetchData}
+        format={format}
+      />
+    );
 }
 
 export default Infrastructure;
