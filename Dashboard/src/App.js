@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Panel from './components/Panel';
+import Panel from './components/common/Panel';
 import MergedPanel from './components/MergedPanel';
 import './App.css';
 import Service from './Service.js';
 import Infrastructure from './components/Infrastructure'
+import Github from './components/Github'
 const service = new Service();
 const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 const MERGED_PANELS = ['presentations', 'db1042']
@@ -29,23 +30,18 @@ class App extends Component {
           name={'ostep dashboard'}
           fetchData={this.fetchData}
         />
-        <div className="panel-row">
-          {panels.map((name, i) => (
-            <Panel
-              key={i}
-              title={name}
-              fetchData={this.fetchData}
-            />
-          ))}
-          <MergedPanel 
-            fetchData={this.fetchData}
-          />
-          <Infrastructure 
-            fetchData={this.fetchData}
-          />
-        </div>
+
+        <Github
+          fetchData={this.fetchData}
+        >
+        </Github>
+        <Infrastructure
+          fetchData={this.fetchData}
+        />
+
         <div className="blank"></div>
       </div>
+
     );
   }
 }

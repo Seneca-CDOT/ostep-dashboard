@@ -1,36 +1,23 @@
 import React from 'react';
+import refresh from '../assets/refresh.svg';
+import Spinner from './Spinner';
 
-class Panel extends React.Component {
-  constructor(props) {
-    console.log("PANEL==")
-    super(props);
-    this.state = {
-      data: null,
-    }
-  }
-
-  componentWillMount() {
-    console.log("IN MOUNT")
-    this.fetchData();
-    setInterval(() => { this.fetchData(); }, 30 * 1000);
-  }
-
-  fetchData() {
-    console.log("IN FETCH DATA")
-    this.props.fetchData(this.title, (data) => {
-      console.log("SETTING STATE TO", data)
-      this.setState({ data });
-    });
-  }
-
-  refreshData() {
-    this.setState({ data: null });
-    this.fetchData();
-  }
-
-  render() {
-    
-  }
-}
+const Panel = (props) => {
+  return (
+    <div className="panel-body">
+      <div className="panel-title">
+        <h3>
+          {props.title.toUpperCase()}
+        </h3>
+        <div className="refresh-container" onClick={this.refreshData}>
+          <img className="refresh" src={refresh} alt={"refresh icon"} />
+        </div>
+      </div>
+      <div className="panel-content">
+        {props.children || <Spinner />}
+      </div>
+    </div>
+  )
+};
 
 export default Panel;
