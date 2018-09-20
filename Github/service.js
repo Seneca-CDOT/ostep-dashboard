@@ -59,7 +59,10 @@ module.exports.getRepos = function() {
                     }
                 }
                 //console.log("DEBUG getRepos");
-                fs.appendFileSync('outputArrays.txt', JSON.stringify(repoUrls) + '\n\n');
+                fs.appendFileSync('outputArrays.txt', "REPO URLs:\n");
+                for (var i = 0; i < repoUrls.length; i++) {
+                    fs.appendFileSync('outputArrays.txt', repoUrls[i].name + ": " + repoUrls[i].url + "\n");
+                } 
                 resolve();
               }
         });
@@ -70,10 +73,14 @@ module.exports.getRepos = function() {
 module.exports.getAllBranchUrls = function() {
     return new Promise((resolve,reject) => {
         //console.log("DEBUG getAllBranchUrls. repoUrls.length: " + repoUrls.length);
+        //console.log("A");
         for (var i = 0; i < repoUrls.length; i++) {
             //console.log("DEBUG getAllBranchUrls. repoUrls[i].url: " + repoUrls[i].url);
+            //console.log("A" + i);
             getBranches(repoUrls[i].url, repoUrls[i].name);
         }
+        //console.log("B");
+        //console.log("C");
         resolve();
     });
 }
@@ -93,24 +100,28 @@ var getBranches = function(branchUrlX, repoName) {
                 //console.log("DEBUG getBranches. branch:" + JSON.stringify(branch));
                 fs.appendFileSync('output.txt', "DEBUG getBranches branchUrlX: " + branchUrlX + '\n');
                 //fs.appendFileSync('output.txt', "DEBUG getBranches data: " + data + '\n');
-                //fs.appendFileSync('output.txt', "DEBUG getBranches. branch.length: " + branch.length + '\n');
+                fs.appendFileSync('output.txt', "DEBUG getBranches. branch.length: " + branch.length + '\n');
                 //fs.appendFileSync('output.txt', "DEBUG getBranches. data.length: " + data.length + '\n');
                 fs.appendFileSync('output.txt', "DEBUG getBranches repoName: " + repoName + '\n');
                 //fs.appendFileSync('output.txt', "DEBUG getBranches branch[0] name: " + JSON.stringify(branch[0].name) + '\n');
                 //fs.appendFileSync('output.txt', "DEBUG getBranches branch[0] commit url: " + JSON.stringify(branch[0].commit.url) + '\n\n');
+                //console.log("B1");                
                 for (var j = 0; j < branch.length; j ++){
                     fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] name: " + JSON.stringify(branch[j].name) + '\n');
                     fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] commit url: " + JSON.stringify(branch[j].commit.url) + '\n');
+                    checkBranch(branch[j].commit.url, branch[j].name).then((message) => {
+                        console.log(message);
+                    }).catch((message)=> {
+                        console.log(message);
+                    });
                     branchURLs.push({
                         'branchName': branch[j].name,
                         'branchUrl': branch[j].commit.url + "?access_token=" + key
                     });
+                    fs.appendFileSync('outputArrays.txt', branchURLs.length + " ADDED BRANCH: " + JSON.stringify(branch[j].name) + '\n');
                 }
                 fs.appendFileSync('output.txt', '\n');
-                fs.appendFileSync('outputArrays.txt', JSON.stringify(branchURLs) + '\n\n');
-
-
-
+                //console.log("B2");
                 for (var i in branch){
                     request.get({
                         url: branch[i].commit.url + "?access_token=" + key,
@@ -128,11 +139,42 @@ var getBranches = function(branchUrlX, repoName) {
                           }
                     });
                 }
+                
                 resolve();
               }
         });
     });
 } 
+
+
+var checkBranch = function(branchCommitUrl, branchName) {
+    //var branchURLs = [];
+    return new Promise ((resolve, reject) => {
+        request.get({
+            url: branchCommitUrl + "?access_token=" + key,
+            headers: {'User-Agent': 'request'},
+        }, (err, res, data) => {
+            if (err) {
+                console.log('Error:', err);
+                reject("Unable to access branches.");
+              } else {
+                var branchCommit = JSON.parse(data);
+                fs.appendFileSync('output.txt', "DEBUG checkBranch: " + branchName + " => " + JSON.stringify(branchCommit.commit.committer.name) + ", time: " + branchCommit.commit.committer.date);
+                //fs.appendFileSync('output.txt', "DEBUG checkBranch name: " + branchCommit.commit.committer.name + ", time: " + branchCommit.commit.committer.date + '\n');
+                if (new Date(today - new Date(branchCommit.commit.committer.date)) < new Date(recency)) {
+                    fs.appendFileSync('output.txt', " IS RECENT" + '\n');
+                    resolve(branchCommit.commit.committer.name + " IS RECENT");
+                    //return "recent";
+                } else {
+                    fs.appendFileSync('output.txt', " IS NOT RECENT" + '\n');
+                    reject(branchCommit.commit.committer.name + " is OLD");
+                    //return "old";
+                }
+            }
+        });
+    });
+} 
+              
 
 //For debugging.
 module.exports.debugBranch = () => {
@@ -158,9 +200,12 @@ module.exports.debugBranch = () => {
 }
 
 //3. getCommits
-
 module.exports.getAllCommitUrls = (branchURLs) => {
     return new Promise((resolve,reject) => {
+        /*fs.appendFileSync('outputArrays.txt', "BRANCH URLs: " + branchURLs.length + "\n");
+        for (var i = 0; i < branchURLs.length; i++) {
+            fs.appendFileSync('outputArrays.txt', branchURLs[i].branchName + ": " + branchURLs[i].branchUrl + "\n");
+        }*/
         //console.log("DEBUG getAllBranchUrls. repoUrls.length: " + repoUrls.length);
         for (var i = 0; i < branchURLs.length; i++) {
             //console.log("DEBUG getAllBranchUrls. repoUrls[i].url: " + repoUrls[i].url);
@@ -174,6 +219,10 @@ module.exports.getAllCommitUrls = (branchURLs) => {
 module.exports.getCommits = function() {
     return new Promise((resolve, reject) => {
         //console.log(commits);
+        fs.appendFileSync('outputArrays.txt', "BRANCH URLs: " + branchURLs.length + "\n");
+        for (var i = 0; i < branchURLs.length; i++) {
+            fs.appendFileSync('outputArrays.txt', branchURLs[i].branchName + ": " + branchURLs[i].branchUrl + "\n");
+        }
         for (let i in commits) {
             var tempUrl = commits[i].url + '&access_token=' + key;
             var repoName = commits[i].repoName;
