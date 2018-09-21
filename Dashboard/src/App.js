@@ -32,8 +32,7 @@ class App extends Component {
         />
         <Github
           fetchData={this.fetchData}
-        >
-        </Github>
+        />
         <Infrastructure
           fetchData={this.fetchData}
         />
