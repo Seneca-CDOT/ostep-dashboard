@@ -23,17 +23,21 @@ class Github extends Container {
       <div>
         <Panel title={COMPONENT_NAME}>
           {this.state.data &&
-            this.state.data.map((commit, i) => (
-              <div key={commit + i} className="github-entry">
-                <img className="github-icon" src={github} alt="Github icon" />
-                <span className="github-name">{commit.author.name}</span>
-                <span> committed to </span>
-                <span className="github-repo"> {` ${commit.repoName}`}</span>
-                at
-                <span className="github-time">{` ${parseDate(commit.author.date)}`}</span>
-                <p className="github-message">{`"${commit.message}"`}</p>
-              </div>
-            ))
+            this.state.data.map((commit, i) => {
+              const commitDate = parseDate(commit.author.date);
+
+              return (
+                <div key={commit + i} className="github-entry">
+                  <img className="github-icon" src={github} alt="Github icon" />
+                  <span className="github-name">{commit.author.name}</span>
+                  <span> committed to </span>
+                  <span className="github-repo"> {` ${commit.repoName} `}</span>
+                  at
+                <span className="github-time">{` ${commitDate}`}</span>
+                  <p className="github-message">{`"${commit.message}"`}</p>
+                </div>
+              );
+            })
           }
         </Panel>
       </div>

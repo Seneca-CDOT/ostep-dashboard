@@ -45,8 +45,8 @@ class Osteppy extends Container {
               </div>
             ))}
             {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
-            {Object.keys(oldEods).map((username) => (
-              <div className="github-entry">
+            {Object.keys(oldEods).map((username, i) => (
+              <div className="github-entry" key={username + i}>
                 <div className="slack-title">
                   <img className="slack-icon" src={slack} alt={"Slack icon"} />
                   <span className="github-name">{username}</span>
