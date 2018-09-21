@@ -109,19 +109,28 @@ var getBranches = function(branchUrlX, repoName) {
                 for (var j = 0; j < branch.length; j ++){
                     fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] name: " + JSON.stringify(branch[j].name) + '\n');
                     fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] commit url: " + JSON.stringify(branch[j].commit.url) + '\n');
-                    checkBranch(branch[j].commit.url, branch[j].name).then((message) => {
-                        console.log(message);
+                    //var recent = false;
+                    checkBranch(branch[j].commit.url, branch[j].name, branchURLs).then(() => {
+                        //console.log(message);
+                        //recent = true;
+                        
                     }).catch((message)=> {
-                        console.log(message);
+                        //console.log(message);
                     });
-                    branchURLs.push({
-                        'branchName': branch[j].name,
-                        'branchUrl': branch[j].commit.url + "?access_token=" + key
-                    });
-                    fs.appendFileSync('outputArrays.txt', branchURLs.length + " ADDED BRANCH: " + JSON.stringify(branch[j].name) + '\n');
+                    /*if (recent) {
+                        branchURLs.push({
+                            'branchName': branch[j].name,
+                            'branchUrl': branch[j].commit.url + "?access_token=" + key
+                        });
+                        console.log(" ADDED BRANCH: " + JSON.stringify(branch[j].name) + '\n');
+                        fs.appendFileSync('outputArrays.txt', branchURLs.length + " ADDED BRANCH: " + JSON.stringify(branch[j].name) + '\n');
+                    }*/
                 }
+
                 fs.appendFileSync('output.txt', '\n');
                 //console.log("B2");
+
+                /*
                 for (var i in branch){
                     request.get({
                         url: branch[i].commit.url + "?access_token=" + key,
@@ -138,7 +147,7 @@ var getBranches = function(branchUrlX, repoName) {
                             //fs.appendFileSync('output.txt', "repo name [" + i + "]: " + reposX[i].name + '\n');
                           }
                     });
-                }
+                }*/
                 
                 resolve();
               }
@@ -147,7 +156,7 @@ var getBranches = function(branchUrlX, repoName) {
 } 
 
 
-var checkBranch = function(branchCommitUrl, branchName) {
+var checkBranch = function(branchCommitUrl, branchName, branchURLs) {
     //var branchURLs = [];
     return new Promise ((resolve, reject) => {
         request.get({
@@ -162,12 +171,18 @@ var checkBranch = function(branchCommitUrl, branchName) {
                 fs.appendFileSync('output.txt', "DEBUG checkBranch: " + branchName + " => " + JSON.stringify(branchCommit.commit.committer.name) + ", time: " + branchCommit.commit.committer.date);
                 //fs.appendFileSync('output.txt', "DEBUG checkBranch name: " + branchCommit.commit.committer.name + ", time: " + branchCommit.commit.committer.date + '\n');
                 if (new Date(today - new Date(branchCommit.commit.committer.date)) < new Date(recency)) {
-                    fs.appendFileSync('output.txt', " IS RECENT" + '\n');
-                    resolve(branchCommit.commit.committer.name + " IS RECENT");
+                    fs.appendFileSync('output.txt', " IS ADDED ----" + '\n');
+                    branchURLs.push({
+                        'branchName': branchName,
+                        'branchUrl': branchCommitUrl + "?access_token=" + key
+                    });
+                    console.log(" ADDED BRANCH: " + JSON.stringify(branchCommit.commit.committer.name) + "'s " + branchName + '\n');
+                    fs.appendFileSync('outputArrays.txt', branchURLs.length + " ADDED BRANCH: " + branchName + '\n');
+                    resolve();
                     //return "recent";
                 } else {
-                    fs.appendFileSync('output.txt', " IS NOT RECENT" + '\n');
-                    reject(branchCommit.commit.committer.name + " is OLD");
+                    fs.appendFileSync('output.txt', " IS REJECTED" + '\n');
+                    reject();
                     //return "old";
                 }
             }
