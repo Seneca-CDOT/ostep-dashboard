@@ -46,15 +46,15 @@ class Schedule extends React.Component {
         refreshData={this.refreshData}
       >
         {this.state.presentationData && this.state.meetingData &&
-          <div>
-            <Presentations
-              fetchData={this.props.fetchData}
-              data={this.state.presentationData}
-            />
-            <Meetings
-              fetchData={this.props.fetchData}
-              data={this.state.meetingData}
-            />
+          <div className="schedule-content">
+              <Presentations
+                fetchData={this.props.fetchData}
+                data={this.state.presentationData}
+              />
+              <Meetings
+                fetchData={this.props.fetchData}
+                data={this.state.meetingData}
+              />
           </div>
         }
       </Panel>

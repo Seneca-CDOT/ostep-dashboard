@@ -35,7 +35,7 @@ class Presentations extends React.Component {
                     <span className="presenter-text">{formatDate(row.Date)}</span>
                   </div>
                   <div className="meeting-time presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />
-                    <span className="presenter-text">{row.Time.split("-")[0]}</span>
+                    <span className="presenter-text">{row.Time}</span>
                   </div>
                 </div>
               }

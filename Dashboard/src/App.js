@@ -5,8 +5,6 @@ import Service from './Service.js';
 import Infrastructure from './components/Infrastructure'
 import Github from './components/Github'
 import Osteppy from './components/Osteppy';
-import Meetings from './components/schedule/Meetings';
-import Presentations from './components/schedule/Presentations';
 import Schedule from './components/Schedule';
 const service = new Service();
 const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
@@ -32,26 +30,16 @@ class App extends Component {
           fetchData={this.fetchData}
         />
         <div className="panel-row">
-          <Github
-            fetchData={this.fetchData}
-          />
-          <Infrastructure
-            fetchData={this.fetchData}
-          />
-          <Osteppy
-            fetchData={this.fetchData}
-          />
-          <Schedule 
-            fetchData={this.fetchData}
-          />
-          {/* <Meetings
-            fetchData={this.fetchData}
-          />
-          <Presentations
-            fetchData={this.fetchData}
-          /> */}
+          <div className="panel-row">
+            <Github fetchData={this.fetchData} />
+            <Infrastructure fetchData={this.fetchData} />
+          </div>
+          <div className="panel-row">
+            <Osteppy fetchData={this.fetchData} />
+            <Schedule fetchData={this.fetchData} />
+          </div>
         </div>
-          <div className="blank" />
+        <div className="blank" />
       </div>
 
     );
