@@ -1,6 +1,16 @@
+/***********************************************************
+// OSTEP Dashboard Github API
+// server.cpp
+// Date: 2018/09/22
+// Author: Yiran Zhu And Lewis Kim
+// Email: yzhu132@myseneca.ca
+// Description: Github API that gets all the sorted recent 
+// commits from an organization/user
+***********************************************************/
+
+
 const express = require('express');
 const bodyParser = require("body-parser");
-const path = require("path");
 const app = express();
 var data = require("./service.js");
 const PORT = process.env.PORT || 2006;
@@ -22,9 +32,9 @@ app.get('/', (req, res) => {
         data.delay(delayTime).then(function() {
           data.getAllBranchUrls().then(function() {
             data.delay(delayTime).then(function() {
-              data.getCommits().then(() => {
+              data.getAllCommitUrls().then(() => {
                 data.delay(delayTime).then(function() {
-                  data.getRecentCommits().then((data) =>{
+                  data.sortRecentCommits().then((data) =>{
                     res.json(data);
                   });
                 });
@@ -38,6 +48,14 @@ app.get('/', (req, res) => {
       console.log(err);
   });
 });
+
+/*app.get('/', (req, res) => {
+  data.initialize().then((data) =>{
+    res.json(data);
+  }).catch((err) => {
+      console.log(err);
+  });
+});*/
 
 app.use((req, res) => {
   res.status(404).send("<h1>Page Not Found</h1>");

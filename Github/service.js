@@ -1,33 +1,40 @@
-var config = require("./config.js");
+/***********************************************************
+// OSTEP Dashboard Github API
+// service.cpp
+// Date: 2018/09/22
+// Author: Yiran Zhu And Lewis Kim
+// Email: yzhu132@myseneca.ca
+// Description: Github API that gets all the sorted recent 
+// commits from an organization/user
+***********************************************************/
 
-var branches = [];
-var commits = [];
-var recentCommits = [];
-var todayCommits = [];
+
+var config = require("./config.js");
 var request = require("request");
-var key = process.env.GITHUB_TOKEN; //var key = config.configKey.SECRET_KEY;
+var key = config.configKey.SECRET_KEY; // process.env.GITHUB_TOKEN; 
 var repoUrl = 'https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=' + key;
 console.log(key);
-var repoUrls = [];
-
-
+var repoUrls = [];         // Attributes: 'name', 'url'
+var branchURLs = [];       // Attributes: 'branchName', 'branchCommitsUrl', 'repoName'
+var recentCommits = []; // Attributes: 'branchName', 'repoName', 'commit'
+var fs = require('fs');
 
 var today = new Date();
 const oneDay = 24 * 60 * 60 * 1000;
-const recency = oneDay;
+var recency = oneDay;
 
 module.exports.initialize = function() {
     return new Promise((resolve, reject) => {
+        fs.appendFileSync('output.txt', "INITIALIZE \n");
         today = new Date();
-        branches = [];
-        commits = [];
-        recentCommits = [];
-        todayCommits = [];
         repoUrls = [];
+        branchURLs = [];
+        recentCommits = [];
         resolve();
     });
 }
 
+//1. getRepos
 module.exports.getRepos = function() {
     return new Promise ((resolve, reject) => {
         request.get({
@@ -39,29 +46,34 @@ module.exports.getRepos = function() {
                 reject("Unable to get repos.");
               } else {
                 var reposX = JSON.parse(data);
-                //console.log("DEBUG getRepos. reposX.length: " + reposX.length);
                 for (var i = reposX.length-1; i > 1; i--){
-
-                    if ((today - new Date(reposX[i].pushed_at)) < recency) {
+                    if (new Date(today - new Date(reposX[i].pushed_at)) < new Date(recency)) {
                         repoUrls.push({
                             'name': reposX[i].name,
                             'url': reposX[i].url + "/branches?access_token=" + key
                         });
-                        //console.log("DEBUG reposX[i].url" + reposX[i].url);
-                    } else {
-                        i = 0;
+                        fs.appendFileSync('output.txt', "repo name [" + i + "]: " + reposX[i].name + '\n');
                     }
-                    
-
                 }
-                //console.log("DEBUG getRepos");
+                fs.appendFileSync('outputArrays.txt', "REPO URLs:\n");
+                for (var i = 0; i < repoUrls.length; i++) {
+                    fs.appendFileSync('outputArrays.txt', repoUrls[i].name + ": " + repoUrls[i].url + "\n");
+                } 
                 resolve();
               }
         });
     });
 }
 
-//-------------------------------------------------------------------------------------------
+//2. getAllBranchUrls
+module.exports.getAllBranchUrls = function() {
+    return new Promise((resolve,reject) => {
+        for (var i = 0; i < repoUrls.length; i++) {
+            getBranches(repoUrls[i].url, repoUrls[i].name);
+        }
+        resolve();
+    });
+}
 
 var getBranches = function(branchUrlX, repoName) {
     return new Promise ((resolve, reject) => {
@@ -73,118 +85,121 @@ var getBranches = function(branchUrlX, repoName) {
                 console.log('Error:', err);
                 reject("Unable to access branches.");
               } else {
-                var branches = JSON.parse(data);
-                //console.log("DEBUG getBranches. branches:" + JSON.stringify(branches));
-
-                for (var i in branches){
-                    request.get({
-                        url: branches[i].commit.url + "?access_token=" + key,
-                        headers: {'User-Agent': 'request'},
-                    }, (err, res, data) => {
-                        if (err) {
-                            console.log('Error:', err);
-                            reject("Unable to access repo url.");
-                          } else {
-                            var subbranch = JSON.parse(data);
-                            subbranch.commit.branchName = branches[i].name;
-                            subbranch.commit.repoName = repoName;
-                                commits.push(subbranch.commit);
-                          }
-                    });
+                var branch = JSON.parse(data);
+                fs.appendFileSync('output.txt', "DEBUG getBranches branchUrlX: " + branchUrlX + '\n');
+                fs.appendFileSync('output.txt', "DEBUG getBranches. branch.length: " + branch.length + '\n');
+                fs.appendFileSync('output.txt', "DEBUG getBranches repoName: " + repoName + '\n');               
+                for (var j = 0; j < branch.length; j ++){
+                    fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] name: " + JSON.stringify(branch[j].name) + '\n');
+                    fs.appendFileSync('output.txt', "DEBUG getBranches branch[" + j + "] commit url: " + JSON.stringify(branch[j].commit.url) + '\n');
+                    checkBranch(branch[j].commit.url, branch[j].name, branchURLs, repoName);
                 }
+                fs.appendFileSync('output.txt', '\n');
                 resolve();
               }
         });
     });
 } 
 
-//For debugging.
-module.exports.debugBranch = function() {
-    return new Promise((resolve, reject) => {
+
+var checkBranch = function(branchCommitsUrl, branchName, branchURLs, repoName) {
+    return new Promise ((resolve, reject) => {
         request.get({
-            url: branches[i].commit.url,
-            headers: {'User-Agent': 'request'}
+            url: branchCommitsUrl + "?access_token=" + key,
+            headers: {'User-Agent': 'request'},
         }, (err, res, data) => {
             if (err) {
                 console.log('Error:', err);
-                reject(err);
+                reject("Unable to access branches.");
               } else {
-                  var temp = [];
-                temp = JSON.parse(data);
-                //console.log("DEBUG debugBranch. temp: " + temp);
-                    for (let x in temp) {
-                        commits.push(temp[x].commit);
-                    }
-              }
-        });
-
-    });
-}
-
-module.exports.getCommits = function() {
-    return new Promise((resolve, reject) => {
-        //console.log(commits);
-        for (let i in commits) {
-            var tempUrl = commits[i].url + '&access_token=' + key;
-            var repoName = commits[i].repoName;
-            var branchName = commits[i].branchName;
-            //console.log("DEBUG getCommits. tempurl1: " + tempUrl);
-            tempUrl = [tempUrl.slice(0, tempUrl.lastIndexOf("git/")), tempUrl.slice(tempUrl.lastIndexOf("commits/"))].join('');
-            //console.log("DEBUG getCommits. tempurl2: " + tempUrl);
-            var newUrl = [tempUrl.slice(0, tempUrl.lastIndexOf("/")), "?per_page=100&sha=", tempUrl.slice(tempUrl.lastIndexOf("/") + 1)].join('');
-            //console.log("DEBUG getCommits. newUrl: " + newUrl);
-            request.get({
-                url: newUrl,
-                headers: {'User-Agent': 'request'}
-            }, (err, res, data) => {
-                if (err) {
-                    console.log('Error:', err);
-                    reject(err);
-                  } else {
-                      var temp = [];
-                    temp = JSON.parse(data);
-                        for (let x in temp) {
-                            temp[x].commit.branchName = branchName;
-                            temp[x].commit.repoName = repoName;
-                            recentCommits.push(temp[x].commit);
-                        }
-                  }
-            });
-        }
-
-        resolve(JSON.stringify(recentCommits));
- 
-    });
-    
-}
-
-module.exports.getRecentCommits = function() {
-    return new Promise((resolve,reject) => {
-        //sort by date
-        recentCommits.sort((a) => {
-            var currentDate = new Date();
-            if (new Date(a.author.date) >= new Date(currentDate.setDate(currentDate.getDate() - 1))) {
-                todayCommits.push(a);
+                var branchCommit = JSON.parse(data);
+                fs.appendFileSync('output.txt', "DEBUG checkBranch: " + branchName + " => " + JSON.stringify(branchCommit.commit.committer.name) + ", time: " + branchCommit.commit.committer.date);
+                if (new Date(today - new Date(branchCommit.commit.committer.date)) < new Date(recency)) {
+                    fs.appendFileSync('output.txt', " IS ADDED ----" + '\n');
+                    branchURLs.push({
+                        'branchName': branchName,
+                        'branchCommitsUrl': branchCommitsUrl + "?access_token=" + key,
+                        'repoName' : repoName
+                    });
+                    //console.log(" ADDED BRANCH: " + JSON.stringify(branchCommit.commit.committer.name) + "'s " + branchName + '\n');
+                    fs.appendFileSync('outputArrays.txt', branchURLs.length + " ADDED BRANCH: " + branchName + '\n');
+                    resolve();
+                }/* else {
+                    fs.appendFileSync('output.txt', " IS REJECTED" + '\n');
+                    reject();
+                }*/
             }
         });
-        todayCommits.sort((a,b) => {
-            var c = new Date(a.author.date);
-            var d = new Date(b.author.date);
-            return d - c;
-        });
-        resolve(todayCommits);
+    });
+} 
+
+//3. getCommits
+module.exports.getAllCommitUrls = () => {
+    return new Promise((resolve,reject) => {
+        fs.appendFileSync('outputArrays.txt', "getAllCommitUrls BRANCH URLs: " + branchURLs.length + "\n");
+        for (var i = 0; i < branchURLs.length; i++) {
+            fs.appendFileSync('outputArrays.txt', branchURLs[i].branchName + ": " + branchURLs[i].branchCommitsUrl + "\n");
+        }
+        for (var i = 0; i < branchURLs.length; i++) {
+            getTheRecentCommits(branchURLs[i].branchCommitsUrl, branchURLs[i].branchName, branchURLs[i].repoName);
+        }
+
+        resolve(recentCommits);
     });
 }
 
-module.exports.getAllBranchUrls = function() {
-    return new Promise((resolve,reject) => {
-        //console.log("DEBUG getAllBranchUrls. repoUrls.length: " + repoUrls.length);
-        for (var i = 0; i < repoUrls.length; i++) {
-            //console.log("DEBUG getAllBranchUrls. repoUrls[i].url: " + repoUrls[i].url);
-            getBranches(repoUrls[i].url, repoUrls[i].name);
+var getTheRecentCommits = function(branchCommitsUrl, branchName, repoName) {
+    var newUrl = [branchCommitsUrl.slice(0, branchCommitsUrl.lastIndexOf("/")), "?per_page=100&sha=", branchCommitsUrl.slice(branchCommitsUrl.lastIndexOf("/") + 1)].join('');
+    newUrl = newUrl.replace("?access", "&access");
+    fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits newUrl: " + newUrl + '\n');
+    return new Promise ((resolve, reject) => {
+        request.get({
+            url: newUrl,
+            headers: {'User-Agent': 'request'},
+        }, (err, res, data) => {
+            if (err) {
+                console.log('Error:', err);
+                reject("Unable to access branches.");
+              } else {
+                var branchCommits = JSON.parse(data);
+                fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits branchCommitsUrl: " + newUrl + '\n');
+                fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits. branchCommits.length: " + branchCommits.length + '\n');
+                fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits branchName: " + branchName + '\n');
+                for (var j = 0; j < branchCommits.length; j ++){
+                    if (new Date(today - new Date(branchCommits[j].commit.committer.date)) < new Date(recency)){
+                        fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] name: " + JSON.stringify(branchCommits[j].commit.committer.name) + '\n');
+                        fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] message: " + JSON.stringify(branchCommits[j].commit.message) + '\n');
+                        fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] date: " + JSON.stringify(branchCommits[j].commit.committer.date) + '\n');
+                        fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] repo-branch: " + repoName + "-" + branchName + '\n');
+                        recentCommits.push ({
+                            'repoName': repoName,
+                            'branchName': branchName,
+                            'commit': branchCommits[j].commit
+                        });
+                    } else {
+                        j = branchCommits.length;
+                    }
+                }
+                fs.appendFileSync('output.txt', '\n');
+                resolve();
+              }
+        });
+    });
+} 
 
+// 4. sortRecentCommits
+module.exports.sortRecentCommits = () => {
+    return new Promise((resolve, reject) => {
+        recentCommits.sort((a,b) => {
+            var c = new Date(a.commit.committer.date);
+            var d = new Date(b.commit.committer.date);
+            return d - c;
+        });
+        fs.appendFileSync('outputArrays.txt', "sortRecentCommits sorted recent commits: " + recentCommits.length + "\n");
+        for (var i = 0; i < recentCommits.length; i++) {
+            fs.appendFileSync('outputArrays.txt', recentCommits[i].repoName + ":" + recentCommits[i].branchName + " - " + recentCommits[i].commit.message + "\n");
         }
-        resolve();
+        resolve(recentCommits);
     });
 }
 
