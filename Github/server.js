@@ -1,6 +1,16 @@
+/***********************************************************
+// OSTEP Dashboard Github API
+// server.cpp
+// Date: 2018/09/22
+// Author: Yiran Zhu And Lewis Kim
+// Email: yzhu132@myseneca.ca
+// Description: Github API that gets all the sorted recent 
+// commits from an organization/user
+***********************************************************/
+
+
 const express = require('express');
 const bodyParser = require("body-parser");
-const path = require("path");
 const app = express();
 var data = require("./service.js");
 const HTTP_PORT = process.env.PORT || 4141;
@@ -19,7 +29,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-///*
 app.get('/', (req, res) => {
   data.initialize().then(function() {
     data.delay(delayTime).then(function() {
@@ -27,9 +36,9 @@ app.get('/', (req, res) => {
         data.delay(delayTime).then(function() {
           data.getAllBranchUrls().then(function() {
             data.delay(delayTime).then(function() {
-              data.getCommits().then(() => {
+              data.getAllCommitUrls().then(() => {
                 data.delay(delayTime).then(function() {
-                  data.getRecentCommits().then((data) =>{
+                  data.sortRecentCommits().then((data) =>{
                     res.json(data);
                   });
                 });
@@ -42,7 +51,7 @@ app.get('/', (req, res) => {
   }).catch((err) => {
       console.log(err);
   });
-});//*/
+});
 
 /*app.get('/', (req, res) => {
   data.initialize().then((data) =>{
