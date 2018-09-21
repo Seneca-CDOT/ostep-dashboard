@@ -160,7 +160,7 @@ var getTheRecentCommits = function(branchCommitsUrl, branchName, repoName) {
             if (err) {
                 console.log('Error:', err);
                 reject("Unable to access branches.");
-              } else {
+            } else {
                 var branchCommits = JSON.parse(data);
                 fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits branchCommitsUrl: " + newUrl + '\n');
                 fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits. branchCommits.length: " + branchCommits.length + '\n');
@@ -171,11 +171,15 @@ var getTheRecentCommits = function(branchCommitsUrl, branchName, repoName) {
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] message: " + JSON.stringify(branchCommits[j].commit.message) + '\n');
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] date: " + JSON.stringify(branchCommits[j].commit.committer.date) + '\n');
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] repo-branch: " + repoName + "-" + branchName + '\n');
-                        recentCommits.push ({
+                        branchCommits[j].commit.repoName = repoName;
+                        branchCommits[j].commit.branchName = branchName;
+                        recentCommits.push(branchCommits[j].commit);
+                        /*recentCommits.push ({
                             'repoName': repoName,
                             'branchName': branchName,
                             'commit': branchCommits[j].commit
-                        });
+                        });*/
+
                     } else {
                         j = branchCommits.length;
                     }
@@ -191,13 +195,13 @@ var getTheRecentCommits = function(branchCommitsUrl, branchName, repoName) {
 module.exports.sortRecentCommits = () => {
     return new Promise((resolve, reject) => {
         recentCommits.sort((a,b) => {
-            var c = new Date(a.commit.committer.date);
-            var d = new Date(b.commit.committer.date);
+            var c = new Date(a.committer.date);
+            var d = new Date(b.committer.date);
             return d - c;
         });
         fs.appendFileSync('outputArrays.txt', "sortRecentCommits sorted recent commits: " + recentCommits.length + "\n");
         for (var i = 0; i < recentCommits.length; i++) {
-            fs.appendFileSync('outputArrays.txt', recentCommits[i].repoName + ":" + recentCommits[i].branchName + " - " + recentCommits[i].commit.message + "\n");
+            fs.appendFileSync('outputArrays.txt', recentCommits[i].repoName + ":" + recentCommits[i].branchName + " - " + recentCommits[i].message + "\n");
         }
         resolve(recentCommits);
     });
