@@ -31,7 +31,7 @@ class Github extends Container {
                   <img className="github-icon" src={github} alt="Github icon" />
                   <span className="github-name">{commit.author.name}</span>
                   <span> committed to </span>
-                  <span className="github-repo"> {` ${commit.repoName} `}</span>
+                  <span className="github-repo"> {` ${commit.repoName}/${commit.branchName} `}</span>
                   at
                 <span className="github-time">{` ${commitDate}`}</span>
                   <p className="github-message">{`"${commit.message}"`}</p>
