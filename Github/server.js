@@ -20,20 +20,20 @@ app.use(bodyParser.json());
 
 //APPLICATION
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', "*");
   next();
 });
 
 app.get('/', (req, res) => {
-  data.initialize().then(function() {
-    data.delay(delayTime).then(function() {
-      data.getRepos().then(function() {
-        data.delay(delayTime).then(function() {
-          data.getAllBranchUrls().then(function() {
-            data.delay(delayTime).then(function() {
+  data.initialize().then(() => {
+    data.delay(delayTime).then(() => {
+      data.getRepos().then(() => {
+        data.delay(delayTime).then(() => {
+          data.getAllBranchUrls().then(() => {
+            data.delay(delayTime).then(() => {
               data.getAllCommitUrls().then(() => {
-                data.delay(delayTime).then(function() {
+                data.delay(delayTime).then(() => {
                   data.sortRecentCommits().then((data) =>{
                     res.json(data);
                   });
