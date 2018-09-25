@@ -42,7 +42,6 @@ html, body {
 .app-content {
   display:flex;
   flex-direction: column;
-  padding-bottom: 4rem;
   justify-content: space-between;
 }
 
@@ -100,6 +99,7 @@ BODY
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 }
 
 .container {
