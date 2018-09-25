@@ -7,7 +7,7 @@ import Github from './components/Github'
 import Osteppy from './components/Osteppy';
 import Schedule from './components/Schedule';
 const service = new Service();
-const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
+// const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 
 class App extends Component {
   fetchData(componentName, cb) {
@@ -15,13 +15,13 @@ class App extends Component {
   }
 
   render() {
-    let panels = DEFAULT_PANELS;
-    const urlParams = new URLSearchParams(window.location.search);
-    const panelQuery = urlParams.get('panels');
+    // let panels = DEFAULT_PANELS;
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const panelQuery = urlParams.get('panels');
 
-    if (panelQuery) {
-      panels = panelQuery.split(",").filter((panel) => DEFAULT_PANELS.includes(panel));
-    }
+    // if (panelQuery) {
+    //   panels = panelQuery.split(",").filter((panel) => DEFAULT_PANELS.includes(panel));
+    // }
 
     return (
       <div className="app-content">
@@ -29,7 +29,7 @@ class App extends Component {
           name={'ostep dashboard'}
           fetchData={this.fetchData}
         />
-        <div className="panel-row">
+        <div className="main-content">
           <div className="panel-row">
             <Github fetchData={this.fetchData} />
             <Infrastructure fetchData={this.fetchData} />
@@ -39,7 +39,6 @@ class App extends Component {
             <Schedule fetchData={this.fetchData} />
           </div>
         </div>
-        <div className="blank" />
       </div>
 
     );

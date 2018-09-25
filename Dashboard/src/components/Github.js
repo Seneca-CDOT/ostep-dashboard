@@ -21,7 +21,10 @@ class Github extends Container {
 
     return (
       <div>
-        <Panel title={COMPONENT_NAME}>
+        <Panel
+          title={COMPONENT_NAME}
+          refreshData={this.refreshData}
+        >
           {this.state.data &&
             this.state.data.map((entry, i) => {
               const commitDate = parseDate(entry.commit.author.date);
@@ -32,8 +35,7 @@ class Github extends Container {
                   <span className="github-name">{entry.commit.author.name}</span>
                   <span> committed to </span>
                   <span className="github-repo"> {` ${entry.repoName}/${entry.branchName} `}</span>
-                  at
-                <span className="github-time">{` ${commitDate}`}</span>
+                  <span className="github-time">{` @${commitDate}`}</span>
                   <p className="github-message">{`"${entry.commit.message}"`}</p>
                 </div>
               );

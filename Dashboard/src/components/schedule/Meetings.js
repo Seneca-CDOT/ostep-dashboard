@@ -3,14 +3,8 @@ import clock from '../assets/clock.svg';
 import user from '../assets/user.svg';
 import clipboard from '../assets/clipboard.svg';
 import calendar from '../assets/calendar.svg';
-const COMPONENT_NAME = "meetings";
 
 class Meetings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.sortedData;
-  }
-
   sortDates() {
     this.sortedData = this.props.data;
     this.sortedData.rows.sort(function (a, b) {

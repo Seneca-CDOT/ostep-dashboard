@@ -5,10 +5,6 @@ import clipboard from '../assets/clipboard.svg';
 import calendar from '../assets/calendar.svg';
 
 class Presentations extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const formatDate = (presenterDate) => {
       const date = new Date(presenterDate);

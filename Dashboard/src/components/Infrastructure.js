@@ -11,11 +11,10 @@ class Infrastructure extends Container {
   }
 
   render() {
-    let component, servers, workstations, dns;
+    let servers, workstations, dns;
 
     if (this.state.data) {
       const upSort = (a, b) => a.Status === 'up';
-      component = "infrastructure";
       servers = this.state.data.Servers.sort(upSort);
       workstations = this.state.data.Workstations.sort(upSort);
       dns = this.state.data.DNS;

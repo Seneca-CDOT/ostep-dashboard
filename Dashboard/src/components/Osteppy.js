@@ -51,7 +51,7 @@ class Osteppy extends Container {
                   <img className="slack-icon" src={slack} alt={"Slack icon"} />
                   <span className="github-name">{username}</span>
                   <p className="slack-post"> posted EOD in channel </p>
-                  <span className="github-repo"> {oldEods[username].channel}</span>:
+                  <span className="github-repo"> {`#${oldEods[username].channel}`}</span>:
             </div>
                 <ReactMarkdown source={oldEods[username].text} />
               </div>
