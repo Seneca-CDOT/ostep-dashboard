@@ -498,7 +498,7 @@ RESPONSIVE DESIGN
 
 
 /* IPAD PRO*/
-@media only screen and (max-width: 1030px) {
+@media only screen and (max-width: 1780px) {
   .panel-row {
     flex-direction: column;
   }
@@ -511,7 +511,7 @@ RESPONSIVE DESIGN
 
 
 /* IPAD*/
-@media only screen and (max-width: 775px) {
+@media only screen and (max-width: 950px) {
   .panel-row {
     flex-direction: column;
   }
@@ -523,7 +523,7 @@ RESPONSIVE DESIGN
 }
 
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 770px) {
   html {
     font-size: 6px;
   }
