@@ -16,27 +16,17 @@ class Meetings extends React.Component {
 
   render() {
     if (this.props.data) this.sortDates();
+    const formatDate = (presenterDate) => {
+      const date = new Date(presenterDate);
+      const month = date.toDateString().split(' ')[1];
+      const day = Number(date.toDateString().split(' ')[2]) + 1;
+      return `${month} ${day}`;
+    };
 
     return (
       <div>
         <h3 className="schedule-heading">DB 1042 Bookings:</h3>
         {!this.sortedData && <div>No upcoming meetings found for today.</div>}
-
-        {/* {
-          this.sortedData && this.sortedData.rows.map((row, i) => (
-            <div key={row + i} className="github-entry meeting">
-              <span className="meeting-organizer">
-                <img className="meeting-icons" src={user} alt={"organizer icon"} />{row["Contact person"]}
-              </span>
-              <span className="meeting-topic">
-                <img className="meeting-icons" src={clipboard} alt={"meeting topic icon"} />{row["Purpose"]}
-              </span>
-              <span className="meeting-time">
-                <img className="meeting-icons" src={clock} alt={"meeting time icon"} />{row["Date and time"].split(' ')[1]}
-              </span>
-            </div>
-          ))
-        } */}
 
         {this.sortedData && this.sortedData.rows.map((row, i) => (
           <div key={row + i} className="presenter-entry">
@@ -48,7 +38,7 @@ class Meetings extends React.Component {
                   <span className="presenter-text">{row["Purpose"]}</span>
                 </div>
                 <div className="presenter-info presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />
-                  <span className="presenter-text">{`Today`}</span>
+                  <span className="presenter-text">{formatDate(row["Date and time"].split(' ')[0])}</span>
                 </div>
                 <div className="meeting-time presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />
                   <span className="presenter-text">{row["Date and time"].split(' ')[1]}</span>

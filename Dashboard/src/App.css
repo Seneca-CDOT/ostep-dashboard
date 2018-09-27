@@ -200,6 +200,10 @@ GITHUB PANEL
   margin-bottom: -0.2em;
 }
 
+.github-link:hover {
+  color: #2980b9;
+}
+
 .github-message {
   margin-left: 2em;
 }

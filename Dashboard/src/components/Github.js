@@ -32,9 +32,14 @@ class Github extends Container {
               return (
                 <div key={entry + i} className="github-entry">
                   <img className="github-icon" src={github} alt="Github icon" />
-                  <span className="github-name">{entry.commit.author.name}</span>
+                  <span className="github-name" >{entry.commit.author.name}</span>
                   <span> committed to </span>
-                  <span className="github-repo"> {` ${entry.repoName}/${entry.branchName} `}</span>
+                  <a 
+                    href={`https://github.com/Seneca-CDOT/${entry.repoName}/tree/${entry.branchName}`}  
+                    target="_blank"
+                  >
+                  <span className="github-repo github-link"> {` ${entry.repoName}/${entry.branchName} `}</span>
+                  </a>
                   <span className="github-time">{` @${commitDate}`}</span>
                   <p className="github-message">{`"${entry.commit.message}"`}</p>
                 </div>
