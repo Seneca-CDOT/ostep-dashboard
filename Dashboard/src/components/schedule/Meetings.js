@@ -22,11 +22,12 @@ class Meetings extends React.Component {
       const day = Number(date.toDateString().split(' ')[2]) + 1;
       return `${month} ${day}`;
     };
+    console.log("SORTED DATA: ", this.sortedData);
 
     return (
       <div>
         <h3 className="schedule-heading">DB 1042 Bookings:</h3>
-        {!this.sortedData && <div>No upcoming meetings found for today.</div>}
+        {this.sortedData.rows.length === 0 && <div>No upcoming meetings found for today.</div>}
 
         {this.sortedData && this.sortedData.rows.map((row, i) => (
           <div key={row + i} className="presenter-entry">
