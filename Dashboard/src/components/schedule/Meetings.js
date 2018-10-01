@@ -17,12 +17,13 @@ class Meetings extends React.Component {
   render() {
     if (this.props.data) this.sortDates();
     const formatDate = (presenterDate) => {
-      const date = new Date(presenterDate);
-      const month = date.toDateString().split(' ')[1];
-      const day = Number(date.toDateString().split(' ')[2]) + 1;
+      let month = presenterDate.split('-')[1];
+      const day = presenterDate.split('-')[2];
+      const year = presenterDate.split('-')[0];
+      const date = new Date(`${month}-${day}-${year}`);
+      month = date.toDateString().split(' ')[1];
       return `${month} ${day}`;
     };
-    console.log("SORTED DATA: ", this.sortedData);
 
     return (
       <div>
