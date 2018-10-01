@@ -33,16 +33,16 @@ class Meetings extends React.Component {
         {this.sortedData && this.sortedData.rows.map((row, i) => (
           <div key={row + i} className="presenter-entry">
               <div className="presenter-row">
-                <div className="presenter-name presenter-section"><img className="meeting-icons" src={user} alt={"presenter icon"} />
-                  <span className="presenter-text">{row["Contact person"]}</span>
+                <div className="presenter-name presenter-section schedule-name"><img className="meeting-icons" src={user} alt={"presenter icon"} />
+                  <span className="presenter-text ">{row["Contact person"]}</span>
                 </div>
-                <div className="meeting-topic  presenter-section"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"} />
-                  <span className="presenter-text">{row["Purpose"]}</span>
+                <div className="meeting-topic  presenter-section schedule-topic"><img className="meeting-icons" src={clipboard} alt={"presentation topic icon"} />
+                  <span className="presenter-text ">{row["Purpose"]}</span>
                 </div>
-                <div className="presenter-info presenter-section"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />
-                  <span className="presenter-text">{formatDate(row["Date and time"].split(' ')[0])}</span>
+                <div className="presenter-info presenter-section schedule-time"> <img className="meeting-icons" src={calendar} alt={"presentation date icon"} />
+                  <span className="presenter-text ">{formatDate(row["Date and time"].split(' ')[0])}</span>
                 </div>
-                <div className="meeting-time presenter-section"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />
+                <div className="meeting-time presenter-section schedule-time"> <img className="meeting-icons" src={clock} alt={"presentation time icon"} />
                   <span className="presenter-text">{row["Date and time"].split(' ')[1]}</span>
                 </div>
               </div>

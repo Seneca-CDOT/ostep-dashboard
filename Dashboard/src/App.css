@@ -343,9 +343,21 @@ SCHEDULE PANEL
   height: 100%;
 }
 
+.schedule-topic {
+  flex: 2;
+}
+
+.schedule-name {
+  flex: 2;
+}
+
+.schedule-time {
+  flex: 1;
+}
+
 /* 
 ====================================
-PRESENTATIONS PANEL
+PRESENTATIONS SECTION
 ==================================== 
 */
 
@@ -365,7 +377,7 @@ PRESENTATIONS PANEL
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
-  width: 7em;
+
 }
 
 .presenter-name {
@@ -386,7 +398,7 @@ PRESENTATIONS PANEL
 
 /* 
 ====================================
-DB1042 PANEL
+DB1042 SECTION
 ==================================== 
 */
 
@@ -398,7 +410,6 @@ DB1042 PANEL
 
 .meeting-topic {
   width: 33rem;
-  justify-content: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -541,6 +552,12 @@ RESPONSIVE DESIGN
     font-size: 1.2rem;
     width: 70rem;
     height: 55rem;
+  }
+
+  .schedule-topic,
+  .schedule-name,
+  .schedule-time {
+    flex: auto;
   }
 }
 
