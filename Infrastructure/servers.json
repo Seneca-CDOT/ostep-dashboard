@@ -1,0 +1,6 @@
+[
+    {"Description":"Server", "Name":"aarchie", "Domain":"ehl.cdot.systems", "Port":"2200", "Status":"unknown"},
+    {"Description":"Server", "Name":"bbetty", "Domain":"ehl.cdot.systems", "Port":"2202", "Status":"unknown"},
+    {"Description":"Server", "Name":"ccharlie", "Domain":"ehl.cdot.systems", "Port":"2205", "Status":"unknown"},
+    {"Description":"Server", "Name":"xerxes", "Domain":"xerxes.cdot.systems", "Port":"22", "Status":"unknown"}
+]
