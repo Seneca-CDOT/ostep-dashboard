@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import clock from '../assets/clock.svg';
 import user from '../assets/user.svg';
 import clipboard from '../assets/clipboard.svg';
@@ -7,10 +8,8 @@ import calendar from '../assets/calendar.svg';
 class Presentations extends React.Component {
   render() {
     const formatDate = (presenterDate) => {
-      const date = new Date(presenterDate);
-      const month = date.toDateString().split(' ')[1];
-      const day = Number(date.toDateString().split(' ')[2]) + 1;
-      return `${month} ${day}`;
+      const date = moment(presenterDate);
+      return `${date.format("MMM")} ${date.format("D")}`;
     };
 
     return (

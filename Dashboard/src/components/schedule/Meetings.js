@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import clock from '../assets/clock.svg';
 import user from '../assets/user.svg';
 import clipboard from '../assets/clipboard.svg';
@@ -17,12 +18,8 @@ class Meetings extends React.Component {
   render() {
     if (this.props.data) this.sortDates();
     const formatDate = (presenterDate) => {
-      let month = presenterDate.split('-')[1];
-      const day = presenterDate.split('-')[2];
-      const year = presenterDate.split('-')[0];
-      const date = new Date(`${month}-${day}-${year}`);
-      month = date.toDateString().split(' ')[1];
-      return `${month} ${day}`;
+      const date = moment(presenterDate);
+      return `${date.format("MMM")} ${date.format("D")}`;
     };
 
     return (
