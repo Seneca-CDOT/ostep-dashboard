@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const tabletojson = require("tabletojson");
 
-const PORT = 8084;
+const PORT = 2004;
 let bookings;
 
 app.use(function(req, res, next) {
@@ -10,14 +10,16 @@ app.use(function(req, res, next) {
   next();
 });
 
-tabletojson.convertUrl(
-  'https://wiki.cdot.senecacollege.ca/wiki/Meeting_Room_T1042',
-  function(tableAsJson) {
-    bookings = tableAsJson[0];
-  }
-);
+const getTable = () => {
+  tabletojson.convertUrl(
+    'https://wiki.cdot.senecacollege.ca/wiki/Meeting_Room_T1042',
+    function (tableAsJson) {
+      bookings = tableAsJson[0];
+    })
+};
 
 app.get("/", (req, res) => {
+  getTable();
   let today = new Date();
   bookings = bookings.filter(row => {
     let splitDateTime = row["Date and time"].split(' ');
@@ -32,10 +34,7 @@ app.get("/", (req, res) => {
     let month = Number(date[1]) - 1;
     let day = Number(date[2]);
     let bookingDate = new Date(year, month, day);
-    console.log("JSON Value: " + JSON.stringify(bookingDate));
     console.log("Booking: " + row["Date and time"] + " | " + row["Purpose"] + " | " + row["Contact person"]);
-    console.log("Today's Date:    " + today.getDate() + "   Booking's Date:    " + bookingDate.getDate());
-    console.log("Today's Month:   " + today.getMonth() + "    Booking's Month:   " + bookingDate.getMonth());
     console.log("----------------------------------------");
     
     return today.getDate() == bookingDate.getDate() && today.getMonth() == bookingDate.getMonth() && today.getFullYear() == bookingDate.getFullYear();

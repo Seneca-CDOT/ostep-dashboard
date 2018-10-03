@@ -42,7 +42,6 @@ html, body {
 .app-content {
   display:flex;
   flex-direction: column;
-  height: 100vh;
   justify-content: space-between;
 }
 
@@ -61,7 +60,7 @@ HEADER
   align-items: center;
 }
 
-.main-heading {
+header {
   background-color:#2c3e50;
   height: 5rem;
   font-size: 1.5rem;
@@ -69,7 +68,7 @@ HEADER
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 1em;
+  padding: 1.5em;
 }
 
 .logo {
@@ -78,16 +77,16 @@ HEADER
   margin-right: 1rem;
 }
 
-.lamp {
+.lamp-content {
+  font-size: 1.8em;
   display: flex;
   align-items: center;
-  font-size: 0.9em;
-  margin-right: 4em;
 }
 
 .bulb {
-  height: 3rem;
-  width: 3rem;
+  height: 1.3em;
+  width: 1.3em;
+  margin: 0 0.6em;
 }
 
 /* 
@@ -98,8 +97,10 @@ BODY
 
 .main-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  flex: 1;
+  padding-bottom: 4rem;
 }
 
 .container {
@@ -108,11 +109,17 @@ BODY
   align-items: center;
 }
 
+/* 
+====================================
+PANELS
+==================================== 
+*/
+
+
 .panel-row {
-  margin: 1rem auto 0 auto;
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
+  align-content: space-around;
 }
 
 .panel-title {
@@ -121,35 +128,34 @@ BODY
   color: #ecf0f1;
   font-size: 1.6rem;
   background-color:#2c3e50;
-  border-bottom: .1rem solid #7f8c8d;
 }
 
 .panel-title h3 {
+  border-bottom: 0.01em solid #7f8c8d;
   padding: 2rem;
+  width: 100%;
 }
 
 .panel-body {
+  display: flex;
+  flex-direction: column;
   background-color:#2c3e50;
-  width: 60rem;
-  height: 40rem;
-  margin: 2rem 1rem 2rem 2rem;
-  align-self: center;
+  width: 85rem;
+  height: 48rem;
+  margin: 2rem 1rem 0rem 2rem;
+}
 
+.panel-body li {
+  list-style-position: inside;
+  word-break: break-word;
 }
 
 .panel-content {
   padding: 1.1em;
-  height: 30rem;
-  font-size: 1.5em;
+  flex: 1;
+  font-size: 1.6em;
   color: #ecf0f1;
   overflow: auto;
-}
-
-.long-panel {
-  background-color: rgb(30, 40, 51);
-  width: 155rem;
-  height: 45rem;
-  margin: 2rem;
 }
 
 .refresh-container {
@@ -158,6 +164,7 @@ BODY
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 0.01em solid #c0392b;
 }
 
 .refresh {
@@ -166,12 +173,12 @@ BODY
 
 /* 
 ====================================
-GITHUB CONTENT
+GITHUB PANEL
 ==================================== 
 */
 
 .github-entry{
-  padding-bottom: 0.6em;
+  padding-bottom: 0.7em;
 }
 
 .github-name {
@@ -181,6 +188,7 @@ GITHUB CONTENT
 }
 
 .github-repo {
+  display: inline-block;
   color: #3498db;
   font-weight: 700;
 }
@@ -192,37 +200,72 @@ GITHUB CONTENT
   margin-bottom: -0.2em;
 }
 
+.github-link:hover {
+  color: #2980b9;
+}
+
 .github-message {
   margin-left: 2em;
 }
 
-/* 
-====================================
-EOD CONTENT
-==================================== 
-*/
-
-.slack-icon {
-  height: 2em;
-  width: 2em;
-  margin-bottom: -0.5em;
-  margin-right: 1em;
+.github-time {
+  color: #2ecc71;
+  display: inline-block;
 }
 
 /* 
 ====================================
-INFRASTRUCTURE CONTENT
+OSTEPPY PANEL
+==================================== 
+*/
+
+
+
+.slack-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+}
+
+.slack-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.4em 0;
+}
+
+.slack-post {
+  padding: 0 .3em;
+}
+
+.slack-message{
+  padding-bottom: 0.7em;
+}
+
+.slack-message a {
+  text-decoration: none;
+  color: #2ecc71;
+  padding-bottom: 0.7em;
+}
+
+.slack-message a:hover {
+  color: #27ae60;
+}
+
+/* 
+====================================
+INFRASTRUCTURE PANEL
 ==================================== 
 */
 
 .ip-icon {
-  height: 1.5em;
-  width: 1.5em;
-  margin-right: 1em;
+  height: 1.2em;
+  width: 1.2em;
+  margin-right: 0.5em;
   margin-bottom: -0.2em;
 }
 
-.ip-name {
+.infra-name {
   color: #3498db;
   font-weight: 700;
 }
@@ -232,7 +275,7 @@ INFRASTRUCTURE CONTENT
 }
 
 .ip-up {
-  color: #2ecc71;
+  color: #27ae60;
   font-weight: 700;
 }
 
@@ -241,9 +284,29 @@ INFRASTRUCTURE CONTENT
   font-weight: 700;
 }
 
+.infra-wrapper {
+  display: grid;
+}
+
+.infra-column {
+  grid-row: 1 / -1;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.infra-column:nth-child(2) {
+  border-right: 1px solid #263544;
+  border-left: 1px solid #263544;
+}
+
+.infra-box {
+  padding: 0.2em;
+}
+
+
 /* 
 ====================================
-LAMP CONTENT
+LAMP PANEL
 ==================================== 
 */
 
@@ -266,13 +329,42 @@ LAMP CONTENT
 
 /* 
 ====================================
-PRESENTATIONS CONTENT
+SCHEDULE PANEL
+==================================== 
+*/
+
+.schedule-heading {
+  padding: 0em 0 .5em 0;
+}
+
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.schedule-topic {
+  flex: 2;
+}
+
+.schedule-name {
+  flex: 2;
+}
+
+.schedule-time {
+  flex: 1;
+}
+
+/* 
+====================================
+PRESENTATIONS SECTION
 ==================================== 
 */
 
 .presenter-section {
   width: 22em;
   font-size: .9em;
+  display: flex;
 }
 
 .presenter-row {
@@ -280,31 +372,49 @@ PRESENTATIONS CONTENT
   justify-content: space-between; 
 }
 
+.presenter-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+
+}
+
+.presenter-name {
+  margin-left: -0.4em;
+  color: #e74c3c;
+  font-weight: 700;
+  
+}
+
+.presenter-info {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.presenter-entry{
+  padding-bottom: 0.6em;
+}
 
 /* 
 ====================================
-DB1042 CONTENT
+DB1042 SECTION
 ==================================== 
 */
 
-.meeting {
-  display: flex;
-}
-
 .meeting-time {
   justify-content: flex-start;
-  width: 16rem;
-  font-weight: bold;
+  font-weight: 700;
   color: #1abc9c;
 }
 
 .meeting-topic {
-  width: 35rem;
-  justify-content: center;
+  width: 33rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #f1c40f;
+  margin-left: -0.4em;
 }
 
 .meeting-organizer {
@@ -321,48 +431,9 @@ DB1042 CONTENT
   vertical-align: middle;
 }
 
-/*
-======================================
-RESPONSIVE DESIGN
-======================================
-*/
-
-@media only screen and (max-width: 450px) {
-  html {
-    font-size: 6px;
-  }
-
-  .panel-body {
-    width: 55rem;
-  }
-
-  .panel-content {
-    font-size: 1.75rem;
-  }
-
-  .presenter-section {
-    width: 5em;
-    font-size: 1em;
-  }
-
-  .meeting-time {
-    min-width: 16rem;
-  }
-
-  .blank {
-    height: 0em;
-  }
-
-  .main-title {
-    padding: 2em;
-  }
-
-}
-
-
 /* 
 ====================================
-LOADING SPINNER
+SPINNER
 ==================================== 
 */
 
@@ -451,3 +522,126 @@ LOADING SPINNER
     opacity: 0;
   }
 }
+
+/*
+======================================
+RESPONSIVE DESIGN
+======================================
+*/
+
+
+/* IPAD PRO*/
+@media only screen and (max-width: 1780px) {
+  .panel-row {
+    flex-direction: column;
+  }
+  .panel-body {
+    font-size: 1.2rem;
+    width: 90rem;
+    height: 55rem;
+  }
+}
+
+
+/* IPAD*/
+@media only screen and (max-width: 950px) {
+  .panel-row {
+    flex-direction: column;
+  }
+  .panel-body {
+    font-size: 1.2rem;
+    width: 70rem;
+    height: 55rem;
+  }
+
+  .schedule-topic,
+  .schedule-name,
+  .schedule-time {
+    flex: auto;
+  }
+}
+
+
+@media only screen and (max-width: 770px) {
+  html {
+    font-size: 6px;
+  }
+  
+  header {
+    padding: 2em;
+  }
+ 
+  .panel-body {
+    width: 55rem;
+    height: 46rem;
+    
+  }
+
+  .panel-title h3 {
+    font-size: 1.5em;
+  }
+
+  .panel-row {
+    flex-direction: column;
+  }
+
+  .panel-content {
+    font-size: 1.8rem;
+  }
+
+  .refresh-container {
+    width: 5em;
+  }
+
+  .refresh {
+    width: 2.3em;
+  }
+
+  .github-repo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 16rem;
+    vertical-align: bottom;
+  }
+
+  .presenter-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .presenter-section {
+    width: 8em;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+  }
+
+  .meeting-time {
+    min-width: 16rem;
+  }
+
+  .blank {
+    height: 0em;
+  }
+
+  .bulb {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0 0.2em;
+  }
+}
+
+/* IPHONE 5/SE */
+@media only screen and (max-width: 325px) {
+  header {
+    font-size: 1.25rem;
+  }
+  
+  .panel-body {
+    width: 48rem;
+    height: 40rem;
+  }
+}
+

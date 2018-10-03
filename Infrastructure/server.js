@@ -9,8 +9,9 @@ var cmd=require('node-cmd');
 var dig=require('node-dig-dns');
 var http = require('http');
 const express = require('express')
-
 const app = express();
+
+const PORT = 2005;
 
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin', "*");
@@ -26,7 +27,7 @@ app.get('/', (req, res)=> {
         new Promise(resolve => { 
     
             ping.sys.probe(item.IPAddress, function(isAlive){
-                item.Status = isAlive ? 'alive' : 'dead';
+                item.Status = isAlive ? 'up' : 'down';
                 console.log(item.IPAddress+' '+item.Status);
                 resolve()
             })
@@ -47,11 +48,11 @@ app.get('/', (req, res)=> {
                         'ssh -o "StrictHostKeyChecking no" -i id_rsa -p '+ item.Port+ ' arif@'+item.Domain + ' hostname',
                         function(err, data, stderr) {
                             if (data='bbetty'||'ccharlie'||'aarchie.cdot.systems'||'xerxes.cdot.systems'){
-                                item.Status = 'alive'
+                                item.Status = 'up'
 
                             }
                             else{
-                                item.Status = 'dead'
+                                item.Status = 'down'
                             }
                          
                             resolve(data);
@@ -86,4 +87,5 @@ app.get('/', (req, res)=> {
        
     });
      
-}).listen(3200);
+}).listen(PORT);
+console.log(`Running on localhost:${PORT}`);

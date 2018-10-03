@@ -4,5 +4,13 @@
 *node_modules/
 npm-debug.log
 
-./config.js
-token.env
+# folders
+.vscode/
+
+# files
+*config*
+*.env
+*New*.js
+*Old*.js
+*key*.js
+output*

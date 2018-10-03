@@ -1,7 +1,7 @@
 {
-  "name": "lamp_service_app",
+  "name": "lamp-server",
   "version": "1.0.0",
-  "description": "LAMP for Dashboard",
+  "description": "Displays lamp status which is reflective of being on-campus",
   "author": "Lewis Kim",
   "main": "server.js",
   "scripts": {

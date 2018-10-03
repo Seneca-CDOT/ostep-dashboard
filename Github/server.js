@@ -1,34 +1,40 @@
+/***********************************************************
+// OSTEP Dashboard Github API
+// server.cpp
+// Date: 2018/09/22
+// Author: Yiran Zhu And Lewis Kim
+// Email: yzhu132@myseneca.ca
+// Description: Github API that gets all the sorted recent 
+// commits from an organization/user
+***********************************************************/
+
+
 const express = require('express');
 const bodyParser = require("body-parser");
-const path = require("path");
 const app = express();
 var data = require("./service.js");
-const HTTP_PORT = process.env.PORT || 4141;
+const PORT = process.env.PORT || 2006;
 var delayTime = 1000;
 
 app.use(bodyParser.json());
 
-const listen = function() {
-    console.log("Now listening on port: " + HTTP_PORT);
-}
-
 //APPLICATION
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', "*");
   next();
 });
 
 app.get('/', (req, res) => {
-  data.initialize().then(function() {
-    data.delay(delayTime).then(function() {
-      data.getRepos().then(function() {
-        data.delay(delayTime).then(function() {
-          data.getAllBranchUrls().then(function() {
-            data.delay(delayTime).then(function() {
-              data.getCommits().then(() => {
-                data.delay(delayTime).then(function() {
-                  data.getRecentCommits().then((data) =>{
+  data.initialize().then(() => {
+    data.delay(delayTime).then(() => {
+      data.getRepos().then(() => {
+        data.delay(delayTime).then(() => {
+          data.getAllBranchUrls().then(() => {
+            data.delay(delayTime).then(() => {
+              data.getAllCommitUrls().then(() => {
+                data.delay(delayTime).then(() => {
+                  data.sortRecentCommits().then((data) =>{
                     res.json(data);
                   });
                 });
@@ -43,8 +49,17 @@ app.get('/', (req, res) => {
   });
 });
 
+/*app.get('/', (req, res) => {
+  data.initialize().then((data) =>{
+    res.json(data);
+  }).catch((err) => {
+      console.log(err);
+  });
+});*/
+
 app.use((req, res) => {
   res.status(404).send("<h1>Page Not Found</h1>");
 });
 
-app.listen(HTTP_PORT, listen);
+app.listen(PORT);
+console.log(`Running on localhost:${PORT}`);
