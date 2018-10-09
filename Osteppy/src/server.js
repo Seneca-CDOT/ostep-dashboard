@@ -68,10 +68,19 @@ app.post('/eod', (req, res) => {
 
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
-    fs.writeFile(eodNames, "");
+    fs.writeFile(eodNames, "", (err) => {
+        if(err) {
+            return console.log(err);
+        }
+    });
+
     for (let i = 0; i < RAs.length; i++){
         if (RAs[i].length > 0)
-            fs.appendFile(eodNames, RAs[i] + "\n");
+            fs.appendFile(eodNames, RAs[i] + "\n", (err) => {
+                if(err) {
+                    return console.log(err);
+                }
+            });
     };
 };
 
