@@ -206,6 +206,8 @@ GITHUB PANEL
 
 .github-message {
   margin-left: 2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .github-time {
