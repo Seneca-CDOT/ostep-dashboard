@@ -1,4 +1,4 @@
-FROM node
+FROM node:8
 
 # File Author / Maintainer
 LABEL authors="OSTEP Team"
