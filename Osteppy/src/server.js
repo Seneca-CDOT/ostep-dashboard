@@ -10,8 +10,11 @@ import * as fs from 'fs';
 let app = express();
 const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
-let RAs = ['obelavina', 'poftadeh2', 'mmarangoni', 'naiuhz', 'lewiskim517', 'fchughtai', 'amohamed59'];
+//let RAs = ['obelavina', 'poftadeh2', 'mmarangoni', 'naiuhz', 'lewiskim517', 'fchughtai', 'amohamed59'];
+let RAs = fs.readFileSync(eodNames).toString().split("\n");
 
+let readline = require('readline');
+  
 app.server = http.createServer(app);
 
 // logger
@@ -30,7 +33,7 @@ app.use(bodyParser.urlencoded({
 app.post('/eod', (req, res) => {
     const slack_request = req.body;
 
-	console.log(slack_request);
+	//console.log(slack_request);
 	const slack_response = {
 		"response_type": "in_channel",
 		"text": `:checkered_flag: EOD was submitted by *${slack_request.user_name}*`,
@@ -53,18 +56,18 @@ app.post('/eod', (req, res) => {
 		fs.writeFileSync(data_file, JSON.stringify(report_data), 'utf8');
 
     }).catch(error => {
-        console.log(error);
+        console.log("error: " + error);
 	});
     
     // Remove RA's name from EOD reminder list
     submitEOD(slack_request.user_name);
+    readRAs();
     writeRAs();
-
+    printRAs();
 	res.status(200).send();
-
 });
 
-// Update the list of RAs who haven't submit their EODs
+// Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
     fs.writeFile(eodNames, "");
     for (let i = 0; i < RAs.length; i++){
@@ -72,9 +75,22 @@ let writeRAs = () => {
     };
 };
 
+// Read the updated list of RAs
+let readRAs = () => {
+    RAs = fs.readFileSync(eodNames).toString().split("\n");
+}
+
+// Print the RAs who have submit their EODs yet for debugging
+let printRAs = () => {
+    for (let i = 0; i < (RAs.length - 1); i++){
+        console.log (i + ": " + RAs[i]);
+    }
+}
+
 // Remove name from EOD reminder list
 let submitEOD = (RA) => {
     RAs = RAs.filter(name => name!=RA);
+    console.log(RA + " has submitted EOD")
 }
 
 /** Get EODs */
@@ -86,12 +102,14 @@ app.get('/eod', (req, res) => {
 
 app.server.listen(process.env.PORT || config.port, () => {
     console.log(`Started on port ${app.server.address().port}`);
-    writeRAs();
+    readRAs();
+    //printRAs();
 });
 
 export default app;
 
 var exec = require('child_process').exec;
+
 
 exec('python src/remindEOD.py',
     (error, stdout, stderr) => {
