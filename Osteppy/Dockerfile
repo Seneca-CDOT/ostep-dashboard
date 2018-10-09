@@ -6,7 +6,8 @@ LABEL authors="OSTEP Team"
 # Install app dependencies
 COPY package.json /www/package.json
 RUN cd /www; npm install
-RUN apt install python-pip
+RUN apt-get update 
+RUN apt-get install -y python-pip
 RUN pip install slacker
 
 # Copy app source
