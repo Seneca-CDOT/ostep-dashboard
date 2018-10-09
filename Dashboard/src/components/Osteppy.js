@@ -34,26 +34,29 @@ class Osteppy extends Container {
           <div>
             {Object.keys(currentEods).length !== 0 && <h3>Today's EODs</h3>}
             {Object.keys(currentEods).map((username, i) => (
-              <div className="github-entry" key={username + i}>
+              <div key={username + i}>
                 <div className="slack-title">
                   <img className="slack-icon" src={slack} alt={"Slack icon"} />
                   <span className="github-name">{username}</span>
                   <p className="slack-post"> posted EOD in channel </p>
                   <div className="github-repo">{`#${currentEods[username].channel}`}</div>:
-            </div>
+                 </div>
                 <ReactMarkdown source={currentEods[username].text} />
               </div>
             ))}
             {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
             {Object.keys(oldEods).map((username, i) => (
-              <div className="github-entry" key={username + i}>
+              <div key={username + i}>
                 <div className="slack-title">
                   <img className="slack-icon" src={slack} alt={"Slack icon"} />
                   <span className="github-name">{username}</span>
                   <p className="slack-post"> posted EOD in channel </p>
-                  <span className="github-repo"> {oldEods[username].channel}</span>:
-            </div>
-                <ReactMarkdown source={oldEods[username].text} />
+                  <span className="github-repo"> {`#${oldEods[username].channel}`}</span>:
+                </div>
+                <ReactMarkdown
+                  source={oldEods[username].text}
+                  className="slack-message"
+                />
               </div>
             ))}
           </div>

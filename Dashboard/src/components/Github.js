@@ -13,31 +13,37 @@ class Github extends Container {
     const parseDate = (date) => {
       const newDate = new Date(date);
       let minutes = String(newDate.getMinutes());
-      if (minutes.length === 1) minutes = '0' + minutes;
       let hours = newDate.getHours();
-
-      return `${hours}:${minutes}`;
+      const month = newDate.toDateString().split(' ')[1];
+      const day = Number(newDate.toDateString().split(' ')[2]) + 1;
+      if (minutes.length === 1) minutes = '0' + minutes;
+      
+      return `${month} ${day} @${hours}:${minutes} `;
     };
 
     return (
       <div>
-        <Panel 
+        <Panel
           title={COMPONENT_NAME}
           refreshData={this.refreshData}
         >
           {this.state.data &&
-            this.state.data.map((commit, i) => {
-              const commitDate = parseDate(commit.author.date);
+            this.state.data.map((entry, i) => {
+              const commitDate = parseDate(entry.author.date);
 
               return (
-                <div key={commit + i} className="github-entry">
+                <div key={entry + i} className="github-entry">
                   <img className="github-icon" src={github} alt="Github icon" />
-                  <span className="github-name">{commit.author.name}</span>
+                  <span className="github-name" >{entry.author.name}</span>
                   <span> committed to </span>
-                  <span className="github-repo"> {` ${commit.repoName}/${commit.branchName} `}</span>
-                  at
-                <span className="github-time">{` ${commitDate}`}</span>
-                  <p className="github-message">{`"${commit.message}"`}</p>
+                  <a 
+                    href={`https://github.com/Seneca-CDOT/${entry.repoName}/tree/${entry.branchName}`}  
+                    target="_blank"
+                  >
+                  <span className="github-repo github-link"> {` ${entry.repoName}/${entry.branchName}:`}</span>
+                  </a>
+                  <p className="github-message">{`"${entry.message}"`} <span className="github-time">{` (${commitDate})`}</span></p>
+                 
                 </div>
               );
             })
