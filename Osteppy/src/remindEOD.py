@@ -36,10 +36,10 @@ def check():
     sys.stdout.write("\033[F")
     if (now.second == 0 and now.minute == 0 and now.weekday() <= 4):
         # Send a reminder at 11PM on weekdays
-        if (now.hour == 23):
+        if (now.hour == 23): #23
             send_EOD()
         # Reset RA list
-        elif (now.hour == 10):
+        elif (now.hour == 10): #10
             reset_RA_list()
     time.sleep(1)
 

@@ -10,7 +10,6 @@ import * as fs from 'fs';
 let app = express();
 const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
-//let RAs = ['obelavina', 'poftadeh2', 'mmarangoni', 'naiuhz', 'lewiskim517', 'fchughtai', 'amohamed59'];
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 
 let readline = require('readline');
