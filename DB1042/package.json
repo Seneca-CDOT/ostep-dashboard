@@ -1,0 +1,24 @@
+{
+  "name": "db1042-server",
+  "version": "1.0.0",
+  "description": "Parses DB1042 Meeting Room Schedule",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seneca-CDOT/ostep-dashboard.git"
+  },
+  "author": "Matthew Marangoni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Seneca-CDOT/ostep-dashboard/issues"
+  },
+  "homepage": "https://github.com/Seneca-CDOT/ostep-dashboard#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "tabletojson": "^0.9.8"
+  }
+}

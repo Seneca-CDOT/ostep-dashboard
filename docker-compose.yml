@@ -1,0 +1,49 @@
+version: '2'
+services:
+  dashboard:
+    container_name: dashboard
+    build: ./Dashboard
+    environment:
+     - REACT_APP_OSTEP_DASH_HOST=$HOSTNAME
+    depends_on:
+     - "osteppy"
+     - "lamp"
+     - "rapresenter"
+     - "db1042"
+     - "github"
+     - "infrastructure"
+    ports:
+     - "8080:2000"
+  osteppy:
+    container_name: osteppy
+    build: ./Osteppy
+    ports:
+      - "8081:2001"
+  lamp:
+    container_name: lamp
+    build: ./Lamp
+    ports:
+      - "8082:2002"
+  rapresenter:
+    container_name: rapresenter
+    build: ./RAPresenter
+    ports:
+      - "8083:2003"
+  db1042:
+    container_name: db1042
+    build: ./DB1042
+    ports:
+      - "8084:2004"
+  infrastructure:
+    container_name: infrastructure
+    build: ./Infrastructure
+    ports:
+      - "8085:2005"
+  github:
+    container_name: github
+    build: ./Github
+    env_file:
+      - github.env
+    ports:
+      - "8086:2006"
+

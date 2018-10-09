@@ -1,0 +1,18 @@
+{
+  "name": "infrastructure-server",
+  "version": "1.0.0",
+  "description": "Gets the status of various machines located at CDOT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arif",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "node-cmd": "^3.0.0",
+    "node-dig-dns": "^0.2.9",
+    "ping": "^0.2.2"
+  }
+}

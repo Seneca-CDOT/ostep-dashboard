@@ -1,0 +1,560 @@
+/* 
+====================================
+SCROLLBARS
+==================================== 
+*/
+
+div::-webkit-scrollbar {
+  width: 1em;
+}
+
+div::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px #95a5a6;
+  box-shadow: inset 0 0 1px #95a5a6;
+  background-color:#95a5a6;
+}
+
+div::-webkit-scrollbar-thumb {
+background-color: #7f8c8d;
+}
+
+/* 
+====================================
+MAIN
+==================================== 
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-size: 10px;
+  line-height: 230%;
+  background-color: #34495e;
+  font-family: 'Lato', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.app-content {
+  display:flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.blank {
+  height: 6em;
+}
+
+/* 
+====================================
+HEADER
+==================================== 
+*/
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+header {
+  background-color:#2c3e50;
+  height: 5rem;
+  font-size: 1.5rem;
+  color: #ecf0f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5em;
+}
+
+.logo {
+  height: 2.5em;
+  width: 2.5em;
+  margin-right: 1rem;
+}
+
+.lamp-content {
+  font-size: 1.8em;
+  display: flex;
+  align-items: center;
+}
+
+.bulb {
+  height: 1.3em;
+  width: 1.3em;
+  margin: 0 0.6em;
+}
+
+/* 
+====================================
+BODY
+==================================== 
+*/
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-row {
+  margin: 1rem auto 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  color: #ecf0f1;
+  font-size: 1.6rem;
+  background-color:#2c3e50;
+}
+
+.panel-title h3 {
+  border-bottom: 0.01em solid #7f8c8d;
+  padding: 2rem;
+  width: 100%;
+}
+
+.panel-body {
+  background-color:#2c3e50;
+  width: 68rem;
+  height: 48rem;
+  margin: 2rem 1rem 0rem 2rem;
+  align-self: center;
+
+}
+
+.panel-body li {
+  list-style-position: inside;
+}
+
+.panel-content {
+  padding: 1.1em;
+  height: 41.5rem;
+  font-size: 1.5em;
+  color: #ecf0f1;
+  overflow: auto;
+  word-break: break-all;
+}
+
+.long-panel {
+  background-color: rgb(30, 40, 51);
+  width: 155rem;
+  height: 45rem;
+  margin: 2rem;
+}
+
+.refresh-container {
+  background-color: #c0392b;
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.01em solid #c0392b;
+}
+
+.refresh {
+  width: 2.5rem;
+}
+
+/* 
+====================================
+GITHUB PANEL
+==================================== 
+*/
+
+.github-entry{
+  padding-bottom: 0.6em;
+}
+
+.github-name {
+  margin-left: -0.4em;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.github-repo {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.github-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+  margin-bottom: -0.2em;
+}
+
+.github-message {
+  margin-left: 2em;
+}
+
+.github-time {
+  color: #2ecc71;
+}
+
+/* 
+====================================
+EOD PANEL
+==================================== 
+*/
+
+.slack-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+}
+
+.slack-title {
+  display: flex;
+  align-items: center;
+  margin: 0.4em 0;
+}
+
+.slack-post {
+  padding: 0 .3em;
+}
+
+/* 
+====================================
+INFRASTRUCTURE PANEL
+==================================== 
+*/
+
+.ip-icon {
+  height: 1.2em;
+  width: 1.2em;
+  margin-right: 0.5em;
+  margin-bottom: -0.2em;
+}
+
+.infra-name {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.ip-entry {
+  padding-bottom: 0.2em;
+}
+
+.ip-up {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.ip-down {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.infra-wrapper {
+  display: grid;
+}
+
+.infra-column {
+  grid-row: 1 / -1;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.infra-column:nth-child(2) {
+  border-right: 1px solid #263544;
+  border-left: 1px solid #263544;
+}
+
+.infra-box {
+  padding: 0.2em;
+}
+
+
+/* 
+====================================
+LAMP PANEL
+==================================== 
+*/
+
+.lamp-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.bulb-off {
+  height: 10em;
+  width: 10em;
+}
+
+.lamp-message {
+  padding-top: 4rem;
+  font-size: 2rem;
+}
+
+/* 
+====================================
+SCHEDULE PANEL
+==================================== 
+*/
+
+.schedule-heading {
+  padding: 0em 0 .5em 0;
+}
+
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 
+====================================
+PRESENTATIONS PANEL
+==================================== 
+*/
+
+.presenter-section {
+  width: 22em;
+  font-size: .9em;
+  display: flex;
+}
+
+.presenter-row {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.presenter-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  width: 7em;
+}
+
+.presenter-name {
+  margin-left: -0.4em;
+  color: #e74c3c;
+  font-weight: 700;
+  
+}
+
+.presenter-info {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.presenter-entry{
+  padding-bottom: 0.6em;
+}
+
+/* 
+====================================
+DB1042 PANEL
+==================================== 
+*/
+
+.meeting-time {
+  justify-content: flex-start;
+  font-weight: 700;
+  color: #1abc9c;
+}
+
+.meeting-topic {
+  width: 33rem;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f1c40f;
+  margin-left: -0.4em;
+}
+
+.meeting-organizer {
+  width: 20rem;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e74c3c;
+}
+
+.meeting-icons {
+  padding: 0 .6em 0 .4em;
+  vertical-align: middle;
+}
+
+/*
+======================================
+RESPONSIVE DESIGN
+======================================
+*/
+
+@media only screen and (max-width: 450px) {
+  html {
+    font-size: 6px;
+  }
+  
+  header {
+    padding: 2em;
+  }
+ 
+  .panel-body {
+    width: 58rem;
+    height: 49.5rem;
+    
+  }
+
+  .panel-title h3 {
+    font-size: 1.5em;
+  }
+
+  .panel-row {
+    justify-content: center;
+  }
+
+  .panel-content {
+    font-size: 1.8rem;
+  }
+
+  .refresh-container {
+    width: 5em;
+  }
+
+  .refresh {
+    width: 2.3em;
+  }
+
+  .presenter-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .presenter-section {
+    width: 8em;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+  }
+
+  .meeting-time {
+    min-width: 16rem;
+  }
+
+  .blank {
+    height: 0em;
+  }
+
+  .bulb {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0 0.2em;
+  }
+}
+
+
+/* 
+====================================
+LOADING SPINNER
+==================================== 
+*/
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.lds-spinner {
+  color: official;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-spinner div {
+  transform-origin: 32px 32px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 29px;
+  width: 5px;
+  height: 14px;
+  border-radius: 20%;
+  background: #fff;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

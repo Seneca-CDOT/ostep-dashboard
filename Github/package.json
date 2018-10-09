@@ -1,0 +1,20 @@
+{
+  "name": "github-server",
+  "version": "1.0.0",
+  "description": "Grabs Github activity for the OSTEP team",
+  "author": "Lewis Kim & Ian Zhu",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "eslint": "^5.5.0",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "license": "ISC"
+}
