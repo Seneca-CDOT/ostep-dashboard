@@ -59,8 +59,8 @@ app.post('/eod', (req, res) => {
 	});
     
     // Remove RA's name from EOD reminder list
-    submitEOD(slack_request.user_name);
     readRAs();
+    submitEOD(slack_request.user_name);
     writeRAs();
     printRAs();
 	res.status(200).send();
@@ -70,7 +70,8 @@ app.post('/eod', (req, res) => {
 let writeRAs = () => {
     fs.writeFile(eodNames, "");
     for (let i = 0; i < RAs.length; i++){
-        fs.appendFile(eodNames, RAs[i] + "\n");
+        if (RAs[i].length > 0)
+            fs.appendFile(eodNames, RAs[i] + "\n");
     };
 };
 
@@ -81,6 +82,7 @@ let readRAs = () => {
 
 // Print the RAs who have submit their EODs yet for debugging
 let printRAs = () => {
+    console.log ("Remaining RAs:")
     for (let i = 0; i < (RAs.length - 1); i++){
         console.log (i + ": " + RAs[i]);
     }
