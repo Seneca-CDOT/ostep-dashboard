@@ -1,0 +1,9 @@
+remindEOD.py
+- Responds ONLY at certain times (11PM and 10AM) 
+- 10AM: replaces sleepyRAs.txt with RAs.txt
+- 10PM: sends EOD reminders only to names in sleepyRAs.txt
+
+server.js
+- Responds ONLY to event handling (/eod and /eod_left)
+- /eod: removes name from sleepyRAs.txt if EOD is submitted, posts formatted EOD
+- /eod_left: posts formatted list of RAs in sleepyRAs.txt

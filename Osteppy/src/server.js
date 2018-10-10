@@ -66,6 +66,46 @@ app.post('/eod', (req, res) => {
 	res.status(200).send();
 });
 
+/** Reached by Slack API */
+app.post('/eod_left', (req, res) => {
+    const slack_request = req.body;
+
+    readRAs();
+    let message = "";
+    RAs.forEach((name) => {
+        message += name + '\n';
+    }); 
+    console.log(message);
+
+	const slack_response = {
+		"response_type": "in_channel",
+        "text": `Sleepy RAs who haven't submitted their EODs:`,
+        "attachments": [
+			{
+				"text": `${message}`
+			}
+		]
+    };
+
+    axios.post(slack_request.response_url, slack_response).then(() => {
+		console.log("Sending a request to slack api")
+		let report_data = JSON.parse(fs.readFileSync(data_file, 'utf8'));
+		report_data[slack_request.user_name] = {
+			'time': new Date(),
+			'text': slack_request.text,
+			'channel': slack_request.channel_name 
+		};
+
+		fs.writeFileSync(data_file, JSON.stringify(report_data), 'utf8');
+
+    }).catch(error => {
+        console.log("error: " + error);
+	});
+
+    printRAs();
+	res.status(200).send();
+});
+
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
     fs.writeFile(eodNames, "", (err) => {
