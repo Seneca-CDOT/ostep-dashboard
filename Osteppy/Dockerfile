@@ -9,6 +9,8 @@ RUN cd /www; npm install
 RUN apt-get update 
 RUN apt-get install -y python-pip
 RUN pip install slacker
+RUN pip install pytz
+
 
 # Copy app source
 COPY . /www
