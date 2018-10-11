@@ -1,9 +1,12 @@
 #!/usr/bin/env python2
 
 from slacker import Slacker
-import os, secret_token, time, datetime, sys
+from datetime import datetime
+from pytz import timezone
+import os, secret_token, time, sys
 import subprocess
 
+EDT = "America/Toronto"
 dir_path = os.path.dirname(os.path.realpath(__file__))
 slack_token = secret_token.EOD_REMINDER_BOT_TOKEN
 sc = Slacker(slack_token)
@@ -11,7 +14,7 @@ cpCommand = "cp " + dir_path + "/RAs.txt " + dir_path + "/sleepyRAs.txt"
 
 def slack_message(recipient):
     # Sends the message to a user or channel
-    sc.chat.post_message(recipient, "Hi! This is a reminder to submit your EOD today if you haven't already submitted it. :simple_smile:")
+    sc.chat.post_message(recipient, "Hi! This is a reminder to submit your EOD today. :saitama:")
 
 def test_message(recipient):
     # Sends a test message for debugging
@@ -31,15 +34,17 @@ def reset_RA_list():
 
 def check():
     # Checks current time and prints clock to console
-    now = datetime.datetime.now()
-    print "[EOD Reminder Bot Running] 24 Hour Clock:", now.hour, ":", now.minute, ":", now.second #, "|", now.weekday()
+    #now = datetime.datetime.now()
+    EDT_time = datetime.now(timezone(EDT))
+    print "[EOD Reminder Bot Running] 24 Hour Clock:", EDT_time.hour, ":", EDT_time.minute, ":", EDT_time.second, "|", EDT_time.weekday()
     sys.stdout.write("\033[F")
-    if (now.second == 0 and now.minute == 0 and now.weekday() <= 4):
+    if (EDT_time.second == 0 and EDT_time.minute == 0 and EDT_time.weekday() <= 4):
         # Send a reminder at 11PM on weekdays
-        if (now.hour == 23): #23
-            send_EOD()
+        if (EDT_time.hour == 23): #23
+            #send_EOD()
+            test()
         # Reset RA list
-        elif (now.hour == 10): #10
+        elif (EDT_time.hour == 10): #10
             reset_RA_list()
     time.sleep(1)
 
