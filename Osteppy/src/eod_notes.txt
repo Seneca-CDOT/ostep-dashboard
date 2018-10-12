@@ -10,3 +10,6 @@ server.js
 
 ps aux | grep remindEOD.py
 docker rm -f $(docker ps -aq)
+docker ps --format "{{.Names}}"
+docker exec -it  bash
+cat src/sleepyRAs.txt

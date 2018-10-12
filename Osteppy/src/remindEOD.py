@@ -18,7 +18,7 @@ def slack_message(recipient):
 
 def test_message(recipient):
     # Sends a test message for debugging
-    sc.chat.post_message(recipient, "Hi! This is test message. Please reply to Ian if you see it. :saitama:")
+    sc.chat.post_message(recipient, "Hi! This is test message. Please reply to Ian if you see it. :saitama: [DASHBOARD]")
 
 def send_EOD():
     # Sends a direct message to remind EOD
@@ -41,11 +41,13 @@ def check():
     if (EDT_time.second == 0 and EDT_time.minute == 0 and EDT_time.weekday() <= 4):
         # Send a reminder at 11PM on weekdays
         if (EDT_time.hour == 23): #23
-            #send_EOD()
-            test()
+            send_EOD()
+            #test()
         # Reset RA list
         elif (EDT_time.hour == 10): #10
             reset_RA_list()
+        elif (EDT_time.hour == 0): #0
+            midnight_debug()
     time.sleep(1)
 
 def test():
@@ -55,6 +57,9 @@ def test():
     names = [name.strip() for name in names] 
     for name in names: 
         test_message ("@" + name)
+
+def midnight_debug():
+    sc.chat.post_message("@naiuhz", ":clock12: Oyasuminasai niichan")
 
 while (True):
     check()
