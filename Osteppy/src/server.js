@@ -87,18 +87,7 @@ app.post('/eod_left', (req, res) => {
 		]
     };
 
-    axios.post(slack_request.response_url, slack_response).then(() => {
-		console.log("Sending a request to slack api")
-		let report_data = JSON.parse(fs.readFileSync(data_file, 'utf8'));
-		report_data[slack_request.user_name] = {
-			'time': new Date(),
-			'text': slack_request.text,
-			'channel': slack_request.channel_name 
-		};
-
-		fs.writeFileSync(data_file, JSON.stringify(report_data), 'utf8');
-
-    }).catch(error => {
+    axios.post(slack_request.response_url, slack_response).catch(error => {
         console.log("error: " + error);
 	});
 
