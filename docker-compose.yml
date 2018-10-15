@@ -13,7 +13,7 @@ services:
      - "github"
      - "infrastructure"
     ports:
-     - "8080:2000"
+     - "80:2000"
     restart: always
   osteppy:
     container_name: osteppy
