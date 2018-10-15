@@ -12,7 +12,7 @@ const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 
-let readline = require('readline');
+let py_script = "";
   
 app.server = http.createServer(app);
 
@@ -95,6 +95,28 @@ app.post('/eod_left', (req, res) => {
 	res.status(200).send();
 });
 
+/** Reached by Slack API */
+app.post('/check_py_script', (req, res) => {
+    const slack_request = req.body;
+
+    let stdout = checkPythonScript()
+
+	const slack_response = {
+		"response_type": "in_channel",
+        "text": `ps aux | grep remindEOD.py:`,
+        "attachments": [
+			{
+				"text": `${py_script}`
+			}
+		]
+    };
+
+    axios.post(slack_request.response_url, slack_response).catch(error => {
+        console.log("error: " + error);
+	});
+	res.status(200).send();
+});
+
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
     fs.writeFile(eodNames, "", (err) => {
@@ -132,6 +154,24 @@ let submitEOD = (RA) => {
     console.log(RA + " has submitted EOD")
 }
 
+let checkPythonScript = () => {
+    let message = "";
+    exec('ps aux | grep remindEOD.py',
+    (error, stdout, stderr) => {
+        message += 'stdout: ' + '\n' + stdout + '\n';
+        message += 'stderr: ' + '\n' + stderr + '\n';
+        //console.log('stdout: ' + stdout);
+        //console.log('stderr: ' + stderr);
+        if (error !== null) {
+            message += 'exec error: ' + error + '\n';
+            //console.log('exec error: ' + error);
+        }
+        console.log(message);
+        py_script = message;
+        return message;
+    });
+}
+
 /** Get EODs */
 app.get('/eod', (req, res) => {
 	const report_data = JSON.parse(fs.readFileSync(data_file, 'utf8'));
@@ -143,6 +183,7 @@ app.server.listen(process.env.PORT || config.port, () => {
     console.log(`Started on port ${app.server.address().port}`);
     readRAs();
     //printRAs();
+    checkPythonScript();
 });
 
 export default app;
