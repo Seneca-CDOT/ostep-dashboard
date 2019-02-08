@@ -23,8 +23,8 @@ class Meetings extends React.Component {
     };
 
     return (
-      <div>
-        <h3 className="schedule-heading">DB 1042 Bookings:</h3>
+      <div className="u-margin-top-small">
+        <h3 className="schedule-heading">DB 1042 Bookings</h3>
         {this.sortedData.rows.length === 0 && <div>No upcoming meetings found for today.</div>}
 
         {this.sortedData && this.sortedData.rows.map((row, i) => (
