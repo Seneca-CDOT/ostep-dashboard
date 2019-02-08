@@ -16,7 +16,7 @@ app.get('/', (req, res)=>{
     //scrapes table data from wiki.cdot website
     var newObj = {"rows":[]};
     scraper
-    .get('https://wiki.cdot.senecacollege.ca/wiki/CDOT_Fall_2018_Weekly_Presentation_Schedule#Presentation_Dates')
+    .get('https://wiki.cdot.senecacollege.ca/wiki/CDOT_Winter_2019_Weekly_Presentation_Schedule')
     .then(function(tableData){
         //turns tableData array into object
         for (let i = 0; i < tableData[0].length; i++){
