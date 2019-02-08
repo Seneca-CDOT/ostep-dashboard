@@ -44,7 +44,7 @@ class Osteppy extends Container {
                 <ReactMarkdown source={currentEods[username].text} />
               </div>
             ))}
-            {Object.keys(oldEods).length !== 0 && <h3>Past EODs</h3>}
+            {Object.keys(oldEods).length !== 0 && <h3 className="u-margin-top-small">Past EODs</h3>}
             {Object.keys(oldEods).map((username, i) => (
               <div key={username + i}>
                 <div className="slack-title">

@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="app-content">
         <Header
-          name={'ostep dashboard'}
+          name={'dashboard'}
           fetchData={this.fetchData}
         />
         <div className="main-content">
