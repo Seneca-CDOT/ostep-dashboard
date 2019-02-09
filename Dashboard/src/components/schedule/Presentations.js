@@ -14,7 +14,7 @@ class Presentations extends React.Component {
 
     return (
       <div>
-        <h3 className="schedule-heading">Upcoming Presentations:</h3>
+        <h3 className="schedule-heading">Upcoming Presentations</h3>
         {!this.props.data && <div>No Presentations Found.</div>}
         {this.props.data && this.props.data.rows.map((row, i) => (
           <div key={row + i} >

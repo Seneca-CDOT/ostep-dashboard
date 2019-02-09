@@ -49,6 +49,12 @@ html, body {
   height: 6em;
 }
 
+
+
+.u-margin-top-small {
+  margin-top: 2rem;
+}
+
 /* 
 ====================================
 HEADER
@@ -60,6 +66,17 @@ HEADER
   align-items: center;
 }
 
+.title .logo {
+  display: block;
+  transform: translateY(2px);
+}
+
+.title-text {
+  letter-spacing: 0.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
 header {
   background-color:#2c3e50;
   height: 5rem;
@@ -68,19 +85,23 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5em;
+  padding: 2.2em;
 }
 
 .logo {
-  height: 2.5em;
-  width: 2.5em;
+  height: 4rem;
   margin-right: 1rem;
 }
 
 .lamp-content {
-  font-size: 1.8em;
+  font-size: 1.5em;
   display: flex;
   align-items: center;
+}
+
+.lamp-text {
+  font-weight: 400;
+  letter-spacing: .3rem;
 }
 
 .bulb {
@@ -109,6 +130,11 @@ BODY
   align-items: center;
 }
 
+h3 {
+  font-weight: 600;
+  letter-spacing: .2rem;
+}
+
 /* 
 ====================================
 PANELS
@@ -130,6 +156,12 @@ PANELS
   background-color:#2c3e50;
 }
 
+.panel-title-text {
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  font-weight: 400;
+}
+
 .panel-title h3 {
   border-bottom: 0.01em solid #7f8c8d;
   padding: 2rem;
@@ -139,7 +171,7 @@ PANELS
 .panel-body {
   display: flex;
   flex-direction: column;
-  background-color:#2c3e50;
+  background-color:#28394a;
   width: 85rem;
   height: 48rem;
   margin: 2rem 1rem 0rem 2rem;
@@ -165,6 +197,23 @@ PANELS
   justify-content: center;
   align-items: center;
   border-bottom: 0.01em solid #c0392b;
+  transition: all .6s;
+}
+
+.refresh-container:hover {
+  background-color: #c25246;
+  border-bottom: 0.01em solid #c25246;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.refresh-container:hover .refresh {
+  animation: rotate 1.5s linear infinite;
 }
 
 .refresh {

@@ -1,10 +1,13 @@
 [
-    {"Host":"romania", "IPAddress":"206.47.241.9", "Status":"unknown"},
-    {"Host":"narnia", "IPAddress":"206.47.241.10","Status":"unknown"},
-    {"Host":"vega", "IPAddress":"206.47.241.11", "Status":"unknown"},
-    {"Host":"england", "IPAddress":"206.47.241.13", "Status":"unknown"},
-    {"Host":"zimbabwe", "IPAddress": "206.47.241.26", "Status":"unknown"},
-    {"Host":"russia", "IPAddress": "206.47.241.27", "Status":"unknown"},
-    {"Host":"iwantapetcow", "IPAddress": "206.47.241.28", "Status":"unknown"},
-    {"Host":"ian-desktop", "IPAddress": "206.47.241.29", "Status":"unknown"}
+    {"Host":"bbb", "IPAddress":"67.69.105.135", "Status":"unknown"},
+    {"Host":"vega", "IPAddress":"67.69.105.136", "Status":"unknown"},
+    {"Host":"rob", "IPAddress":"67.69.105.137", "Status":"unknown"}, 
+    {"Host":"ps", "IPAddress":"67.69.105.138", "Status":"unknown"},
+    {"Host":"italy", "IPAddress":"67.69.105.142", "Status":"unknown"},
+    {"Host":"canada", "IPAddress":"67.69.105.143", "Status":"unknown"},
+    {"Host":"narnia", "IPAddress":"67.69.105.159", "Status":"unknown"},
+    {"Host":"ireland", "IPAddress":"67.69.105.163", "Status":"unknown"},
+    {"Host":"spain", "IPAddress":"67.69.105.166", "Status":"unknown"},
+    {"Host":"hong kong", "IPAddress":"67.69.105.167", "Status":"unknown"},
+    {"Host":"rome", "IPAddress":"67.69.105.170", "Status":"unknown"}
 ]
