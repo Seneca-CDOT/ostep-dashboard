@@ -11,6 +11,7 @@ let app = express();
 const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
+const clock_path = __dirname + '/clock.txt';
 
 let py_script = "";
   
@@ -79,7 +80,7 @@ app.post('/eod_left', (req, res) => {
 
 	const slack_response = {
 		"response_type": "in_channel",
-        "text": `Sleepy RAs who haven't submitted their EODs:`,
+        "text": `Sleepy RAs who haven't submitted their EODs:`, //"text": `Current time is: ` + clock + `\nSleepy RAs who haven't submitted their EODs:`
         "attachments": [
 			{
 				"text": `${message}`
@@ -99,7 +100,8 @@ app.post('/eod_left', (req, res) => {
 app.post('/check_py_script', (req, res) => {
     const slack_request = req.body;
 
-    let stdout = checkPythonScript()
+    //let stdout = checkPythonScript()
+    checkPythonScript();
 
 	const slack_response = {
 		"response_type": "in_channel",
@@ -107,6 +109,27 @@ app.post('/check_py_script', (req, res) => {
         "attachments": [
 			{
 				"text": `${py_script}`
+			}
+		]
+    };
+
+    axios.post(slack_request.response_url, slack_response).catch(error => {
+        console.log("error: " + error);
+	});
+	res.status(200).send();
+});
+
+app.post('/check_eod_time', (req, res) => {
+    const slack_request = req.body;
+
+    let time = checkEODClock();
+
+	const slack_response = {
+		"response_type": "in_channel",
+        "text": `EOD Reminder Bot's clock:`,
+        "attachments": [
+			{
+				"text": `${time}`
 			}
 		]
     };
@@ -171,6 +194,16 @@ let checkPythonScript = () => {
         return message;
     });
 }
+
+let checkEODClock = () =>{
+    if (fs.existsSync(clock_path)) { 
+        var contents = fs.readFileSync(clock_path, 'utf8');
+        return (contents);
+    } else {
+        return ("Error: Clock does not exist!")
+    }
+}
+
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
