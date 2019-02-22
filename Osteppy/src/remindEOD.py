@@ -48,7 +48,7 @@ def check():
         elif (EDT_time.hour == 10): #10
             reset_RA_list()
         elif (EDT_time.hour == 0): #0
-            midnight_debug()
+            midnight_debug() 
     time.sleep(1)
 
 def test():
