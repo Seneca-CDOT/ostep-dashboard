@@ -12,8 +12,10 @@ const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 const clock_path = __dirname + '/clock.txt';
+const execSync = require('child_process').execSync;
 
 let py_script = "";
+let cmd_output = "";
   
 app.server = http.createServer(app);
 
@@ -101,7 +103,7 @@ app.post('/check_py_script', (req, res) => {
     const slack_request = req.body;
 
     //let stdout = checkPythonScript()
-    message = checkPythonScript();
+    let message = checkPythonScript();
 
 	const slack_response = {
 		"response_type": "in_channel",
@@ -143,14 +145,14 @@ app.post('/check_eod_time', (req, res) => {
 app.post('/bash', (req, res) => {
     const slack_request = req.body;
 
-    //let output = runBashCommand();
+    let cmd_output = runBashCommand(slack_request.text);
 
 	const slack_response = {
 		"response_type": "in_channel",
         "text": `$ ` + slack_request.text + `:`,
         "attachments": [
 			{
-				"text": `${"OwO"}`
+				"text": `${cmd_output}`
 			}
 		]
     };
@@ -176,7 +178,7 @@ let writeRAs = () => {
                     return console.log(err);
                 }
             });
-    };
+    }
 };
 
 // Read the updated list of RAs
@@ -226,8 +228,10 @@ let checkEODClock = () =>{
 }
 
 let runBashCommand = (cmd) => {
-    let message = "";
-    exec(cmd,
+    let message = execSync (cmd);
+    return message;
+    
+    /*exec(cmd,
     (error, stdout, stderr) => {
         message += 'stdout: ' + '\n' + stdout + '\n';
         message += 'stderr: ' + '\n' + stderr + '\n';
@@ -238,9 +242,10 @@ let runBashCommand = (cmd) => {
             //console.log('exec error: ' + error);
         }
         console.log(message);
-        //cmd_output = message;
+        cmd_output = message;
         return message;
-    });
+    });*/
+    
 }
 
 
