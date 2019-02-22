@@ -101,14 +101,14 @@ app.post('/check_py_script', (req, res) => {
     const slack_request = req.body;
 
     //let stdout = checkPythonScript()
-    checkPythonScript();
+    message = checkPythonScript();
 
 	const slack_response = {
 		"response_type": "in_channel",
         "text": `ps aux | grep remindEOD.py:`,
         "attachments": [
 			{
-				"text": `${py_script}`
+				"text": `${message}` //py_script
 			}
 		]
     };
@@ -130,6 +130,27 @@ app.post('/check_eod_time', (req, res) => {
         "attachments": [
 			{
 				"text": `${time}`
+			}
+		]
+    };
+
+    axios.post(slack_request.response_url, slack_response).catch(error => {
+        console.log("error: " + error);
+	});
+	res.status(200).send();
+});
+
+app.post('/bash', (req, res) => {
+    const slack_request = req.body;
+
+    //let output = runBashCommand();
+
+	const slack_response = {
+		"response_type": "in_channel",
+        "text": `$ ` + slack_request.text + `:`,
+        "attachments": [
+			{
+				"text": `${"OwO"}`
 			}
 		]
     };
@@ -204,13 +225,30 @@ let checkEODClock = () =>{
     }
 }
 
+let runBashCommand = (cmd) => {
+    let message = "";
+    exec(cmd,
+    (error, stdout, stderr) => {
+        message += 'stdout: ' + '\n' + stdout + '\n';
+        message += 'stderr: ' + '\n' + stderr + '\n';
+        //console.log('stdout: ' + stdout);
+        //console.log('stderr: ' + stderr);
+        if (error !== null) {
+            message += 'exec error: ' + error + '\n';
+            //console.log('exec error: ' + error);
+        }
+        console.log(message);
+        //cmd_output = message;
+        return message;
+    });
+}
+
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
 	const report_data = JSON.parse(fs.readFileSync(data_file, 'utf8'));
 	res.status(200).json(report_data);
 });
-
 
 app.server.listen(process.env.PORT || config.port, () => {
     console.log(`Started on port ${app.server.address().port}`);
