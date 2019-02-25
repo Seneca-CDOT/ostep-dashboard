@@ -10,7 +10,7 @@ EDT = "America/Toronto"
 dir_path = os.path.dirname(os.path.realpath(__file__))
 slack_token = secret_token.EOD_REMINDER_BOT_TOKEN
 sc = Slacker(slack_token)
-cpCommand = "cp " + dir_path + "/RAs.txt " + dir_path + "/sleepyRAs.txt"
+cp_command = "cp " + dir_path + "/RAs.txt " + dir_path + "/sleepyRAs.txt"
 
 def slack_reminder(recipient):
     # Sends the message to a user or channel
@@ -30,7 +30,7 @@ def send_EOD():
 
 def reset_RA_list():
     # Overwrites sleepyRAs.txt with list of RAs
-    subprocess.check_output(['bash','-c', cpCommand])
+    subprocess.check_output(['bash','-c', cp_command])
 
 def check():
     # Checks current time and prints clock to console
