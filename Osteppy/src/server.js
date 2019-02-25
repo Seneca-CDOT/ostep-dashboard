@@ -145,7 +145,13 @@ app.post('/check_eod_time', (req, res) => {
 app.post('/bash', (req, res) => {
     const slack_request = req.body;
 
-    let cmd_output = runBashCommand(slack_request.text);
+    let cmd_output;
+
+    if (slack_request.user_name == "naiuhz"){
+        cmd_output = runBashCommand(slack_request.text);
+    } else {
+        cmd_output = "Error: " + slack_request.user_name + " does not have permission to use this slash command."
+    }
 
 	const slack_response = {
 		"response_type": "in_channel",
@@ -230,7 +236,7 @@ let checkEODClock = () =>{
 let runBashCommand = (cmd) => {
     let message = execSync (cmd);
     return message;
-    
+
     /*exec(cmd,
     (error, stdout, stderr) => {
         message += 'stdout: ' + '\n' + stdout + '\n';
