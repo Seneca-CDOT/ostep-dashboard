@@ -152,7 +152,7 @@ app.post('/bash', (req, res) => {
     let cmd_output = "";
 
     if (slack_request.user_name == "naiuhz"){
-        cmd_output = runBashCommand(slack_request.text);
+        //cmd_output = runBashCommand(slack_request.text);
     } else {
         cmd_output = "Error: " + slack_request.user_name + " does not have permission to use this slash command."
     }
