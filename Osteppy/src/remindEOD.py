@@ -55,7 +55,7 @@ def check():
                 send_RA_EOD("mroncancio19", "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:")
                 send_RA_EOD("josue.quilon-barrios", "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:")
                 send_RA_EOD("fchughtai", "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:")
-                send_RA_EOD("fchughtai", "It's 9PM sleepy head! Please remember to do your EOD! :ayaya:")
+                send_RA_EOD("naiuhz", "It's 9PM sleepy head! Please remember to do your EOD! :ayaya:")
             elif (EDT_time.hour == 22 and (EDT_time.weekday() == 1 or EDT_time.weekday() == 2 or EDT_time.weekday() == 4)):
                 send_RA_EOD("poftadeh2", "It's 10PM sleepy head! Please remember to do your EOD! :pouya:")
             # Reset RA list
