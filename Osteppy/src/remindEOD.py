@@ -33,8 +33,9 @@ def send_RA_EOD(RA, message):
     with open('./src/sleepyRAs.txt') as f:
         names = f.readlines()
     names = [name.strip() for name in names] 
-    if (RA in names):
-        sc.chat.post_message("@" + name, message)
+    for name in names:
+        if (RA in names):
+            sc.chat.post_message("@" + name, message)
 
 def reset_RA_list():
     # Overwrites sleepyRAs.txt with list of RAs
@@ -44,7 +45,7 @@ def check():
     # Checks current time and prints clock to console
     #now = datetime.datetime.now()
     EDT_time = datetime.now(timezone(EDT))
-    print "[EOD Reminder Bot Running] 24 Hour Clock:", EDT_time.hour, ":", EDT_time.minute, ":", EDT_time.second, "|", EDT_time.weekday()
+    print ("[EOD Reminder Bot Running] 24 Hour Clock: " + str(EDT_time.hour) + ":" + str(EDT_time.minute) + ":" + str(EDT_time.second) + "|" + str(EDT_time.weekday()))
     sys.stdout.write("\033[F")
     tick_tock(EDT_time)
     if (EDT_time.second == 0):
