@@ -8,6 +8,6 @@
     {"Host":"narnia", "IPAddress":"67.69.105.159", "Status":"unknown"},
     {"Host":"ireland", "IPAddress":"67.69.105.163", "Status":"unknown"},
     {"Host":"spain", "IPAddress":"67.69.105.166", "Status":"unknown"},
-    {"Host":"hong kong", "IPAddress":"67.69.105.167", "Status":"unknown"},
-    {"Host":"rome", "IPAddress":"67.69.105.170", "Status":"unknown"}
+    {"Host":"rome", "IPAddress":"67.69.105.170", "Status":"unknown"},
+    {"Host": "france", "IPAddress":"67.69.105.171", "Status":"unknown"}
 ]
