@@ -145,34 +145,6 @@ app.post('/check_eod_time', (req, res) => {
 	res.status(200).send();
 });
 
-// Slash command for sending bash commands to docker, only allows Ian to use this
-app.post('/bash', (req, res) => {
-    const slack_request = req.body;
-
-    let cmd_output = "";
-
-    if (slack_request.user_name == "naiuhz"){
-        //cmd_output = runBashCommand(slack_request.text);
-    } else {
-        cmd_output = "Error: " + slack_request.user_name + " does not have permission to use this slash command."
-    }
-
-	const slack_response = {
-		"response_type": "in_channel",
-        "text": `$ ` + slack_request.text + `:`,
-        "attachments": [
-			{
-				"text": `${cmd_output}`
-			}
-		]
-    };
-
-    axios.post(slack_request.response_url, slack_response).catch(error => {
-        console.log("error: " + error);
-	});
-	res.status(200).send();
-});
-
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
     fs.writeFile(eodNames, "", (err) => {
@@ -225,13 +197,6 @@ let checkEODClock = () =>{
         return ("Error: Clock does not exist!")
     }
 }
-
-// Execute given bash command
-let runBashCommand = (cmd) => {
-    let message = execSync (cmd);
-    return message;
-}
-
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
