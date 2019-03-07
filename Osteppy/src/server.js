@@ -12,6 +12,7 @@ const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 const clock_path = __dirname + '/clock.txt';
+const error_log_path = __dirname + '/error_log.txt';
 const execSync = require('child_process').execSync;
 let execEODReminder = __dirname + "/remindEOD.py"
 const { spawn } = require('child_process');
@@ -145,6 +146,28 @@ app.post('/check_eod_time', (req, res) => {
 	res.status(200).send();
 });
 
+// Slash command for checking remindEOD.py's error logs
+app.post('/check_errors', (req, res) => {
+    const slack_request = req.body;
+
+    let error_log = checkErrorLog();
+
+	const slack_response = {
+		"response_type": "in_channel",
+        "text": `Error log:`,
+        "attachments": [
+			{
+				"text": `${error_log}`
+			}
+		]
+    };
+
+    axios.post(slack_request.response_url, slack_response).catch(error => {
+        console.log("error: " + error);
+	});
+	res.status(200).send();
+});
+
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
     fs.writeFile(eodNames, "", (err) => {
@@ -197,6 +220,17 @@ let checkEODClock = () =>{
         return ("Error: Clock does not exist!")
     }
 }
+
+// Reads error_log.txt to return the time
+let checkErrorLog = () =>{
+    if (fs.existsSync(error_log_path)) { 
+        var contents = fs.readFileSync(error_log_path, 'utf8');
+        return (contents);
+    } else {
+        return ("Error: Error Log does not exist!")
+    }
+}
+
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
