@@ -12,6 +12,7 @@ const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 const clock_path = __dirname + '/clock.txt';
+const error_log_path = __dirname + '/error_log.txt';
 const execSync = require('child_process').execSync;
 let execEODReminder = __dirname + "/remindEOD.py"
 const { spawn } = require('child_process');
@@ -145,24 +146,18 @@ app.post('/check_eod_time', (req, res) => {
 	res.status(200).send();
 });
 
-// Slash command for sending bash commands to docker, only allows Ian to use this
-app.post('/bash', (req, res) => {
+// Slash command for checking remindEOD.py's error logs
+app.post('/check_errors', (req, res) => {
     const slack_request = req.body;
 
-    let cmd_output = "";
-
-    if (slack_request.user_name == "naiuhz"){
-        //cmd_output = runBashCommand(slack_request.text);
-    } else {
-        cmd_output = "Error: " + slack_request.user_name + " does not have permission to use this slash command."
-    }
+    let error_log = checkErrorLog();
 
 	const slack_response = {
 		"response_type": "in_channel",
-        "text": `$ ` + slack_request.text + `:`,
+        "text": `Error log:`,
         "attachments": [
 			{
-				"text": `${cmd_output}`
+				"text": `${error_log}`
 			}
 		]
     };
@@ -175,19 +170,22 @@ app.post('/bash', (req, res) => {
 
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
-    fs.writeFile(eodNames, "", (err) => {
+    /*fs.writeFile(eodNames, "", (err) => {
         if(err) {
             return console.log(err);
         }
-    });
+    });*/
+
+    fs.writeFileSync(eodNames, "", 'utf8');
 
     for (let i = 0; i < RAs.length; i++){
-        if (RAs[i].length > 0)
+        if (RAs[i].length > 0) {
             fs.appendFile(eodNames, RAs[i] + "\n", (err) => {
                 if(err) {
                     return console.log(err);
                 }
             });
+        }
     }
 };
 
@@ -226,10 +224,14 @@ let checkEODClock = () =>{
     }
 }
 
-// Execute given bash command
-let runBashCommand = (cmd) => {
-    let message = execSync (cmd);
-    return message;
+// Reads error_log.txt to return the time
+let checkErrorLog = () =>{
+    if (fs.existsSync(error_log_path)) { 
+        var contents = fs.readFileSync(error_log_path, 'utf8');
+        return (contents);
+    } else {
+        return ("Error: Error Log does not exist!")
+    }
 }
 
 
