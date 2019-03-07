@@ -66,7 +66,7 @@ def check():
                 midnight_debug()
         elif (EDT_time.minute == 30):
             if (EDT_time.hour == 9 and EDT_time.weekday() <= 4):
-                send_RA_EOD("mroncancio19", "It's 8:30AM Miguel! You forgot to submit yesterday's EOD! Let's submit one right now! :robot_face:")
+                send_RA_EOD("mroncancio19", "It's 9:30AM Miguel! You forgot to submit yesterday's EOD! Let's submit one right now! :robot_face:")
             elif (EDT_time.hour == 16 and EDT_time.weekday() <= 4):
                 send_RA_EOD("mroncancio19", "It's 4:30PM Miguel! Try to do your EOD before you leave today! :robot_face:")
                 send_RA_EOD("naiuhz", "It's 4:30PM Ian! Try to do your EOD before you leave today! :ayaya:")

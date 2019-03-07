@@ -7,9 +7,6 @@ LABEL authors="OSTEP Team"
 COPY package.json /www/package.json
 RUN cd /www; npm install
 RUN apt-get update 
-RUN apt-get install -y python-pip
-RUN pip install slacker
-RUN pip install pytz
 RUN apt-get install -y ntp
 
 # Copy app source
@@ -32,5 +29,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 EXPOSE 2001
 
 # start command as per package.json
-CMD node dist/server.js && (dist/remindEOD.py &> dist/error_log.txt)
-#CMD ["dist/remindEOD.py"]
+CMD ["node", "dist/server.js"]

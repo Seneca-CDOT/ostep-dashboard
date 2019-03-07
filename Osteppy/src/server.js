@@ -14,9 +14,9 @@ let RAs = fs.readFileSync(eodNames).toString().split("\n");
 const clock_path = __dirname + '/clock.txt';
 const error_log_path = __dirname + '/error_log.txt';
 const execSync = require('child_process').execSync;
-let execEODReminder = __dirname + "/remindEOD.py"
-const { spawn } = require('child_process');
-  
+var cp = require('child_process');
+cp.fork(__dirname + '/EODreminder.js');
+
 app.server = http.createServer(app);
 
 // logger
@@ -100,17 +100,14 @@ app.post('/eod_left', (req, res) => {
 	res.status(200).send();
 });
 
-
-// Slash command for checking if remindEOD.py script is still running or not
-app.post('/check_py_script', (req, res) => {
+// Slash command for checking if remindEOD.js script is still running or not
+app.post('/check_js_script', (req, res) => {
     const slack_request = req.body;
-
-    //let stdout = checkPythonScript()
-    let message = checkPythonScript();
+    let message = checkJSScript();
 
 	const slack_response = {
 		"response_type": "in_channel",
-        "text": `ps aux | grep remindEOD.py:`,
+        "text": `ps aux | grep EODreminder.js:`,
         "attachments": [
 			{
 				"text": `${message}` //py_script
@@ -146,27 +143,6 @@ app.post('/check_eod_time', (req, res) => {
 	res.status(200).send();
 });
 
-// Slash command for checking remindEOD.py's error logs
-app.post('/check_errors', (req, res) => {
-    const slack_request = req.body;
-
-    let error_log = checkErrorLog();
-
-	const slack_response = {
-		"response_type": "in_channel",
-        "text": `Error log:`,
-        "attachments": [
-			{
-				"text": `${error_log}`
-			}
-		]
-    };
-
-    axios.post(slack_request.response_url, slack_response).catch(error => {
-        console.log("error: " + error);
-	});
-	res.status(200).send();
-});
 
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
@@ -208,9 +184,8 @@ let submitEOD = (RA) => {
     console.log(RA + " has submitted EOD")
 }
 
-// Runs command to check if python script is running or not
-let checkPythonScript = () => {
-    let message = execSync('ps aux | grep remindEOD.py');
+let checkJSScript =() => {
+    let message = execSync('ps aux | grep EODreminder.js');
     return message;
 }
 
@@ -223,17 +198,6 @@ let checkEODClock = () =>{
         return ("Error: Clock does not exist!")
     }
 }
-
-// Reads error_log.txt to return the time
-let checkErrorLog = () =>{
-    if (fs.existsSync(error_log_path)) { 
-        var contents = fs.readFileSync(error_log_path, 'utf8');
-        return (contents);
-    } else {
-        return ("Error: Error Log does not exist!")
-    }
-}
-
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
@@ -248,8 +212,3 @@ app.server.listen(process.env.PORT || config.port, () => {
 });
 
 export default app;
-
-// Execute remindEOD.py script
-const subprocess = spawn(execEODReminder);
-// Terminates python script when server is shut down
-subprocess.unref();
