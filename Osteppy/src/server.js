@@ -170,19 +170,22 @@ app.post('/check_errors', (req, res) => {
 
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
-    fs.writeFile(eodNames, "", (err) => {
+    /*fs.writeFile(eodNames, "", (err) => {
         if(err) {
             return console.log(err);
         }
-    });
+    });*/
+
+    fs.writeFileSync(eodNames, "", 'utf8');
 
     for (let i = 0; i < RAs.length; i++){
-        if (RAs[i].length > 0)
+        if (RAs[i].length > 0) {
             fs.appendFile(eodNames, RAs[i] + "\n", (err) => {
                 if(err) {
                     return console.log(err);
                 }
             });
+        }
     }
 };
 
