@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 
+/***********************************************************
+// OSTEP Dashboard Osteppy API
+// EODreminder.cpp
+// Date Created: 2019/03/07
+// Author: Yiran Zhu
+// Email: yzhu132@myseneca.ca
+// Description: Slack API sends custom EOD reminders to 
+// OSTEP Research Assistants
+***********************************************************/
+
 // Javascript version of remindEOD.py
-// Sends custom EOD reminders to OSTEP RA's
 
 const { DateTime } = require('luxon');
 DateTime.local().setZone('America/Toronto');
@@ -24,6 +33,7 @@ const cp_command = "cp " + __dirname + "/RAs.txt " + __dirname + "/sleepyRAs.txt
 const token = process.env.SLACK_TOKEN;
 const web = new WebClient(token);
 
+// Sends EOD message to RA if they haven't already submitted their EOD that work day
 function sendEOD (RA, message) {
     var names = fs.readFileSync(__dirname + "/sleepyRAs.txt").toString().split("\n");
     for(let name of names) {
@@ -34,10 +44,15 @@ function sendEOD (RA, message) {
 }
 //sendEOD ("josue.quilon-barrios", "Test message. :robot_face:");
 
+// Exported function used in slash command
+module.exports.sendDM = (RA, message) => {
+    web.chat.postMessage({ channel: channel_IDs[RA], text: message });
+}
+
+// Resets RA list in the morning of a weekday
 function resetRAList (){
     execSync(cp_command);
 }
-
 //resetRAList();
 
 // Reminder schedule
@@ -49,6 +64,7 @@ function resetRAList (){
 // Yan: 9:30PM, 4:55PM
 // Olga: 8:30PM
 
+// Checks the time to send custom EOD reminders
 function checkTime(clock) {
     if (clock.second == 0) {
         if (clock.minute == 0) {
@@ -86,6 +102,7 @@ function checkTime(clock) {
     }
 }
 
+// Writes the formatted time into a text file
 function writeTime(clock) {
     var time = "[EOD Reminder Bot Running] 24 Hour Clock: ";
     if (clock.hour < 10){
@@ -112,6 +129,7 @@ function writeTime(clock) {
     fs.writeFileSync(clock_path, time, 'utf8');
 }
 
+// Ticks each second, checks if appropriate time to send EOD and writes the time to text file
 function tickTock() {
     var clock = DateTime.local();
     writeTime(clock);

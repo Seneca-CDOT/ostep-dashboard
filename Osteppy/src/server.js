@@ -1,3 +1,15 @@
+#!/usr/bin/env node
+
+/***********************************************************
+// OSTEP Dashboard Osteppy API
+// server.cpp
+// Date Created: 2018/09/11
+// Author: Olga Belavina and Yiran Zhu
+// Email: yzhu132@myseneca.ca
+// Description: Slack API triggered by and responds to 
+// slash commands such as /eod and /eod_left. 
+***********************************************************/
+
 import http from 'http';
 import express from 'express';
 import cors from 'cors';
@@ -12,9 +24,8 @@ const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
 const clock_path = __dirname + '/clock.txt';
-const error_log_path = __dirname + '/error_log.txt';
 const execSync = require('child_process').execSync;
-var cp = require('child_process');
+const cp = require('child_process');
 cp.fork(__dirname + '/EODreminder.js');
 
 app.server = http.createServer(app);
@@ -143,15 +154,8 @@ app.post('/check_eod_time', (req, res) => {
 	res.status(200).send();
 });
 
-
 // Update and overwrite the list of RAs who haven't submit their EODs
 let writeRAs = () => {
-    /*fs.writeFile(eodNames, "", (err) => {
-        if(err) {
-            return console.log(err);
-        }
-    });*/
-
     fs.writeFileSync(eodNames, "", 'utf8');
 
     for (let i = 0; i < RAs.length; i++){
@@ -184,6 +188,7 @@ let submitEOD = (RA) => {
     console.log(RA + " has submitted EOD")
 }
 
+// Checks if EOD reminder JavaScript is running or not
 let checkJSScript =() => {
     let message = execSync('ps aux | grep EODreminder.js');
     return message;
@@ -192,7 +197,7 @@ let checkJSScript =() => {
 // Reads clock.txt to return the time
 let checkEODClock = () =>{
     if (fs.existsSync(clock_path)) { 
-        var contents = fs.readFileSync(clock_path, 'utf8');
+        let contents = fs.readFileSync(clock_path, 'utf8');
         return (contents);
     } else {
         return ("Error: Clock does not exist!")
