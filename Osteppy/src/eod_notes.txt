@@ -10,6 +10,7 @@ server.js
 
 ps aux | grep remindEOD.py
 docker rm -f $(docker ps -aq)
+docker build -t slack-service .; docker run -p 8081:2001 -d slack-service
 docker ps --format "{{.Names}}"
-docker exec -it  bash
+docker exec -it {CONTAINER_NAME} bash
 cat src/sleepyRAs.txt
