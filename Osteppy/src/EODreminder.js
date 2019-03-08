@@ -78,7 +78,8 @@ const checkTime = (clock) => {
         sendEOD('josue.quilon-barrios', "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:");
         sendEOD('dray1', "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:");
         sendEOD('naiuhz', "It's 9PM sleepy head! Please remember to do your EOD! :ayaya:");
-      } else if (clock.hour === 22 && (clock.weekday === 2 || clock.weekday === 3 || clock.weekday === 5)) {
+      } else if (clock.hour === 22 && (clock.weekday === 2 || clock.weekday === 3
+        || clock.weekday === 5)) {
         sendEOD('poftadeh2', "It's 10PM sleepy head! Please remember to do your EOD! :pouya:");
       } else if (clock.hour === 0) {
         sendEOD('naiuhz', ':clock12: Oyasuminasai niichan :ayaya:');
