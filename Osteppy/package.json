@@ -27,6 +27,7 @@
   "author": "OSTEP Team",
   "license": "MIT",
   "dependencies": {
+    "@slack/client": "^4.11.0",
     "@slack/events-api": "^2.1.1",
     "axios": "^0.18.0",
     "body-parser": "^1.13.3",

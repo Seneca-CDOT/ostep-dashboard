@@ -10,14 +10,10 @@
 
 ## Instructions
 
-### Create a secret_webhooks.json file local to service.js
+## Set Osteppy environment token
 
-Add this code: 
+Add this code local to the src folder: `ostep-dashboard/Osteppy/src`: 
 
-{
-    "RA":"webhook_url"
-}
+SLACK_TOKEN="TOKEN_VALUE"
 
-Where RA is the name of the Research Assistant and webhook_url is the webhook url.
-
-Note: These should be ignored in .gitignore and not be shared to the public.
+Note: This key is called from the backend, so it should not be available to the public.

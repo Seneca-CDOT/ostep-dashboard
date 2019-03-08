@@ -6,3 +6,4 @@
 /eods.json
 *secret*
 /src/clock.txt
+*.env
