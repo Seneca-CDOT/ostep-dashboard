@@ -6,36 +6,33 @@
 const { DateTime } = require('luxon');
 DateTime.local().setZone('America/Toronto');
 
-const request = require('request');
 const execSync = require('child_process').execSync;
 const fs = require('fs');
+const { WebClient } = require('@slack/client');
 
 const clock_path = __dirname + '/clock.txt';
-const webhooks = JSON.parse(fs.readFileSync(__dirname + "/secret_webhooks.json"));
+var channel_IDs = {
+    naiuhz: "UCQFB9TEX",
+    "josue.quilon-barrios": "UF88F1XNG",
+    mroncancio19: "UF90J8E6Q",
+    poftadeh2: "U8WLH35U2",
+    ylei11: "UF8DGNTSP",
+    obelavina: "D5B49TX6D",
+    dray1: "UGNN3DF2P"
+};
 const cp_command = "cp " + __dirname + "/RAs.txt " + __dirname + "/sleepyRAs.txt"
-
+const token = process.env.SLACK_TOKEN;
+const web = new WebClient(token);
 
 function sendEOD (RA, message) {
-    //console.log(name + ":" + webhooks[name])
     var names = fs.readFileSync(__dirname + "/sleepyRAs.txt").toString().split("\n");
     for(let name of names) {
         if (name == RA) {
-            request.post(
-                webhooks[RA],
-                { json: { text: message } }
-            );
+            web.chat.postMessage({ channel: channel_IDs[RA], text: message });
         }
     }
 }
-//sendEOD ("naiuhz", ":robot_face:");
-
-function sendDM (RA, message) {
-    request.post(
-        webhooks[RA],
-        { json: { text: message, channel: "USLACKBOT" } }
-    );
-}
-sendEOD ("naiuhz", ":robot_face:");
+//sendEOD ("josue.quilon-barrios", "Test message. :robot_face:");
 
 function resetRAList (){
     execSync(cp_command);
@@ -124,4 +121,4 @@ function tickTock() {
     setTimeout(tickTock, 1000);
 }
 
-//tickTock();
+tickTock();
