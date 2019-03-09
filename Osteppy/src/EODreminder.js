@@ -43,7 +43,7 @@ const sendEOD = (RA, message) => {
     }
   });
 };
-// sendEOD ("josue.quilon-barrios", "Test message. :robot_face:");
+sendEOD ("naiuhz", "EOD Reminder test passed! :robot_face:");
 
 // Exported function used in slash command
 module.exports.sendDM = (RA, message) => {
