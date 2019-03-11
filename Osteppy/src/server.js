@@ -19,7 +19,7 @@ import config from './config.json';
 import axios from 'axios';
 import * as fs from 'fs';
 
-let app = express();
+const app = express();
 const data_file = './eods.json';
 const eodNames = __dirname + '/sleepyRAs.txt';
 let RAs = fs.readFileSync(eodNames).toString().split("\n");
