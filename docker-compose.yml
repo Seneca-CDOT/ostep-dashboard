@@ -18,6 +18,8 @@ services:
   osteppy:
     container_name: osteppy
     build: ./Osteppy
+    env_file:
+      - .dashboard.env
     ports:
       - "8081:2001"
     restart: always
@@ -49,7 +51,7 @@ services:
     container_name: github
     build: ./Github
     env_file:
-      - github.env
+      - .dashboard.env
     ports:
       - "8086:2006"
     restart: always
