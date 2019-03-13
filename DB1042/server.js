@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
     filteredTable = { rows: bookings };
   } catch (e) {
     console.log(e);
-    filteredTable = {};
+    filteredTable = {rows: []};
   }
   res.json(filteredTable);
 });
