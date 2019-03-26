@@ -14,7 +14,7 @@ class Container extends React.Component {
   componentDidMount() {
     console.log("IN MOUNT")
     this.fetchData();
-    setInterval(() => { this.fetchData(); }, 30 * 1000);
+    setInterval(() => { this.fetchData(); }, 60 * 1000);
   }
 
   fetchData() {
