@@ -171,6 +171,8 @@ let getTheRecentCommits = (branchCommitsUrl, branchName, repoName) => {
                     if (new Date(today - new Date(branchCommits[j].commit.committer.date)) < new Date(recency)){
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] name: " + JSON.stringify(branchCommits[j].commit.committer.name) + '\n');
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] message: " + JSON.stringify(branchCommits[j].commit.message) + '\n');
+                        const time = new Date(branchCommits[j].commit.committer.date);
+                        branchCommits[j].commit.committer.date = time.toLocaleString("en-US", {timeZone : "America/Toronto"});
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] date: " + JSON.stringify(branchCommits[j].commit.committer.date) + '\n');
                         fs.appendFileSync('output.txt', "DEBUG getTheRecentCommits added branchCommits[" + j + "] repo-branch: " + repoName + "-" + branchName + '\n');
                         branchCommits[j].commit.repoName = repoName;
