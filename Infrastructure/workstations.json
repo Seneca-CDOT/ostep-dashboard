@@ -10,6 +10,6 @@
     {"Host":"spain", "IPAddress":"67.69.105.166", "Status":"unknown"},
     {"Host":"rome", "IPAddress":"67.69.105.170", "Status":"unknown"},
     {"Host": "switzerland", "IPAddress":"67.69.105.132", "Status":"unknown"},
-    {"Host": "japan", "IPAddress":"67.69.105.139", "Status":"unknown"}
-
+    {"Host": "japan", "IPAddress":"67.69.105.139", "Status":"unknown"},
+    {"Host": "ukraine", "IPAddress":"67.69.105.133", "Status":"unknown"}
 ]
