@@ -6,7 +6,6 @@
     {"Host":"italy", "IPAddress":"italy.cdot.systems", "Status":"unknown"},
     {"Host":"canada", "IPAddress":"canada.cdot.systems", "Status":"unknown"},
     {"Host":"narnia", "IPAddress":"narnia.cdot.systems", "Status":"unknown"},
-    {"Host":"ireland", "IPAddress":"ireland.cdot.systems", "Status":"unknown"},
     {"Host":"spain", "IPAddress":"spain.cdot.systems", "Status":"unknown"},
     {"Host":"rome", "IPAddress":"rome.cdot.systems", "Status":"unknown"},
     {"Host": "switzerland", "IPAddress":"switzerland.cdot.systems", "Status":"unknown"},
