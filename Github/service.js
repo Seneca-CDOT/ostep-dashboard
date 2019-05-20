@@ -117,7 +117,7 @@ module.exports.getAllCommitsTogether = () => {
                 Promise.all(promises)
                 .then(()=>{
                     recentCommits.sort((firstCommit, secondCommit) => {
-                        return new Date(secondCommit.commit.author.date) - new Date(firstCommit.commit.author.date);;
+                        return new Date(secondCommit.commit.author.date) - new Date(firstCommit.commit.author.date);
                     });
                     resolve(recentCommits);
     
