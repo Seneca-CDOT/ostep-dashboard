@@ -38,11 +38,11 @@ module.exports.getRepos = () => {
           reposX.forEach(repo => {
             repo.branches_url = repo.branches_url.slice(
               0,
-              repo.branches_url.length - 9,
+              repo.branches_url.indexOf('{/branch}'),
             );
             repo.branches_url = `${
               repo.branches_url
-              }?per_page=100&access_token=${key}`;
+            }?per_page=100&access_token=${key}`;
             if (
               new Date(today - new Date(repo.pushed_at)) < new Date(recency)
             ) {
