@@ -11,6 +11,7 @@
 ********************************************************* */
 
 import http from 'http';
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -19,13 +20,14 @@ import axios from 'axios';
 import * as fs from 'fs';
 import config from './config.json';
 
-const app = express();
-const dataFile = './eods.json';
-const eodNames = `${__dirname}/sleepyRAs.txt`;
-let RAs = fs.readFileSync(eodNames).toString().split('\n');
-const clockPath = `${__dirname}/clock.txt`;
+const dataFile = path.join(__dirname, 'eods.json');
+const eodNames = path.join(__dirname, 'sleepyRAs.txt');
+const clockPath = path.join(__dirname, 'clock.txt');
+
 const { execSync } = require('child_process');
 const cp = require('child_process');
+
+let RAs = fs.readFileSync(eodNames).toString().split('\n');
 
 // Update and overwrite the list of RAs who haven't submit their EODs
 function writeRAs() {
@@ -74,6 +76,8 @@ function checkEODClock() {
 }
 
 cp.fork(`${__dirname}/EODreminder.js`);
+
+const app = express();
 
 app.server = http.createServer(app);
 
