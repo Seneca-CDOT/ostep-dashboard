@@ -48,7 +48,6 @@ app.use(bodyParser.urlencoded({
 app.post('/eod', (req, res) => {
     const slack_request = req.body;
 
-	//console.log(slack_request);
 	const slack_response = {
 		"response_type": "in_channel",
 		"text": `:checkered_flag: EOD was submitted by *${slack_request.user_name}*`,
@@ -60,7 +59,6 @@ app.post('/eod', (req, res) => {
     };
 
 	axios.post(slack_request.response_url, slack_response).then(() => {
-		console.log("Sending a request to slack api")
 		let report_data = JSON.parse(fs.readFileSync(data_file, 'utf8'));
 		report_data[slack_request.user_name] = {
 			'time': new Date(),
@@ -91,7 +89,6 @@ app.post('/eod_left', (req, res) => {
     RAs.forEach((name) => {
         message += name + '\n';
     }); 
-    console.log(message);
 
 	const slack_response = {
 		"response_type": "in_channel",
@@ -162,7 +159,7 @@ let writeRAs = () => {
         if (RAs[i].length > 0) {
             fs.appendFile(eodNames, RAs[i] + "\n", (err) => {
                 if(err) {
-                    return console.log(err);
+                    return err;
                 }
             });
         }

@@ -22,13 +22,10 @@ app.get('/', (req, res)=> {
      
     let numPassed = 0;
      object.forEach(async (item) => {
-        // console.log(item.IPAddress)
-       
         new Promise(resolve => { 
     
             ping.sys.probe(item.IPAddress, function(isAlive){
                 item.Status = isAlive ? 'up' : 'down';
-                console.log(item.IPAddress+' '+item.Status);
                 resolve()
             })
         }).then(() => {
@@ -36,9 +33,7 @@ app.get('/', (req, res)=> {
             if (object.length === numPassed) {
                 
                 // Ping is completed
-                console.log("Done fetching the data!");
-                // console.log(object)
-    
+
                 numPassed = 0;
                 
                 servers.forEach( async (item) => {
@@ -65,8 +60,6 @@ app.get('/', (req, res)=> {
                         }
                         dig(['cdot.systems', 'ns'])
                         .then((result) => {
- 
-                            console.log(result.answer)
                             res.end(JSON.stringify({Workstations:object , DNS:result.answer, Servers:servers}));
         
                             numPassed = 0;
@@ -87,5 +80,8 @@ app.get('/', (req, res)=> {
        
     });
      
-}).listen(PORT);
-console.log(`Running on localhost:${PORT}`);
+});
+
+app.listen(PORT, () => {
+    console.log(`Running on localhost:${PORT}`);
+});

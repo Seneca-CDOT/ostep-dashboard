@@ -133,8 +133,6 @@ function tickTock() {
   const clock = DateTime.local();
   writeTime(clock);
   checkTime(clock);
-  // console.clear();
-  // console.log(time);
   setTimeout(tickTock, 1000);
 }
 
