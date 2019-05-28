@@ -10,6 +10,7 @@
 // slash commands such as /eod and /eod_left.
 ********************************************************* */
 
+import cp from 'child_process';
 import http from 'http';
 import path from 'path';
 import express from 'express';
@@ -23,9 +24,6 @@ import config from './config.json';
 const dataFile = path.join(__dirname, 'eods.json');
 const eodNames = path.join(__dirname, 'sleepyRAs.txt');
 const clockPath = path.join(__dirname, 'clock.txt');
-
-const { execSync } = require('child_process');
-const cp = require('child_process');
 
 let RAs = fs.readFileSync(eodNames).toString().split('\n');
 
@@ -62,7 +60,7 @@ function submitEOD(RA) {
 
 // Checks if EOD reminder JavaScript is running or not
 function checkJSScript() {
-  const message = execSync('ps aux | grep EODreminder.js');
+  const message = cp.execSync('ps aux | grep EODreminder.js');
   return message;
 }
 
