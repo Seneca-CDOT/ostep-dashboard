@@ -19,44 +19,14 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import fs from 'fs';
+
+import EODList from './EODList';
+
 import config from './config.json';
 
-const dataFile = path.join(__dirname, 'eods.json');
-const eodNames = path.join(__dirname, 'sleepyRAs.txt');
 const clockPath = path.join(__dirname, 'clock.txt');
 
-let RAs = fs.readFileSync(eodNames).toString().split('\n');
-
-// Update and overwrite the list of RAs who haven't submit their EODs
-function writeRAs() {
-  fs.writeFileSync(eodNames, '', 'utf8');
-
-  for (let i = 0; i < RAs.length; i += 1) {
-    if (RAs[i].length > 0) {
-      fs.appendFile(eodNames, `${RAs[i]}\n`)
-        .catch(err => console.log(err));
-    }
-  }
-}
-
-// Read the updated list of RAs
-function readRAs() {
-  RAs = fs.readFileSync(eodNames).toString().split('\n');
-}
-
-// Print the RAs who have submit their EODs yet for debugging
-function printRAs() {
-  console.log('Remaining RAs:');
-  for (let i = 0; i < (RAs.length - 1); i += 1) {
-    console.log(`${i}: ${RAs[i]}`);
-  }
-}
-
-// Remove name from EOD reminder list
-function submitEOD(RA) {
-  RAs = RAs.filter(name => name !== RA);
-  console.log(`${RA} has submitted EOD`);
-}
+const EOD = new EODList();
 
 // Checks if EOD reminder JavaScript is running or not
 function checkJSScript() {
@@ -109,24 +79,14 @@ app.post('/eod', (req, res) => {
 
   axios
     .post(slackRequest.response_url, slackResponse)
-    .then(() => {
-      const reportData = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-      reportData[slackRequest.user_name] = {
-        time: new Date(),
-        text: slackRequest.text,
-        channel: slackRequest.channel_name,
-      };
-
-      fs.writeFileSync(dataFile, JSON.stringify(reportData), 'utf8');
-    }).catch((error) => {
+    .then(() => EOD.submit(slackRequest.user_name, {
+      time: new Date(),
+      text: slackRequest.text,
+      channel: slackRequest.channel_name,
+    })).catch((error) => {
       console.log(`error: ${error}`);
     });
 
-  // Remove RA's name from EOD reminder list
-  readRAs();
-  submitEOD(slackRequest.user_name);
-  writeRAs();
-  printRAs();
   res.status(200).send();
 });
 
@@ -134,11 +94,7 @@ app.post('/eod', (req, res) => {
 app.post('/eod_left', (req, res) => {
   const slackRequest = req.body;
 
-  readRAs();
-  let message = '';
-  RAs.forEach((name) => {
-    message += `${name}\n`;
-  });
+  const message = EOD.missing().join('\n');
 
   const slackResponse = {
     response_type: 'in_channel',
@@ -156,7 +112,6 @@ app.post('/eod_left', (req, res) => {
       console.log(`error: ${error}`);
     });
 
-  printRAs();
   res.status(200).send();
 });
 
@@ -211,13 +166,12 @@ app.post('/check_eod_time', (req, res) => {
 
 /** Get EODs */
 app.get('/eod', (req, res) => {
-  const reportData = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-  res.status(200).json(reportData);
+  res.json(EOD.report());
 });
 
 app.server.listen(process.env.PORT || config.port, () => {
   console.log(`Started on port ${app.server.address().port}`);
-  readRAs();
+  EOD.load().catch(console.log);
 });
 
 export default app;
