@@ -270,7 +270,9 @@ OSTEPPY PANEL
 ==================================== 
 */
 
-
+.eod-list h3:not(:first-child) {
+  margin-top: 2rem;
+}
 
 .slack-icon {
   height: 1.5em;
