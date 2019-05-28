@@ -17,7 +17,6 @@ class Header extends React.Component {
 
   fetchData() {
     this.props.fetchData("lamp", (data) => {
-      console.log(data)
       this.setState({ data });
     });
   }

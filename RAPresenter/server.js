@@ -23,9 +23,9 @@ app.get('/', (req, res)=>{
             newObj.rows.push(tableData[0][i]); 
         }       
         res.send(newObj);
-        console.log(newObj);  
-    })
+    });
 });
 
-app.listen(PORT);
-console.log(`Running on localhost:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Running on localhost:${PORT}`);
+});

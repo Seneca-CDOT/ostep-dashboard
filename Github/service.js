@@ -12,7 +12,6 @@ const request = require('request');
 
 const key = process.env.GITHUB_TOKEN;
 const repoUrl = `https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=${key}`;
-console.log(key);
 let branchUrls = [];
 let recentCommits = [];
 
