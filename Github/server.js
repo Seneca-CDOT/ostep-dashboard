@@ -1,4 +1,4 @@
-/***********************************************************
+/* **********************************************************
 // OSTEP Dashboard Github API
 // server.cpp
 // Date Created: 2018/09/22
@@ -6,43 +6,52 @@
 // Email: yzhu132@myseneca.ca
 // Description: Github API that gets all the sorted recent 
 // commits from an organization/user
-***********************************************************/
-
+********************************************************** */
 
 const express = require('express');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
+const data = require('./service.js');
+
 const app = express();
-var data = require("./service.js");
+
 const PORT = process.env.PORT || 2006;
-var delayTime = 1000;
 let isTimedOut = false;
-const TIMEOUT_SECONDS = 360;
+const TIMEOUT_SECONDS = 6 * 60;
 let storedData;
 
 app.use(bodyParser.json());
 
-//APPLICATION
+// APPLICATION
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
 app.get('/', (req, res) => {
-  data.getRepos()
-    .then(() => {
-      data.getAllCommitsTogether()
-        .then((data)=>{
-          res.json(data);
+  if (!isTimedOut) {
+    data.getRepos().then(() => {
+      data
+        .getAllCommitsTogether()
+        .then(commits => {
+          storedData = commits;
+          isTimedOut = true;
+          setTimeout(() => {
+            isTimedOut = false;
+          }, TIMEOUT_SECONDS * 1000);
+          res.json(commits);
         })
-        .catch((err)=>{
+        .catch(err => {
           res.send(err);
         });
     });
+  } else {
+    res.json(storedData);
+  }
 });
 
 app.use((req, res) => {
-  res.status(404).send("<h1>Page Not Found</h1>");
+  res.status(404).send('<h1>Page Not Found</h1>');
 });
 
 app.listen(PORT, () => console.log(`Running on localhost:${PORT}`));
