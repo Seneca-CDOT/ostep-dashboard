@@ -77,8 +77,13 @@ class Osteppy extends Container {
       >
         {data &&
           <div className="eod-list">
-            <EODList title="Today's EODs" eods={currentEods} />
-            <EODList title="Past EODs" eods={oldEods} />
+            {currentEods.length > 0 &&
+              <EODList title="Today's EODs" eods={currentEods} />
+            }
+
+            {oldEods.length > 0 &&
+              <EODList title="Past EODs" eods={oldEods} />
+            }
           </div>
         }
       </Panel>
