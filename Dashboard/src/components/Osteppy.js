@@ -5,6 +5,20 @@ import slack from './assets/slack.svg';
 import ReactMarkdown from 'react-markdown';
 const COMPONENT_NAME = "osteppy";
 
+// Reformat Slack messages based on:
+// https://api.slack.com/messaging/composing/formatting#retrieving-messages
+function reformatSlackMentions(text) {
+  return text.replace(/<(.*?)>/g, (match, p1) => {
+    switch(p1[0]) {
+      case '@': // content starting with `@U` or `@W` is a user mention
+        return `**${p1.split('|')[1]}**`;
+      default: // content we don't yet know how to format
+        console.warn(`Unknown mention: ${match}`);
+        return match
+    }
+  });
+}
+
 class Osteppy extends Container {
   constructor(props) {
     super(props, COMPONENT_NAME);
@@ -41,7 +55,7 @@ class Osteppy extends Container {
                   <p className="slack-post"> posted EOD in channel </p>
                   <div className="github-repo">{`#${currentEods[username].channel}`}</div>:
                  </div>
-                <ReactMarkdown source={currentEods[username].text} />
+                <ReactMarkdown source={reformatSlackMentions(currentEods[username].text)} />
               </div>
             ))}
             {Object.keys(oldEods).length !== 0 && <h3 className="u-margin-top-small">Past EODs</h3>}
@@ -54,7 +68,7 @@ class Osteppy extends Container {
                   <span className="github-repo"> {`#${oldEods[username].channel}`}</span>:
                 </div>
                 <ReactMarkdown
-                  source={oldEods[username].text}
+                  source={reformatSlackMentions(oldEods[username].text)}
                   className="slack-message"
                 />
               </div>
