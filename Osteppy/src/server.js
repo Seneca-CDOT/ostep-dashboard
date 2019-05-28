@@ -18,7 +18,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import axios from 'axios';
-import * as fs from 'fs';
+import fs from 'fs';
 import config from './config.json';
 
 const dataFile = path.join(__dirname, 'eods.json');
