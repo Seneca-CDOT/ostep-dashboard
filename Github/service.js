@@ -42,10 +42,8 @@ module.exports.getRepos = () => {
             );
             repo.branches_url = `${
               repo.branches_url
-            }?per_page=100&access_token=${key}`;
-            if (
-              new Date(today - new Date(repo.pushed_at)) < new Date(recency)
-            ) {
+              }?per_page=100&access_token=${key}`;
+            if (today - new Date(repo.pushed_at) < recency) {
               branchUrls.push({
                 name: repo.name,
                 url: repo.branches_url,
@@ -65,7 +63,7 @@ const getCommits = commitObject => {
       {
         url: `https://api.github.com/repos/Seneca-CDOT/${
           commitObject.repo
-        }/commits?sha=${commitObject.br.sha}&per_page=100&access_token=${key}`,
+          }/commits?sha=${commitObject.br.sha}&per_page=100&access_token=${key}`,
         headers: { 'User-Agent': 'request' },
       },
       (err, res, data) => {
@@ -74,13 +72,12 @@ const getCommits = commitObject => {
           reject(err);
         } else {
           JSON.parse(data).forEach(singleCommit => {
-            if (
-              new Date(today - new Date(singleCommit.commit.author.date)) <
-              new Date(recency)
-            ) {
-              const time = new Date(singleCommit.commit.author.date);
+            const { commit: { author } } = singleCommit;
+
+            if (today - new Date(author.date) < recency) {
+              const time = new Date(author.date);
               singleCommit.author = {
-                name: singleCommit.commit.author.name,
+                name: author.name,
                 date: time.toLocaleString('en-US', {
                   timeZone: 'America/Toronto',
                 }),
