@@ -11,9 +11,12 @@ const COMPONENT_NAME = "osteppy";
 // https://api.slack.com/messaging/composing/formatting#retrieving-messages
 function reformatSlackMentions(text) {
   return text.replace(/<(.*?)>/g, (match, p1) => {
-    switch(p1[0]) {
-      case '@': // content starting with `@U` or `@W` is a user mention
+    switch(p1.slice(0, 2)) {
+      case '@U': // content starting with `@U` or `@W` is a user mention
+      case '@W':
         return `**${p1.split('|')[1]}**`;
+      case '#C': // content starting with `#C` is a channel link
+        return `**#${p1.split('|')[1]}**`
       default: // content we don't yet know how to format
         console.warn(`Unknown mention: ${match}`);
         return match
