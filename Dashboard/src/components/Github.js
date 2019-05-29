@@ -27,6 +27,7 @@ class Github extends Container {
                   <a 
                     href={`https://github.com/Seneca-CDOT/${entry.repoName}/tree/${entry.branchName}`}  
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                   <span className="github-repo github-link"> {` ${entry.repoName}/${entry.branchName}:`}</span>
                   </a>
