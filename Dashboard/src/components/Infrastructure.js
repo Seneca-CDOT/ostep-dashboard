@@ -21,9 +21,9 @@ class Infrastructure extends Container {
     }
 
     return (
-      <div>
+      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
         <Panel
-          title={COMPONENT_NAME}
+          title={this.constructor.name}
           refreshData={this.refreshData}
         >
           {this.state.data &&

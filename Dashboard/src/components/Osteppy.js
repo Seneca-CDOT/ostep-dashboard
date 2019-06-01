@@ -71,22 +71,24 @@ class Osteppy extends Container {
     }
 
     return (
-      <Panel
-        title={COMPONENT_NAME}
-        refreshData={this.refreshData}
-      >
-        {data &&
-          <div className="eod-list">
-            {currentEods.length > 0 &&
-              <EODList title="Today's EODs" eods={currentEods} />
-            }
+      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
+        <Panel
+          title={this.constructor.name}
+          refreshData={this.refreshData}
+        >
+          {data &&
+            <div className="eod-list">
+              {currentEods.length > 0 &&
+                <EODList title="Today's EODs" eods={currentEods} />
+              }
 
-            {oldEods.length > 0 &&
-              <EODList title="Past EODs" eods={oldEods} />
-            }
-          </div>
-        }
-      </Panel>
+              {oldEods.length > 0 &&
+                <EODList title="Past EODs" eods={oldEods} />
+              }
+            </div>
+          }
+        </Panel>
+      </div>
     );
   }
 }

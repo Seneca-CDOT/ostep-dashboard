@@ -41,12 +41,13 @@ class Schedule extends React.Component {
 
   render() {
     return (
-      <Panel
-        title={COMPONENT_NAME}
-        refreshData={this.refreshData}
-      >
-        {this.state.presentationData && this.state.meetingData &&
-          <div className="schedule-content">
+      <div className={this.constructor.name.toLocaleLowerCase() + '-panel panel'}>
+        <Panel
+          title={this.constructor.name}
+          refreshData={this.refreshData}
+        >
+          {this.state.presentationData && this.state.meetingData &&
+            <div className="schedule-content">
               <Presentations
                 fetchData={this.props.fetchData}
                 data={this.state.presentationData}
@@ -55,9 +56,10 @@ class Schedule extends React.Component {
                 fetchData={this.props.fetchData}
                 data={this.state.meetingData}
               />
-          </div>
-        }
-      </Panel>
+            </div>
+          }
+        </Panel>
+      </div>
     );
   }
 }

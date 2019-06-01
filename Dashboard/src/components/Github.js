@@ -3,7 +3,7 @@ import Panel from './common/Panel';
 import Container from './common/Container';
 import github from './assets/github.svg';
 import moment from 'moment';
-const COMPONENT_NAME = "github";
+const COMPONENT_NAME = "github"
 class Github extends Container {
   constructor(props) {
     super(props, COMPONENT_NAME);
@@ -11,9 +11,9 @@ class Github extends Container {
 
   render() {
     return (
-      <div>
+      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
         <Panel
-          title={COMPONENT_NAME}
+          title={this.constructor.name}
           refreshData={this.refreshData}
         >
           {this.state.data &&
