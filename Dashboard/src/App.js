@@ -30,11 +30,11 @@ class App extends Component {
           fetchData={this.fetchData}
         />
         <div className="main-content">
-          <div className="panel-row">
+          <div className="row">
             <Github fetchData={this.fetchData} />
             <Infrastructure fetchData={this.fetchData} />
           </div>
-          <div className="panel-row">
+          <div className="row">
             <Osteppy fetchData={this.fetchData} />
             <Schedule fetchData={this.fetchData} />
           </div>
