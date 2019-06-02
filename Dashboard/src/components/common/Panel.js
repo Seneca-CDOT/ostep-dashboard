@@ -44,7 +44,6 @@ export default class Panel extends React.Component {
   }
 
   toggleDropdown() {
-    console.log(this.state.width);
     if (window.innerWidth < 950) {
       this.setState({ content_visible: !this.state.content_visible });
     }
