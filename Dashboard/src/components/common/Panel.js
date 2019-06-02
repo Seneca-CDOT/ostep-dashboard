@@ -7,6 +7,7 @@ export default class Panel extends React.Component {
     super(props)
     this.state = {
       content_visible: true,
+      width: window.innerWidth,
     };
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
@@ -29,7 +30,21 @@ export default class Panel extends React.Component {
     );
   }
 
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  updateDimensions() {
+    this.setState({width: window.innerWidth});
+  }
+
+  componentDidUpdate(){
+    if (this.state.width >= 950 && !this.state.content_visible)
+      this.setState({ content_visible: !this.state.content_visible })
+  }
+
   toggleDropdown() {
+    console.log(this.state.width);
     if (window.innerWidth < 950) {
       this.setState({ content_visible: !this.state.content_visible });
     }
