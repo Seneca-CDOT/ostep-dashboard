@@ -1,3 +1,6 @@
+import path from "path";
+import { promises as fs } from "fs";
+
 export default class EODList {
   constructor({
     dataFile = path.join(__dirname, "eods.json"),
@@ -11,8 +14,8 @@ export default class EODList {
 
   async load() {
     const results = await Promise.all([
-      fs.promises.readFile(this.dataFile, { encoding: "utf8", flag: "a+" }),
-      fs.promises.readFile(this.unsubmittedNamesFile, {
+      fs.readFile(this.dataFile, { encoding: "utf8", flag: "a+" }),
+      fs.readFile(this.unsubmittedNamesFile, {
         encoding: "utf8",
         flag: "a+"
       })
@@ -30,11 +33,8 @@ export default class EODList {
 
   save() {
     return Promise.all([
-      fs.promises.writeFile(this.dataFile, JSON.stringify(this.reportData)),
-      fs.promises.writeFile(
-        this.unsubmittedNamesFile,
-        this.unsubmittedNames.join("\n")
-      )
+      fs.writeFile(this.dataFile, JSON.stringify(this.reportData)),
+      fs.writeFile(this.unsubmittedNamesFile, this.unsubmittedNames.join("\n"))
     ]);
   }
 
