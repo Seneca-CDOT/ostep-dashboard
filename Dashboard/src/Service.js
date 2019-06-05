@@ -4,7 +4,7 @@ import dummyData from './debug/dummy-data';
 
 class Service {
   getData(containerName, cb) {
-    if ((process.env.MODE = 'debug')) {
+    if (process.env.REACT_APP_MODE === 'development') {
       cb(dummyData[containerName]);
       return;
     }

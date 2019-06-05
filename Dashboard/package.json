@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "debug": "MODE=debug react-scripts start"
+    "debug": "REACT_APP_MODE=development react-scripts start"
   },
   "browserslist": [
     ">0.2%",
