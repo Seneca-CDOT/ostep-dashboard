@@ -11,9 +11,8 @@ class Github extends Container {
 
   render() {
     return (
-      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
         <Panel
-          title={this.constructor.name}
+          title={COMPONENT_NAME}
           refreshData={this.refreshData}
         >
           {this.state.data &&
@@ -37,7 +36,6 @@ class Github extends Container {
             })
           }
         </Panel>
-      </div>
     );
   }
 }

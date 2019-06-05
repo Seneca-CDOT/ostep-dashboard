@@ -71,7 +71,6 @@ class Osteppy extends Container {
     }
 
     return (
-      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
         <Panel
           title={this.constructor.name}
           refreshData={this.refreshData}
@@ -88,7 +87,6 @@ class Osteppy extends Container {
             </div>
           }
         </Panel>
-      </div>
     );
   }
 }

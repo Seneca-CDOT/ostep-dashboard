@@ -21,7 +21,6 @@ class Infrastructure extends Container {
     }
 
     return (
-      <div className={this.constructor.name.toLocaleLowerCase()+ '-panel panel'}>
         <Panel
           title={this.constructor.name}
           refreshData={this.refreshData}
@@ -69,7 +68,6 @@ class Infrastructure extends Container {
             </div>
           }
         </Panel>
-      </div>
     );
   };
 }

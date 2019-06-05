@@ -41,7 +41,6 @@ class Schedule extends React.Component {
 
   render() {
     return (
-      <div className={this.constructor.name.toLocaleLowerCase() + '-panel panel'}>
         <Panel
           title={this.constructor.name}
           refreshData={this.refreshData}
@@ -59,7 +58,6 @@ class Schedule extends React.Component {
             </div>
           }
         </Panel>
-      </div>
     );
   }
 }
