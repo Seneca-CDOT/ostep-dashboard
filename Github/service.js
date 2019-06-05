@@ -31,7 +31,7 @@ module.exports.getRepos = () => {
       (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
-          reject(new Error(`Unable to get repos.`));
+          reject(new Error('Unable to get repos.'));
         } else {
           const reposX = JSON.parse(data);
           reposX.forEach(repo => {
@@ -68,7 +68,7 @@ const getCommits = commitObject => {
       (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
-          reject(new Error(`Unable to get repos.`));
+          reject(new Error('Unable to get commits.'));
         } else {
           JSON.parse(data).forEach(singleCommit => {
             const { commit: { author } } = singleCommit;
@@ -103,7 +103,7 @@ const getBranches = branchObject => {
       }, (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
-          reject(new Error(`Unable to get repos.`));
+          reject(new Error('Unable to get branches.'));
         } else {
           const listOfBranches = {
             repo: branchObject.name,
