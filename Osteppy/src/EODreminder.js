@@ -28,7 +28,7 @@ const channelIDs = {
   poftadeh2: 'U8WLH35U2',
   obelavina: 'D5B49TX6D',
   rkiguru: 'UJJ026KRC',
-  'stuart.crust': 'UJJ026KRC',
+  'stuart.crust': 'UJFPKA3A4',
   vklymenko: 'UJHG7GYHM'
 };
 const cpCommand = `cp ${__dirname}/RAs.txt ${__dirname}/sleepyRAs.txt`;
