@@ -230,6 +230,15 @@ GITHUB PANEL
   padding-bottom: 0.7em;
 }
 
+.github-entry span {
+  white-space: pre;
+}
+
+.github-entry-details {
+  display: flex;
+  align-items: center;
+}
+
 .github-name {
   margin-left: -0.4em;
   color: #e74c3c;
@@ -246,7 +255,6 @@ GITHUB PANEL
   height: 1.5em;
   width: 1.5em;
   margin-right: 1em;
-  margin-bottom: -0.2em;
 }
 
 .github-link:hover {
