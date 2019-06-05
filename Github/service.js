@@ -29,8 +29,8 @@ module.exports.getRepos = () => {
         headers: { 'User-Agent': 'request' },
       },
       (err, res, data) => {
-        if (err) {
-          console.log('Error:', err);
+        if (res.statusCode !== 200) {
+          console.log('Error:', res.statusMessage);
           reject(new Error(`Unable to get repos.`));
         } else {
           const reposX = JSON.parse(data);
@@ -66,9 +66,9 @@ const getCommits = commitObject => {
         headers: { 'User-Agent': 'request' },
       },
       (err, res, data) => {
-        if (err) {
-          console.log('Error:', err);
-          reject(err);
+        if (res.statusCode !== 200) {
+          console.log('Error:', res.statusMessage);
+          reject(new Error(`Unable to get repos.`));
         } else {
           JSON.parse(data).forEach(singleCommit => {
             const { commit: { author } } = singleCommit;
@@ -101,9 +101,9 @@ const getBranches = branchObject => {
         url: branchObject.url,
         headers: { 'User-Agent': 'request' },
       }, (err, res, data) => {
-        if (err) {
-          console.log('Error:', err);
-          reject(err);
+        if (res.statusCode !== 200) {
+          console.log('Error:', res.statusMessage);
+          reject(new Error(`Unable to get repos.`));
         } else {
           const listOfBranches = {
             repo: branchObject.name,
