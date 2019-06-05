@@ -71,20 +71,23 @@ const getCommits = commitObject => {
           reject(err);
         } else {
           JSON.parse(data).forEach(singleCommit => {
-            const { commit: { author } } = singleCommit;
-
+            const {
+              commit: { author },
+            } = singleCommit;
             if (today - new Date(author.date) < recency) {
               const time = new Date(author.date);
-              singleCommit.author = {
-                name: author.name,
-                date: time.toLocaleString('en-US', {
-                  timeZone: 'America/Toronto',
-                }),
+              const simplifiedCommit = {
+                author: {
+                  name: author.name,
+                  date: time.toLocaleString('en-US', {
+                    timeZone: 'America/Toronto',
+                  }),
+                },
+                message: singleCommit.commit.message,
+                repoName: commitObject.repo,
+                branchName: commitObject.br.name,
               };
-              singleCommit.message = singleCommit.commit.message;
-              singleCommit.repoName = commitObject.repo;
-              singleCommit.branchName = commitObject.br.name;
-              recentCommits.push(singleCommit);
+              recentCommits.push(simplifiedCommit);
             }
           });
           resolve();
@@ -141,8 +144,8 @@ module.exports.getAllCommitsTogether = () => {
           .then(() => {
             recentCommits.sort((firstCommit, secondCommit) => {
               return (
-                new Date(secondCommit.commit.author.date) -
-                new Date(firstCommit.commit.author.date)
+                new Date(secondCommit.author.date) -
+                new Date(firstCommit.author.date)
               );
             });
             resolve(recentCommits);
