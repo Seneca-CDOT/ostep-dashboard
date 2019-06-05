@@ -42,9 +42,9 @@ app.get('/', (req, res) => {
           res.json(commits);
         })
         .catch(err => {
-          res.send(err);
+          res.status(err.statusCode).send(err.statusMessage);
         });
-    });
+    }).catch(err => console.log(err));
   } else {
     res.json(storedData);
   }
