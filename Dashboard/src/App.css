@@ -245,10 +245,15 @@ GITHUB PANEL
   font-weight: 700;
 }
 
-.github-repo {
+.span-emphasis {
   display: inline-block;
   color: #3498db;
   font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 16rem;
+  vertical-align: bottom;
 }
 
 .github-icon {
@@ -656,14 +661,6 @@ RESPONSIVE DESIGN
 
   .refresh {
     width: 2.3em;
-  }
-
-  .github-repo {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 16rem;
-    vertical-align: bottom;
   }
 
   .presenter-row {

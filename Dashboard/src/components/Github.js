@@ -30,7 +30,7 @@ class Github extends Container {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                    <span className="github-repo github-link"> {`${entry.repoName}/${entry.branchName}:`}</span>
+                    <span className="span-emphasis github-link"> {`${entry.repoName}/${entry.branchName}:`}</span>
                     </a>
                   </div>
                   <p className="github-message">{`"${entry.message}"`} <span className="github-time">{` (${commitDate})`}</span></p>
