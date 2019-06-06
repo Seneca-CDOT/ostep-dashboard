@@ -12,16 +12,12 @@ const request = require('request');
 
 const key = process.env.GITHUB_TOKEN;
 const repoUrl = `https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=${key}`;
-let branchUrls = [];
-let recentCommits = [];
 
 const today = new Date();
 const recency = 24 * 60 * 60 * 1000;
 
 module.exports.getRepos = () => {
-  branchUrls = [];
-  recentCommits = [];
-
+  const branchUrls = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
@@ -41,7 +37,7 @@ module.exports.getRepos = () => {
             );
             repo.branches_url = `${
               repo.branches_url
-              }?per_page=100&access_token=${key}`;
+            }?per_page=100&access_token=${key}`;
             if (today - new Date(repo.pushed_at) < recency) {
               branchUrls.push({
                 name: repo.name,
@@ -49,7 +45,7 @@ module.exports.getRepos = () => {
               });
             }
           });
-          resolve();
+          resolve(branchUrls);
         }
       },
     );
@@ -57,12 +53,14 @@ module.exports.getRepos = () => {
 };
 
 const getCommits = commitObject => {
+  let simplifiedCommit = {};
+  const commitsPerBranch = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
         url: `https://api.github.com/repos/Seneca-CDOT/${
           commitObject.repo
-          }/commits?sha=${commitObject.br.sha}&per_page=100&access_token=${key}`,
+        }/commits?sha=${commitObject.br.sha}&per_page=100&access_token=${key}`,
         headers: { 'User-Agent': 'request' },
       },
       (err, res, data) => {
@@ -76,7 +74,7 @@ const getCommits = commitObject => {
             } = singleCommit;
             if (today - new Date(author.date) < recency) {
               const time = new Date(author.date);
-              const simplifiedCommit = {
+              simplifiedCommit = {
                 author: {
                   name: author.name,
                   date: time.toLocaleString('en-US', {
@@ -87,10 +85,10 @@ const getCommits = commitObject => {
                 repoName: commitObject.repo,
                 branchName: commitObject.br.name,
               };
-              recentCommits.push(simplifiedCommit);
+              commitsPerBranch.push(simplifiedCommit);
             }
           });
-          resolve();
+          resolve(commitsPerBranch);
         }
       },
     );
@@ -126,10 +124,11 @@ const getBranches = branchObject => {
   });
 };
 
-module.exports.getAllCommitsTogether = () => {
+module.exports.getAllCommitsTogether = branches => {
+  const arrayToSendBack = [];
   return new Promise((resolve, reject) => {
     let promises = [];
-    branchUrls.forEach(branchUrl => {
+    branches.forEach(branchUrl => {
       promises.push(getBranches(branchUrl));
     });
     Promise.all(promises)
@@ -141,14 +140,21 @@ module.exports.getAllCommitsTogether = () => {
           });
         });
         Promise.all(promises)
-          .then(() => {
-            recentCommits.sort((firstCommit, secondCommit) => {
+          .then(arraysOfCommits => {
+            arraysOfCommits.forEach(arrayOfCommits => {
+              if (arrayOfCommits.length !== 0) {
+                arrayOfCommits.forEach(commit => {
+                  arrayToSendBack.push(commit);
+                });
+              }
+            });
+            arrayToSendBack.sort((firstCommit, secondCommit) => {
               return (
                 new Date(secondCommit.author.date) -
                 new Date(firstCommit.author.date)
               );
             });
-            resolve(recentCommits);
+            resolve(arrayToSendBack);
           })
           .catch(err => {
             console.log(err);
