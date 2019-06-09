@@ -230,23 +230,36 @@ GITHUB PANEL
   padding-bottom: 0.7em;
 }
 
+.github-entry span {
+  white-space: pre;
+}
+
+.github-entry-details {
+  display: flex;
+  align-items: center;
+}
+
 .github-name {
   margin-left: -0.4em;
   color: #e74c3c;
   font-weight: 700;
 }
 
-.github-repo {
+.span-emphasis {
   display: inline-block;
   color: #3498db;
   font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 16rem;
+  vertical-align: bottom;
 }
 
 .github-icon {
   height: 1.5em;
   width: 1.5em;
   margin-right: 1em;
-  margin-bottom: -0.2em;
 }
 
 .github-link:hover {
@@ -648,14 +661,6 @@ RESPONSIVE DESIGN
 
   .refresh {
     width: 2.3em;
-  }
-
-  .github-repo {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 16rem;
-    vertical-align: bottom;
   }
 
   .presenter-row {

@@ -21,16 +21,18 @@ class Github extends Container {
               const commitDate = moment(entry.author.date).format("MMM DD@HH:mm");
               return (
                 <div key={entry + i} className="github-entry">
-                  <img className="github-icon" src={github} alt="Github icon" />
-                  <span className="github-name" >{entry.author.name}</span>
-                  <span> committed to </span>
-                  <a 
-                    href={`https://github.com/Seneca-CDOT/${entry.repoName}/tree/${entry.branchName}`}  
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                  <span className="github-repo github-link"> {` ${entry.repoName}/${entry.branchName}:`}</span>
-                  </a>
+                  <div className="github-entry-details">
+                    <img className="github-icon" src={github} alt="Github icon" />
+                    <span className="github-name" >{entry.author.name}</span>
+                    <span> committed to </span>
+                    <a 
+                      href={`https://github.com/Seneca-CDOT/${entry.repoName}/tree/${entry.branchName}`}  
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                    <span className="span-emphasis github-link"> {`${entry.repoName}/${entry.branchName}:`}</span>
+                    </a>
+                  </div>
                   <p className="github-message">{`"${entry.message}"`} <span className="github-time">{` (${commitDate})`}</span></p>
                  
                 </div>
