@@ -56,25 +56,25 @@ export default {
   },
   meetings: { rows: [] },
   infrastructure: {
-    Workstations: [
-      { Host: 'one', IPAddress: 'foo.bar', Status: 'up' },
-      { Host: 'two', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'three', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'four', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'five', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'six', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'seven', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'eight', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'nine', IPAddress: 'baz.foo.bar', Status: 'up' },
+    workstations: [
+      { host: 'one', ipAddress: 'foo.bar', status: 'up' },
+      { host: 'two', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'three', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'four', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'five', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'six', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'seven', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'eight', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'nine', ipAddress: 'baz.foo.bar', status: 'up' },
       {
-        Host: 'ten',
-        IPAddress: 'switzerland.foo.bar',
-        Status: 'down'
+        host: 'ten',
+        ipAddress: 'switzerland.foo.bar',
+        status: 'down'
       },
-      { Host: 'eleven', IPAddress: 'japan.foo.bar', Status: 'up' },
-      { Host: 'twelve', IPAddress: 'ukraine.foo.bar', Status: 'down' }
+      { host: 'eleven', ipAddress: 'japan.foo.bar', status: 'up' },
+      { host: 'twelve', ipAddress: 'ukraine.foo.bar', status: 'down' }
     ],
-    DNS: [
+    dns: [
       {
         domain: 'foo.bar.',
         type: 'NS',
@@ -90,74 +90,74 @@ export default {
         value: 'baz.foo.bar.'
       }
     ],
-    Servers: [
+    servers: [
       {
-        Description: 'Server',
-        Name: 'first',
-        Domain: 'baz.foo.bar',
-        Port: '2200',
-        Status: 'up'
+        description: 'Server',
+        name: 'first',
+        domain: 'baz.foo.bar',
+        port: '2200',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'second',
-        Domain: 'baz.foo.bar',
-        Port: '2202',
-        Status: 'up'
+        description: 'Server',
+        name: 'second',
+        domain: 'baz.foo.bar',
+        port: '2202',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'third',
-        Domain: 'baz.foo.bar',
-        Port: '2205',
-        Status: 'up'
+        description: 'Server',
+        name: 'third',
+        domain: 'baz.foo.bar',
+        port: '2205',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'fourth',
-        Domain: 'baz.foo.bar',
-        Port: '22',
-        Status: 'up'
+        description: 'Server',
+        name: 'fourth',
+        domain: 'baz.foo.bar',
+        port: '22',
+        status: 'up'
       }
     ]
   },
   github: [
     {
       author: { name: 'Alpha Zero', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'voltage-fluct-57',
+      reponame: 'ostep-dashboard',
+      branchname: 'voltage-fluct-57',
       message: 'Add debug feature to dashboard.'
     },
     {
       author: { name: 'Deep Blue', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'issue-57',
+      reponame: 'ostep-dashboard',
+      branchname: 'issue-57',
       message: 'refactor: Math.min for Ellipse tool'
     },
     {
       author: { name: 'Boris Spassky', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'debug-frontend',
+      reponame: 'ostep-dashboard',
+      branchname: 'debug-frontend',
       message:
         'Merge pull request #64 from issues/63-add-missing-imports Add missing imports to EODList.js'
     },
     {
       author: { name: 'Gary Kasparov', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'voltage-fluct-57',
+      reponame: 'ostep-dashboard',
+      branchname: 'voltage-fluct-57',
       message:
         'add cookie validation utilities -isCookie(cookie) -validateCookie add UnhandledPromptBehaviourValues add RunScriptValues add isBrowserOptionse'
     },
     {
       author: { name: 'Magnus Carlsen', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'voltage-fluct-57',
+      reponame: 'ostep-dashboard',
+      branchname: 'voltage-fluct-57',
       message: 'Delegated calculations for load updates to individual assets'
     },
     {
       author: { name: 'Some Random RA', date: '6/4/2019, 6:24:40 PM' },
-      repoName: 'ostep-dashboard',
-      branchName: 'voltage-fluct-57',
+      reponame: 'ostep-dashboard',
+      branchname: 'voltage-fluct-57',
       message: 'Added state __str__ overload for assets'
     }
   ]

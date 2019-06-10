@@ -10,8 +10,8 @@
   "author": "Arif",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.3",
-    "node-cmd": "^3.0.0",
     "node-dig-dns": "^0.2.9",
     "ping": "^0.2.2"
   }
