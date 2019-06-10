@@ -1,0 +1,23 @@
+.refresh-container {
+  background-color: #c0392b;
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.01rem solid #c0392b; // changed from em to rem, need to check
+  transition: all 0.6s;
+
+  &:hover {
+    background-color: #c25246;
+    border-bottom: 0.01rem solid #c25246; // changed from em to rem, need to check
+    cursor: pointer;
+
+    .refresh {
+      animation: rotate 1.5s linear infinite;
+    }
+  }
+}
+
+.refresh {
+  width: 2.5rem;
+}

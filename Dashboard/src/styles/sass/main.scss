@@ -6,5 +6,11 @@
 
 @import 'components/header';
 @import 'components/scrollbars';
+@import 'components/panel';
+@import 'components/refreshContainer';
+@import 'components/githubPanel';
 
 @import 'layout/appContent';
+@import 'layout/mainContent';
+
+@import 'animations/animations';

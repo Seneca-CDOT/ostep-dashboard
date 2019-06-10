@@ -1,0 +1,56 @@
+.github {
+  &-entry {
+    padding-bottom: 0.7em;
+
+    span {
+      white-space: pre;
+    }
+
+    &-details {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-name {
+    margin-left: -0.4em;
+    color: #e74c3c;
+    font-weight: 700;
+  }
+
+  &-icon {
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 1em;
+  }
+  &-icon {
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 1em;
+  }
+  &-link:hover {
+    color: #2980b9;
+  }
+
+  &-message {
+    margin-left: 2em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &-time {
+    color: #2ecc71;
+    display: inline-block;
+  }
+}
+
+.span-emphasis {
+  display: inline-block;
+  color: #3498db;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 16rem;
+  vertical-align: bottom;
+}
