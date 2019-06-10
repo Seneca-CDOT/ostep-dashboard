@@ -1,0 +1,28 @@
+body {
+  font-family: 'Lato', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 230%;
+}
+
+/* 
+====================================
+HEADER
+==================================== 
+*/
+
+.lamp {
+  &-content {
+    font-size: 1.5rem;
+  }
+
+  &-text {
+    font-weight: 400;
+    letter-spacing: 0.3rem;
+  }
+}
+
+.title-text {
+  letter-spacing: 0.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import './styles/css/style.css';
 import './App.css';
 import Service from './Service.js';
 import Infrastructure from './components/Infrastructure'
