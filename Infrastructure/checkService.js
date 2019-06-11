@@ -8,7 +8,7 @@ const {
   sshUser
 } = require('./config.js');
 
-const DIG_ARG = 'ns';
+const DIG_ARGS = ['ns'];
 const SSH_TIMEOUT = 3;
 
 const pingWorkstation = workstation => {
@@ -47,7 +47,7 @@ const checkServers = () =>
 
 const checkDNS = async () => {
   try {
-    const digResult = await dig([dnsQueryDomain, DIG_ARG]);
+    const digResult = await dig([dnsQueryDomain, ...DIG_ARGS]);
     return digResult.answer;
   } catch (error) {
     return error;
