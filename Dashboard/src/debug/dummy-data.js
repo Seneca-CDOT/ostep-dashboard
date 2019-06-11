@@ -124,40 +124,40 @@ export default {
   github: [
     {
       author: { name: 'Alpha Zero', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'voltage-fluct-57',
+      repoName: 'ostep-dashboard',
+      branchName: 'voltage-fluct-57',
       message: 'Add debug feature to dashboard.'
     },
     {
       author: { name: 'Deep Blue', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'issue-57',
+      repoName: 'ostep-dashboard',
+      branchName: 'issue-57',
       message: 'refactor: Math.min for Ellipse tool'
     },
     {
       author: { name: 'Boris Spassky', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'debug-frontend',
+      repoName: 'ostep-dashboard',
+      branchName: 'debug-frontend',
       message:
         'Merge pull request #64 from issues/63-add-missing-imports Add missing imports to EODList.js'
     },
     {
       author: { name: 'Gary Kasparov', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'voltage-fluct-57',
+      repoName: 'ostep-dashboard',
+      branchName: 'voltage-fluct-57',
       message:
         'add cookie validation utilities -isCookie(cookie) -validateCookie add UnhandledPromptBehaviourValues add RunScriptValues add isBrowserOptionse'
     },
     {
       author: { name: 'Magnus Carlsen', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'voltage-fluct-57',
+      repoName: 'ostep-dashboard',
+      branchName: 'voltage-fluct-57',
       message: 'Delegated calculations for load updates to individual assets'
     },
     {
       author: { name: 'Some Random RA', date: '6/4/2019, 6:24:40 PM' },
-      reponame: 'ostep-dashboard',
-      branchname: 'voltage-fluct-57',
+      repoName: 'ostep-dashboard',
+      branchName: 'voltage-fluct-57',
       message: 'Added state __str__ overload for assets'
     }
   ]
