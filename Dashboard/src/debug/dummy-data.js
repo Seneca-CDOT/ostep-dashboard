@@ -56,25 +56,25 @@ export default {
   },
   meetings: { rows: [] },
   infrastructure: {
-    Workstations: [
-      { Host: 'one', IPAddress: 'foo.bar', Status: 'up' },
-      { Host: 'two', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'three', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'four', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'five', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'six', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'seven', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'eight', IPAddress: 'baz.foo.bar', Status: 'up' },
-      { Host: 'nine', IPAddress: 'baz.foo.bar', Status: 'up' },
+    workstations: [
+      { host: 'one', address: 'foo.bar', status: 'up' },
+      { host: 'two', address: 'baz.foo.bar', status: 'up' },
+      { host: 'three', address: 'baz.foo.bar', status: 'up' },
+      { host: 'four', address: 'baz.foo.bar', status: 'up' },
+      { host: 'five', address: 'baz.foo.bar', status: 'up' },
+      { host: 'six', address: 'baz.foo.bar', status: 'up' },
+      { host: 'seven', address: 'baz.foo.bar', status: 'up' },
+      { host: 'eight', address: 'baz.foo.bar', status: 'up' },
+      { host: 'nine', address: 'baz.foo.bar', status: 'up' },
       {
-        Host: 'ten',
-        IPAddress: 'switzerland.foo.bar',
-        Status: 'down'
+        host: 'ten',
+        address: 'switzerland.foo.bar',
+        status: 'down'
       },
-      { Host: 'eleven', IPAddress: 'japan.foo.bar', Status: 'up' },
-      { Host: 'twelve', IPAddress: 'ukraine.foo.bar', Status: 'down' }
+      { host: 'eleven', address: 'japan.foo.bar', status: 'up' },
+      { host: 'twelve', address: 'ukraine.foo.bar', status: 'down' }
     ],
-    DNS: [
+    dns: [
       {
         domain: 'foo.bar.',
         type: 'NS',
@@ -90,34 +90,34 @@ export default {
         value: 'baz.foo.bar.'
       }
     ],
-    Servers: [
+    servers: [
       {
-        Description: 'Server',
-        Name: 'first',
-        Domain: 'baz.foo.bar',
-        Port: '2200',
-        Status: 'up'
+        description: 'Server',
+        name: 'first',
+        domain: 'baz.foo.bar',
+        port: '2200',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'second',
-        Domain: 'baz.foo.bar',
-        Port: '2202',
-        Status: 'up'
+        description: 'Server',
+        name: 'second',
+        domain: 'baz.foo.bar',
+        port: '2202',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'third',
-        Domain: 'baz.foo.bar',
-        Port: '2205',
-        Status: 'up'
+        description: 'Server',
+        name: 'third',
+        domain: 'baz.foo.bar',
+        port: '2205',
+        status: 'up'
       },
       {
-        Description: 'Server',
-        Name: 'fourth',
-        Domain: 'baz.foo.bar',
-        Port: '22',
-        Status: 'up'
+        description: 'Server',
+        name: 'fourth',
+        domain: 'baz.foo.bar',
+        port: '22',
+        status: 'up'
       }
     ]
   },
