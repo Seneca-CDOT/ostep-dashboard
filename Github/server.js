@@ -30,21 +30,24 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
   if (!isTimedOut) {
-    data.getRepos().then(() => {
-      data
-        .getAllCommitsTogether()
-        .then(commits => {
-          storedData = commits;
-          isTimedOut = true;
-          setTimeout(() => {
-            isTimedOut = false;
-          }, TIMEOUT_SECONDS * 1000);
-          res.json(commits);
-        })
-        .catch(err => {
-          res.send(err);
-        });
-    });
+    data
+      .getRepos()
+      .then(branches => {
+        data
+          .getAllCommitsTogether(branches)
+          .then(commits => {
+            storedData = commits;
+            isTimedOut = true;
+            setTimeout(() => {
+              isTimedOut = false;
+            }, TIMEOUT_SECONDS * 1000);
+            res.json(commits);
+          })
+          .catch(err => {
+            res.status(err.statusCode).send(err.statusMessage);
+          });
+      })
+      .catch(err => console.log(err));
   } else {
     res.json(storedData);
   }

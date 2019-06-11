@@ -4,16 +4,31 @@
   "description": "Slack micro-service",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"babel-node src/server.js --presets es2015,stage-0\"",
-    "build": "babel src -s -D -d dist --presets es2015,stage-0",
-    "start": "node dist",
+    "dev": "nodemon -w src --exec \"babel-node src/server.js\"",
+    "build": "babel src --copy-files --source-maps=true --out-dir dist",
+    "start": "node dist/server.js",
     "prestart": "npm run -s build",
     "test": "eslint",
     "lint": "eslint ./src --fix"
   },
   "author": "OSTEP Team",
   "license": "MIT",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          },
+          "useBuiltIns": "usage",
+          "corejs": 3
+        }
+      ]
+    ]
+  },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@slack/client": "^4.11.0",
     "@slack/events-api": "^2.1.1",
     "axios": "^0.18.0",
@@ -27,10 +42,10 @@
     "resource-router-middleware": "^0.6.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-core": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",

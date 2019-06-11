@@ -26,9 +26,10 @@ const channelIDs = {
   'josue.quilon-barrios': 'UF88F1XNG',
   mroncancio19: 'UF90J8E6Q',
   poftadeh2: 'U8WLH35U2',
-  ylei11: 'UF8DGNTSP',
   obelavina: 'D5B49TX6D',
-  dray1: 'UGNN3DF2P',
+  rkiguru: 'UJJ026KRC',
+  'stuart.crust': 'UJFPKA3A4',
+  vklymenko: 'UJHG7GYHM'
 };
 const cpCommand = `cp ${__dirname}/RAs.txt ${__dirname}/sleepyRAs.txt`;
 const token = process.env.SLACK_TOKEN;
@@ -43,7 +44,9 @@ const sendEOD = (RA, message) => {
     }
   });
 };
-sendEOD ("naiuhz", "EOD Reminder test passed! :robot_face:");
+
+
+sendEOD ("naiuhz", "OSTEPPY Rebooted! :robot_face:");
 
 // Exported function used in slash command
 module.exports.sendDM = (RA, message) => {
@@ -54,16 +57,16 @@ module.exports.sendDM = (RA, message) => {
 const resetRAList = () => {
   execSync(cpCommand);
 };
-// resetRAList();
+
 
 // Reminder schedule
 // Josue: 4PM, 9PM
 // Miguel: 9PM, 8:30AM, 4:30PM
-// Daniel: 9PM
 // Ian: 9PM, 4:30PM
 // Pouya: 10PM
-// Yan: 9:30PM, 4:55PM
 // Olga: 8:30PM
+// Stuart: 9PM
+// Raymond: 9AM
 
 // Checks the time to send custom EOD reminders
 const checkTime = (clock) => {
@@ -71,19 +74,23 @@ const checkTime = (clock) => {
     if (clock.minute === 0) {
       if (clock.hour === 10 && clock.weekday <= 5) {
         resetRAList();
+      } else if (clock.hour === 9 && clock.weekday <= 5) {
+        sendEOD('rkiguru', "Oi, it's 9:30AM baka-aniki! You forgot to submit yesterday's EOD! Go submit one right now! :pout:");
       } else if (clock.hour === 16 && clock.weekday <= 5) {
         sendEOD('josue.quilon-barrios', "It's 4PM Josue! Try to do your EOD before you leave today! :robot_face:");
       } else if (clock.hour === 21 && clock.weekday <= 5) {
         sendEOD('mroncancio19', "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:");
         sendEOD('josue.quilon-barrios', "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:");
-        sendEOD('dray1', "It's 9PM sleepy head! Please remember to do your EOD! :robot_face:");
         sendEOD('naiuhz', "It's 9PM sleepy head! Please remember to do your EOD! :ayaya:");
-      } else if (clock.hour === 22 && (clock.weekday === 2 || clock.weekday === 3
-        || clock.weekday === 5)) {
-        sendEOD('poftadeh2', "It's 10PM sleepy head! Please remember to do your EOD! :pouya:");
+        sendEOD('stuart.crust', "Tis 9pm sleepy heid! Please min' tae dae yer EOD! :wee_lass:");
+        if (clock.weekday === 1 || clock.weekday === 5) {
+          sendEOD('vklymenko', "It's 9PM товариш! Please remember to do your EOD! :natalia_chan:");
+        }
+      } else if (clock.hour === 22 && clock.weekday <= 5) {
+        sendEOD('poftadeh2', "It's 10PM BAKA! Please remember to do your EOD! :okotta_emi:");
       } else if (clock.hour === 0) {
-        sendEOD('naiuhz', ':clock12: Oyasuminasai niichan :ayaya:');
-        sendEOD('ylei11', ':clock12: Oyasuminasai Yan-niichan :ayaya:');
+        web.chat.postMessage({ channel: channelIDs['naiuhz'], text: ':clock12: Oyasuminasai niichan :ayaya:' });
+        web.chat.postMessage({ channel: channelIDs['rkiguru'], text: ':clock12: Oyasumi b-baka-aniki :pout:' });
       }
     } else if (clock.minute === 30) {
       if (clock.hour === 9 && clock.weekday <= 5) {
@@ -91,14 +98,8 @@ const checkTime = (clock) => {
       } else if (clock.hour === 16 && clock.weekday <= 5) {
         sendEOD('mroncancio19', "It's 4:30PM Miguel! Try to do your EOD before you leave today! :robot_face:");
         sendEOD('naiuhz', "It's 4:30PM Ian! Try to do your EOD before you leave today! :ayaya:");
-      } else if (clock.hour === 21 && clock.weekday <= 5) {
-        sendEOD('ylei11', "It's 9:30PM Yan-nii! Please remember to do your EOD! :ayaya:");
-      } else if (clock.hour === 21 && clock.weekday <= 5) {
+      } else if (clock.hour === 20 && clock.weekday <= 5) {
         sendEOD('obelavina', "It's 8:30PM товарищ! Please remember to do your EOD! :olga:");
-      }
-    } else if (clock.minute === 55) {
-      if (clock.hour === 16 && clock.weekday <= 5) {
-        sendEOD('ylei11', "It's 4:55PM Yan-nii! Try to do your EOD before you leave today! :ayaya:");
       }
     }
   }
