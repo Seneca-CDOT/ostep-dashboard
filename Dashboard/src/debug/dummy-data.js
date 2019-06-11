@@ -57,22 +57,22 @@ export default {
   meetings: { rows: [] },
   infrastructure: {
     workstations: [
-      { host: 'one', ipAddress: 'foo.bar', status: 'up' },
-      { host: 'two', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'three', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'four', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'five', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'six', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'seven', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'eight', ipAddress: 'baz.foo.bar', status: 'up' },
-      { host: 'nine', ipAddress: 'baz.foo.bar', status: 'up' },
+      { host: 'one', address: 'foo.bar', status: 'up' },
+      { host: 'two', address: 'baz.foo.bar', status: 'up' },
+      { host: 'three', address: 'baz.foo.bar', status: 'up' },
+      { host: 'four', address: 'baz.foo.bar', status: 'up' },
+      { host: 'five', address: 'baz.foo.bar', status: 'up' },
+      { host: 'six', address: 'baz.foo.bar', status: 'up' },
+      { host: 'seven', address: 'baz.foo.bar', status: 'up' },
+      { host: 'eight', address: 'baz.foo.bar', status: 'up' },
+      { host: 'nine', address: 'baz.foo.bar', status: 'up' },
       {
         host: 'ten',
-        ipAddress: 'switzerland.foo.bar',
+        address: 'switzerland.foo.bar',
         status: 'down'
       },
-      { host: 'eleven', ipAddress: 'japan.foo.bar', status: 'up' },
-      { host: 'twelve', ipAddress: 'ukraine.foo.bar', status: 'down' }
+      { host: 'eleven', address: 'japan.foo.bar', status: 'up' },
+      { host: 'twelve', address: 'ukraine.foo.bar', status: 'down' }
     ],
     dns: [
       {
