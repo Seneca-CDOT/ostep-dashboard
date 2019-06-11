@@ -26,21 +26,21 @@ module.exports = {
     }
   ],
   workstations: [
-    { host: 'bbb', ipAddress: 'bbb.cdot.systems' },
-    { host: 'vega', ipAddress: 'vega.cdot.systems' },
-    { host: 'rob', ipAddress: 'rob.cdot.systems' },
-    { host: 'ps', ipAddress: 'ps.cdot.systems' },
-    { host: 'italy', ipAddress: 'italy.cdot.systems' },
-    { host: 'canada', ipAddress: 'canada.cdot.systems' },
-    { host: 'narnia', ipAddress: 'narnia.cdot.systems' },
-    { host: 'spain', ipAddress: 'spain.cdot.systems' },
-    { host: 'rome', ipAddress: 'rome.cdot.systems' },
+    { host: 'bbb', address: 'bbb.cdot.systems' },
+    { host: 'vega', address: 'vega.cdot.systems' },
+    { host: 'rob', address: 'rob.cdot.systems' },
+    { host: 'ps', address: 'ps.cdot.systems' },
+    { host: 'italy', address: 'italy.cdot.systems' },
+    { host: 'canada', address: 'canada.cdot.systems' },
+    { host: 'narnia', address: 'narnia.cdot.systems' },
+    { host: 'spain', address: 'spain.cdot.systems' },
+    { host: 'rome', address: 'rome.cdot.systems' },
     {
       host: 'switzerland',
-      ipAddress: 'switzerland.cdot.systems'
+      address: 'switzerland.cdot.systems'
     },
-    { host: 'japan', ipAddress: 'japan.cdot.systems' },
-    { host: 'ukraine', ipAddress: 'ukraine.cdot.systems' }
+    { host: 'japan', address: 'japan.cdot.systems' },
+    { host: 'ukraine', address: 'ukraine.cdot.systems' }
   ],
   dnsQueryDomain: 'cdot.systems',
   sshUser: 'arif'

@@ -13,7 +13,7 @@ const SSH_TIMEOUT = 3;
 
 const pingWorkstation = workstation => {
   return new Promise(resolve => {
-    ping.sys.probe(workstation.ipAddress, isAlive => {
+    ping.sys.probe(workstation.address, isAlive => {
       workstation.status = isAlive ? 'up' : 'down';
       resolve(workstation);
     });
