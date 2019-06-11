@@ -11,13 +11,10 @@ const {
 const DIG_ARGS = ['ns'];
 const SSH_TIMEOUT = 3;
 
-const pingWorkstation = workstation => {
-  return new Promise(resolve => {
-    ping.sys.probe(workstation.address, isAlive => {
-      workstation.status = isAlive ? 'up' : 'down';
-      resolve(workstation);
-    });
-  });
+const pingWorkstation = async workstation => {
+  const { alive } = await ping.promise.probe(workstation.address);
+  workstation.status = alive ? 'up' : 'down';
+  return workstation;
 };
 
 const sshIntoServer = server => {
