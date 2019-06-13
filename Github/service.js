@@ -236,10 +236,9 @@ module.exports.getFilteredIssues = repos => {
             });
           }
         });
-        issues.sort((earlyIssue, laterIssue) => {
+        issues.sort((firstItem, secondItem) => {
           return (
-            new Date(laterIssue.created.date) -
-            new Date(earlyIssue.created.date)
+            new Date(secondItem.created.date) - new Date(firstItem.created.date)
           );
         });
         resolve(issues);
