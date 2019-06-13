@@ -183,12 +183,12 @@ const getIssues = repo => {
         } else {
           const filteredIssues = [];
           JSON.parse(data).forEach(issue => {
-            const assignees = [];
+            const assigs = [];
             if (issue.assignees.length !== 0) {
-              issue.assignees.forEach(asgn => {
-                assignees.push({
-                  name: asgn.login,
-                  avatar: asgn.avatar_url,
+              issue.assignees.forEach(assignee => {
+                assigs.push({
+                  name: assignee.login,
+                  avatar: assignee.avatar_url,
                 });
               });
             }
@@ -199,11 +199,11 @@ const getIssues = repo => {
                 issue.repository_url.length,
               ),
               number: issue.number,
-              title: issue.html_url.title,
+              title: issue.title,
               description: issue.body,
               label: 'Help Wanted',
               state: issue.state,
-              assignee: assignees,
+              assignees: assigs,
               milestone: issue.milestone,
               created: new Date(issue.created_at).toLocaleString('en-US', {
                 timeZone: 'America/Toronto',
