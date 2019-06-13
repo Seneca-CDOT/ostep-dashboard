@@ -14,9 +14,9 @@ const key = process.env.GITHUB_TOKEN;
 const repoUrl = `https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=${key}`;
 
 const today = new Date();
-const recency = 24 * 60 * 60 * 1000;
+const day = 24 * 60 * 60 * 1000;
 
-module.exports.getRepos = () => {
+module.exports.getRepos = recency => {
   const branchUrls = [];
   return new Promise((resolve, reject) => {
     request.get(
@@ -72,7 +72,7 @@ const getCommits = commitObject => {
             const {
               commit: { author },
             } = singleCommit;
-            if (today - new Date(author.date) < recency) {
+            if (today - new Date(author.date) < day) {
               const time = new Date(author.date);
               simplifiedCommit = {
                 author: {
@@ -101,7 +101,8 @@ const getBranches = branchObject => {
       {
         url: branchObject.url,
         headers: { 'User-Agent': 'request' },
-      }, (err, res, data) => {
+      },
+      (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
           reject(new Error('Unable to get branches.'));
@@ -163,6 +164,88 @@ module.exports.getAllCommitsTogether = branches => {
       })
       .catch(err => {
         console.log(`Error: ${err}`);
+        reject(err);
+      });
+  });
+};
+
+const getIssues = repo => {
+  return new Promise((resolve, reject) => {
+    request.get(
+      {
+        url: `https://api.github.com/repos/Seneca-CDOT/${repo}/issues?labels=help+wanted&access_token=${key}`,
+        headers: { 'User-Agent': 'request' },
+      },
+      (err, res, data) => {
+        if (res.statusCode !== 200) {
+          console.log('Error:', res.statusMessage);
+          reject(new Error('Unable to get repos.'));
+        } else {
+          const filteredIssues = [];
+          JSON.parse(data).forEach(issue => {
+            const assignees = [];
+            if (issue.assignees.length !== 0) {
+              issue.assignees.forEach(asgn => {
+                assignees.push({
+                  name: asgn.login,
+                  avatar: asgn.avatar_url,
+                });
+              });
+            }
+            filteredIssues.push({
+              ra: issue.user.login,
+              repository: issue.repository_url.slice(
+                issue.repository_url.lastIndexOf('/') + 1,
+                issue.repository_url.length,
+              ),
+              number: issue.number,
+              title: issue.html_url.title,
+              description: issue.body,
+              label: 'Help Wanted',
+              state: issue.state,
+              assignee: assignees,
+              milestone: issue.milestone,
+              created: new Date(issue.created_at).toLocaleString('en-US', {
+                timeZone: 'America/Toronto',
+              }),
+              updated: new Date(issue.updated_at).toLocaleString('en-US', {
+                timeZone: 'America/Toronto',
+              }),
+            });
+          });
+          resolve(filteredIssues);
+        }
+      },
+    );
+  });
+};
+
+module.exports.getFilteredIssues = repos => {
+  const issues = [];
+  return new Promise((resolve, reject) => {
+    const promises = [];
+    repos.forEach(repo => {
+      promises.push(getIssues(repo.name));
+    });
+    Promise.all(promises)
+      .then(arraysOfIssues => {
+        arraysOfIssues.forEach(arrayOfIssues => {
+          if (arrayOfIssues.length !== 0) {
+            arrayOfIssues.forEach(issue => {
+              issues.push(issue);
+            });
+          }
+        });
+        issues.sort((earlyIssue, laterIssue) => {
+          return (
+            new Date(laterIssue.created.date) -
+            new Date(earlyIssue.created.date)
+          );
+        });
+        resolve(issues);
+      })
+      .catch(err => {
+        console.log(err);
         reject(err);
       });
   });
