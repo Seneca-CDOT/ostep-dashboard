@@ -18,6 +18,8 @@ const PORT = process.env.PORT || 2006;
 let isTimedOut = false;
 const TIMEOUT_SECONDS = 6 * 60;
 let storedData;
+const day = 24 * 60 * 60 * 1000;
+const month = 30 * 24 * 60 * 60 * 1000;
 
 app.use(bodyParser.json());
 
@@ -31,7 +33,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   if (!isTimedOut) {
     data
-      .getRepos()
+      .getRepos(day)
       .then(branches => {
         data
           .getAllCommitsTogether(branches)
@@ -47,10 +49,30 @@ app.get('/', (req, res) => {
             res.status(err.statusCode).send(err.statusMessage);
           });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        res.status(err.statusCode).send(err.statusMessage);
+      });
   } else {
     res.json(storedData);
   }
+});
+
+app.get('/helpWanted', (req, res) => {
+  data
+    .getRepos(month)
+    .then(repos => {
+      data
+        .getFilteredIssues(repos)
+        .then(issues => {
+          res.json(issues);
+        })
+        .catch(err => {
+          res.status(err.statusCode).send(err.statusMessage);
+        });
+    })
+    .catch(err => {
+      res.status(err.statusCode).send(err.statusMessage);
+    });
 });
 
 app.use((req, res) => {
