@@ -8,60 +8,54 @@
 // commits from an organization/user
 ********************************************************** */
 
-const request = require('request');
+const r = require('request');
+const qs = require('qs');
 
 const key = process.env.GITHUB_TOKEN;
-const repoUrl = `https://api.github.com/orgs/Seneca-CDOT/repos?per_page=100&access_token=${key}`;
+const cdotUrl = 'https://api.github.com'
+const pageAndToken = qs.parse(`per_page=100&access_token=${key}`);
+const request = r.defaults({headers: { 'User-Agent': 'request' }, baseUrl: cdotUrl, qs: pageAndToken});
 
 const today = new Date();
 const day = 24 * 60 * 60 * 1000;
 
+
 module.exports.getRepos = recency => {
-  const branchUrls = [];
+  const reposNames = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
-        url: repoUrl,
-        headers: { 'User-Agent': 'request' },
+        url: '/orgs/Seneca-CDOT/repos',
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
-          reject(new Error('Unable to get repos.'));
+          reject(res.Error);
         } else {
-          const reposX = JSON.parse(data);
-          reposX.forEach(repo => {
-            repo.branches_url = repo.branches_url.slice(
-              0,
-              repo.branches_url.indexOf('{/branch}'),
-            );
-            repo.branches_url = `${
-              repo.branches_url
-            }?per_page=100&access_token=${key}`;
+          const repos = JSON.parse(data);
+          repos.forEach(repo => {
             if (today - new Date(repo.pushed_at) < recency) {
-              branchUrls.push({
+              reposNames.push({
                 name: repo.name,
-                url: repo.branches_url,
               });
             }
           });
-          resolve(branchUrls);
+          resolve(reposNames);
         }
       },
     );
   });
 };
 
-const getCommits = commitObject => {
+const getCommits = branch => {
   let simplifiedCommit = {};
   const commitsPerBranch = [];
+  const sha = qs.parse(`sha=${branch.br.sha}`);
   return new Promise((resolve, reject) => {
     request.get(
       {
-        url: `https://api.github.com/repos/Seneca-CDOT/${
-          commitObject.repo
-        }/commits?sha=${commitObject.br.sha}&per_page=100&access_token=${key}`,
-        headers: { 'User-Agent': 'request' },
+        url: `/repos/Seneca-CDOT/${branch.repo}/commits`,
+        qs: sha,
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -82,8 +76,8 @@ const getCommits = commitObject => {
                   }),
                 },
                 message: singleCommit.commit.message,
-                repoName: commitObject.repo,
-                branchName: commitObject.br.name,
+                repoName: branch.repo,
+                branchName: branch.br.name,
               };
               commitsPerBranch.push(simplifiedCommit);
             }
@@ -95,12 +89,11 @@ const getCommits = commitObject => {
   });
 };
 
-const getBranches = branchObject => {
+const getBranches = repo => {
   return new Promise((resolve, reject) => {
     request.get(
       {
-        url: branchObject.url,
-        headers: { 'User-Agent': 'request' },
+        url: `/repos/Seneca-CDOT/${repo.name}/branches`,
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -108,14 +101,14 @@ const getBranches = branchObject => {
           reject(new Error('Unable to get branches.'));
         } else {
           const listOfBranches = {
-            repo: branchObject.name,
+            repo: repo.name,
             branches: [],
           };
-          JSON.parse(data).forEach(singleBranch => {
-            singleBranch.repo = branchObject.name;
+          JSON.parse(data).forEach(branch => {
+            branch.repo = repo.name;
             listOfBranches.branches.push({
-              name: singleBranch.name,
-              sha: singleBranch.commit.sha,
+              name: branch.name,
+              sha: branch.commit.sha,
             });
           });
           resolve(listOfBranches);
@@ -126,11 +119,10 @@ const getBranches = branchObject => {
 };
 
 module.exports.getAllCommitsTogether = branches => {
-  const arrayToSendBack = [];
   return new Promise((resolve, reject) => {
     let promises = [];
-    branches.forEach(branchUrl => {
-      promises.push(getBranches(branchUrl));
+    branches.forEach(branch => {
+      promises.push(getBranches(branch));
     });
     Promise.all(promises)
       .then(branchesPerRepo => {
@@ -142,13 +134,7 @@ module.exports.getAllCommitsTogether = branches => {
         });
         Promise.all(promises)
           .then(arraysOfCommits => {
-            arraysOfCommits.forEach(arrayOfCommits => {
-              if (arrayOfCommits.length !== 0) {
-                arrayOfCommits.forEach(commit => {
-                  arrayToSendBack.push(commit);
-                });
-              }
-            });
+            const arrayToSendBack = arraysOfCommits.flat();
             arrayToSendBack.sort((firstCommit, secondCommit) => {
               return (
                 new Date(secondCommit.author.date) -
@@ -169,12 +155,13 @@ module.exports.getAllCommitsTogether = branches => {
   });
 };
 
-const getIssues = repo => {
+const getIssuesFromRepo = repo => {
   return new Promise((resolve, reject) => {
+    const label = qs.parse('labels=help+wanted');
     request.get(
       {
-        url: `https://api.github.com/repos/Seneca-CDOT/${repo}/issues?labels=help+wanted&access_token=${key}`,
-        headers: { 'User-Agent': 'request' },
+        url: `/repos/Seneca-CDOT/${repo}/issues`,
+        qs: label,
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -220,22 +207,15 @@ const getIssues = repo => {
   });
 };
 
-module.exports.getFilteredIssues = repos => {
-  const issues = [];
+module.exports.getIssues = repos => {
   return new Promise((resolve, reject) => {
     const promises = [];
     repos.forEach(repo => {
-      promises.push(getIssues(repo.name));
+      promises.push(getIssuesFromRepo(repo.name));
     });
     Promise.all(promises)
       .then(arraysOfIssues => {
-        arraysOfIssues.forEach(arrayOfIssues => {
-          if (arrayOfIssues.length !== 0) {
-            arrayOfIssues.forEach(issue => {
-              issues.push(issue);
-            });
-          }
-        });
+        const issues = arraysOfIssues.flat();
         issues.sort((firstItem, secondItem) => {
           return new Date(secondItem.created) - new Date(firstItem.created);
         });
