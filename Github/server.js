@@ -11,7 +11,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const data = require('./service.js');
-
 const app = express();
 
 const PORT = process.env.PORT || 2006;
@@ -57,12 +56,12 @@ app.get('/', (req, res) => {
   }
 });
 
-app.get('/helpWanted', (req, res) => {
+app.get('/help-wanted', (req, res) => {
   data
     .getRepos(month)
     .then(repos => {
       data
-        .getFilteredIssues(repos)
+        .getIssues(repos)
         .then(issues => {
           res.json(issues);
         })
