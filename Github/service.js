@@ -156,7 +156,7 @@ const getIssuesFromRepo = repo => {
     request.get(
       {
         url: `/repos/Seneca-CDOT/${repo}/issues`,
-        qs: {'labels': 'help wanted'},
+        qs: {labels: 'help wanted'},
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
