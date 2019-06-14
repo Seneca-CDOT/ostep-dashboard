@@ -9,13 +9,17 @@
 ********************************************************** */
 
 const r = require('request');
+
 const key = process.env.GITHUB_TOKEN;
-const cdotUrl = 'https://api.github.com'
-const request = r.defaults({headers: { 'User-Agent': 'request' }, baseUrl: cdotUrl, qs: {per_page: 100, access_token: key}});
+const cdotUrl = 'https://api.github.com';
+const request = r.defaults({
+  headers: { 'User-Agent': 'request' },
+  baseUrl: cdotUrl,
+  qs: { per_page: 100, access_token: key },
+});
 
 const today = new Date();
 const day = 24 * 60 * 60 * 1000;
-
 
 module.exports.getRepos = recency => {
   const reposNames = [];
@@ -51,7 +55,7 @@ const getCommits = branch => {
     request.get(
       {
         url: `/repos/Seneca-CDOT/${branch.repo}/commits`,
-        qs: {sha: `${branch.br.sha}`},
+        qs: { sha: `${branch.br.sha}` },
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -156,7 +160,7 @@ const getIssuesFromRepo = repo => {
     request.get(
       {
         url: `/repos/Seneca-CDOT/${repo}/issues`,
-        qs: {labels: 'help wanted'},
+        qs: { labels: 'help wanted' },
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
