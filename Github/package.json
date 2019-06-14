@@ -13,7 +13,6 @@
     "express": "^4.16.3",
     "jquery": "^3.3.1",
     "path": "^0.12.7",
-    "qs": "^6.7.0",
     "request": "^2.88.0",
     "xmlhttprequest": "^1.8.0"
   },

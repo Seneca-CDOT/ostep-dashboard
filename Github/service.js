@@ -9,12 +9,9 @@
 ********************************************************** */
 
 const r = require('request');
-const qs = require('qs');
-
 const key = process.env.GITHUB_TOKEN;
 const cdotUrl = 'https://api.github.com'
-const pageAndToken = qs.parse(`per_page=100&access_token=${key}`);
-const request = r.defaults({headers: { 'User-Agent': 'request' }, baseUrl: cdotUrl, qs: pageAndToken});
+const request = r.defaults({headers: { 'User-Agent': 'request' }, baseUrl: cdotUrl, qs: {per_page: 100, access_token: key}});
 
 const today = new Date();
 const day = 24 * 60 * 60 * 1000;
@@ -50,12 +47,11 @@ module.exports.getRepos = recency => {
 const getCommits = branch => {
   let simplifiedCommit = {};
   const commitsPerBranch = [];
-  const sha = qs.parse(`sha=${branch.br.sha}`);
   return new Promise((resolve, reject) => {
     request.get(
       {
         url: `/repos/Seneca-CDOT/${branch.repo}/commits`,
-        qs: sha,
+        qs: {sha: `${branch.br.sha}`},
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -157,11 +153,10 @@ module.exports.getAllCommitsTogether = branches => {
 
 const getIssuesFromRepo = repo => {
   return new Promise((resolve, reject) => {
-    const label = qs.parse('labels=help+wanted');
     request.get(
       {
         url: `/repos/Seneca-CDOT/${repo}/issues`,
-        qs: label,
+        qs: {'labels': 'help wanted'},
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -169,6 +164,7 @@ const getIssuesFromRepo = repo => {
           reject(new Error('Unable to get repos.'));
         } else {
           const filteredIssues = [];
+          console.log(data.length);
           JSON.parse(data).forEach(issue => {
             const assigs = [];
             if (issue.assignees.length !== 0) {
