@@ -28,6 +28,11 @@ sudo iptables -A INPUT -p tcp --destination-port 8086 -j DROP
 Save Changes:
 ` sudo service iptables save`
 
+### Debug Mode for UI
+
+Enables running the frontend without the need to set up Docker or token by loading dummy data.
+In the `Dashboard` folder run `npm i` to install dependencies, then `npm run debug`. 
+
 ### Create github.env File for Github Component
 
 in the project root directory, add this line to `github.env`

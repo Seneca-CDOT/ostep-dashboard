@@ -37,8 +37,6 @@ app.get("/", (req, res) => {
       let month = Number(date[1]) - 1;
       let day = Number(date[2]);
       let bookingDate = new Date(year, month, day);
-      console.log("Booking: " + row["Date and time"] + " | " + row["Purpose"] + " | " + row["Contact person"]);
-      console.log("----------------------------------------");
 
       return today.getDate() == bookingDate.getDate() && today.getMonth() == bookingDate.getMonth() && today.getFullYear() == bookingDate.getFullYear();
     });

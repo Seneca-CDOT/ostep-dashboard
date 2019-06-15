@@ -14,10 +14,10 @@ class Infrastructure extends Container {
     let servers, workstations, dns;
 
     if (this.state.data) {
-      const upSort = (a, b) => a.Status === 'up';
-      servers = this.state.data.Servers.sort(upSort);
-      workstations = this.state.data.Workstations.sort(upSort);
-      dns = this.state.data.DNS;
+      const upSort = (a, b) => a.status === 'up';
+      servers = this.state.data.servers.sort(upSort);
+      workstations = this.state.data.workstations.sort(upSort);
+      dns = this.state.data.dns;
     }
 
     return (
@@ -36,8 +36,8 @@ class Infrastructure extends Container {
                       key={"servers-" + i}
                       className="infra-box"
                     >
-                      <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
-                      <span> {server.Name} </span>
+                      <img className="ip-icon" src={server.status === "up" ? zap : zapOff} alt={"IP icon"} />
+                      <span> {server.name} </span>
                     </div>
                   ))}
                 </div>
@@ -48,8 +48,8 @@ class Infrastructure extends Container {
                       key={"workstation-" + i}
                       className="infra-box"
                     >
-                      <img className="ip-icon" src={server.Status === "up" ? zap : zapOff} alt={"IP icon"} />
-                      <span> {server.Host} </span>
+                      <img className="ip-icon" src={server.status === "up" ? zap : zapOff} alt={"IP icon"} />
+                      <span> {server.host} </span>
                     </div>
                   ))}
                 </div>
