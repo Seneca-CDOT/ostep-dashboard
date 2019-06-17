@@ -68,10 +68,10 @@ const getCommits = branch => {
               } = singleCommit;
               return today - new Date(author.date) < day;
             })
-            .map(sc => {
+            .map(singleCommit => {
               const {
                 commit: { author },
-              } = sc;
+              } = singleCommit;
               const time = new Date(author.date);
               return {
                 author: {
@@ -80,7 +80,7 @@ const getCommits = branch => {
                     timeZone: 'America/Toronto',
                   }),
                 },
-                message: sc.commit.message,
+                message: singleCommit.commit.message,
                 repoName: branch.repo,
                 branchName: branch.br.name,
               };
