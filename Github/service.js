@@ -50,8 +50,6 @@ module.exports.getRepos = recency => {
 };
 
 const getCommits = branch => {
-  // let simplifiedCommit = {};
-  // const commitsPerBranch = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
