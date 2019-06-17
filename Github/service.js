@@ -178,9 +178,7 @@ const getIssuesFromRepo = repo => {
                 };
               });
             }
-            const labelsInIssue = issue.labels.map(label => {
-              return label.name;
-            });
+            const labelsInIssue = issue.labels.map(label => label.name);
 
             return {
               ra: issue.user.login,
