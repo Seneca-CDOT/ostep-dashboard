@@ -35,7 +35,7 @@ function EODList(props) {
             <img className='slack-icon' src={slack} alt='Slack icon' />
             <span className='github-name'>{eod.username}</span>
             <p className='slack-post'> posted EOD in channel </p>
-            <span className='github-repo'> {`#${eod.channel}`}</span>:
+            <span className='span-emphasis'> {`#${eod.channel}`}</span>:
           </div>
           <ReactMarkdown
             source={reformatSlackMentions(eod.text)}
