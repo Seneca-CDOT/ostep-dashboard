@@ -13,6 +13,7 @@ class Header extends React.Component {
 
   componentWillMount() {
     this.fetchData();
+    setInterval(() => { this.fetchData(); }, 30 * 1000);
   }
 
   fetchData() {
