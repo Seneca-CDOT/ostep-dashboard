@@ -23,47 +23,35 @@ class Infrastructure extends Container {
     return (
       <Panel title={COMPONENT_NAME} refreshData={this.refreshData}>
         {this.state.data && (
-          <>
-            <div>
-              <div className='infra-wrapper'>
-                <div className='infra-column'>
-                  <div className='infra-box'>
-                    <h3>Servers</h3>
-                  </div>
-                  {servers.map((server, i) => (
-                    <div key={'servers-' + i} className='infra-box'>
-                      <img
-                        className='ip-icon'
-                        src={server.status === 'up' ? zap : zapOff}
-                        alt={'IP icon'}
-                      />
-                      <span> {server.name} </span>
-                    </div>
-                  ))}
+          <div>
+            <div className='infra-wrapper'>
+              <div className='infra-column'>
+                <div className='infra-box'>
+                  <h3>Servers</h3>
                 </div>
-                <div className='infra-column'>
-                  <div className='infra-box'>
-                    <h3>Workstations</h3>{' '}
+                {servers.map((server, i) => (
+                  <div key={'servers-' + i} className='infra-box'>
+                    <img
+                      className='ip-icon'
+                      src={server.status === 'up' ? zap : zapOff}
+                      alt={'IP icon'}
+                    />
+                    <span> {server.name} </span>
                   </div>
-                  {workstations.map((server, i) => (
-                    <div key={'workstation-' + i} className='infra-box'>
-                      <img
-                        className='ip-icon'
-                        src={server.status === 'up' ? zap : zapOff}
-                        alt={'IP icon'}
-                      />
-                      <span> {server.host} </span>
-                    </div>
-                  ))}
+                ))}
+              </div>
+              <div className='infra-column'>
+                <div className='infra-box'>
+                  <h3>Workstations</h3>{' '}
                 </div>
                 {workstations.map((server, i) => (
                   <div key={'workstation-' + i} className='infra-box'>
                     <img
                       className='ip-icon'
-                      src={server.Status === 'up' ? zap : zapOff}
+                      src={server.status === 'up' ? zap : zapOff}
                       alt={'IP icon'}
                     />
-                    <span> {server.Host} </span>
+                    <span> {server.host} </span>
                   </div>
                 ))}
               </div>
@@ -79,9 +67,8 @@ class Infrastructure extends Container {
                 ))}
               </div>
             </div>
-          </>
+          </div>
         )}
-        )
       </Panel>
     );
   }
