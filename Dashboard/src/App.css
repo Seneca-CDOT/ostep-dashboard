@@ -11,11 +11,11 @@ div::-webkit-scrollbar {
 div::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 1px #95a5a6;
   box-shadow: inset 0 0 1px #95a5a6;
-  background-color:#95a5a6;
+  background-color: #95a5a6;
 }
 
 div::-webkit-scrollbar-thumb {
-background-color: #7f8c8d;
+  background-color: #7f8c8d;
 }
 
 /* 
@@ -30,17 +30,18 @@ MAIN
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   font-size: 10px;
   line-height: 230%;
   background-color: #34495e;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-rendering: optimizeLegibility;
 }
 
 .app-content {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -48,8 +49,6 @@ html, body {
 .blank {
   height: 6em;
 }
-
-
 
 .u-margin-top-small {
   margin-top: 2rem;
@@ -78,7 +77,7 @@ HEADER
 }
 
 header {
-  background-color:#2c3e50;
+  background-color: #2c3e50;
   height: 5rem;
   font-size: 1.5rem;
   color: #ecf0f1;
@@ -86,6 +85,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 2.2em;
+  width: 100%;
 }
 
 .logo {
@@ -101,7 +101,7 @@ header {
 
 .lamp-text {
   font-weight: 400;
-  letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
 }
 
 .bulb {
@@ -132,7 +132,7 @@ BODY
 
 h3 {
   font-weight: 600;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
 }
 
 /* 
@@ -141,43 +141,43 @@ PANELS
 ==================================== 
 */
 
-
-.panel-row {
+.row {
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
 }
 
-.panel-title {
+.panel-header {
   display: flex;
   justify-content: space-between;
   color: #ecf0f1;
   font-size: 1.6rem;
-  background-color:#2c3e50;
+  background-color: #2c3e50;
+  height: auto;
 }
 
-.panel-title-text {
+.panel-title {
   text-transform: uppercase;
   letter-spacing: 0.5rem;
   font-weight: 400;
 }
 
-.panel-title h3 {
+.panel-header h3 {
   border-bottom: 0.01em solid #7f8c8d;
   padding: 2rem;
   width: 100%;
 }
 
-.panel-body {
+.panel-container {
   display: flex;
   flex-direction: column;
-  background-color:#28394a;
+  background-color: #28394a;
   width: 85rem;
   height: 48rem;
   margin: 2rem 1rem 0rem 2rem;
 }
 
-.panel-body li {
+.panel-container li {
   list-style-position: inside;
   word-break: break-word;
 }
@@ -197,7 +197,7 @@ PANELS
   justify-content: center;
   align-items: center;
   border-bottom: 0.01em solid #c0392b;
-  transition: all .6s;
+  transition: all 0.6s;
 }
 
 .refresh-container:hover {
@@ -226,7 +226,7 @@ GITHUB PANEL
 ==================================== 
 */
 
-.github-entry{
+.github-entry {
   padding-bottom: 0.7em;
 }
 
@@ -301,10 +301,10 @@ OSTEPPY PANEL
 }
 
 .slack-post {
-  padding: 0 .3em;
+  padding: 0 0.3em;
 }
 
-.slack-message{
+.slack-message {
   padding-bottom: 0.7em;
 }
 
@@ -369,7 +369,6 @@ INFRASTRUCTURE PANEL
   padding: 0.2em;
 }
 
-
 /* 
 ====================================
 LAMP PANEL
@@ -383,6 +382,7 @@ LAMP PANEL
   align-items: center;
   height: 100%;
 }
+
 .bulb-off {
   height: 10em;
   width: 10em;
@@ -400,7 +400,7 @@ SCHEDULE PANEL
 */
 
 .schedule-heading {
-  padding: 0em 0 .5em 0;
+  padding: 0em 0 0.5em 0;
 }
 
 .schedule-content {
@@ -429,13 +429,13 @@ PRESENTATIONS SECTION
 
 .presenter-section {
   width: 22em;
-  font-size: .9em;
+  font-size: 0.9em;
   display: flex;
 }
 
 .presenter-row {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .presenter-text {
@@ -443,14 +443,12 @@ PRESENTATIONS SECTION
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
-
 }
 
 .presenter-name {
   margin-left: -0.4em;
   color: #e74c3c;
   font-weight: 700;
-  
 }
 
 .presenter-info {
@@ -458,7 +456,7 @@ PRESENTATIONS SECTION
   font-weight: 700;
 }
 
-.presenter-entry{
+.presenter-entry {
   padding-bottom: 0.6em;
 }
 
@@ -493,7 +491,7 @@ DB1042 SECTION
 }
 
 .meeting-icons {
-  padding: 0 .6em 0 .4em;
+  padding: 0 0.6em 0 0.4em;
   vertical-align: middle;
 }
 
@@ -517,10 +515,12 @@ SPINNER
   width: 64px;
   height: 64px;
 }
+
 .lds-spinner div {
   transform-origin: 32px 32px;
   animation: lds-spinner 1.2s linear infinite;
 }
+
 .lds-spinner div:after {
   content: " ";
   display: block;
@@ -532,58 +532,72 @@ SPINNER
   border-radius: 20%;
   background: #fff;
 }
+
 .lds-spinner div:nth-child(1) {
   transform: rotate(0deg);
   animation-delay: -1.1s;
 }
+
 .lds-spinner div:nth-child(2) {
   transform: rotate(30deg);
   animation-delay: -1s;
 }
+
 .lds-spinner div:nth-child(3) {
   transform: rotate(60deg);
   animation-delay: -0.9s;
 }
+
 .lds-spinner div:nth-child(4) {
   transform: rotate(90deg);
   animation-delay: -0.8s;
 }
+
 .lds-spinner div:nth-child(5) {
   transform: rotate(120deg);
   animation-delay: -0.7s;
 }
+
 .lds-spinner div:nth-child(6) {
   transform: rotate(150deg);
   animation-delay: -0.6s;
 }
+
 .lds-spinner div:nth-child(7) {
   transform: rotate(180deg);
   animation-delay: -0.5s;
 }
+
 .lds-spinner div:nth-child(8) {
   transform: rotate(210deg);
   animation-delay: -0.4s;
 }
+
 .lds-spinner div:nth-child(9) {
   transform: rotate(240deg);
   animation-delay: -0.3s;
 }
+
 .lds-spinner div:nth-child(10) {
   transform: rotate(270deg);
   animation-delay: -0.2s;
 }
+
 .lds-spinner div:nth-child(11) {
   transform: rotate(300deg);
   animation-delay: -0.1s;
 }
+
 .lds-spinner div:nth-child(12) {
   transform: rotate(330deg);
   animation-delay: 0s;
 }
+
 @keyframes lds-spinner {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -594,30 +608,61 @@ SPINNER
 RESPONSIVE DESIGN
 ======================================
 */
+.visible {
+  display: block;
+}
 
-
-/* IPAD PRO*/
-@media only screen and (max-width: 1780px) {
-  .panel-row {
-    flex-direction: column;
-  }
-  .panel-body {
-    font-size: 1.2rem;
-    width: 90rem;
-    height: 55rem;
-  }
+.hidden {
+  display: none;
 }
 
 
-/* IPAD*/
-@media only screen and (max-width: 950px) {
-  .panel-row {
+/*
+======================================
+DISPLAY CLASSES
+======================================
+*/
+
+@media only screen and (min-width: 2400px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 35vw;
+    margin: 3rem;
+  }
+}
+
+/* IPAD PRO*/
+@media only screen and (max-width: 1780px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 45vw;
+  }
+}
+
+@media only screen and (max-width: 1270px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 80vw;
+  }
+
+  .row {
     flex-direction: column;
   }
-  .panel-body {
+}
+
+@media only screen and (min-width: 950px) {
+  .panel-content {
+    display: block;
+  }
+}
+
+/* IPAD*/
+@media only screen and (max-width: 950px) {
+  .panel-container {
+    height: auto;
+    max-height: 48rem;
     font-size: 1.2rem;
-    width: 70rem;
-    height: 55rem;
+    width: 85vw;
   }
 
   .schedule-topic,
@@ -627,28 +672,21 @@ RESPONSIVE DESIGN
   }
 }
 
-
 @media only screen and (max-width: 770px) {
   html {
-    font-size: 6px;
+    font-size: 8px;
   }
-  
+
   header {
     padding: 2em;
   }
- 
-  .panel-body {
-    width: 55rem;
-    height: 46rem;
-    
+
+  .panel-container {
+    width: 90vw;
   }
 
-  .panel-title h3 {
+  .panel-header h3 {
     font-size: 1.5em;
-  }
-
-  .panel-row {
-    flex-direction: column;
   }
 
   .panel-content {
@@ -691,15 +729,56 @@ RESPONSIVE DESIGN
   }
 }
 
+@media only screen and (max-width: 700px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .lamp-text {
+    display: none;
+  }
+
+  .panel-header {
+    font-size: 1.2rem;
+    height: 6rem;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .panel-content {
+    font-size: 1.5rem;
+  }
+}
+
 /* IPHONE 5/SE */
-@media only screen and (max-width: 325px) {
+@media only screen and (max-width: 375px) {
   header {
     font-size: 1.25rem;
   }
-  
-  .panel-body {
-    width: 48rem;
-    height: 40rem;
+
+  .panel-container {
+    width: 90vw;
+  }
+
+  .panel-content {
+    font-size: 1.4rem;
+  }
+}
+
+
+@media only screen and (max-width: 340px) {
+  header {
+    font-size: 1.25rem;
+  }
+
+  .panel-container {
+    width: 90vw;
+  }
+
+  .panel-content {
+    font-size: 1.32rem;
   }
 }
 

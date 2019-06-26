@@ -3,7 +3,7 @@ import Panel from './common/Panel';
 import Container from './common/Container';
 import github from './assets/github.svg';
 import moment from 'moment';
-const COMPONENT_NAME = "github";
+const COMPONENT_NAME = "github"
 class Github extends Container {
   constructor(props) {
     super(props, COMPONENT_NAME);
@@ -11,7 +11,6 @@ class Github extends Container {
 
   render() {
     return (
-      <div>
         <Panel
           title={COMPONENT_NAME}
           refreshData={this.refreshData}
@@ -40,7 +39,6 @@ class Github extends Container {
             })
           }
         </Panel>
-      </div>
     );
   }
 }
