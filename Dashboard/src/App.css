@@ -545,7 +545,7 @@ HELP WANTED PANEL
 .github-issue__priority {
   margin-top: 0;
   margin-left: 4rem;
-  margin-bottom: 2px;
+  margin-bottom: 1rem;
 }
 
 .github-issue__priority-critical {
@@ -572,6 +572,7 @@ HELP WANTED PANEL
 .github-issue__stack__language {
   height: 2.5rem;
   width: 2.5rem;
+  margin-left:1rem;
 }
 
 /* 
