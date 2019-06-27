@@ -6,6 +6,7 @@ import Infrastructure from './components/Infrastructure'
 import Github from './components/Github'
 import Osteppy from './components/Osteppy';
 import Schedule from './components/Schedule';
+import HelpWanted from './components/HelpWanted';
 const service = new Service();
 // const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 
@@ -35,7 +36,8 @@ class App extends Component {
             <Infrastructure fetchData={this.fetchData} />
           </div>
           <div className="row">
-            <Osteppy fetchData={this.fetchData} />
+            {/* <Osteppy fetchData={this.fetchData} /> */}
+            <HelpWanted fetchData={this.fetchData} />
             <Schedule fetchData={this.fetchData} />
           </div>
         </div>
