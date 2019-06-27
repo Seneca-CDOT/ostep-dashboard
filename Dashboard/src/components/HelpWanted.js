@@ -48,6 +48,12 @@ export default class HelpWanted extends Container {
                   <span className='github-issue__repo'>{`${
                     issue.repository
                   }`}</span>
+                  
+                </div>
+                <div className='github-issue__priority'>
+                  <span className={`github-issue__priority-${priority}`}>{`${
+                    priority ? `Priority: ${priority}` : ''
+                  }`}</span>
                   <div className='github-issue__stack'>
                     {/* This needs to be re-written to accomodate an array in the future */}
                     <img
@@ -57,11 +63,7 @@ export default class HelpWanted extends Container {
                     />
                   </div>
                 </div>
-                <div className='github-issue__priority'>
-                  <span className={`github-issue__priority-${priority}`}>{`${
-                    priority ? `Priority: ${priority}` : ''
-                  }`}</span>
-                </div>
+                
                 <div className='github-issue__assignees'>
                   {issue.assignees.map(assignee => (
                     <img
