@@ -7,5 +7,6 @@ export default {
   presentations: `http://${dashHost}:8083`,
   meetings: `http://${dashHost}:8084`,
   infrastructure: `http://${dashHost}:8085`,
-  github: `http://${dashHost}:8086`
+  github: `http://${dashHost}:8086`,
+  helpWanted: `http://${dashHost}:8086/help-wanted`
 }
