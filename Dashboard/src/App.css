@@ -516,6 +516,10 @@ HELP WANTED PANEL
 .github-issue__details {
   margin-bottom: 0;
   display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width:95%;
+  text-overflow: ellipsis;
 }
 
 .github-issue__repo{
@@ -540,6 +544,10 @@ HELP WANTED PANEL
 .github-issue__assignees {
   margin-left: 4rem;
   margin-bottom: .5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  width:50%;
+  text-overflow: ellipsis;
 }
 
 .github-issue__priority {
