@@ -160,5 +160,100 @@ export default {
       branchName: 'voltage-fluct-57',
       message: 'Added state __str__ overload for assets'
     }
+  ],
+  helpWanted: [
+    {
+      ra: 'scrust',
+      repository: 'telemed',
+      number: 165,
+      title: 'Consider migrating to TypeScript',
+      description:
+        'Once we finish the `First Prototype` milestone and get feedback, it may be worth our while to migrate the codebase to TypeScript.\r\n\r\n`create-react-app` comes with a lot of machinery built-in to support TypeScript projects, and I was able to transition `App` and `MeasurementContext` to TypeScript with only a few interface and type definitions as [`exps/add-typescript`](https://github.com/Seneca-CDOT/telemed/tree/exps/add-typescript) with very little effort.\r\n\r\nMy feeling is `First Prototype` will help us lock down the shape of a lot of our objects (especially for e.g. `Measurement`s), and codifying these in a type system will support us well as we got forward in the project.',
+      language: 'Python',
+      labels: ['enhancement', 'help wanted', 'question', 'priority:low'],
+      state: 'open',
+      assignees: [],
+      milestone: null,
+      created: '6/25/2019, 4:20:11 PM',
+      updated: '6/25/2019, 4:20:11 PM'
+    },
+    {
+      ra: 'miggs125',
+      repository: 'ostep-dashboard',
+      number: 65,
+      title: 'Project Restructuring - Discussion',
+      description:
+        "The code-base for dashboard, although functional, is somewhat convoluted and at times redundant. I propose a restructuring of the project (with the input of it's contributors of course) to make the code-base more readable and maintainable and eliminate redundancies before we continue adding more functionality and features to the project. Perhaps we should create a document detailing classes, functionality and structure agreed upon by all before beginning to implement the restructure. This would also make it easier for new RAs to get involved with the project and spare senior RAs from having to explain how the project functions by pointing them to the proposed documentation. We could take this opportunity to implement the ostep repo standards into the dashboard as well.",
+      language: 'JavaScript',
+      labels: ['help wanted', 'type: discussion', 'type: question', 'priority:critical'],
+      state: 'open',
+      assignees: [
+        {
+          name: 'naiuhz',
+          avatar: 'https://avatars1.githubusercontent.com/u/7077433?v=4'
+        },
+        {
+          name: 'belavina',
+          avatar: 'https://avatars0.githubusercontent.com/u/13407723?v=4'
+        },
+        {
+          name: 'newbRaymond',
+          avatar: 'https://avatars0.githubusercontent.com/u/14317628?v=4'
+        },
+        {
+          name: 'scrust',
+          avatar: 'https://avatars0.githubusercontent.com/u/21987387?v=4'
+        },
+        {
+          name: 'manekenpix',
+          avatar: 'https://avatars2.githubusercontent.com/u/23108901?v=4'
+        },
+        {
+          name: 'klymenkoo',
+          avatar: 'https://avatars2.githubusercontent.com/u/26641473?v=4'
+        },
+        {
+          name: 'poftadeh',
+          avatar: 'https://avatars0.githubusercontent.com/u/30670414?v=4'
+        },
+        {
+          name: 'miggs125',
+          avatar: 'https://avatars2.githubusercontent.com/u/32024054?v=4'
+        }
+      ],
+      milestone: null,
+      created: '6/4/2019, 10:12:30 AM',
+      updated: '6/17/2019, 2:43:50 PM'
+    },
+    {
+      ra: 'miggs125',
+      repository: 'ostep-dashboard',
+      number: 61,
+      title: 'convert css files to sass and refactor code',
+      description:
+        'The style files are, specifically App.css is getting rather large and needs to be refactored and modulated in order to keep the codebase maintainable as the project scales',
+      language: 'java',
+      labels: ['area: frontend', 'help wanted', 'type: enhancement', 'priority:medium'],
+      state: 'open',
+      assignees: [],
+      milestone: null,
+      created: '6/1/2019, 11:49:53 PM',
+      updated: '6/7/2019, 7:27:52 PM'
+    },
+    {
+      ra: 'poftadeh',
+      repository: 'plumadriver',
+      number: 8,
+      title: 'Convert Project Code to Typescript',
+      description:
+        'As discussed, static type-checking will be useful as the project grows in size. ',
+      language: 'bash',
+      labels: ['Type: Enhancement', 'help wanted','priority:high'],
+      state: 'open',
+      assignees: [],
+      milestone: null,
+      created: '2/22/2019, 11:29:08 AM',
+      updated: '5/30/2019, 4:21:25 PM'
+    }
   ]
 };
