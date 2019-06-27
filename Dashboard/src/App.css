@@ -497,6 +497,85 @@ DB1042 SECTION
 
 /* 
 ====================================
+HELP WANTED PANEL
+==================================== 
+*/
+
+.github-issue {
+  margin-bottom: 2rem;
+  border-width: 1px;
+  display: block;
+}
+
+.github-issue__icon {
+  height: 3rem;
+  margin:0 .5rem;
+  display: inline-block;
+}
+
+.github-issue__details {
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.github-issue__repo{
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.github-issue__number{
+  color: grey;
+}
+
+.github-issue__name{
+  color: #3498db;
+  font-weight: bold;
+}
+
+.github-issue__avatar{
+  height: 2.5rem;
+  margin:0 3px;
+}
+
+.github-issue__assignees {
+  margin-left: 4rem;
+  margin-bottom: .5rem;
+}
+
+.github-issue__priority {
+  margin-top: 0;
+  margin-left: 4rem;
+  margin-bottom: 2px;
+}
+
+.github-issue__priority-critical {
+  color: #e74c3c;
+}
+
+.github-issue__priority-high {
+  color: orange;
+}
+
+.github-issue__priority-medium {
+  color: yellow;
+}
+
+.github-issue__priority-low {
+  color: green;
+}
+
+.github-issue__stack {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.github-issue__stack__language {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+/* 
+====================================
 SPINNER
 ==================================== 
 */
