@@ -239,7 +239,7 @@ const getPullRequest = repo => {
       (err, res, data) => {
         if (res.statusCode !== 200) {
           console.log('Error:', res.statusMessage);
-          reject(new Error('Unable to get commits.'));
+          reject(new Error('Unable to get pull requests.'));
         } else {
           JSON.parse(data).forEach(pullRequest => {
             pullRequestData = {
