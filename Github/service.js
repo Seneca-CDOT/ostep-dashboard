@@ -228,3 +228,73 @@ module.exports.getIssues = repos => {
       });
   });
 };
+
+const getPullRequest = repo => {
+  let pullRequestData = {};
+  const pullRequestsPerBranch = [];
+  return new Promise((resolve, reject) => {
+    request.get(
+      {
+        url: `/repos/Seneca-CDOT/${repo}/pulls`,
+      },
+      (err, res, data) => {
+        if (res.statusCode !== 200) {
+          console.log('Error:', res.statusMessage);
+          reject(new Error('Unable to get pull requests.'));
+        } else {
+          JSON.parse(data).forEach(pullRequest => {
+            pullRequestData = {
+              title: pullRequest.title,
+              author: {
+                name: pullRequest.user.login,
+                avatar: pullRequest.user.avatar_url,
+              },
+              created: new Date(pullRequest.created_at).toLocaleString('en-US', {
+                timeZone: 'America/Toronto',
+              }),
+              reviewers: pullRequest.requested_reviewers.map(reviewer => {
+                return {
+                  name: reviewer.login,
+                  avatar: reviewer.avatar_url,
+                }
+              }),
+              description: pullRequest.body,
+              repoName: repo,
+              url: pullRequest.html_url,
+              labels: pullRequest.labels.map(label => {
+                return {
+                  name : label.name,
+                  color : label.color
+                }
+              }),
+              number: pullRequest.number,
+            };
+            pullRequestsPerBranch.push(pullRequestData);
+          });
+          resolve(pullRequestsPerBranch);
+        }
+      },
+    );
+  });
+};
+
+module.exports.getPullRequests = repos => {
+  return new Promise((resolve, reject) => {
+    const promises = [];
+    repos.forEach(repo => {
+      promises.push(getPullRequest(repo.name));
+    });
+    Promise.all(promises)
+      .then(arraysOfPullRequests => {
+        const pullRequests = arraysOfPullRequests.flat();
+        pullRequests.sort((firstItem, secondItem) => {
+          return new Date(secondItem.created) - new Date(firstItem.created);
+        });
+        resolve(pullRequests);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
