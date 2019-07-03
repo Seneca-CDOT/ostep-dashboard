@@ -22,7 +22,6 @@ const today = new Date();
 const day = 24 * 60 * 60 * 1000;
 
 module.exports.getRepos = recency => {
-  const reposNames = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
@@ -33,14 +32,16 @@ module.exports.getRepos = recency => {
           console.log('Error:', res.statusMessage);
           reject(res.Error);
         } else {
-          const repos = JSON.parse(data);
-          repos.forEach(repo => {
-            if (today - new Date(repo.pushed_at) < recency) {
-              reposNames.push({
+          const reposNames = JSON.parse(data)
+            .filter(rep => {
+              return today - new Date(rep.pushed_at) < recency;
+            })
+            .map(repo => {
+              return {
                 name: repo.name,
-              });
-            }
-          });
+                language: repo.language,
+              };
+            });
           resolve(reposNames);
         }
       },
@@ -49,8 +50,6 @@ module.exports.getRepos = recency => {
 };
 
 const getCommits = branch => {
-  let simplifiedCommit = {};
-  const commitsPerBranch = [];
   return new Promise((resolve, reject) => {
     request.get(
       {
@@ -62,13 +61,19 @@ const getCommits = branch => {
           console.log('Error:', res.statusMessage);
           reject(new Error('Unable to get commits.'));
         } else {
-          JSON.parse(data).forEach(singleCommit => {
-            const {
-              commit: { author },
-            } = singleCommit;
-            if (today - new Date(author.date) < day) {
+          const commitsPerBranch = JSON.parse(data)
+            .filter(singleCommit => {
+              const {
+                commit: { author },
+              } = singleCommit;
+              return today - new Date(author.date) < day;
+            })
+            .map(singleCommit => {
+              const {
+                commit: { author },
+              } = singleCommit;
               const time = new Date(author.date);
-              simplifiedCommit = {
+              return {
                 author: {
                   name: author.name,
                   date: time.toLocaleString('en-US', {
@@ -79,9 +84,7 @@ const getCommits = branch => {
                 repoName: branch.repo,
                 branchName: branch.br.name,
               };
-              commitsPerBranch.push(simplifiedCommit);
-            }
-          });
+            });
           resolve(commitsPerBranch);
         }
       },
@@ -104,12 +107,11 @@ const getBranches = repo => {
             repo: repo.name,
             branches: [],
           };
-          JSON.parse(data).forEach(branch => {
-            branch.repo = repo.name;
-            listOfBranches.branches.push({
+          listOfBranches.branches = JSON.parse(data).map(branch => {
+            return {
               name: branch.name,
               sha: branch.commit.sha,
-            });
+            };
           });
           resolve(listOfBranches);
         }
@@ -120,9 +122,8 @@ const getBranches = repo => {
 
 module.exports.getAllCommitsTogether = branches => {
   return new Promise((resolve, reject) => {
-    let promises = [];
-    branches.forEach(branch => {
-      promises.push(getBranches(branch));
+    let promises = branches.map(branch => {
+      return getBranches(branch);
     });
     Promise.all(promises)
       .then(branchesPerRepo => {
@@ -159,7 +160,7 @@ const getIssuesFromRepo = repo => {
   return new Promise((resolve, reject) => {
     request.get(
       {
-        url: `/repos/Seneca-CDOT/${repo}/issues`,
+        url: `/repos/Seneca-CDOT/${repo.name}/issues`,
         qs: { labels: 'help wanted' },
       },
       (err, res, data) => {
@@ -167,19 +168,19 @@ const getIssuesFromRepo = repo => {
           console.log('Error:', res.statusMessage);
           reject(new Error('Unable to get repos.'));
         } else {
-          const filteredIssues = [];
-          console.log(data.length);
-          JSON.parse(data).forEach(issue => {
-            const assigs = [];
+          const filteredIssues = JSON.parse(data).map(issue => {
+            let assigs = [];
             if (issue.assignees.length !== 0) {
-              issue.assignees.forEach(assignee => {
-                assigs.push({
+              assigs = issue.assignees.map(assignee => {
+                return {
                   name: assignee.login,
                   avatar: assignee.avatar_url,
-                });
+                };
               });
             }
-            filteredIssues.push({
+            const labelsInIssue = issue.labels.map(label => label.name);
+
+            return {
               ra: issue.user.login,
               repository: issue.repository_url.slice(
                 issue.repository_url.lastIndexOf('/') + 1,
@@ -188,7 +189,8 @@ const getIssuesFromRepo = repo => {
               number: issue.number,
               title: issue.title,
               description: issue.body,
-              label: 'Help Wanted',
+              language: repo.language,
+              labels: labelsInIssue,
               state: issue.state,
               assignees: assigs,
               milestone: issue.milestone,
@@ -198,7 +200,7 @@ const getIssuesFromRepo = repo => {
               updated: new Date(issue.updated_at).toLocaleString('en-US', {
                 timeZone: 'America/Toronto',
               }),
-            });
+            };
           });
           resolve(filteredIssues);
         }
@@ -209,9 +211,8 @@ const getIssuesFromRepo = repo => {
 
 module.exports.getIssues = repos => {
   return new Promise((resolve, reject) => {
-    const promises = [];
-    repos.forEach(repo => {
-      promises.push(getIssuesFromRepo(repo.name));
+    const promises = repos.map(repo => {
+      return getIssuesFromRepo(repo);
     });
     Promise.all(promises)
       .then(arraysOfIssues => {
