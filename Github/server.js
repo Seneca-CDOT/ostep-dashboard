@@ -79,7 +79,7 @@ app.get('/pull-requests', (req, res) => {
     .getRepos(month)
     .then(repos => {
       data
-        .getPullRequests(repos)
+        .getAllPullRequests(repos)
         .then(pullRequests => {
           res.json(pullRequests);
         })

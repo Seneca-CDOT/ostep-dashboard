@@ -229,7 +229,7 @@ module.exports.getIssues = repos => {
   });
 };
 
-const getPullRequest = repo => {
+const getPullRequestsPerRepo = repo => {
   let pullRequestData = {};
   const pullRequestsPerBranch = [];
   return new Promise((resolve, reject) => {
@@ -278,11 +278,11 @@ const getPullRequest = repo => {
   });
 };
 
-module.exports.getPullRequests = repos => {
+module.exports.getAllPullRequests = repos => {
   return new Promise((resolve, reject) => {
     const promises = [];
     repos.forEach(repo => {
-      promises.push(getPullRequest(repo.name));
+      promises.push(getPullRequestsPerRepo(repo.name));
     });
     Promise.all(promises)
       .then(arraysOfPullRequests => {
