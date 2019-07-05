@@ -74,6 +74,24 @@ app.get('/help-wanted', (req, res) => {
     });
 });
 
+app.get('/pull-requests', (req, res) => {
+  data
+    .getRepos(month)
+    .then(repos => {
+      data
+        .getAllPullRequests(repos)
+        .then(pullRequests => {
+          res.json(pullRequests);
+        })
+        .catch(err => {
+          res.status(err.statusCode).send(err.statusMessage);
+        });
+    })
+    .catch(err => {
+      res.status(err.statusCode).send(err.statusMessage);
+    });
+});
+
 app.use((req, res) => {
   res.status(404).send('<h1>Page Not Found</h1>');
 });
