@@ -22,3 +22,5 @@ yarn-debug.log*
 yarn-error.log*
 *.env
 **id_rsa
+/config-files/*
+!/config-files/README.md
