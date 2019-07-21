@@ -16,4 +16,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 2000
-CMD [ "npm", "start" ]
+CMD [ "npm", "serve" ]
