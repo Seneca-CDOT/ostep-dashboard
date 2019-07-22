@@ -50,8 +50,6 @@ services:
   github:
     container_name: github
     build: ./Github
-    env_file:
-      - .dashboard.env
     expose:
       - "80"
     restart: always

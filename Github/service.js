@@ -10,7 +10,7 @@
 
 const r = require('request');
 
-const key = process.env.GITHUB_TOKEN;
+const key = require('../config-files/github-token');
 const cdotUrl = 'https://api.github.com';
 const request = r.defaults({
   headers: { 'User-Agent': 'request' },
