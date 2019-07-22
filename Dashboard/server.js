@@ -1,4 +1,5 @@
 const express = require('express');
+const request = require('request');
 const path = require('path');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
 const { isEnabled, ipsAllowed } = require('../config-files/whitelist');
@@ -13,16 +14,18 @@ if (isEnabled) {
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/data/:containerName', (req, res) => {
-  const { containerName } = req.params;
-  res.send(containerName);
+  request(req.params.containerName, (_error, _response, body) => {
+    res.json(body);
+  });
 });
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error('Error handler:', err);
   if (err instanceof IpDeniedError) {
-    res.status(401);
+    console.log('You shall not pass!');
+    res.end();
   } else {
-    res.status(err.status || 500).json({ message: err });
+    res.status(err.status || 500).json({ message: err.message });
   }
 });
 

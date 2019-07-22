@@ -6,7 +6,7 @@ class Service {
     if (process.env.REACT_APP_MODE === 'development') {
       cb(dummyData[containerName]);
     } else {
-      http.get(containerName, res => {
+      http.get(`data/${containerName}`, res => {
         res.setEncoding('utf8');
         let body = '';
 
