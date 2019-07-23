@@ -1,14 +1,15 @@
 const express = require('express');
 const request = require('request');
 const path = require('path');
+const basicAuth = require('express-basic-auth');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
-const { isEnabled, ipsAllowed } = require('../config-files/whitelist');
+const { whitelist, users } = require('../config-files/authentication');
 
 const PORT = process.env.PORT || 80;
 const app = express();
 
-if (isEnabled) {
-  app.use(IpFilter(ipsAllowed, { mode: 'allow' }));
+if (whitelist) {
+  app.use(IpFilter(whitelist, { mode: 'allow' }));
 }
 
 app.use(express.static(path.join(__dirname, 'build')));
@@ -22,8 +23,10 @@ app.get('/data/:containerName', (req, res) => {
 app.use((err, _req, res, _next) => {
   console.error('Error handler:', err);
   if (err instanceof IpDeniedError) {
-    console.log('You shall not pass!');
-    res.end();
+    basicAuth({
+      challenge: true,
+      users,
+    });
   } else {
     res.status(err.status || 500).json({ message: err.message });
   }

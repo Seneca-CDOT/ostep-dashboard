@@ -1,7 +1,6 @@
 # Welcome to Ostep Dashboard!
 
-Ostep dashboard 
-
+Ostep dashboard
 
 ## Docker
 
@@ -26,19 +25,37 @@ sudo iptables -A INPUT -p tcp --destination-port 8086 -j DROP
 ```
 
 Save Changes:
-` sudo service iptables save`
+`sudo service iptables save`
 
 ### Debug Mode for UI
 
 Enables running the frontend without the need to set up Docker or token by loading dummy data.
-In the `Dashboard` folder run `npm i` to install dependencies, then `npm run debug`. 
+In the `Dashboard` folder run `npm i` to install dependencies, then `npm run debug`.
 
-### Create github.env File for Github Component
+### Configuration Files:
 
-in the project root directory, add this line to `github.env`
+    authentication.(js|json)
+    github-token.(js|json)
+
+Create the above files in the `/config-files/` directory.
+
+#####Sample Configs:
+
+#####`authentication.json:`
 
 ```
-GITHUB_TOKEN={token}
+{
+  whitelist: ["127.0.0.1", "192.0.2.0/24"], // list of IPs that are permitted without authentication.
+  users: { "admin": "supersecret", "foo": "bar" } // key-value pairs for username & password for basic auth.
+}
+```
+
+#####`github-token.json:`
+
+```
+{
+  key: "AAASFWEVSVBSQGWEV13131212A"
+}
 ```
 
 ### Docker compose
