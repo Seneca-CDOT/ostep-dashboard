@@ -34,8 +34,8 @@ In the `Dashboard` folder run `npm i` to install dependencies, then `npm run deb
 
 ### Configuration Files:
 
-    authentication.(js|json)
-    github-token.(js|json)
+    authentication.json
+    github-token.json
 
 Create the above files in the `/config-files/` directory.
 
