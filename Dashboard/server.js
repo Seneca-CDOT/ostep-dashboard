@@ -5,7 +5,7 @@ const basicAuth = require('express-basic-auth');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
 const { whitelist, users } = require('../config-files/authentication');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 const app = express();
 
 if (whitelist) {
