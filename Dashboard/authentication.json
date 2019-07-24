@@ -1,0 +1,4 @@
+{
+  "whitelist": ["127.0.3.1", "192.0.2.0/24"],
+  "users": { "admin": "supersecret", "foo": "bar" }
+}
