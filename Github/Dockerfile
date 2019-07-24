@@ -20,4 +20,4 @@ RUN mkdir /usr/src/config-files
 COPY ./config-files/github-token.json /usr/src/config-files
 
 EXPOSE 80
-CMD [ "npm", "run", "serve" ]
+CMD [ "npm", "start" ]
