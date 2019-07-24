@@ -5,7 +5,7 @@ const basicAuth = require('express-basic-auth');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
 const { whitelist, users } = require('../config-files/authentication');
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 if (whitelist) {
@@ -26,17 +26,16 @@ app.get('/osteppy/:endpoint', (req, res) => {
   });
 });
 
-app.use((err, _req, res, _next) => {
+app.use((err, _req, res, next) => {
   console.error('Error handler:', err);
   if (err instanceof IpDeniedError) {
-    basicAuth({
-      challenge: true,
-      users,
-    });
+    next();
   } else {
     res.status(err.status || 500).json({ message: err.message });
   }
 });
+
+app.use(basicAuth({ challenge: true, users }));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Dashboard container is listening on port ${PORT}`);

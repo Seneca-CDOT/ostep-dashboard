@@ -15,5 +15,9 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# Add config file
+RUN mkdir /usr/config-files
+COPY ../config-files/authentication* /usr/config-files
+
 EXPOSE 80
 CMD [ "npm", "run", "serve" ]
