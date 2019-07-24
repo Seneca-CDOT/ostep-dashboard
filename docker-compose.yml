@@ -51,7 +51,9 @@ services:
     restart: always
   github:
     container_name: github
-    build: ./Github
+    build: 
+      context: .
+      dockerfile: ./Github/Dockerfile
     expose:
       - "80"
     restart: always
