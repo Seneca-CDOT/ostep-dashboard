@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y dnsutils
 # Bundle app source
 COPY . .
 
-EXPOSE 2005
+EXPOSE 80
 CMD [ "npm", "start" ]
 
 

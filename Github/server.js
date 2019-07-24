@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 const data = require('./service.js');
 const app = express();
 
-const PORT = process.env.PORT || 2006;
+const PORT = process.env.PORT || 80;
 let isTimedOut = false;
 const TIMEOUT_SECONDS = 6 * 60;
 let storedData;

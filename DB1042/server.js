@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const tabletojson = require("tabletojson");
 
-const PORT = 2004;
+const PORT = 80;
 let bookings;
 
 app.use(function (req, res, next) {

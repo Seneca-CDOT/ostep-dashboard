@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var scraper = require('table-scraper');
 
-const PORT = 2003;
+const PORT = 80;
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");

@@ -6,5 +6,5 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 # copy dependancies into working directory, run npm, and install dependencies 
-EXPOSE 2003
+EXPOSE 80
 CMD [ "npm", "start"]
