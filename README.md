@@ -36,6 +36,7 @@ In the `Dashboard` folder run `npm i` to install dependencies, then `npm run deb
 
     authentication.json
     github-token.json
+    id_rsa (a private key with EHL access)
 
 Create the above files in the `/config-files/` directory.
 
@@ -56,6 +57,14 @@ Create the above files in the `/config-files/` directory.
 {
   key: "AAASFWEVSVBSQGWEV13131212A"
 }
+```
+
+#####`id_rsa:`
+
+```
+-----BEGIN OPENSSH PRIVATE KEY-----
+ABCVAEWFOAFW...
+-----END OPENSSH PRIVATE KEY-----
 ```
 
 ### Docker compose
