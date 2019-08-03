@@ -13,33 +13,33 @@ services:
       - 'github'
       - 'infrastructure'
     ports:
-      - '80:80'
+      - '8080:80'
     restart: always
   lamp:
     container_name: lamp
     build: ./Lamp
-    expose:
-      - '80'
+    ports:
+      - '127.0.0.1:8000:8000'
     restart: always
   rapresenter:
     container_name: rapresenter
     build: ./RAPresenter
-    expose:
-      - '80'
+    ports:
+      - '127.0.0.1:8001:8001'
     restart: always
   infrastructure:
     container_name: infrastructure
     build:
       context: .
       dockerfile: ./Infrastructure/Dockerfile
-    expose:
-      - '80'
+    ports:
+      - '127.0.0.1:8002:8002'
     restart: always
   github:
     container_name: github
     build:
       context: .
       dockerfile: ./Github/Dockerfile
-    expose:
-      - '80'
+    ports:
+      - '127.0.0.1:8003:8003'
     restart: always
