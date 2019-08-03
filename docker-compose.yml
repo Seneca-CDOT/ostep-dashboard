@@ -22,25 +22,25 @@ services:
     build: ./Osteppy
     env_file:
       - .dashboard.env
-    expose:
-      - '80'
+    ports:
+      - '127.0.0.1:8000:8000'
     restart: always
   lamp:
     container_name: lamp
     build: ./Lamp
     ports:
-      - '127.0.0.1:8000:8000'
+      - '127.0.0.1:8001:8001'
     restart: always
   rapresenter:
     container_name: rapresenter
     build: ./RAPresenter
     ports:
-      - '127.0.0.1:8001:8001'
+      - '127.0.0.1:8002:8002'
     restart: always
   db1042:
     container_name: db1042
     build: ./DB1042
-    expose:
+    ports:
       - '80'
     restart: always
   infrastructure:
@@ -49,7 +49,7 @@ services:
       context: .
       dockerfile: ./Infrastructure/Dockerfile
     ports:
-      - '127.0.0.1:8002:8002'
+      - '127.0.0.1:8003:8003'
     restart: always
   github:
     container_name: github
@@ -57,5 +57,5 @@ services:
       context: .
       dockerfile: ./Github/Dockerfile
     ports:
-      - '127.0.0.1:8003:8003'
+      - '127.0.0.1:8004:8004'
     restart: always
