@@ -8,12 +8,22 @@ services:
     environment:
       - REACT_APP_OSTEP_DASH_HOST=$HOSTNAME
     depends_on:
+      - 'osteppy'
       - 'lamp'
       - 'rapresenter'
+      - 'db1042'
       - 'github'
       - 'infrastructure'
     ports:
       - '8080:80'
+    restart: always
+  osteppy:
+    container_name: osteppy
+    build: ./Osteppy
+    env_file:
+      - .dashboard.env
+    expose:
+      - '80'
     restart: always
   lamp:
     container_name: lamp
@@ -26,6 +36,12 @@ services:
     build: ./RAPresenter
     ports:
       - '127.0.0.1:8001:8001'
+    restart: always
+  db1042:
+    container_name: db1042
+    build: ./DB1042
+    expose:
+      - '80'
     restart: always
   infrastructure:
     container_name: infrastructure
