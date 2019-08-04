@@ -37,12 +37,6 @@ services:
     ports:
       - '127.0.0.1:8002:8002'
     restart: always
-  db1042:
-    container_name: db1042
-    build: ./DB1042
-    ports:
-      - '80'
-    restart: always
   infrastructure:
     container_name: infrastructure
     build:
