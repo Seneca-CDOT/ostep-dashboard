@@ -5,7 +5,7 @@ const basicAuth = require('express-basic-auth');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
 const { whitelist, users } = require('../config-files/authentication');
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 if (whitelist) {
@@ -15,13 +15,13 @@ if (whitelist) {
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/data/:containerName', (req, res) => {
-  request(req.params.containerName, (_error, _response, body) => {
+  request(`http://${req.params.containerName}`, (_error, _response, body) => {
     res.json(body);
   });
 });
 
 app.get('/osteppy/:endpoint', (req, res) => {
-  request(`osteppy/${req.params.endpoint}`, (_error, _response, body) => {
+  request(`http://osteppy/${req.params.endpoint}`, (_error, _response, body) => {
     res.json(body);
   });
 });
