@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "debug": "SET REACT_APP_MODE=development && react-scripts start",
+    "debug": "REACT_APP_MODE=development react-scripts start",
     "serve": "npm run build && node server.js"
   },
   "browserslist": [

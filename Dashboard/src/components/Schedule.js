@@ -1,5 +1,4 @@
 import React from 'react';
-import Meetings from './schedule/Meetings';
 import Presentations from './schedule/Presentations';
 import Panel from './common/Panel';
 const COMPONENT_NAME = 'schedule';
@@ -8,8 +7,7 @@ class Schedule extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      presentationData: null,
-      meetingData: null
+      presentationData: null
     };
     this.refreshData = this.refreshData.bind(this);
   }
@@ -25,16 +23,11 @@ class Schedule extends React.Component {
     this.props.fetchData('presentations', presentationData => {
       this.setState({ presentationData });
     });
-
-    this.props.fetchData('meetings', meetingData => {
-      this.setState({ meetingData });
-    });
   }
 
   refreshData() {
     this.setState(() => ({
-      presentationData: null,
-      meetingData: null
+      presentationData: null
     }));
 
     this.fetchData();
@@ -43,15 +36,11 @@ class Schedule extends React.Component {
   render() {
     return (
       <Panel title={COMPONENT_NAME} refreshData={this.refreshData}>
-        {this.state.presentationData && this.state.meetingData && (
-          <div className='schedule-content'>
+        {this.state.presentationData && (
+          <div className="schedule-content">
             <Presentations
               fetchData={this.props.fetchData}
               data={this.state.presentationData}
-            />
-            <Meetings
-              fetchData={this.props.fetchData}
-              data={this.state.meetingData}
             />
           </div>
         )}
