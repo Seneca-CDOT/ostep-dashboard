@@ -11,7 +11,11 @@ const service = new Service();
 
 class App extends Component {
   fetchData(componentName, cb) {
-    service.getData(componentName, cb);
+    try {
+      service.getData(componentName, cb);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {

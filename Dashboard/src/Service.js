@@ -7,14 +7,21 @@ class Service {
       cb(dummyData[containerName]);
     } else {
       http.get(`data/${containerName}`, res => {
+        const { statusCode } = res;
+
+        if (statusCode !== 200) {
+          throw new Error(
+            `Request to ${containerName} failed. Status code: ${statusCode}`
+          );
+        }
+
         res.setEncoding('utf8');
         let body = '';
 
         res.on('error', function(e) {
-          console.error(
+          throw new Error(
             `Could not fetch data for ${containerName}: ${e.message}`
           );
-          cb(null);
         });
 
         res.on('data', data => {
@@ -22,18 +29,13 @@ class Service {
         });
 
         res.on('end', () => {
-          try {
-            body = JSON.parse(body);
-            if (typeof body !== 'object') {
-              throw new Error(
-                `Invalid type after parsing ${containerName} body: ${typeof body}`
-              );
-            }
-            cb(body);
-          } catch (e) {
-            console.error(`Error parsing ${containerName} data: ${e}`);
-            cb(null);
+          body = JSON.parse(body);
+          if (typeof body !== 'object') {
+            throw new Error(
+              `Invalid type after parsing ${containerName} body: ${typeof body}`
+            );
           }
+          cb(body);
         });
       });
     }
