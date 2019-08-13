@@ -25,15 +25,6 @@ app.get('/data/:containerName', (req, res) => {
   });
 });
 
-app.get('/osteppy/:endpoint', (req, res) => {
-  request(
-    `http://osteppy/${req.params.endpoint}`,
-    (_error, _response, body) => {
-      res.send(body);
-    }
-  );
-});
-
 app.use((err, _req, res, next) => {
   console.error('Error handler:', err);
   if (err instanceof IpDeniedError) {

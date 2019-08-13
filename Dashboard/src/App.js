@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import './App.css';
 import Service from './Service.js';
-import Infrastructure from './components/Infrastructure'
-import Github from './components/Github'
-import Osteppy from './components/Osteppy';
+import Infrastructure from './components/Infrastructure';
+import Github from './components/Github';
 import Schedule from './components/Schedule';
+import Panel from './components/common/Panel';
 const service = new Service();
 // const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 
@@ -25,22 +25,18 @@ class App extends Component {
 
     return (
       <div className="app-content">
-        <Header
-          name={'dashboard'}
-          fetchData={this.fetchData}
-        />
+        <Header name={'dashboard'} fetchData={this.fetchData} />
         <div className="main-content">
           <div className="row">
             <Github fetchData={this.fetchData} />
             <Infrastructure fetchData={this.fetchData} />
           </div>
           <div className="row">
-            <Osteppy fetchData={this.fetchData} />
+            <Panel title={'PR Reminders (Coming Soon)'} />
             <Schedule fetchData={this.fetchData} />
           </div>
         </div>
       </div>
-
     );
   }
 }
