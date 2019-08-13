@@ -11,7 +11,9 @@ class Service {
         let body = '';
 
         res.on('error', function(e) {
-          console.error(e.message);
+          console.error(
+            `Could not fetch data for ${containerName}: ${e.message}`
+          );
           cb(null);
         });
 
@@ -20,12 +22,12 @@ class Service {
         });
 
         res.on('end', () => {
-          console.log(`${containerName}'s body: ${body}`)
           try {
             body = JSON.parse(body);
-            console.log(`Parsed body: ${body}`)
             if (typeof body !== 'object') {
-              throw new Error('Invalid type after parsing JSON body');
+              throw new Error(
+                `Invalid type after parsing ${containerName} body: ${typeof body}`
+              );
             }
             cb(body);
           } catch (e) {

@@ -19,15 +19,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/data/:containerName', (req, res) => {
-  request(`http://${req.params.containerName}`, (_error, _response, body) => {
-    res.json(body);
+  request(`http://${req.params.containerName}`, (error, response, body) => {
+    if (error) next(error);
+    res.send(body);
   });
 });
 
 app.get('/osteppy/:endpoint', (req, res) => {
-  request(`http://osteppy/${req.params.endpoint}`, (_error, _response, body) => {
-    res.json(body);
-  });
+  request(
+    `http://osteppy/${req.params.endpoint}`,
+    (_error, _response, body) => {
+      res.send(body);
+    }
+  );
 });
 
 app.use((err, _req, res, next) => {
@@ -39,7 +43,7 @@ app.use((err, _req, res, next) => {
   }
 });
 
-app.use(basicAuth({ challenge: true, users }));
+// app.use(basicAuth({ challenge: true, users }));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Dashboard container is listening on port ${PORT}`);
