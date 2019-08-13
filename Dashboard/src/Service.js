@@ -20,14 +20,16 @@ class Service {
         });
 
         res.on('end', () => {
+          console.log(`${containerName}'s body: ${body}`)
           try {
             body = JSON.parse(body);
+            console.log(`Parsed body: ${body}`)
             if (typeof body !== 'object') {
               throw new Error('Invalid type after parsing JSON body');
             }
             cb(body);
           } catch (e) {
-            console.error(`Error fetching ${containerName} data: ${e}`);
+            console.error(`Error parsing ${containerName} data: ${e}`);
             cb(null);
           }
         });
