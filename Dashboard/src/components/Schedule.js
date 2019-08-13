@@ -20,7 +20,7 @@ class Schedule extends React.Component {
   }
 
   fetchData() {
-    this.props.fetchData('presentations', presentationData => {
+    this.props.fetchData('rapresenter', presentationData => {
       this.setState({ presentationData });
     });
   }
