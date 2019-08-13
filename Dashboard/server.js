@@ -8,11 +8,15 @@ const { whitelist, users } = require('../config-files/authentication');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-if (whitelist) {
-  app.use(IpFilter(whitelist, { mode: 'allow' }));
-}
+// if (whitelist) {
+//   app.use(IpFilter(whitelist, { mode: 'allow' }));
+// }
 
 app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get('/data/:containerName', (req, res) => {
   request(`http://${req.params.containerName}`, (_error, _response, body) => {

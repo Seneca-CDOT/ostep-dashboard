@@ -12,6 +12,7 @@ class Service {
 
         res.on('error', function(e) {
           console.error(e.message);
+          cb(null);
         });
 
         res.on('data', data => {
@@ -21,9 +22,13 @@ class Service {
         res.on('end', () => {
           try {
             body = JSON.parse(body);
+            if (typeof body !== 'object') {
+              throw new Error('Invalid type after parsing JSON body');
+            }
             cb(body);
           } catch (e) {
-            console.error(e);
+            console.error(`Error fetching ${containerName} data: ${e}`);
+            cb(null);
           }
         });
       });
