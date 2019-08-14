@@ -10,20 +10,6 @@ Open port `80`:
 
 `sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT`
 
-Slack will need to reach the Osteppy container at port `8081`:
-
-`sudo iptables -I INPUT 1 -p tcp --dport 8081 -j ACCEPT`
-
-Restrict access to the components:
-
-```
-sudo iptables -A INPUT -p tcp --destination-port 8082 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8083 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8084 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8085 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8086 -j DROP
-```
-
 Save Changes:
 `sudo service iptables save`
 

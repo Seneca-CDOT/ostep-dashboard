@@ -13,7 +13,7 @@ services:
       - 'github'
       - 'infrastructure'
     ports:
-      - '8080:8080'
+      - '80:80'
     restart: always
   lamp:
     container_name: lamp
