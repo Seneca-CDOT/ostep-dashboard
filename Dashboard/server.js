@@ -5,19 +5,18 @@ const basicAuth = require('express-basic-auth');
 const { IpFilter, IpDeniedError } = require('express-ipfilter');
 const { whitelist, users } = require('../config-files/authentication');
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(IpFilter(whitelist, { mode: 'allow' }));
 
 app.use((err, req, res, next) => {
-  console.error('IN FIRST Error handler:', err);
   if (err instanceof IpDeniedError) {
-    next();
+    basicAuth({ challenge: true, users })(req, res, next);
   } else {
     next(err);
   }
-}, basicAuth({ challenge: true, users }));
+});
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -32,7 +31,7 @@ app.get('/data/:containerName', (req, res, next) => {
   });
 });
 
-app.use((err, _req, res, next) => {
+app.use((err, req, res, next) => {
   console.error('Error handler:', err);
   res.status(err.status || 500).json({ message: err.message });
 });
