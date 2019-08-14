@@ -46,8 +46,8 @@ Create the above files in the `/config-files/` directory.
 
 ```
 {
-  whitelist: ["127.0.0.1", "192.0.2.0/24"], // list of IPs that are permitted without authentication.
-  users: { "admin": "supersecret", "foo": "bar" } // key-value pairs for username & password for basic auth.
+  "whitelist": ["127.0.0.1", "192.0.2.0/24"], // list of IPs that are permitted without authentication.
+  "users": { "admin": "supersecret", "foo": "bar" } // key-value pairs for username & password for basic auth.
 }
 ```
 
@@ -55,7 +55,7 @@ Create the above files in the `/config-files/` directory.
 
 ```
 {
-  key: "AAASFWEVSVBSQGWEV13131212A"
+  key: "dhj340gknmwuxzv3956b03bnf834j30"
 }
 ```
 
