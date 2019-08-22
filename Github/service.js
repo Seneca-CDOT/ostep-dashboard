@@ -10,7 +10,7 @@
 
 const r = require('request');
 
-const key = process.env.GITHUB_TOKEN;
+const { key } = require('../config-files/github-token');
 const cdotUrl = 'https://api.github.com';
 const request = r.defaults({
   headers: { 'User-Agent': 'request' },
@@ -249,23 +249,26 @@ const getPullRequestsPerRepo = repo => {
                 name: pullRequest.user.login,
                 avatar: pullRequest.user.avatar_url,
               },
-              created: new Date(pullRequest.created_at).toLocaleString('en-US', {
-                timeZone: 'America/Toronto',
-              }),
+              created: new Date(pullRequest.created_at).toLocaleString(
+                'en-US',
+                {
+                  timeZone: 'America/Toronto',
+                },
+              ),
               reviewers: pullRequest.requested_reviewers.map(reviewer => {
                 return {
                   name: reviewer.login,
                   avatar: reviewer.avatar_url,
-                }
+                };
               }),
               description: pullRequest.body,
               repoName: repo,
               url: pullRequest.html_url,
               labels: pullRequest.labels.map(label => {
                 return {
-                  name : label.name,
-                  color : label.color
-                }
+                  name: label.name,
+                  color: label.color,
+                };
               }),
               number: pullRequest.number,
             };
