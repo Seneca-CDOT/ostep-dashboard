@@ -23,3 +23,4 @@ yarn-error.log*
 *.env
 **id_rsa
 /config-files/*
+!/config-files/.gitkeep
