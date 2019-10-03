@@ -24,11 +24,11 @@ In the `Dashboard` folder run `npm i` to install dependencies, then `npm run deb
     github-token.json
     id_rsa (a private key with EHL access)
 
-Create the above files in the `/config-files/` directory.
+Create the above files in the `Dashboard/config-files/` directory.
 
-#####Sample Configs:
+##### Sample Configs:
 
-#####`authentication.json:`
+##### `authentication.json:`
 
 ```
 {
@@ -37,7 +37,7 @@ Create the above files in the `/config-files/` directory.
 }
 ```
 
-#####`github-token.json:`
+##### `github-token.json:`
 
 ```
 {
@@ -45,7 +45,7 @@ Create the above files in the `/config-files/` directory.
 }
 ```
 
-#####`id_rsa:`
+##### `id_rsa:`
 
 ```
 -----BEGIN OPENSSH PRIVATE KEY-----
