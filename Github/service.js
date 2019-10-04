@@ -161,7 +161,7 @@ const getIssuesFromRepo = repo => {
     request.get(
       {
         url: `/repos/Seneca-CDOT/${repo.name}/issues`,
-        qs: { labels: 'help wanted' },
+        // qs: { labels: 'help wanted' },
       },
       (err, res, data) => {
         if (res.statusCode !== 200) {
@@ -170,39 +170,48 @@ const getIssuesFromRepo = repo => {
         } else {
           const filteredIssues = JSON.parse(data).map(issue => {
             let assigs = [];
-            if (issue.assignees.length !== 0) {
-              assigs = issue.assignees.map(assignee => {
-                return {
-                  name: assignee.login,
-                  avatar: assignee.avatar_url,
-                };
-              });
-            }
-            const labelsInIssue = issue.labels.map(label => label.name);
 
-            return {
-              ra: issue.user.login,
-              repository: issue.repository_url.slice(
-                issue.repository_url.lastIndexOf('/') + 1,
-                issue.repository_url.length,
-              ),
-              number: issue.number,
-              title: issue.title,
-              description: issue.body,
-              language: repo.language,
-              labels: labelsInIssue,
-              state: issue.state,
-              assignees: assigs,
-              milestone: issue.milestone,
-              created: new Date(issue.created_at).toLocaleString('en-US', {
-                timeZone: 'America/Toronto',
-              }),
-              updated: new Date(issue.updated_at).toLocaleString('en-US', {
-                timeZone: 'America/Toronto',
-              }),
-            };
+            helpWantedRegExp = /help( |-)?wanted/i;
+            hasHelpWanted = (lable) => {
+              return lable.name.match(helpWantedRegExp);
+            }
+
+            if (issue.labels.some(hasHelpWanted)) {
+              if (issue.assignees.length !== 0) {
+                assigs = issue.assignees.map(assignee => {
+                  return {
+                    name: assignee.login,
+                    avatar: assignee.avatar_url,
+                  };
+                });
+              }
+              const labelsInIssue = issue.labels.map(label => label.name);
+  
+              return {
+                ra: issue.user.login,
+                repository: issue.repository_url.slice(
+                  issue.repository_url.lastIndexOf('/') + 1,
+                  issue.repository_url.length,
+                ),
+                number: issue.number,
+                title: issue.title,
+                description: issue.body,
+                language: repo.language,
+                labels: labelsInIssue,
+                state: issue.state,
+                assignees: assigs,
+                milestone: issue.milestone,
+                created: new Date(issue.created_at).toLocaleString('en-US', {
+                  timeZone: 'America/Toronto',
+                }),
+                updated: new Date(issue.updated_at).toLocaleString('en-US', {
+                  timeZone: 'America/Toronto',
+                }),
+              };
+  
+            }
           });
-          resolve(filteredIssues);
+          resolve(filteredIssues.filter(issue => (issue !== undefined && issue !== null)));
         }
       },
     );
