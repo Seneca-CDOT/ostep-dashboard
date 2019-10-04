@@ -1,7 +1,6 @@
 # Welcome to Ostep Dashboard!
 
-Ostep dashboard 
-
+Ostep dashboard
 
 ## Docker
 
@@ -11,34 +10,47 @@ Open port `80`:
 
 `sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT`
 
-Slack will need to reach the Osteppy container at port `8081`:
-
-`sudo iptables -I INPUT 1 -p tcp --dport 8081 -j ACCEPT`
-
-Restrict access to the components:
-
-```
-sudo iptables -A INPUT -p tcp --destination-port 8082 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8083 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8084 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8085 -j DROP
-sudo iptables -A INPUT -p tcp --destination-port 8086 -j DROP
-```
-
 Save Changes:
-` sudo service iptables save`
+`sudo service iptables save`
 
 ### Debug Mode for UI
 
 Enables running the frontend without the need to set up Docker or token by loading dummy data.
-In the `Dashboard` folder run `npm i` to install dependencies, then `npm run debug`. 
+In the `Dashboard` folder run `npm i` to install dependencies, then `npm run debug`.
 
-### Create github.env File for Github Component
+### Configuration Files:
 
-in the project root directory, add this line to `github.env`
+    authentication.json
+    github-token.json
+    id_rsa (a private key with EHL access)
+
+Create the above files in the `Dashboard/config-files/` directory.
+
+##### Sample Configs:
+
+##### `authentication.json:`
 
 ```
-GITHUB_TOKEN={token}
+{
+  "whitelist": ["127.0.0.1", "192.0.2.0/24"], // list of IPs that are permitted without authentication.
+  "users": { "admin": "supersecret", "foo": "bar" } // key-value pairs for username & password for basic auth.
+}
+```
+
+##### `github-token.json:`
+
+```
+{
+  key: "dhj340gknmwuxzv3956b03bnf834j30"
+}
+```
+
+##### `id_rsa:`
+
+```
+-----BEGIN OPENSSH PRIVATE KEY-----
+ABCVAEWFOAFW...
+-----END OPENSSH PRIVATE KEY-----
 ```
 
 ### Docker compose

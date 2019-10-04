@@ -7,17 +7,19 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {onCampus: false},
-    }
+      data: { onCampus: false }
+    };
   }
 
   componentWillMount() {
     this.fetchData();
-    setInterval(() => { this.fetchData(); }, 30 * 1000);
+    setInterval(() => {
+      this.fetchData();
+    }, 30 * 1000);
   }
 
   fetchData() {
-    this.props.fetchData("lamp", (data) => {
+    this.props.fetchData('lamp', data => {
       this.setState({ data });
     });
   }
@@ -28,22 +30,22 @@ class Header extends React.Component {
   }
 
   render() {
+    const { data } = this.state;
     return (
       <header>
         <div className="title">
-          <img className="logo" src={logo} alt={"CDOT logo"} />
+          <img className="logo" src={logo} alt={'CDOT logo'} />
           <h1 className="title-text">{this.props.name} </h1>
         </div>
         <h3 className="lamp-content">
           <span className="lamp-text">LAMP: </span>
           <img
             className="bulb"
-            src={this.state.data.onCampus ? bulbOn : bulbOff}
+            src={data && data.onCampus ? bulbOn : bulbOff}
             alt="lamp"
           />
         </h3>
       </header>
-
     );
   }
 }

@@ -2,57 +2,44 @@ version: '2'
 services:
   dashboard:
     container_name: dashboard
-    build: ./Dashboard
+    build:
+      context: .
+      dockerfile: ./Dashboard/Dockerfile
     environment:
-     - REACT_APP_OSTEP_DASH_HOST=$HOSTNAME
+      - REACT_APP_OSTEP_DASH_HOST=$HOSTNAME
     depends_on:
-     - "osteppy"
-     - "lamp"
-     - "rapresenter"
-     - "db1042"
-     - "github"
-     - "infrastructure"
+      - 'lamp'
+      - 'rapresenter'
+      - 'github'
+      - 'infrastructure'
     ports:
-     - "80:2000"
-    restart: always
-  osteppy:
-    container_name: osteppy
-    build: ./Osteppy
-    env_file:
-      - .dashboard.env
-    ports:
-      - "8081:2001"
+      - '80:80'
     restart: always
   lamp:
     container_name: lamp
     build: ./Lamp
     ports:
-      - "8082:2002"
+      - '127.0.0.1:8001:8001'
     restart: always
   rapresenter:
     container_name: rapresenter
     build: ./RAPresenter
     ports:
-      - "8083:2003"
-    restart: always
-  db1042:
-    container_name: db1042
-    build: ./DB1042
-    ports:
-      - "8084:2004"
+      - '127.0.0.1:8002:8002'
     restart: always
   infrastructure:
     container_name: infrastructure
-    build: ./Infrastructure
+    build:
+      context: .
+      dockerfile: ./Infrastructure/Dockerfile
     ports:
-      - "8085:2005"
+      - '127.0.0.1:8003:8003'
     restart: always
   github:
     container_name: github
-    build: ./Github
-    env_file:
-      - .dashboard.env
+    build:
+      context: .
+      dockerfile: ./Github/Dockerfile
     ports:
-      - "8086:2006"
+      - '127.0.0.1:8004:8004'
     restart: always
-

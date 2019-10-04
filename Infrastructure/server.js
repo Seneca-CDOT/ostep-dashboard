@@ -3,7 +3,7 @@ const cors = require('cors');
 const getStatus = require('./checkService.js');
 
 const app = express();
-const PORT = 2005;
+const PORT = 80;
 
 app.use(cors());
 
