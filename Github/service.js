@@ -172,8 +172,8 @@ const getIssuesFromRepo = repo => {
             let assigs = [];
 
             helpWantedRegExp = /help( |-)?wanted/i;
-            hasHelpWanted = (lable) => {
-              return lable.name.match(helpWantedRegExp);
+            hasHelpWanted = (label) => {
+              return helpWantedRegExp.test(label.name);
             }
 
             if (issue.labels.some(hasHelpWanted)) {
@@ -281,6 +281,14 @@ const getPullRequestsPerRepo = repo => {
               }),
               number: pullRequest.number,
             };
+            priorityRegEx = /priority/i;
+            hasPriority = (label) => {
+              return priorityRegEx.test(label.name);
+            }
+
+            if (!pullRequestData.labels.some(hasPriority))
+              pullRequestData.labels.push({name: "priority: medium", color: "e4fc5a"})
+
             pullRequestsPerBranch.push(pullRequestData);
           });
           resolve(pullRequestsPerBranch);
