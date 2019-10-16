@@ -72,6 +72,11 @@ export default class Reminder extends Container {
     );
   }
 
+  /*
+    textColour uses this to determine if the label font should be white or black
+    depending on the background colour
+    https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color/3943023
+  */
   textColor = colour => {
     const red = parseInt(colour.substr(0, 2), 16);
     const green = parseInt(colour.substr(2, 2), 16);
