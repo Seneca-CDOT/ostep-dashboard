@@ -43,8 +43,3 @@ services:
     ports:
       - '127.0.0.1:8004:8004'
     restart: always
-  reminder:
-    container_name: reminder
-    ports:
-      - '127.0.0.1:8005:8005'
-    restart: always
