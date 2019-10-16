@@ -78,10 +78,13 @@ export default class Reminder extends Container {
     https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color/3943023
   */
   textColor = colour => {
+    const white = "#ffffff";
+    const black = "#000000";
+    
     const red = parseInt(colour.substr(0, 2), 16);
     const green = parseInt(colour.substr(2, 2), 16);
     const blue = parseInt(colour.substr(4, 2), 16);
 
-    return (red * 0.299 + green * 0.587 + blue * 0.114) > 186 ? '#000000' : '#ffffff';
+    return (red * 0.299 + green * 0.587 + blue * 0.114) > 186 ? black : white;
   }
 }
