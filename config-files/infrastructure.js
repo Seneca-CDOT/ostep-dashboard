@@ -32,7 +32,7 @@ module.exports = {
     { host: 'ps', address: 'ps.cdot.systems' },
     { host: 'italy', address: 'italy.cdot.systems' },
     { host: 'canada', address: 'canada.cdot.systems' },
-    { host: 'narnia', address: 'narnia.cdot.systems' },
+    { host: 'denmark', address: 'denmark.cdot.systems' },
     { host: 'spain', address: 'spain.cdot.systems' },
     { host: 'rome', address: 'rome.cdot.systems' },
     {
