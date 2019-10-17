@@ -53,6 +53,35 @@ ABCVAEWFOAFW...
 -----END OPENSSH PRIVATE KEY-----
 ```
 
+##### `infrastructure.json:`
+
+```
+module.exports = {
+  servers: [
+    {
+      description: 'server',
+      name: 'server1',
+      domain: 'mydomain.myservers.com',
+      port: '3000'
+    },
+    {
+      description: 'server',
+      name: 'server2',
+      domain: 'mydomain.myservers.com',
+      port: '3000'
+    },
+  ...
+  ],
+  workstations: [
+    { host: 'bbb', address: 'bbb.cdot.systems' },
+    { host: 'vega', address: 'vega.cdot.systems' },
+  ...
+  ],
+  dnsQueryDomain: 'myservers.com',
+  sshUser: 'admin'
+};
+```
+
 ### Docker compose
 
 To build the containers:
