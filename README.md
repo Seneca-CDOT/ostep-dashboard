@@ -74,7 +74,7 @@ module.exports = {
   ],
   workstations: [
     { host: 'workstation1', address: 'workstation1.mymachines.com' },
-    { host: 'workstation2', address: 'workstation2.mymachines.systems' },
+    { host: 'workstation2', address: 'workstation2.mymachines.com' },
   ...
   ],
   dnsQueryDomain: 'mymachines.com',
