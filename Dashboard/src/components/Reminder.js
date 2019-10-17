@@ -4,7 +4,11 @@ import Container from './common/Container';
 import pullRequestIcon from './assets/pull-request_wh.svg';
 import moment from 'moment';
 
-const COMPONENT_NAME = 'reminder';
+/**
+  * We use '%2F' instead of '/' for COMPONENT_NAME since
+  * forward slashes need to be urlencoded so the request in Service.js will work
+ */
+const COMPONENT_NAME = 'github%2Fpull-requests';
 
 export default class Reminder extends Container {
   constructor(props) {
