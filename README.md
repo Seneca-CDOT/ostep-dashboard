@@ -61,23 +61,23 @@ module.exports = {
     {
       description: 'server',
       name: 'server1',
-      domain: 'mydomain.myservers.com',
+      domain: 'mydomain.mymachines.com',
       port: '3000'
     },
     {
       description: 'server',
       name: 'server2',
-      domain: 'mydomain.myservers.com',
+      domain: 'mydomain.mymachines.com',
       port: '3000'
     },
   ...
   ],
   workstations: [
-    { host: 'bbb', address: 'bbb.cdot.systems' },
-    { host: 'vega', address: 'vega.cdot.systems' },
+    { host: 'workstation1', address: 'workstation1.mymachines.com' },
+    { host: 'workstation2', address: 'workstation2.mymachines.systems' },
   ...
   ],
-  dnsQueryDomain: 'myservers.com',
+  dnsQueryDomain: 'mymachines.com',
   sshUser: 'admin'
 };
 ```
