@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 const data = require('./service.js');
 const app = express();
 
-const PORT = process.env.PORT || 2006;
+const PORT = process.env.PORT || 80;
 let isTimedOut = false;
 const TIMEOUT_SECONDS = 6 * 60;
 let storedData;
@@ -64,6 +64,24 @@ app.get('/help-wanted', (req, res) => {
         .getIssues(repos)
         .then(issues => {
           res.json(issues);
+        })
+        .catch(err => {
+          res.status(err.statusCode).send(err.statusMessage);
+        });
+    })
+    .catch(err => {
+      res.status(err.statusCode).send(err.statusMessage);
+    });
+});
+
+app.get('/pull-requests', (req, res) => {
+  data
+    .getRepos(month)
+    .then(repos => {
+      data
+        .getAllPullRequests(repos)
+        .then(pullRequests => {
+          res.json(pullRequests);
         })
         .catch(err => {
           res.status(err.statusCode).send(err.statusMessage);

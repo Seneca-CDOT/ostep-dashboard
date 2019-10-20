@@ -6,7 +6,7 @@ const {
   workstations: workstationList,
   dnsQueryDomain,
   sshUser
-} = require('./config.js');
+} = require('../config-files/infrastructure.js');
 
 const DIG_ARGS = ['ns'];
 const SSH_TIMEOUT = 3;

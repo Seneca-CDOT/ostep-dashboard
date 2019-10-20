@@ -26,7 +26,7 @@ export default {
     }
   },
   lamp: { status: 'Chris is off campus.', onCampus: false },
-  presentations: {
+  rapresenter: {
     rows: [
       {
         Date: '2119-06-03',

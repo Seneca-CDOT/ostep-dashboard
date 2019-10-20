@@ -1,14 +1,23 @@
 FROM node
 
+# Create app directory
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-
-# ENV GITHUB_TOKEN $GITHUB_TOKEN
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY ./Github/package*.json ./
 
 RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
 
-COPY . .
+# Bundle app source
+COPY ./Github .
 
-EXPOSE 2006
+# Add config file
+RUN mkdir /usr/src/config-files
+COPY ./config-files/github-token.json /usr/src/config-files
+
+EXPOSE 80
 CMD [ "npm", "start" ]
