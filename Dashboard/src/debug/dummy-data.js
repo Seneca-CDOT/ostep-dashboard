@@ -161,7 +161,7 @@ export default {
       message: 'Added state __str__ overload for assets'
     }
   ],
-  reminder: [
+  'github%2Fpull-requests': [
     {
       title: 'Added flux capacitor',
       author: { name: 'Marty McFly'},
