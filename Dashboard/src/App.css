@@ -528,8 +528,8 @@ PR REMINDER PANEL
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  width: 95%;
   text-overflow: ellipsis;
+  vertical-align: bottom;
   display: flex;
 }
 
@@ -569,11 +569,12 @@ PR REMINDER PANEL
 .github-pullRequest__name {
   color: #e74c3c;
   font-weight: bold;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
-  max-width: 90rem;
+  width: 25rem;
   text-overflow: ellipsis;
-  display: inline-block;
+  vertical-align: bottom; */
+  /* display: inline-block; */
 }
 
 .github-pullRequest__avatar {

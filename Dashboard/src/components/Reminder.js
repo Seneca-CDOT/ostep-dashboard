@@ -39,7 +39,7 @@ export default class Reminder extends Container {
                       {`[${pullRequest.repoName}]`}
                     </span>
                     <span className="github-pullRequest__priority--high github-pullRequest__label">
-                      {'[High]'}
+                      {'[Priority: High]'}
                     </span>
                     <span className="github-pullRequest__name">
                       {pullRequest.title}
