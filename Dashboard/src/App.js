@@ -5,7 +5,7 @@ import Service from './Service.js';
 import Infrastructure from './components/Infrastructure';
 import Github from './components/Github';
 import Schedule from './components/Schedule';
-import Panel from './components/common/Panel';
+import Reminder from './components/Reminder';
 const service = new Service();
 // const DEFAULT_PANELS = ['github', 'infrastructure', 'eods'];
 
@@ -36,7 +36,7 @@ class App extends Component {
             <Infrastructure fetchData={this.fetchData} />
           </div>
           <div className="row">
-            <Panel title={'PR Reminders (Coming Soon)'} />
+            <Reminder fetchData={this.fetchData} />
             <Schedule fetchData={this.fetchData} />
           </div>
         </div>

@@ -34,7 +34,7 @@ module.exports.getRepos = recency => {
         } else {
           const reposNames = JSON.parse(data)
             .filter(rep => {
-              return (today - new Date(rep.pushed_at) < recency && !rep.private);
+              return (today - new Date(rep.pushed_at) < recency);
             })
             .map(repo => {
               return {

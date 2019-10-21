@@ -497,6 +497,106 @@ DB1042 SECTION
 
 /* 
 ====================================
+PR REMINDER PANEL
+==================================== 
+*/
+
+.github-pullRequest {
+  margin-bottom: 1.5rem;
+  border-width: 1px;
+  display: block;
+}
+
+.github-pullRequest__inner {
+  display: inline-block;
+}
+
+.github-pullRequest__icon {
+  height: rem;
+  width: 1.2em;
+  margin-top: 0rem;
+  margin-right: 0.5em;
+  display: inline-block;
+}
+
+.github-pullRequest__details {
+  margin-bottom: 0;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width:95%;
+  text-overflow: ellipsis;
+}
+
+.github-pullRequest__details > * {
+  vertical-align: middle;
+}
+
+.github-pullRequest__description {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+  margin-left: 2em;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  width:95%;
+  text-overflow: ellipsis;
+}
+
+.github-pullRequest__repo{
+  color: #3498db;
+  font-weight: bold;
+}
+
+.github-pullRequest__number{
+  color: grey;
+}
+
+.github-pullRequest__name{
+  color: #e74c3c;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 30rem;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.github-pullRequest__avatar{
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+
+.github-pullRequest__reviewers {
+  margin-left: 4rem;
+  margin-bottom: .5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  width:50%;
+  text-overflow: ellipsis;
+}
+
+.github-pullRequest__labels {
+  margin-left: 4rem;
+}
+
+.github-pullRequest__label {
+  margin-right: 0.6em;
+  margin-top: -1rem;
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 2px;
+  font-size: 1.3rem;
+  display: inline-block;
+}
+
+.github-pullRequest__time {
+  color: #2ecc71;
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+/* 
+====================================
 SPINNER
 ==================================== 
 */
