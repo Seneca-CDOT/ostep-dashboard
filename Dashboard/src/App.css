@@ -36,7 +36,7 @@ body {
   font-size: 10px;
   line-height: 230%;
   background-color: #34495e;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -524,12 +524,14 @@ PR REMINDER PANEL
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  width:95%;
+  width: 95%;
   text-overflow: ellipsis;
+  display: flex;
 }
 
-.github-pullRequest__details > * {
-  vertical-align: middle;
+.github-pullRequest__priority--high {
+  background-color: #e74c3c;
+  color: #ecf0f1;
 }
 
 .github-pullRequest__description {
@@ -539,20 +541,29 @@ PR REMINDER PANEL
   display: block;
   white-space: nowrap;
   overflow: hidden;
-  width:95%;
+  width: 95%;
   text-overflow: ellipsis;
 }
 
-.github-pullRequest__repo{
-  color: #3498db;
+.github-pullRequest__label {
   font-weight: bold;
+  border-radius: 2px;
+  padding: 0 0.5rem;
+  height: 2.5rem;
+  margin: 0 0.4rem;
 }
 
-.github-pullRequest__number{
+.github-pullRequest__repo {
+  color: #ecf0f1;
+  background-color: #2980b9;
+
+}
+
+.github-pullRequest__number {
   color: grey;
 }
 
-.github-pullRequest__name{
+.github-pullRequest__name {
   color: #e74c3c;
   font-weight: bold;
   white-space: nowrap;
@@ -562,31 +573,22 @@ PR REMINDER PANEL
   display: inline-block;
 }
 
-.github-pullRequest__avatar{
+.github-pullRequest__avatar {
   height: 2.5rem;
   margin-left: 1rem;
 }
 
 .github-pullRequest__reviewers {
   margin-left: 4rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
-  width:50%;
+  width: 50%;
   text-overflow: ellipsis;
 }
 
 .github-pullRequest__labels {
   margin-left: 4rem;
-}
-
-.github-pullRequest__label {
-  margin-right: 0.6em;
-  margin-top: -1rem;
-  padding: 0 0.5rem 0 0.5rem;
-  border-radius: 2px;
-  font-size: 1.3rem;
-  display: inline-block;
 }
 
 .github-pullRequest__time {
@@ -622,7 +624,7 @@ SPINNER
 }
 
 .lds-spinner div:after {
-  content: " ";
+  content: ' ';
   display: block;
   position: absolute;
   top: 3px;
@@ -715,7 +717,6 @@ RESPONSIVE DESIGN
 .hidden {
   display: none;
 }
-
 
 /*
 ======================================
@@ -867,7 +868,6 @@ DISPLAY CLASSES
   }
 }
 
-
 @media only screen and (max-width: 340px) {
   header {
     font-size: 1.25rem;
@@ -881,4 +881,3 @@ DISPLAY CLASSES
     font-size: 1.32rem;
   }
 }
-
