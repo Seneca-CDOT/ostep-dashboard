@@ -18,7 +18,8 @@ COPY ./Infrastructure .
 
 # Add config file
 RUN mkdir /usr/src/config-files
-COPY ./config-files/id_rsa /usr/src/app
+COPY ./config-files/id_rsa  /usr/src/app
+COPY ./config-files/infrastructure.js /usr/src/config-files
 
 EXPOSE 80
 CMD [ "npm", "start" ]
