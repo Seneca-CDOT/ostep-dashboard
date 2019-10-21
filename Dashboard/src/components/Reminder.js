@@ -24,42 +24,45 @@ export default class Reminder extends Container {
               'MMM DD@HH:mm'
             );
             return (
-              <div
-                key={`${pullRequest.repoName}`}
-                className="github-pullRequest"
-              >
-                <div className="github-pullRequest__details">
-                  <img
-                    className="github-pullRequest__icon"
-                    src={pullRequestIcon}
-                    alt="Pull Request icon"
-                  />
-                  <span className="github-pullRequest__repo github-pullRequest__label">
-                    {`[${pullRequest.repoName}]`}
-                  </span>
-                  <span className="github-pullRequest__priority--high github-pullRequest__label">
-                    {'[High]'}
-                  </span>
-                  <span className="github-pullRequest__name">
-                    {pullRequest.title}
-                  </span>
-                  <span className="github-pullRequest__time">
-                    {' ('}
-                    {creationDate}
-                    {') '}
-                  </span>
-                  <span>
-                    {pullRequest.reviewers.map(reviewer => (
-                      <img
-                        className="github-pullRequest__avatar"
-                        src={reviewer.avatar}
-                        title={reviewer.name}
-                      />
-                    ))}
-                  </span>
-                </div>
-                <div className="github-pullRequest__labels">
-                  {pullRequest.labels.map(label => {
+              <div className="github-pullRequest">
+                <img
+                  className="github-pullRequest__icon"
+                  src={pullRequestIcon}
+                  alt="Pull Request icon"
+                />
+                <div
+                  key={`${pullRequest.repoName}`}
+                  className="github-pullRequest__content"
+                >
+                  <div className="github-pullRequest__details">
+                    <span className="github-pullRequest__repo github-pullRequest__label">
+                      {`[${pullRequest.repoName}]`}
+                    </span>
+                    <span className="github-pullRequest__priority--high github-pullRequest__label">
+                      {'[High]'}
+                    </span>
+                    <span className="github-pullRequest__name">
+                      {pullRequest.title}
+                    </span>
+                    <span className="github-pullRequest__time">
+                      {' ('}
+                      {creationDate}
+                      {') '}
+                    </span>
+                  </div>
+                  <div className="github-pullRequest__status">
+                    <span className="github-pullRequest__time">5</span>days old
+                    - Waiting on{' '}
+                    <span>
+                      {pullRequest.reviewers.map(reviewer => (
+                        <img
+                          className="github-pullRequest__avatar"
+                          src={reviewer.avatar}
+                          title={reviewer.name}
+                        />
+                      ))}
+                    </span>
+                    {/* {pullRequest.labels.map(label => {
                     const text = this.textColor(label.color);
                     const inLineStyle = {
                       background: `#${label.color}`,
@@ -73,17 +76,18 @@ export default class Reminder extends Container {
                         {`${label.name}`}
                       </span>
                     );
-                  })}
-                </div>
-                <div>
-                  <span
-                    className="github-pullRequest__description"
-                    title={pullRequest.description}
-                  >
-                    {' "'}
-                    {`${pullRequest.description}`}
-                    {' "'}
-                  </span>
+                  })} */}
+                  </div>
+                  {/* <div>
+                    <span
+                      className="github-pullRequest__description"
+                      title={pullRequest.description}
+                    >
+                      {' "'}
+                      {`${pullRequest.description}`}
+                      {' "'}
+                    </span>
+                  </div> */}
                 </div>
               </div>
             );
