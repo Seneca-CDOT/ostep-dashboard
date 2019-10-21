@@ -512,8 +512,8 @@ PR REMINDER PANEL
 }
 
 .github-pullRequest__icon {
-  height: 3rem;
-  width: 1.5em;
+  height: rem;
+  width: 1.2em;
   margin-top: 0rem;
   margin-right: 0.5em;
   display: inline-block;
@@ -528,8 +528,13 @@ PR REMINDER PANEL
   text-overflow: ellipsis;
 }
 
+.github-pullRequest__details > * {
+  vertical-align: middle;
+}
+
 .github-pullRequest__description {
   margin-bottom: 0;
+  margin-top: 0.5rem;
   margin-left: 2em;
   display: block;
   white-space: nowrap;
@@ -550,6 +555,11 @@ PR REMINDER PANEL
 .github-pullRequest__name{
   color: #e74c3c;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 30rem;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .github-pullRequest__avatar{
@@ -571,9 +581,12 @@ PR REMINDER PANEL
 }
 
 .github-pullRequest__label {
-  margin-right: 1em;
+  margin-right: 0.6em;
+  margin-top: -1rem;
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 2px;
+  font-size: 1.3rem;
+  display: inline-block;
 }
 
 .github-pullRequest__time {
