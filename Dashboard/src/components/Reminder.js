@@ -48,20 +48,26 @@ export default class Reminder extends Container {
     return priorityLevel;
   };
 
-  sortPullRequests = pullRequests => {
+  isGreaterPriority = (firstPR, secondPR) => {
     const priorityEnum = { low: 0, medium: 1, high: 2, critical: 3 };
+    return priorityEnum[firstPR.priority] > priorityEnum[secondPR.priority];
+  };
 
+  isDateAfter = (firstDate, secondDate) => {
+    moment(firstDate.created).isAfter(moment(secondDate.created));
+  };
+
+  sortPullRequests = pullRequests => {
     return pullRequests
       .map(pullRequest => {
         pullRequest.priority = this.findPullRequestPriority(pullRequest);
         pullRequest.age = this.findPullRequestAge(pullRequest);
-        console.log('or', pullRequest);
         return pullRequest;
       })
       .sort((a, b) => {
-        if (priorityEnum[a.priority] > priorityEnum[b.priority]) {
+        if (this.isGreaterPriority(a, b)) {
           return -1;
-        } else if (moment(a.created).isAfter(moment(b.created))) {
+        } else if (this.isDateAfter(a, b)) {
           return 1;
         } else {
           return 0;
@@ -71,7 +77,6 @@ export default class Reminder extends Container {
 
   render() {
     const { data } = this.state;
-
     return (
       <Panel title="PR Reminder" refreshData={this.refreshData}>
         {data &&
