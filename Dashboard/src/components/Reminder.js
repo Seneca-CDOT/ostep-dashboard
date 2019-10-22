@@ -39,10 +39,13 @@ export default class Reminder extends Container {
     if (!priorityLabel) {
       priorityLevel = 'medium';
     } else {
-      priorityLevel = priorityLabel.split(' ').pop();
+      priorityLevel = priorityLabel
+        .split(' ')
+        .pop()
+        .toLowerCase();
     }
 
-    return priorityLevel.toLowerCase();
+    return priorityLevel;
   };
 
   sortPullRequests = pullRequests => {
