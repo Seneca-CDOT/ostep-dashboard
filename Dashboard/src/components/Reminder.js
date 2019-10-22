@@ -83,7 +83,7 @@ export default class Reminder extends Container {
       .sort(this.comparePullRequests);
   };
 
-  getWaitingOn = pullRequest => {
+  getWaitedOn = pullRequest => {
     if (pullRequest.reviewers.length === 0) {
       const { avatar, name } = pullRequest.author;
       return (
@@ -141,6 +141,8 @@ export default class Reminder extends Container {
                     <a
                       href={pullRequest.url}
                       className="github-pullRequest__name github-pullRequest__label"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       {`#${pullRequest.number}: ${pullRequest.title}`}
                     </a>{' '}
@@ -149,7 +151,7 @@ export default class Reminder extends Container {
                     <span className="github-pullRequest__time">{`${count} ${format}${
                       count > 1 ? 's' : ''
                     } old - waiting on`}</span>
-                    {this.getWaitingOn(pullRequest)}
+                    {this.getWaitedOn(pullRequest)}
                   </div>
                 </div>
               </div>
