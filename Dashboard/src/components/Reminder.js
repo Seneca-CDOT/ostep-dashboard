@@ -20,10 +20,10 @@ export default class Reminder extends Container {
     const createdDate = moment(created);
     const timeDifference = moment.duration(now.diff(createdDate));
     const durations = [
-      { format: 'day', value: timeDifference.days() },
-      { format: 'hour', value: timeDifference.hours() },
-      { format: 'minute', value: timeDifference.minutes() },
-      { format: 'second', value: timeDifference.seconds() },
+      { format: 'day', count: timeDifference.days() },
+      { format: 'hour', count: timeDifference.hours() },
+      { format: 'minute', count: timeDifference.minutes() },
+      { format: 'second', count: timeDifference.seconds() },
     ];
 
     return durations.find(({ value }) => value);
@@ -43,6 +43,27 @@ export default class Reminder extends Container {
     }
 
     return priorityLevel.toLowerCase();
+  };
+
+  sortPullRequests = pullRequests => {
+    const priorityEnum = { low: 0, medium: 1, high: 2, critical: 3 };
+
+    return pullRequests
+      .map(pullRequest => {
+        pullRequest.priority = this.findPullRequestPriority(pullRequest);
+        pullRequest.age = this.findPullRequestAge(pullRequest);
+        return pullRequest;
+      })
+      .sort((a, b) => {
+        if (
+          priorityEnum[a.priority] > priorityEnum[b.priority] ||
+          moment(a.created).isBefore(moment(b.created))
+        ) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
   };
 
   render() {
