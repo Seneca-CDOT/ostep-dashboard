@@ -5,8 +5,8 @@ import pullRequestIcon from './assets/pull-request_wh.svg';
 import moment from 'moment';
 
 /**
-  * We use '%2F' instead of '/' for COMPONENT_NAME since
-  * forward slashes need to be urlencoded so the request in Service.js will work
+ * We use '%2F' instead of '/' for COMPONENT_NAME since
+ * forward slashes need to be urlencoded so the request in Service.js will work
  */
 const COMPONENT_NAME = 'github%2Fpull-requests';
 
@@ -15,80 +15,132 @@ export default class Reminder extends Container {
     super(props, COMPONENT_NAME);
   }
 
+  findPullRequestAge = ({ created }) => {
+    const now = moment();
+    const createdDate = moment(created);
+    const computeTimeDifference = period => now.diff(createdDate, period);
+
+    const durations = [
+      { format: 'day', count: computeTimeDifference('days') },
+      { format: 'hour', count: computeTimeDifference('hours') },
+      { format: 'minute', count: computeTimeDifference('minutes') },
+      { format: 'second', count: computeTimeDifference('seconds') }
+    ];
+
+    return durations.find(({ count }) => count);
+  };
+
+  findPullRequestPriority = ({ labels }) => {
+    let priorityLevel;
+
+    const { name: priorityLabel } = labels.find(label =>
+      /priority/i.test(label.name)
+    );
+
+    if (!priorityLabel) {
+      priorityLevel = 'medium';
+    } else {
+      priorityLevel = priorityLabel
+        .split(' ')
+        .pop()
+        .toLowerCase();
+    }
+
+    return priorityLevel;
+  };
+
+  isGreaterPriority = (firstPR, secondPR) => {
+    const priorityEnum = { low: 0, medium: 1, high: 2, critical: 3 };
+    return priorityEnum[firstPR.priority] > priorityEnum[secondPR.priority];
+  };
+
+  isDateBefore = (firstDate, secondDate) => {
+    return moment(firstDate.created).isBefore(moment(secondDate.created));
+  };
+
+  comparePullRequests = (firstPR, secondPR) => {
+    if (this.isGreaterPriority(firstPR, secondPR)) {
+      return -1;
+    } else if (this.isGreaterPriority(secondPR, firstPR)) {
+      return 1;
+    }
+
+    if (this.isDateBefore(firstPR, secondPR)) {
+      return -1;
+    } else if (this.isDateBefore(secondPR, firstPR)) {
+      return 1;
+    }
+    return 0;
+  };
+
+  sortPullRequests = pullRequests => {
+    return pullRequests
+      .map(pullRequest => {
+        pullRequest.priority = this.findPullRequestPriority(pullRequest);
+        pullRequest.age = this.findPullRequestAge(pullRequest);
+        return pullRequest;
+      })
+      .sort(this.comparePullRequests);
+  };
+
   render() {
+    const { data } = this.state;
     return (
-      <Panel title='PR Reminder' refreshData={this.refreshData}>
-        {this.state.data &&
-          this.state.data.map(pullRequest => {
-            const creationDate = moment(pullRequest.created).format("MMM DD@HH:mm");
+      <Panel title="PR Reminder" refreshData={this.refreshData}>
+        {data &&
+          this.sortPullRequests(data).map(pullRequest => {
+            const {
+              priority,
+              age: { format },
+              age: { count }
+            } = pullRequest;
             return (
-              <div
-                key={`${pullRequest.repoName}`}
-                className='github-pullRequest'>
-                <div className='github-pullRequest__details'>
-                  <img
-                    className='github-pullRequest__icon'
-                    src={pullRequestIcon}
-                    alt='Pull Request icon'
-                  />
-                  <span className='github-pullRequest__number'>
-                    #{pullRequest.number}{' '}
-                  </span>
-                  <span className='github-pullRequest__name'>{' "'}{pullRequest.title}{'" '}</span>
-                  {' in repository '}
-                  <span className='github-pullRequest__repo'>{`${
-                    pullRequest.repoName
-                    }`}</span>
-                  <span className='github-pullRequest__time'>{' ('}{
-                    creationDate}
-                    {') '}</span>
-                  <span>
-                    {pullRequest.reviewers.map(reviewer => (
-                      <img
-                        className='github-pullRequest__avatar'
-                        src={`${reviewer.avatar}`}
-                        title={`${reviewer.name}`}
-                      />
-                    ))}
-                  </span>
-                </div>
-                <div className='github-pullRequest__labels'>
-                  {pullRequest.labels.map(label => {
-                    const text = this.textColor(label.color);
-                    const inLineStyle = {
-                      background: `#${label.color}`,
-                      color: `${text}`
-                    };
-                    return <span style={inLineStyle} className='github-pullRequest__label'>
-                      {`${label.name}`}
+              <div key={`${pullRequest.title}`} className="github-pullRequest">
+                <div className="github-pullRequest__content">
+                  <div className="github-pullRequest__details">
+                    <img
+                      className="github-pullRequest__icon"
+                      src={pullRequestIcon}
+                      alt="Pull Request icon"
+                    />
+                    <span className="github-pullRequest__repo github-pullRequest__label">
+                      {`[${pullRequest.repoName}]`}
                     </span>
-                  })}
-                </div>
-                <div>
-                  <span className='github-pullRequest__description' title={pullRequest.description}>{' "'}{`${
-                    pullRequest.description
-                    }`}{' "'}</span>
+                    <span
+                      className={`github-pullRequest__priority-${priority} github-pullRequest__label`}
+                    >
+                      {`[${priority}]`}
+                    </span>
+                    <a
+                      href={pullRequest.url}
+                      className="github-pullRequest__name github-pullRequest__label"
+                    >
+                      {`#${pullRequest.number}: ${pullRequest.title}`}
+                    </a>{' '}
+                  </div>
+                  <div className="github-pullRequest__status">
+                    <span className="github-pullRequest__time">{`${count} ${format}${
+                      count > 1 ? 's' : ''
+                    } old - waiting on`}</span>
+                    {pullRequest.reviewers.map(reviewer => (
+                      <span
+                        key={reviewer.avatar}
+                        className="github-pullRequest__reviewer"
+                      >
+                        <img
+                          className="github-pullRequest__avatar"
+                          src={reviewer.avatar}
+                          title={reviewer.name}
+                          alt={`${reviewer.name}'s avatar'`}
+                        />
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
           })}
       </Panel>
     );
-  }
-
-  /*
-    textColour uses this to determine if the label font should be white or black
-    depending on the background colour
-    https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color/3943023
-  */
-  textColor = colour => {
-    const white = "#ffffff";
-    const black = "#000000";
-    
-    const red = parseInt(colour.substr(0, 2), 16);
-    const green = parseInt(colour.substr(2, 2), 16);
-    const blue = parseInt(colour.substr(4, 2), 16);
-
-    return (red * 0.299 + green * 0.587 + blue * 0.114) > 186 ? black : white;
   }
 }

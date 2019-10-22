@@ -36,7 +36,7 @@ body {
   font-size: 10px;
   line-height: 230%;
   background-color: #34495e;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -502,9 +502,8 @@ PR REMINDER PANEL
 */
 
 .github-pullRequest {
-  margin-bottom: 1.5rem;
-  border-width: 1px;
-  display: block;
+  display: flex;
+  margin-bottom: .5rem;
 }
 
 .github-pullRequest__inner {
@@ -517,82 +516,90 @@ PR REMINDER PANEL
   margin-top: 0rem;
   margin-right: 0.5em;
   display: inline-block;
+  align-self: baseline;
 }
 
 .github-pullRequest__details {
-  margin-bottom: 0;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  width:95%;
-  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
 }
 
-.github-pullRequest__details > * {
-  vertical-align: middle;
+.github-pullRequest__priority-critical {
+  background-color: #c0392b;
+}
+
+.github-pullRequest__priority-high {
+  background-color: #e74c3c;
+}
+
+.github-pullRequest__priority-medium {
+  background-color: #e67e22;
+}
+
+.github-pullRequest__priority-low {
+  background-color: #2ecc71;
+}
+
+.github-pullRequest__summary {
+  display: flex;
 }
 
 .github-pullRequest__description {
   margin-bottom: 0;
-  margin-top: 0.5rem;
+  margin-top: .5rem;
   margin-left: 2em;
   display: block;
   white-space: nowrap;
   overflow: hidden;
-  width:95%;
+  width: 95%;
   text-overflow: ellipsis;
-}
-
-.github-pullRequest__repo{
-  color: #3498db;
-  font-weight: bold;
-}
-
-.github-pullRequest__number{
-  color: grey;
-}
-
-.github-pullRequest__name{
-  color: #e74c3c;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 30rem;
-  text-overflow: ellipsis;
-  display: inline-block;
-}
-
-.github-pullRequest__avatar{
-  height: 2.5rem;
-  margin-left: 1rem;
-}
-
-.github-pullRequest__reviewers {
-  margin-left: 4rem;
-  margin-bottom: .5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  width:50%;
-  text-overflow: ellipsis;
-}
-
-.github-pullRequest__labels {
-  margin-left: 4rem;
 }
 
 .github-pullRequest__label {
-  margin-right: 0.6em;
-  margin-top: -1rem;
-  padding: 0 0.5rem 0 0.5rem;
   border-radius: 2px;
-  font-size: 1.3rem;
-  display: inline-block;
+  color: #ecf0f1;
+  margin-right: .5rem;
+  padding: .3rem;
+  text-transform: capitalize;
+}
+
+.github-pullRequest__summary-label {
+  background-color: #16a085;
+  color: #ecf0f1;
+}
+
+.github-pullRequest__repo {
+  color: #ecf0f1;
+  background-color: #2980b9;
+}
+
+.github-pullRequest__name {
+  text-decoration: none;
+  background-color: #16a085;
+}
+
+.github-pullRequest__avatar {
+  height: 2.5rem;
+  margin: .2rem .7rem;
+}
+
+.github-pullRequest__reviewer {
+  display: flex;
+}
+
+.github-pullRequest__reviewer-name {
+  color: #1abc9c;
+}
+
+.github-pullRequest__status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: .5rem 0 1.2rem 0;
 }
 
 .github-pullRequest__time {
-  color: #2ecc71;
-  display: inline-block;
-  margin-left: 1rem;
+  margin-right: .4rem;
 }
 
 /* 
@@ -622,7 +629,7 @@ SPINNER
 }
 
 .lds-spinner div:after {
-  content: " ";
+  content: ' ';
   display: block;
   position: absolute;
   top: 3px;
@@ -715,7 +722,6 @@ RESPONSIVE DESIGN
 .hidden {
   display: none;
 }
-
 
 /*
 ======================================
@@ -867,7 +873,6 @@ DISPLAY CLASSES
   }
 }
 
-
 @media only screen and (max-width: 340px) {
   header {
     font-size: 1.25rem;
@@ -881,4 +886,3 @@ DISPLAY CLASSES
     font-size: 1.32rem;
   }
 }
-
