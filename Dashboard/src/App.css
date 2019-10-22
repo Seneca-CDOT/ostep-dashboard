@@ -562,8 +562,8 @@ PR REMINDER PANEL
 .github-pullRequest__label {
   border-radius: 2px;
   color: #ecf0f1;
-  margin-right: 0.7rem;
-  padding: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.3rem;
   text-transform: capitalize;
 }
 
