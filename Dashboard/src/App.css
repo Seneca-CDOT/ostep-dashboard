@@ -503,7 +503,7 @@ PR REMINDER PANEL
 
 .github-pullRequest {
   display: flex;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .github-pullRequest__inner {
@@ -528,19 +528,19 @@ PR REMINDER PANEL
   align-items: center;
 }
 
-.github-pullRequest__priority--critical {
+.github-pullRequest__priority-critical {
   background-color: #c0392b;
 }
 
-.github-pullRequest__priority--high {
+.github-pullRequest__priority-high {
   background-color: #e74c3c;
 }
 
-.github-pullRequest__priority--medium {
+.github-pullRequest__priority-medium {
   background-color: #e67e22;
 }
 
-.github-pullRequest__priority--low {
+.github-pullRequest__priority-low {
   background-color: #2ecc71;
 }
 
@@ -562,7 +562,7 @@ PR REMINDER PANEL
 .github-pullRequest__label {
   border-radius: 2px;
   color: #ecf0f1;
-  margin-right: .7rem;
+  margin-right: 0.7rem;
   padding: 0.5rem;
   text-transform: capitalize;
 }
@@ -602,7 +602,7 @@ PR REMINDER PANEL
 }
 
 .github-pullRequest__time {
-  margin-right: .4rem;
+  margin-right: 0.4rem;
 }
 
 /* 

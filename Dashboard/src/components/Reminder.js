@@ -15,7 +15,7 @@ export default class Reminder extends Container {
     super(props, COMPONENT_NAME);
   }
 
-  computeDuration = ({ created }) => {
+  findPullRequestAge = ({ created }) => {
     const now = moment();
     const createdDate = moment(created);
     const timeDifference = moment.duration(now.diff(createdDate));
@@ -29,7 +29,7 @@ export default class Reminder extends Container {
     return durations.find(({ value }) => value);
   };
 
-  findPriority = ({ labels }) => {
+  findPullRequestPriority = ({ labels }) => {
     let priorityLevel;
 
     const { name: priorityLabel } = labels.find(label =>
@@ -51,8 +51,8 @@ export default class Reminder extends Container {
       <Panel title="PR Reminder" refreshData={this.refreshData}>
         {data &&
           data.map(pullRequest => {
-            const { format, value } = this.computeDuration(pullRequest);
-            const priority = this.findPriority(pullRequest);
+            const { format, value } = this.findPullRequestAge(pullRequest);
+            const priority = this.findPullRequestPriority(pullRequest);
 
             return (
               <div key={`${pullRequest.title}`} className="github-pullRequest">
@@ -67,7 +67,7 @@ export default class Reminder extends Container {
                       {`[${pullRequest.repoName}]`}
                     </span>
                     <span
-                      className={`github-pullRequest__priority--${priority} github-pullRequest__label`}
+                      className={`github-pullRequest__priority-${priority} github-pullRequest__label`}
                     >
                       {`[${priority}]`}
                     </span>
