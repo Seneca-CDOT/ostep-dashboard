@@ -26,7 +26,7 @@ export default class Reminder extends Container {
       { format: 'second', count: timeDifference.seconds() },
     ];
 
-    return durations.find(({ value }) => value);
+    return durations.find(({ count }) => count);
   };
 
   findPullRequestPriority = ({ labels }) => {
@@ -52,29 +52,32 @@ export default class Reminder extends Container {
       .map(pullRequest => {
         pullRequest.priority = this.findPullRequestPriority(pullRequest);
         pullRequest.age = this.findPullRequestAge(pullRequest);
+        console.log('or', pullRequest);
         return pullRequest;
       })
       .sort((a, b) => {
-        if (
-          priorityEnum[a.priority] > priorityEnum[b.priority] ||
-          moment(a.created).isBefore(moment(b.created))
-        ) {
+        if (priorityEnum[a.priority] > priorityEnum[b.priority]) {
           return -1;
-        } else {
+        } else if (moment(a.created).isAfter(moment(b.created))) {
           return 1;
+        } else {
+          return 0;
         }
       });
   };
 
   render() {
     const { data } = this.state;
+
     return (
       <Panel title="PR Reminder" refreshData={this.refreshData}>
         {data &&
-          data.map(pullRequest => {
-            const { format, value } = this.findPullRequestAge(pullRequest);
-            const priority = this.findPullRequestPriority(pullRequest);
-
+          this.sortPullRequests(data).map(pullRequest => {
+            const {
+              priority,
+              age: { format },
+              age: { count },
+            } = pullRequest;
             return (
               <div key={`${pullRequest.title}`} className="github-pullRequest">
                 <div className="github-pullRequest__content">
@@ -97,8 +100,8 @@ export default class Reminder extends Container {
                     </span>
                   </div>
                   <div className="github-pullRequest__status">
-                    <span className="github-pullRequest__time">{`${value} ${format}${
-                      value > 1 ? 's' : ''
+                    <span className="github-pullRequest__time">{`${count} ${format}${
+                      count > 1 ? 's' : ''
                     } old - waiting on`}</span>
                     {pullRequest.reviewers.map(reviewer => (
                       <span
