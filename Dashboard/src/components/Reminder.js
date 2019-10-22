@@ -103,7 +103,7 @@ export default class Reminder extends Container {
             className="github-pullRequest__avatar"
             src={avatar}
             title={name}
-            alt={`${name}'s avatar'`}
+            alt={`${name}'s avatar`}
           />
         </span>
       ));
