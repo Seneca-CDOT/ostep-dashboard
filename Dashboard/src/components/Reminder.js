@@ -18,12 +18,13 @@ export default class Reminder extends Container {
   findPullRequestAge = ({ created }) => {
     const now = moment();
     const createdDate = moment(created);
-    const timeDifference = moment.duration(now.diff(createdDate));
+    const computeTimeDifference = period => now.diff(createdDate, period);
+
     const durations = [
-      { format: 'day', count: timeDifference.days() },
-      { format: 'hour', count: timeDifference.hours() },
-      { format: 'minute', count: timeDifference.minutes() },
-      { format: 'second', count: timeDifference.seconds() },
+      { format: 'day', count: computeTimeDifference('days') },
+      { format: 'hour', count: computeTimeDifference('hours') },
+      { format: 'minute', count: computeTimeDifference('minutes') },
+      { format: 'second', count: computeTimeDifference('seconds') }
     ];
 
     return durations.find(({ count }) => count);
@@ -33,7 +34,7 @@ export default class Reminder extends Container {
     let priorityLevel;
 
     const { name: priorityLabel } = labels.find(label =>
-      /priority/i.test(label.name),
+      /priority/i.test(label.name)
     );
 
     if (!priorityLabel) {
@@ -53,8 +54,23 @@ export default class Reminder extends Container {
     return priorityEnum[firstPR.priority] > priorityEnum[secondPR.priority];
   };
 
-  isDateAfter = (firstDate, secondDate) => {
-    moment(firstDate.created).isAfter(moment(secondDate.created));
+  isDateBefore = (firstDate, secondDate) => {
+    return moment(firstDate.created).isBefore(moment(secondDate.created));
+  };
+
+  comparePullRequests = (firstPR, secondPR) => {
+    if (this.isGreaterPriority(firstPR, secondPR)) {
+      return -1;
+    } else if (this.isGreaterPriority(secondPR, firstPR)) {
+      return 1;
+    }
+
+    if (this.isDateBefore(firstPR, secondPR)) {
+      return -1;
+    } else if (this.isDateBefore(secondPR, firstPR)) {
+      return 1;
+    }
+    return 0;
   };
 
   sortPullRequests = pullRequests => {
@@ -64,15 +80,7 @@ export default class Reminder extends Container {
         pullRequest.age = this.findPullRequestAge(pullRequest);
         return pullRequest;
       })
-      .sort((a, b) => {
-        if (this.isGreaterPriority(a, b)) {
-          return -1;
-        } else if (this.isDateAfter(a, b)) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      .sort(this.comparePullRequests);
   };
 
   render() {
@@ -84,7 +92,7 @@ export default class Reminder extends Container {
             const {
               priority,
               age: { format },
-              age: { count },
+              age: { count }
             } = pullRequest;
             return (
               <div key={`${pullRequest.title}`} className="github-pullRequest">
@@ -103,9 +111,12 @@ export default class Reminder extends Container {
                     >
                       {`[${priority}]`}
                     </span>
-                    <span className="github-pullRequest__name github-pullRequest__label">
+                    <a
+                      href={pullRequest.url}
+                      className="github-pullRequest__name github-pullRequest__label"
+                    >
                       {`#${pullRequest.number}: ${pullRequest.title}`}
-                    </span>
+                    </a>{' '}
                   </div>
                   <div className="github-pullRequest__status">
                     <span className="github-pullRequest__time">{`${count} ${format}${

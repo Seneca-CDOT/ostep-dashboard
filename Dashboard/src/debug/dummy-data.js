@@ -164,7 +164,7 @@ export default {
   'github%2Fpull-requests': [
     {
       title: 'Added flux capacitor',
-      author: { name: 'Marty McFly'},
+      author: { name: 'Marty McFly' },
       created: '6/4/2019, 6:24:40 PM',
       number: '45',
       reviewers: [
@@ -174,26 +174,27 @@ export default {
         },
         {
           name: 'Biff',
-          avatar:'https://avatars2.githubusercontent.com/u/32024054?v=4',
-        },
+          avatar: 'https://avatars2.githubusercontent.com/u/32024054?v=4'
+        }
       ],
       labels: [
         {
           name: 'Priority: High',
-          color: 'f58484',
+          color: 'f58484'
         },
         {
           name: 'Type: Enhancement',
-          color: '37b4e5',
+          color: '37b4e5'
         }
       ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       repoName: 'ostep-dashboard',
       url: 'https//backToTheFuture.com'
     },
     {
       title: 'Killed Mozart',
-      author: { name: 'Salieri'},
+      author: { name: 'Salieri' },
       created: '10/10/2019, 6:24:40 PM',
       number: '76',
       reviewers: [
@@ -203,30 +204,31 @@ export default {
         },
         {
           name: 'Bach',
-          avatar:'https://avatars0.githubusercontent.com/u/21987387?v=4',
-        },
+          avatar: 'https://avatars0.githubusercontent.com/u/21987387?v=4'
+        }
       ],
       labels: [
         {
           name: 'Priority: High',
-          color: 'f58484',
+          color: 'f58484'
         },
         {
           name: 'Area: Backend',
-          color: '02d673',
+          color: '02d673'
         },
         {
           name: 'Type: Enhancement',
-          color: '37b4e5',
+          color: '37b4e5'
         }
       ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       repoName: 'telemed',
       url: 'https//IdidntKillMozart.com'
     },
     {
       title: 'Danced with Mia Wallace',
-      author: { name: 'Vince Vega'},
+      author: { name: 'Vince Vega' },
       created: '7/8/2019, 6:24:40 PM',
       number: '116',
       reviewers: [
@@ -236,30 +238,31 @@ export default {
         },
         {
           name: 'Marsellus Wallace',
-          avatar:'https://avatars2.githubusercontent.com/u/23108901?v=4',
-        },
+          avatar: 'https://avatars2.githubusercontent.com/u/23108901?v=4'
+        }
       ],
       labels: [
         {
           name: 'Type: Bug',
-          color: 'd73a4a',
+          color: 'd73a4a'
         },
         {
           name: 'Priority: Medium',
-          color: 'e4fc5a',
+          color: 'e4fc5a'
         },
         {
           name: 'Difficulty: Medium',
-          color: 'e67e22',
+          color: 'e67e22'
         }
       ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       repoName: 'plumadriver',
       url: 'https//.com'
     },
     {
       title: 'Killed Sentinels',
-      author: { name: 'Neo'},
+      author: { name: 'Neo' },
       created: '1/1/2019, 6:24:40 PM',
       number: '116',
       reviewers: [
@@ -269,26 +272,27 @@ export default {
         },
         {
           name: 'Trinity',
-          avatar:'https://avatars1.githubusercontent.com/u/7077433?v=4',
-        },
+          avatar: 'https://avatars1.githubusercontent.com/u/7077433?v=4'
+        }
       ],
       labels: [
         {
           name: 'Priority: Low',
-          color: 'fbca04',
+          color: 'fbca04'
         },
         {
           name: 'Area: Documentation',
-          color: 'f7ec59',
+          color: 'f7ec59'
         },
         {
           name: 'Type: Enhancement',
-          color: 'a3a4e2',
+          color: 'a3a4e2'
         }
       ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       repoName: 'j-sas',
       url: 'https//.com'
-    },
+    }
   ]
 };
