@@ -530,7 +530,6 @@ PR REMINDER PANEL
 
 .github-pullRequest__priority--high {
   background-color: #e74c3c;
-  margin: 0 0.4rem;
 }
 
 .github-pullRequest__summary {
@@ -551,7 +550,9 @@ PR REMINDER PANEL
 .github-pullRequest__label {
   border-radius: 2px;
   color: #ecf0f1;
+  margin-right: .7rem;
   padding: 0.5rem;
+  text-transform: capitalize;
 }
 
 .github-pullRequest__summary-label {

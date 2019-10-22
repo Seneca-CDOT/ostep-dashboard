@@ -15,16 +15,18 @@ export default class Reminder extends Container {
     super(props, COMPONENT_NAME);
   }
 
-  computeDurations = ({ created }) => {
+  computeDuration = ({ created }) => {
     const now = moment();
     const createdDate = moment(created);
     const timeDifference = moment.duration(now.diff(createdDate));
-    return {
-      days: timeDifference.days(),
-      hours: timeDifference.hours(),
-      minutes: timeDifference.minutes(),
-      seconds: timeDifference.seconds(),
-    };
+    const durations = [
+      { format: 'day', value: timeDifference.days() },
+      { format: 'hour', value: timeDifference.hours() },
+      { format: 'minute', value: timeDifference.minutes() },
+      { format: 'second', value: timeDifference.seconds() },
+    ];
+
+    return durations.find(({ value }) => value);
   };
 
   findPriority = ({ labels }) => {
@@ -33,14 +35,14 @@ export default class Reminder extends Container {
     const { name: priorityLabel } = labels.find(label =>
       /priority/i.test(label.name),
     );
-    
+
     if (!priorityLabel) {
-      priorityLevel = 'Medium';
+      priorityLevel = 'medium';
     } else {
       priorityLevel = priorityLabel.split(' ').pop();
     }
-  
-    return priorityLevel;
+
+    return priorityLevel.toLowerCase();
   };
 
   render() {
@@ -49,11 +51,9 @@ export default class Reminder extends Container {
       <Panel title="PR Reminder" refreshData={this.refreshData}>
         {data &&
           data.map(pullRequest => {
-            const { days, hours, minutes, seconds } = this.computeDurations(
-              pullRequest,
-            );
-
+            const { format, value } = this.computeDuration(pullRequest);
             const priority = this.findPriority(pullRequest);
+
             return (
               <div key={`${pullRequest.title}`} className="github-pullRequest">
                 <div className="github-pullRequest__content">
@@ -66,16 +66,19 @@ export default class Reminder extends Container {
                     <span className="github-pullRequest__repo github-pullRequest__label">
                       {`[${pullRequest.repoName}]`}
                     </span>
-                    <span className="github-pullRequest__priority--high github-pullRequest__label">
-                      {'[High]'}
+                    <span
+                      className={`github-pullRequest__priority--${priority} github-pullRequest__label`}
+                    >
+                      {`[${priority}]`}
                     </span>
                     <span className="github-pullRequest__name github-pullRequest__label">
                       {`#${pullRequest.number}: ${pullRequest.title}`}
                     </span>
                   </div>
                   <div className="github-pullRequest__status">
-                    <span className="github-pullRequest__time">{days}</span>
-                    {`day${days > 1 ? 's' : ''} old - waiting on`}
+                    <span className="github-pullRequest__time">{`${value} ${format}${
+                      value > 1 ? 's' : ''
+                    } old - waiting on`}</span>
                     {pullRequest.reviewers.map(reviewer => (
                       <span
                         key={reviewer.avatar}
