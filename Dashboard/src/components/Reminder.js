@@ -24,7 +24,7 @@ export default class Reminder extends Container {
       { format: 'day', count: computeTimeDifference('days') },
       { format: 'hour', count: computeTimeDifference('hours') },
       { format: 'minute', count: computeTimeDifference('minutes') },
-      { format: 'second', count: computeTimeDifference('seconds') }
+      { format: 'second', count: computeTimeDifference('seconds') },
     ];
 
     return durations.find(({ count }) => count);
@@ -34,7 +34,7 @@ export default class Reminder extends Container {
     let priorityLevel;
 
     const { name: priorityLabel } = labels.find(label =>
-      /priority/i.test(label.name)
+      /priority/i.test(label.name),
     );
 
     if (!priorityLabel) {
@@ -83,6 +83,33 @@ export default class Reminder extends Container {
       .sort(this.comparePullRequests);
   };
 
+  getWaitedOn = pullRequest => {
+    if (pullRequest.reviewers.length === 0) {
+      const { avatar, name } = pullRequest.author;
+      return (
+        <span className="github-pullRequest__reviewer">
+          <img
+            className="github-pullRequest__avatar"
+            src={avatar}
+            title={name}
+            alt={`${name}'s avatar'`}
+          />
+        </span>
+      );
+    } else {
+      return pullRequest.reviewers.map(({ avatar, name }) => (
+        <span key={avatar} className="github-pullRequest__reviewer">
+          <img
+            className="github-pullRequest__avatar"
+            src={avatar}
+            title={name}
+            alt={`${name}'s avatar`}
+          />
+        </span>
+      ));
+    }
+  };
+
   render() {
     const { data } = this.state;
     return (
@@ -92,7 +119,7 @@ export default class Reminder extends Container {
             const {
               priority,
               age: { format },
-              age: { count }
+              age: { count },
             } = pullRequest;
             return (
               <div key={`${pullRequest.title}`} className="github-pullRequest">
@@ -114,6 +141,8 @@ export default class Reminder extends Container {
                     <a
                       href={pullRequest.url}
                       className="github-pullRequest__name github-pullRequest__label"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       {`#${pullRequest.number}: ${pullRequest.title}`}
                     </a>{' '}
@@ -122,19 +151,7 @@ export default class Reminder extends Container {
                     <span className="github-pullRequest__time">{`${count} ${format}${
                       count > 1 ? 's' : ''
                     } old - waiting on`}</span>
-                    {pullRequest.reviewers.map(reviewer => (
-                      <span
-                        key={reviewer.avatar}
-                        className="github-pullRequest__reviewer"
-                      >
-                        <img
-                          className="github-pullRequest__avatar"
-                          src={reviewer.avatar}
-                          title={reviewer.name}
-                          alt={`${reviewer.name}'s avatar'`}
-                        />
-                      </span>
-                    ))}
+                    {this.getWaitedOn(pullRequest)}
                   </div>
                 </div>
               </div>
