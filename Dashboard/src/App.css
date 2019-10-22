@@ -503,16 +503,16 @@ PR REMINDER PANEL
 
 .github-pullRequest {
   display: flex;
+  margin-bottom: .5rem;
 }
 
 .github-pullRequest__inner {
   display: inline-block;
 }
 
-.github-pullRequest__content {
-  display: flex;
-  flex-direction: column;
-}
+/* .github-pullRequest__content {
+  font-size: 1em;
+} */
 
 .github-pullRequest__icon {
   height: rem;
@@ -520,23 +520,21 @@ PR REMINDER PANEL
   margin-top: 0rem;
   margin-right: 0.5em;
   display: inline-block;
-  align-self: baseline
+  align-self: baseline;
 }
 
 .github-pullRequest__details {
-  margin-bottom: 0;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: bottom;
   display: flex;
+  align-items: center;
 }
 
 .github-pullRequest__priority--high {
   background-color: #e74c3c;
-  color: #ecf0f1;
   margin: 0 0.4rem;
+}
+
+.github-pullRequest__summary {
+  display: flex;
 }
 
 .github-pullRequest__description {
@@ -551,10 +549,14 @@ PR REMINDER PANEL
 }
 
 .github-pullRequest__label {
-  font-weight: bold;
   border-radius: 2px;
-  padding: 0 0.5rem;
-  height: 2.5rem;
+  color: #ecf0f1;
+  padding: 0.5rem;
+}
+
+.github-pullRequest__summary-label {
+  background-color: #16a085;
+  color: #ecf0f1;
 }
 
 .github-pullRequest__repo {
@@ -562,38 +564,28 @@ PR REMINDER PANEL
   background-color: #2980b9;
 }
 
-/* .github-pullRequest__number {
-  color: grey;
-} */
-
 .github-pullRequest__name {
-  color: #e74c3c;
-  font-weight: bold;
-  /* white-space: nowrap;
-  overflow: hidden;
-  width: 25rem;
-  text-overflow: ellipsis;
-  vertical-align: bottom; */
-  /* display: inline-block; */
+  background-color: #16a085;
 }
 
 .github-pullRequest__avatar {
   height: 2.5rem;
-  margin-left: 1rem;
+  margin: 0.2rem 0.7rem;
 }
 
-.github-pullRequest__reviewers {
-  margin-left: 4rem;
-  margin-bottom: 0.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 50%;
-  text-overflow: ellipsis;
+.github-pullRequest__reviewer {
+  display: flex;
+}
+
+.github-pullRequest__reviewer-name {
+  color: #1abc9c;
 }
 
 .github-pullRequest__status {
   display: flex;
-  margin: 1rem 0 1.2rem 0;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 1.2rem 0;
 }
 
 .github-pullRequest__time {
