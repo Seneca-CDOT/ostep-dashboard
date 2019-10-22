@@ -15,7 +15,7 @@ export default class Reminder extends Container {
     super(props, COMPONENT_NAME);
   }
 
-  computeDurations = ({created}) => {
+  computeDurations = ({ created }) => {
     const now = moment();
     const createdDate = moment(created);
     const timeDifference = moment.duration(now.diff(createdDate));
@@ -27,18 +27,36 @@ export default class Reminder extends Container {
     };
   };
 
+  findPriority = ({ labels }) => {
+    let priorityLevel;
+
+    const { name: priorityLabel } = labels.find(label =>
+      /priority/i.test(label.name),
+    );
+    
+    if (!priorityLabel) {
+      priorityLevel = 'Medium';
+    } else {
+      priorityLevel = priorityLabel.split(' ').pop();
+    }
+  
+    return priorityLevel;
+  };
+
   render() {
+    const { data } = this.state;
     return (
       <Panel title="PR Reminder" refreshData={this.refreshData}>
-        {this.state.data &&
-          this.state.data.map(pullRequest => {
-            const { days, hours, minutes, seconds } = this.computeDurations(pullRequest);
+        {data &&
+          data.map(pullRequest => {
+            const { days, hours, minutes, seconds } = this.computeDurations(
+              pullRequest,
+            );
+
+            const priority = this.findPriority(pullRequest);
             return (
-              <div className="github-pullRequest">
-                <div
-                  key={`${pullRequest.repoName}`}
-                  className="github-pullRequest__content"
-                >
+              <div key={`${pullRequest.title}`} className="github-pullRequest">
+                <div className="github-pullRequest__content">
                   <div className="github-pullRequest__details">
                     <img
                       className="github-pullRequest__icon"
@@ -56,12 +74,13 @@ export default class Reminder extends Container {
                     </span>
                   </div>
                   <div className="github-pullRequest__status">
-                    <span className="github-pullRequest__time">
-                      {days}
-                    </span>
-                    days old - waiting on{' '}
+                    <span className="github-pullRequest__time">{days}</span>
+                    {`day${days > 1 ? 's' : ''} old - waiting on`}
                     {pullRequest.reviewers.map(reviewer => (
-                      <span className="github-pullRequest__reviewer">
+                      <span
+                        key={reviewer.avatar}
+                        className="github-pullRequest__reviewer"
+                      >
                         <img
                           className="github-pullRequest__avatar"
                           src={reviewer.avatar}
