@@ -45,6 +45,14 @@ Create the above files in the `Dashboard/config-files/` directory.
 }
 ```
 
+##### `github-whitelist.json:`
+
+```
+{
+  repos: ["repo1", "repo2", "repo3"]
+}
+```
+
 ##### `id_rsa:`
 
 ```
