@@ -28,7 +28,7 @@ const sshIntoServer = server => {
           console.error(error);
           server.status = 'error';
         } else {
-          server.status = data.includes(server.name) ? 'up' : 'down';
+          server.status = stdout.includes(server.name) ? 'up' : 'down';
         }
         resolve(server);
       }
