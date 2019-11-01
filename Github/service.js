@@ -11,6 +11,7 @@
 const r = require('request');
 
 const { key } = require('../config-files/github-token');
+const { repos: whitelist } = require('../config-files/github-whitelist');
 const cdotUrl = 'https://api.github.com';
 const request = r.defaults({
   headers: { 'User-Agent': 'request' },
@@ -34,7 +35,7 @@ module.exports.getRepos = recency => {
         } else {
           const reposNames = JSON.parse(data)
             .filter(rep => {
-              return (today - new Date(rep.pushed_at) < recency);
+              return (whitelist.includes(rep.name) && today - new Date(rep.pushed_at) < recency);
             })
             .map(repo => {
               return {
