@@ -35,7 +35,7 @@ module.exports.getRepos = recency => {
         } else {
           const reposNames = JSON.parse(data)
             .filter(rep => {
-              return (today - new Date(rep.pushed_at) < recency && whitelist.includes(rep.name));
+              return (whitelist.includes(rep.name) && today - new Date(rep.pushed_at) < recency);
             })
             .map(repo => {
               return {
