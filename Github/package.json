@@ -11,7 +11,7 @@
     "body-parser": "^1.18.3",
     "eslint": "^5.16.0",
     "express": "^4.16.3",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "path": "^0.12.7",
     "request": "^2.88.0",
     "xmlhttprequest": "^1.8.0"
