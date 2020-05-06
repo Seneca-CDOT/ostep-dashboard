@@ -1,0 +1,36 @@
+// ====================================
+// PRESENTATIONS SECTION
+// ==================================== 
+
+.presenter-section {
+  width: 22em;
+  font-size: 0.9em;
+  display: flex;
+}
+
+.presenter-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.presenter-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.presenter-name {
+  margin-left: -0.4em;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.presenter-info {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.presenter-entry {
+  padding-bottom: 0.6em;
+}

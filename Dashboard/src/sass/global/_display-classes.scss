@@ -1,0 +1,161 @@
+// ======================================
+// DISPLAY CLASSES
+// ======================================
+
+@media only screen and (min-width: 2400px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 35vw;
+    margin: 3rem;
+  }
+}
+
+/* IPAD PRO*/
+@media only screen and (max-width: 1780px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 45vw;
+  }
+}
+
+@media only screen and (max-width: 1270px) {
+  .panel-container {
+    font-size: 1.2rem;
+    width: 80vw;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .panel-content {
+    display: block;
+  }
+}
+
+/* IPAD*/
+@media only screen and (max-width: 950px) {
+  .panel-container {
+    height: auto;
+    max-height: 48rem;
+    font-size: 1.2rem;
+    width: 85vw;
+  }
+
+  .schedule-topic,
+  .schedule-name,
+  .schedule-time {
+    flex: auto;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  html {
+    font-size: 8px;
+  }
+
+  header {
+    padding: 2em;
+  }
+
+  .panel-container {
+    width: 90vw;
+  }
+
+  .panel-header h3 {
+    font-size: 1.5em;
+  }
+
+  .panel-content {
+    font-size: 1.8rem;
+  }
+
+  .refresh-container {
+    width: 5em;
+  }
+
+  .refresh {
+    width: 2.3em;
+  }
+
+  .presenter-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .presenter-section {
+    width: 8em;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+  }
+
+  .meeting-time {
+    min-width: 16rem;
+  }
+
+  .blank {
+    height: 0em;
+  }
+
+  .bulb {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0 0.2em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .lamp-text {
+    display: none;
+  }
+
+  .panel-header {
+    font-size: 1.2rem;
+    height: 6rem;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .panel-content {
+    font-size: 1.5rem;
+  }
+}
+
+/* IPHONE 5/SE */
+@media only screen and (max-width: 375px) {
+  header {
+    font-size: 1.25rem;
+  }
+
+  .panel-container {
+    width: 90vw;
+  }
+
+  .panel-content {
+    font-size: 1.4rem;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  header {
+    font-size: 1.25rem;
+  }
+
+  .panel-container {
+    width: 90vw;
+  }
+
+  .panel-content {
+    font-size: 1.32rem;
+  }
+}
