@@ -48,7 +48,7 @@ export default {
         Date: '2119-06-05',
         Time: '11:30 - 11:45',
         Presenter: 'John Doe',
-        Topic: 'New Featues in ES2020',
+        Topic: 'New Features in ES2020',
         'Public Session': 'No',
         Room: 'K2037',
       },
