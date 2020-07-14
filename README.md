@@ -1,6 +1,6 @@
-# Welcome to Ostep Dashboard!
+# Welcome to the OSTEP Dashboard!
 
-Ostep dashboard
+![Alt text](repo-resources/ostep-demo.png 'Dashboard Image')
 
 ## Docker
 

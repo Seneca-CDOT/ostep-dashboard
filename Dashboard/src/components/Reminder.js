@@ -113,7 +113,7 @@ export default class Reminder extends Container {
   render() {
     const { data } = this.state;
     return (
-      <Panel title="PR Reminder" refreshData={this.refreshData}>
+      <Panel title="Pull Requests" refreshData={this.refreshData}>
         {data &&
           this.sortPullRequests(data).map(pullRequest => {
             const {
