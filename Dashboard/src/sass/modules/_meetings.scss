@@ -1,0 +1,32 @@
+// ====================================
+// DB1042 SECTION
+// ==================================== 
+
+.meeting-time {
+  justify-content: flex-start;
+  font-weight: 700;
+  color: #1abc9c;
+}
+
+.meeting-topic {
+  width: 33rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f1c40f;
+  margin-left: -0.4em;
+}
+
+.meeting-organizer {
+  width: 20rem;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e74c3c;
+}
+
+.meeting-icons {
+  padding: 0 0.6em 0 0.4em;
+  vertical-align: middle;
+}

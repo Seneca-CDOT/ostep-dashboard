@@ -1,0 +1,25 @@
+// ====================================
+// SCHEDULE PANEL
+// ==================================== 
+
+.schedule-heading {
+  padding: 0em 0 0.5em 0;
+}
+
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.schedule-topic {
+  flex: 2;
+}
+
+.schedule-name {
+  flex: 2;
+}
+
+.schedule-time {
+  flex: 1;
+}

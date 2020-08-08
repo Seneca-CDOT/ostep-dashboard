@@ -1,0 +1,38 @@
+// ====================================
+// OSTEPPY PANEL
+// ==================================== 
+
+.eod-list h3:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.slack-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+}
+
+.slack-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.4em 0;
+}
+
+.slack-post {
+  padding: 0 0.3em;
+}
+
+.slack-message {
+  padding-bottom: 0.7em;
+}
+
+.slack-message a {
+  text-decoration: none;
+  color: #2ecc71;
+  padding-bottom: 0.7em;
+}
+
+.slack-message a:hover {
+  color: #27ae60;
+}

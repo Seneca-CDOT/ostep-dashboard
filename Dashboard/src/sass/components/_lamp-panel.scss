@@ -1,0 +1,21 @@
+// ====================================
+// LAMP PANEL
+// ==================================== 
+
+.lamp-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.bulb-off {
+  height: 10em;
+  width: 10em;
+}
+
+.lamp-message {
+  padding-top: 4rem;
+  font-size: 2rem;
+}

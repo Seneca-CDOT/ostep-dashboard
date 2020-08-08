@@ -1,0 +1,48 @@
+// ====================================
+// INFRASTRUCTURE PANEL
+// ==================================== 
+
+.ip-icon {
+  height: 1.2em;
+  width: 1.2em;
+  margin-right: 0.5em;
+  margin-bottom: -0.2em;
+}
+
+.infra-name {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.ip-entry {
+  padding-bottom: 0.2em;
+}
+
+.ip-up {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.ip-down {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.infra-wrapper {
+  display: grid;
+}
+
+.infra-column {
+  grid-row: 1 / -1;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.infra-column:nth-child(2) {
+  border-right: 1px solid #263544;
+  border-left: 1px solid #263544;
+}
+
+.infra-box {
+  padding: 0.2em;
+}

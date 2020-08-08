@@ -1,0 +1,104 @@
+// ====================================
+// PR REMINDER PANEL
+// ==================================== 
+
+.github-pullRequest {
+  display: flex;
+  margin-bottom: .5rem;
+}
+
+.github-pullRequest__inner {
+  display: inline-block;
+}
+
+.github-pullRequest__icon {
+  height: rem;
+  width: 1.2em;
+  margin-top: 0rem;
+  margin-right: 0.5em;
+  display: inline-block;
+  align-self: baseline;
+}
+
+.github-pullRequest__details {
+  display: flex;
+  align-items: center;
+}
+
+.github-pullRequest__priority-critical {
+  background-color: #c0392b;
+}
+
+.github-pullRequest__priority-high {
+  background-color: #e74c3c;
+}
+
+.github-pullRequest__priority-medium {
+  background-color: #e67e22;
+}
+
+.github-pullRequest__priority-low {
+  background-color: #2ecc71;
+}
+
+.github-pullRequest__summary {
+  display: flex;
+}
+
+.github-pullRequest__description {
+  margin-bottom: 0;
+  margin-top: .5rem;
+  margin-left: 2em;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 95%;
+  text-overflow: ellipsis;
+}
+
+.github-pullRequest__label {
+  border-radius: 2px;
+  color: #ecf0f1;
+  margin-right: .5rem;
+  padding: .3rem;
+  text-transform: capitalize;
+}
+
+.github-pullRequest__summary-label {
+  background-color: #16a085;
+  color: #ecf0f1;
+}
+
+.github-pullRequest__repo {
+  color: #ecf0f1;
+  background-color: #2980b9;
+}
+
+.github-pullRequest__name {
+  text-decoration: none;
+  background-color: #16a085;
+}
+
+.github-pullRequest__avatar {
+  height: 2.5rem;
+  margin: .2rem .7rem;
+}
+
+.github-pullRequest__reviewer {
+  display: flex;
+}
+
+.github-pullRequest__reviewer-name {
+  color: #1abc9c;
+}
+
+.github-pullRequest__status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: .5rem 0 1.2rem 0;
+}
+
+.github-pullRequest__time {
+  margin-right: .4rem;
+}
