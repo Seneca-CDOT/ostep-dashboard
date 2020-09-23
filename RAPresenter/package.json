@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "table-scraper": "^0.1.0"
+    "table-scraper": "^1.0.3"
   }
 }
