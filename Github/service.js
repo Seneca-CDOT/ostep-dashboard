@@ -251,7 +251,7 @@ const getPullRequestsPerRepo = repo => {
           console.log('Error:', res.statusMessage);
           reject(new Error('Unable to get pull requests.'));
         } else {
-          JSON.parse(data).forEach(pullRequest => {
+          JSON.parse(data).filter((pr) => !pr.draft).forEach(pullRequest => {
             pullRequestData = {
               title: pullRequest.title,
               author: {
