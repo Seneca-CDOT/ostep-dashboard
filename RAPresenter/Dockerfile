@@ -1,4 +1,4 @@
-FROM node
+FROM node:lts-alpine
 # use another image as a template, using offical node image and version 7
 WORKDIR /usr/src/app
 #working directory where code is to be inside docker container  
