@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY ./Infrastructure/package*.json ./
 
 RUN npm install
-RUN apt-get update && apt-get install -y dnsutils
+RUN apk update && apk add bind-tools
 # If you are building your code for production
 # RUN npm install --only=production
 
