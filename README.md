@@ -56,8 +56,8 @@ ABCVAEWFOAFW...
 ```
 module.exports = {
   servers: [
-    { host: 'server1', address: 'mydomain.mymachines.com' },
-    { host: 'server2', address: 'mydomain.mymachines.com' },
+    { name: 'server1', address: 'mydomain.mymachines.com' },
+    { name: 'server2', address: 'mydomain.mymachines.com' },
   ...
   ],
   workstations: [
