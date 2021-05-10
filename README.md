@@ -3,16 +3,6 @@
 ![Alt text](repo-resources/ostep-demo.png 'Dashboard Image')
 
 ## Docker
-
-### Firewall Configuration
-
-Open port `80`:
-
-`sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT`
-
-Save Changes:
-`sudo service iptables save`
-
 ### Debug Mode for UI
 
 Enables running the frontend without the need to set up Docker or token by loading dummy data.
@@ -24,7 +14,7 @@ In the `Dashboard` folder run `npm i` to install dependencies, then `npm run deb
     github-token.json
     id_rsa (a private key with EHL access)
 
-Create the above files in the `Dashboard/config-files/` directory.
+Create the above files in the `config-files/` directory.
 
 ##### Sample Configs:
 
@@ -61,23 +51,13 @@ ABCVAEWFOAFW...
 -----END OPENSSH PRIVATE KEY-----
 ```
 
-##### `infrastructure.json:`
+##### `infrastructure.js:`
 
 ```
 module.exports = {
   servers: [
-    {
-      description: 'server',
-      name: 'server1',
-      domain: 'mydomain.mymachines.com',
-      port: '3000'
-    },
-    {
-      description: 'server',
-      name: 'server2',
-      domain: 'mydomain.mymachines.com',
-      port: '3000'
-    },
+    { host: 'server1', address: 'mydomain.mymachines.com' },
+    { host: 'server2', address: 'mydomain.mymachines.com' },
   ...
   ],
   workstations: [
