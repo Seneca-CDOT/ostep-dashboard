@@ -17,30 +17,11 @@ const pingWorkstation = async workstation => {
   return workstation;
 };
 
-const sshIntoServer = server => {
-  return new Promise(resolve => {
-    exec(
-      `ssh -o "StrictHostKeyChecking no" -o ConnectTimeout=${SSH_TIMEOUT} -i id_rsa -p ${
-        server.port
-      } ${sshUser}@${server.domain} hostname`,
-      (error, stdout, stderr) => {
-        if (error) {
-          console.error(error);
-          server.status = 'error';
-        } else {
-          server.status = stdout.includes(server.name) ? 'up' : 'down';
-        }
-        resolve(server);
-      }
-    );
-  });
-};
-
 const checkWorkstations = () =>
   Promise.all(workstationList.map(workstation => pingWorkstation(workstation)));
 
 const checkServers = () =>
-  Promise.all(serverList.map(server => sshIntoServer(server)));
+  Promise.all(serverList.map(server => pingWorkstation(server)));
 
 const checkDNS = async () => {
   try {
