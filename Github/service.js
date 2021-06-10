@@ -14,9 +14,12 @@ const { key } = require('../config-files/github-token');
 const { repos: whitelist } = require('../config-files/github-whitelist');
 const cdotUrl = 'https://api.github.com';
 const request = r.defaults({
-  headers: { 'User-Agent': 'request' },
+  headers: {
+    'User-Agent': 'request',
+    Authorization: `token ${key}`,
+  },
   baseUrl: cdotUrl,
-  qs: { per_page: 100, access_token: key },
+  qs: { per_page: 100 },
 });
 
 const today = new Date();
