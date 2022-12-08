@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Seneca-CDOT/ostep-dashboard#readme",
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "tabletojson": "^0.9.8"
   }
 }
